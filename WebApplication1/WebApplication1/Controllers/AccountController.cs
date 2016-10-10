@@ -18,6 +18,11 @@ namespace WebApplication1.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        public ActionResult Test()
+        {
+            return View();
+        }
+
         public AccountController()
         {
         }
