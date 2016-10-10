@@ -1,0 +1,76 @@
+﻿@using BCMS.Models;
+@model MarketAnalyse
+
+<div style=" text-align: center;width:82%">
+    <div class="box col-md-8" style="width:121%;text-align: center">
+
+        <div class="box-content" style="width:100%;">
+
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">القطاع</label>
+                <input type="text" disabled="disabled" value="@Model.Sector.SectorName" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">السوق</label>
+                <input type="text" disabled="disabled" value="@Model.Market.MarketArName" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">السنة</label>
+                <input type="text" disabled="disabled" value="@Model.Year.YearN" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">الأسهم المصدره (بالمليون)</label>
+                <input type="text" disabled="disabled" value="@Model.IssuedShares" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">الأسهم الحرة (بالمليون)</label>
+                <input type="text" disabled="disabled" value="@Model.FloatedShares" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">صافي الدخل (بالمليون)</label>
+                <input type="text" disabled="disabled" value="@Model.NetIncome" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">حقوق المساهمين (بالمليون)</label>
+                <input type="text" disabled="disabled" value="@Model.ShareHoldersEquity" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">القيمه السوقيه (بالمليون)</label>
+                <input type="text" disabled="disabled" value="@Model.MarketCap" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">العائد على السهم (بالريال)</label>
+                <input type="text" disabled="disabled" value="@Model.EPS" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">السعر للعائد</label>
+                <textarea class="form-control" name="CompanyActivity" disabled="disabled">@Model.PE</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">القيمه الدفتريه</label>
+                <textarea class="form-control" name="CompanyActivity" disabled="disabled">@Model.BookValue</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">السعر / القيمه الدفتريه</label>
+                <textarea class="form-control" name="CompanyActivity" disabled="disabled">@Model.PBV</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">القيمة السوقية للأسهم الحرة (بالمليون)</label>
+                <textarea class="form-control" name="CompanyActivity" disabled="disabled">@Model.FloatedSharesMarketCap</textarea>
+            </div>
+        </div>
+    </div>
+</div>

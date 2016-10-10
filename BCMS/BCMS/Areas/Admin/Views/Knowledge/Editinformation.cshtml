@@ -1,0 +1,25 @@
+﻿<div style=" text-align: center;width:82%">
+
+    <div class="box col-md-8" style="width:121%;text-align: center">
+        <div class="box-content" style="width:100%;">
+
+            @using (Html.BeginForm("Editinformation", "Knowledge", FormMethod.Post))
+            {
+                @Html.ValidationSummary(true)
+
+    <input type="hidden" id="KnowledgeID" name="InformationID" value="@ViewBag.infoID" />
+    <input type="hidden" id="KnowledgeID" name="KnowledgeID" value="@ViewBag.knowID" />
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">المعلومة</label>
+                    <textarea id="InformationTitle" name="InformationTitle" class="form-control">@ViewBag.informationTitle</textarea>
+                </div>
+
+                <div style="margin:5px 20px 5px 5px;text-align:right">
+                    <input type="submit" class="btn btn-primary12 btn-sm" style="width:80px" value="حفظ" />
+                    <input type="button" value="إلغاء" class="btn btn-primary12 btn-sm" id="btnSpecificationCancel" />
+                </div>
+            }
+        </div>
+    </div>
+</div>

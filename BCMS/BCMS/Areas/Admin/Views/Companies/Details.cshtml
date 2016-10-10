@@ -1,0 +1,66 @@
+﻿@using BCMS.Models;
+@model CompanyInfo
+
+<div style=" text-align: center;width:82%">
+    <div class="box col-md-8" style="width:121%;text-align: center">
+
+        <div class="box-content" style="width:100%;">
+          
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">كود الشركة</label>
+                    <input type="text" disabled="disabled" value="@Model.CompanyID" name="CompanyID" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">إسم الشركة</label>
+                    <input type="text" disabled="disabled" value="@Model.CompanyName" name="CompanyID" class="form-control" />
+                </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">القطـــاع</label>
+                <input type="text" disabled="disabled" value="@Model.Sector.SectorName" name="CompanyID" class="form-control" />
+            </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">تاريخ التأسيس</label>
+                    <input type="text" disabled="disabled" value="@Model.CompanyIncorporation" name="CompanyID" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">رأس المال المدفوع بالمليون</label>
+                    <input type="text" disabled="disabled" value="@Model.CompanyPaid_Up_Capital" name="CompanyID" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">رئيس مجلس الادارة</label>
+                    <input type="text" disabled="disabled" value="@Model.ChairmanBoardOfDirectors" name="CompanyID" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">عدد الموظفين</label>
+                    <input type="text" disabled="disabled" value="@Model.CompanyEmployees" name="CompanyID" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">المركز الرئيسي</label>
+                    <input type="text" disabled="disabled" value="@Model.CompanyMain_Office" name="CompanyID" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">مواقع العمل</label>
+                    <input type="text" disabled="disabled" value="@Model.CompanyWork_sites" name="CompanyID" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">نشاط الشركة</label>
+                    <textarea class="form-control" name="CompanyActivity" disabled="disabled">@Model.CompanyActivity</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">الوصف</label>
+                    <textarea class="form-control" name="CompanyActivity" disabled="disabled">@Model.CompanyDescription</textarea>
+                </div>
+        </div>
+    </div>
+</div>

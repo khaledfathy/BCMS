@@ -1,0 +1,93 @@
+﻿
+@model IEnumerable<BCMS.Models.Tadawel>
+    <li><h2 class="Clouding" style="float: right;">تاسي </h2></li>
+    <li><h2 class="Clouding">قطاع المصارف والخدمات المالية</h2></li>
+    @foreach (var item in Model.Where(x => x.RecordID == 1))
+    {
+        <li style="font-weight:bold;"> @Html.DisplayFor(modelItem => item.NAME)</li>
+        <li style="display:none; ">@Html.DisplayFor(modelItem => item.CHANGE)</li>
+    }
+    <li><h2 class="Clouding">قطاع الصناعات البتروكيماوية</h2></li>
+    @foreach (var item in Model.Where(x => x.RecordID == 2))
+    {
+        <li style="font-weight:bold;">@Html.DisplayFor(modelItem => item.NAME)</li>
+        <li style="display:none; ">@Html.DisplayFor(modelItem => item.CHANGE)</li>
+    }
+    <li><h2 class="Clouding">قطاع الاسمنت</h2></li>
+    @foreach (var item in Model.Where(x => x.RecordID == 3))
+    {
+        <li style="font-weight:bold;">@Html.DisplayFor(modelItem => item.NAME)</li>
+        <li style="display:none; ">@Html.DisplayFor(modelItem => item.CHANGE)</li>
+    }
+    <li><h2 class="Clouding">قطاع التجزئة</h2></li>
+    @foreach (var item in Model.Where(x => x.RecordID == 4))
+    {
+        <li style="font-weight:bold;">@Html.DisplayFor(modelItem => item.NAME)</li>
+        <li style="display:none; ">@Html.DisplayFor(modelItem => item.CHANGE)</li>
+    }
+    <li><h2 class="Clouding">قطاع الطاقة والمرافق الخدمية</h2></li>
+    @foreach (var item in Model.Where(x => x.RecordID == 5))
+    {
+        <li style="font-weight:bold;">@Html.DisplayFor(modelItem => item.NAME)</li>
+        <li style="display:none; ">@Html.DisplayFor(modelItem => item.CHANGE)</li>
+    }
+    <li><h2 class="Clouding">قطاع الزراعة والصناعات الغذائية</h2></li>
+    @foreach (var item in Model.Where(x => x.RecordID == 6))
+    {
+        <li style="font-weight:bold;">@Html.DisplayFor(modelItem => item.NAME)</li>
+        <li style="display:none; ">@Html.DisplayFor(modelItem => item.CHANGE)</li>
+    }
+    <li><h2 class="Clouding">قطاع الاتصالات وتقنية المعلومات</h2></li>
+    @foreach (var item in Model.Where(x => x.RecordID == 7))
+    {
+        <li style="font-weight:bold;">@Html.DisplayFor(modelItem => item.NAME)</li>
+        <li style="display:none; ">@Html.DisplayFor(modelItem => item.CHANGE)</li>
+    }
+    <li><h2 class="Clouding">قطاع التأمين</h2></li>
+    @foreach (var item in Model.Where(x => x.RecordID == 8))
+    {
+        <li style="font-weight:bold;">@Html.DisplayFor(modelItem => item.NAME)</li>
+        <li style="display:none; ">@Html.DisplayFor(modelItem => item.CHANGE)</li>
+    }
+    <li><h2 class="Clouding">قطاع شركات الأستثمار المتعدد</h2></li>
+    @foreach (var item in Model.Where(x => x.RecordID == 9))
+    {
+        <li style="font-weight:bold;">@Html.DisplayFor(modelItem => item.NAME)</li>
+        <li style="display:none;">@Html.DisplayFor(modelItem => item.CHANGE)</li>
+    }
+    <li><h2 class="Clouding">قطاع الأستثمار الصناعي</h2></li>
+    @foreach (var item in Model.Where(x => x.RecordID == 10))
+    {
+        <li style="font-weight:bold;">@Html.DisplayFor(modelItem => item.NAME)</li>
+        <li style="display:none; ">@Html.DisplayFor(modelItem => item.CHANGE)</li>
+    }
+    <li><h2 class="Clouding">قطاع التشييد والبناء</h2></li>
+    @foreach (var item in Model.Where(x => x.RecordID == 11))
+    {
+        <li style="font-weight:bold;">@Html.DisplayFor(modelItem => item.NAME)</li>
+        <li style="display:none; ">@Html.DisplayFor(modelItem => item.CHANGE)</li>
+    }
+    <li><h2 class="Clouding">قطاع التطوير العقاري</h2></li>
+    @foreach (var item in Model.Where(x => x.RecordID == 12))
+    {
+        <li style="font-weight:bold;">@Html.DisplayFor(modelItem => item.NAME)</li>
+        <li style="display:none; ">@Html.DisplayFor(modelItem => item.CHANGE)</li>
+    }
+    <li><h2 class="Clouding">قطاع النقل</h2></li>
+    @foreach (var item in Model.Where(x => x.RecordID == 13))
+    {
+        <li style="font-weight:bold;">@Html.DisplayFor(modelItem => item.NAME)</li>
+        <li style="display:none; ">@Html.DisplayFor(modelItem => item.CHANGE)</li>
+    }
+    <li><h2 class="Clouding">قطاع الاعلام والنشر</h2></li>
+    @foreach (var item in Model.Where(x => x.RecordID == 14))
+    {
+        <li style="font-weight:bold;">@Html.DisplayFor(modelItem => item.NAME)</li>
+        <li style="display:none; ">@Html.DisplayFor(modelItem => item.CHANGE)</li>
+    }
+    <li><h2 class="Clouding">قطاع الفنادق والسياحة</h2></li>
+    @foreach (var item in Model.Where(x => x.RecordID == 15))
+    {
+        <li style="font-weight:bold;">@Html.DisplayFor(modelItem => item.NAME)</li>
+        <li style="display:none; ">@Html.DisplayFor(modelItem => item.CHANGE)</li>
+    }

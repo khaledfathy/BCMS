@@ -1,0 +1,93 @@
+﻿@using System.Web.Optimization
+<!doctype html>
+<html ng-app="langApp" dir="rtl" lang="ar" >
+<head>
+    @*<base href="/" />*@
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    @if (Request.Cookies["language"] != null)
+    {
+        var lang = Request.Cookies["language"].Value;
+        if (lang == "en")
+        {
+            @Styles.Render("~/bundles/BCMS/style/en")
+        }
+        else
+        {
+            @Styles.Render("~/bundles/BCMS/style/ar")
+        }
+    }
+    else
+    {
+        @Styles.Render("~/bundles/BCMS/style/ar")
+    }
+
+    @Scripts.Render("~/bundles/BCMS/script")
+
+    @*<script src="~/Scripts/angular-translate.js"></script>*@
+    @*<script src="~/Language/langApp.js"></script>*@
+    @*<script src="~/Language/languageController.js"></script>*@
+    
+    @RenderSection("scripts", required: false)
+    @*<script src="~/Language/layoutController.js"></script>*@
+    @*<script src="/signalr/Hubs"></script>*@
+    
+</head>
+
+<body>
+    <!-- Start Header-->
+    @{Html.RenderPartial("_HeaderPartial");}
+    <!--End Header-->
+
+    <div class="large-12 columns">
+        <div class="large-12 column" id="body">
+
+            <!--START CONTENT-->
+            
+            @RenderBody()
+            
+            <!--END CONTENT-->
+
+        </div>
+    </div>
+   
+    <div class="clear"></div>
+
+    <!-- Start Footer-->
+    @{Html.RenderPartial("_FooterPartial");}
+    <!--End Footer-->
+
+    <script type="text/javascript">
+        $(function () {
+
+            $("#btnMusic").click(function (e) {
+                e.preventDefault();
+                window.open("@Url.Action("Music", "Entertainment")", "", "width=500, height=600");
+            });
+
+            $(".btnMusic").click(function () {
+                window.open("/test/Home/Music", "", "width=500, height=600");
+            });
+
+            var $elem = $('#allBody');
+
+            $(".Fbutton").click(function (event) {
+                event.preventDefault();
+                $("#FooterDetails").slideToggle(500);
+                $('html, body').animate({ scrollTop: $elem.height() }, 500);
+            });
+        });
+
+    </script>
+    
+    <!-- Hany -->
+    @*<script>
+        $(document).foundation();
+    </script>*@
+    <!-- /Hany -->
+
+</body>
+</html>
+

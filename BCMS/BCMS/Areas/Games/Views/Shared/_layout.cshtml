@@ -1,0 +1,83 @@
+﻿@using System.Web.Optimization
+@if (Request.Cookies["mvcname"] == null)
+{
+    Response.Redirect(Url.Action("Index", "Home", new { Area = "" }));
+}
+@*@{
+    if (this.Context.Request.Cookies["mvcname"] == null)
+    {
+
+        Response.Redirect(Url.Action("Login", "Account", new { Area = "" }));
+    }*@
+    @*else
+    {
+        HttpCookie cookie = this.Context.Request.Cookies["mvcname"];
+
+        Guid userId = Guid.Parse(cookie["UserId"]);
+        if (BCGame.Models.LoggedUsers.Users != null)
+        {
+            var uid = from c in BCGame.Models.LoggedUsers.Users
+                      where c.UserId == userId
+                      select c;
+
+            if (uid.Count() > 0)
+            {
+
+                uid.First().Session = null;
+                BCGame.Hubs.HitLogOffHub._usrid = uid.First().UserId;
+
+            }
+
+        }
+
+    }
+    }*@
+
+    <!doctype html>
+    <html ng-app="MyApp" dir="rtl" lang="ar">
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="http://fonts.googleapis.com/earlyaccess/droidarabickufi.css" rel="stylesheet" />
+        @Styles.Render("/bundles/BCGame/GameStyle")
+        @Scripts.Render("/bundles/BCGame/script")
+
+        @*<script src="/scripts/jquery.signalR-2.2.0.js"></script>
+        <script src="/SignalR/Hubs"></script>
+        <script src="/js/App.js"></script>*@
+
+    </head>
+    <body ng-controller="HomeController">
+
+        <!-- Start Header-->
+        @{Html.RenderPartial("_HeaderPartial");}
+        <!--End Header-->
+
+        <div class="row">
+            <!--START CONTENT-->
+            @RenderBody()
+            <!--END CONTENT-->
+        </div>
+
+        <!-- Start Footer-->
+        @{Html.RenderPartial("_FooterPartial");}
+        <!--End Footer-->
+
+
+        <script type="text/javascript">
+
+        </script>
+        <script>
+            $(document).foundation();
+        </script>
+
+
+
+
+
+
+    </body>
+</html>
+

@@ -1,0 +1,249 @@
+﻿
+@{
+    ViewBag.Title = "MarketCaster";
+    Layout = null;
+}
+<style>
+
+    .Grid_Wrapper tr:hover{ background-color:#7c7b7b;}
+    
+     .Grid_Wrapper {
+        width: 100%;
+        height: 540px;
+        padding: 0;
+        margin: 0;
+        overflow: auto;
+    }
+       .Grid_Wrapper table {
+            width: 100%;
+            border-collapse: collapse;      
+        }
+        
+    .Grid_Wrapper .header {
+        width: 100%;
+        /* Safari 5.1 to 6.0 
+        background: -webkit-repeating-linear-gradient(#000000 2%, #1d1d1b 50%);
+         Opera 11.1 to 12.0 
+        background: -o-repeating-linear-gradient(#000000 2%, #1d1d1b 50%);
+         Firefox 3.6 to 15 
+        background: -moz-repeating-linear-gradient(#000000 2%, #1d1d1b 50%);
+         Standard syntax 
+        background: repeating-linear-gradient(#000000 2%, #1d1d1b 50%);
+        -webkit-box-shadow: 0 5px 22px 12px #0A0000;
+        box-shadow: 0 5px 22px 12px #0A0000;*/
+    }
+        .Grid_Wrapper  .header th[scope=col] {
+            color: #FFF;
+            font-family: Tahoma;
+            font-size: 10px;
+            font-weight: normal;
+            text-align: right;
+            line-height: 28px;
+            white-space: nowrap;
+            border-left: 1px #4d4d4d solid;
+        }
+            .Grid_Wrapper .header th:last-child {
+                border-left: 0px #4d4d4d solid;
+            }
+            .Grid_Wrapper .header th[scope=col]:nth-child(1) {
+            }
+            .Grid_Wrapper .header th[scope=col]:nth-child(2) {
+            }
+            .Grid_Wrapper .header th {
+               text-align:right;
+            }
+        .Grid_Wrapper td {
+            font-weight: bold;
+            padding: 0.5625rem 0.625rem;
+        }
+    .Grid_Wrapper tr {
+        border-collapse: collapse;
+        border: none;
+        font-family: Tahoma;
+        font-size: 11px;
+        font-weight: normal;
+        background-color: #191919;
+        color: #cbcbcb;
+        white-space: nowrap;
+        line-height: 18px;
+    }
+        .Grid_Wrapper tr td {
+            border-left: 1px #4d4d4d solid;
+        }
+            .Grid_Wrapper tr td:last-child {
+                border-left: 0px #4d4d4d solid;
+            }
+        .Grid_Wrapper tr {
+            border-collapse: collapse;
+            border: none;
+            font-family: Tahoma;
+            font-size: 11px;
+            font-weight: normal;
+            background-color: #000000;
+            color: #cbcbcb;
+            white-space: nowrap;
+        }
+
+     
+            .Grid_Wrapper tr:nth-child(even) td {
+                border-left: 1px #4d4d4d solid;
+            }
+                .Grid_Wrapper tr:nth-child(even) td:last-child {
+                    border-left: 0px #4d4d4d solid;
+                }
+   
+
+</style>
+
+<div class="row">
+        <div class="col-md-12">
+            <div class="Grid_Wrapper" id="messagesTable">
+                @* show table tadawel from database*@
+                <table id="mrkcaster" class="marketcaster" cellspacing="0" cellpadding="4">
+                     
+                </table>
+            </div>
+        </div>
+</div>
+
+<div id="loadingArea" ng-show="loading"></div>
+@*<script src="/signalr/Hubs"></script>*@
+<script type="text/javascript">
+        $(".row").hide();
+        // last market caster
+        var marketableold = [];
+        // market caster At the current moment
+        var marketablenew = [];
+        //The oldest values in market caster
+        var marketcasterstat = [];
+        //check to push  old data to (marketableold) just first time run page market caster
+        var check = false;
+        $(function () {
+            var notifications = $.connection.MessagesHub;
+            // when data changeing update automaticly
+            notifications.client.updateMessages = function () {
+                getAllMessages();
+                //connection.hub stop and start to avoiding a problem in repeat connection
+                //when refresh or open same page
+                $.connection.hub.stop();
+                $.connection.hub.start();
+            };
+            $.connection.hub.start().done(function () {
+                check = false;
+                //function getting data from database
+                getAllMessages();
+            }).fail(function (e) {
+                alert(e);
+            });
+        });
+        function getAllMessages() {
+            var tbl = $('#mrkcaster');
+            $.ajax({
+                url: '/MarketCaster/GetMessages',
+                contentType: 'application/html ; charset:utf-8',
+                type: 'GET',
+                dataType: 'html'
+            }).success(function (result) {
+                //clean table market caster and append new data from partial view (_MessagesList)
+                tbl.empty().append(result);
+                $("#loadingArea").hide();
+                $(".row").show();
+                if (check == false)
+                {
+                    // push cells market caster table to Array for current market values to  marketableold
+                    var myTableArray = [];
+                    $("#mrkcaster tr").each(function () {
+                        var arrayOfThisRow = [];
+                        var tableData = $(this).find('td');
+                        if (tableData.length > 0)
+                        {
+                            tableData.each(function () { arrayOfThisRow.push($(this).text()); });
+                            myTableArray.push(arrayOfThisRow);
+                        }
+                        marketableold = myTableArray;
+                    });
+                }
+                //trigger fire when data changeing from database
+                      $('#mrkcaster').trigger('contentchanged');
+                check = true;
+            }).error(function () {
+            });
+        }
+
+        $('#mrkcaster').bind('contentchanged', function ()
+        {
+            //puch market caster table for this moment to array to marketablenew
+            var myTableArray = [];
+            $("#mrkcaster tr").each(function ()
+            {
+                var arrayOfThisRow = [];
+                var tableData = $(this).find('td');
+                if (tableData.length > 0)
+                {
+                    tableData.each(function () { arrayOfThisRow.push($(this).text()); });
+                    myTableArray.push(arrayOfThisRow);
+                }
+                marketablenew = myTableArray;
+            });
+
+            // compare with 3 araays
+            // first change  marketcasterstat is null
+            for (var x = 0; x < marketablenew.length; x++)
+            {
+                    for (var i = 2; i < 15; i++)
+                    {
+                        if ((marketablenew[x][i] - marketableold[x][i]) < 0)
+                        {
+                            if (marketableold[x][i] - marketcasterstat[x][i] < 0)
+                            {
+                                //make background color for 1 sec and remove it
+                                var ss = document.getElementById("mrkcaster").rows[x + 1].cells[i];
+                              ss.style.color = "red";
+                                ss.style.backgroundColor = "#540707";
+                                setTimeout(function () {
+                                    var $el = $("#mrkcaster tr td");
+                                    $el.css("background", "none");
+                                }, 1000);
+                            }
+                                //when condition Not achieved
+                            else
+                                document.getElementById("mrkcaster").rows[x + 1].cells[i].style.color = "red";
+                        }
+                        else if ((marketablenew[x][i] - marketableold[x][i]) > 0)
+                        {
+                            if (marketableold[x][i] - marketcasterstat[x][i] > 0) {
+                                //make background color for 1 sec and remove it
+                                var ss = document.getElementById("mrkcaster").rows[x + 1].cells[i];
+                                ss.style.color = "rgb(0, 249, 92)";
+                                ss.style.backgroundColor = "#174811";
+                                setTimeout(function () {
+                                    var $el = $("#mrkcaster tr td");
+                                    $el.css("background", "none");
+                                }, 1000);
+                            }
+                                //when condition Not achieved
+                            else
+                            {
+                                document.getElementById("mrkcaster").rows[x + 1].cells[i].style.color = "rgb(0, 249, 92)";
+                            }
+                        }
+                        else
+                        {
+                            document.getElementById("mrkcaster").rows[x + 1].cells[i].style.color = "#5DC0E0";
+                        }
+                    }
+                }
+
+            // empty the older array and set old array
+            marketcasterstat = [];
+            marketcasterstat = marketableold;
+            // empty the old array and set new array
+            marketableold = [];
+            marketableold = marketablenew;
+            //empty new array
+            marketablenew = [];
+        });
+
+
+</script>
+   

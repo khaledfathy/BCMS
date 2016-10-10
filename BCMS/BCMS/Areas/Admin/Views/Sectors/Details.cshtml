@@ -1,0 +1,28 @@
+﻿@using BCMS.Models;
+@model Sector
+<link href="~/Areas/Admin/css/MyStyle.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.ui-dialog-buttonset button').addClass('btn btn-primary12 btn-sm');
+    });
+</script>
+<div style=" text-align: center;width:82%">
+    <div class="box col-md-8" style="width:121%;text-align: center">
+        <div class="box-content" style="width:100%;">
+            <div class="form-group">
+                <label for="exampleInputEmail1">كود القطاع</label>
+                <input name="SectorID" class="form-control" type="text" disabled="disabled" value="@Model.SectorID" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">إسم القطاع</label>
+                <input name="SectorName" class="form-control" type="text" disabled="disabled" value="@Model.SectorName" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">الوصف</label>
+                <textarea name="AdviceContent" class="form-control" disabled="disabled">@Model.SectorDescription</textarea>
+            </div>
+        </div>
+    </div>
+</div>

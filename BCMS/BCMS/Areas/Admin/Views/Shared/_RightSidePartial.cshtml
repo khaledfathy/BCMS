@@ -1,0 +1,222 @@
+﻿   <!-- left menu starts -->
+<div class="col-sm-2 col-lg-2">
+    <div class="sidebar-nav">
+        <div class="nav-canvas">
+            <div class="nav-sm nav nav-stacked">
+
+            </div>
+            <ul class="nav nav-pills nav-stacked main-menu">
+                <li class="nav-header">الروابط الرئيسية</li>
+
+                <li>
+                    <a class="ajax-link" href="@Url.Action("Index", "Home")"><i class="glyphicon glyphicon-home"></i><span> الرئيسية </span></a>
+                </li>
+                <li class="accordion">
+                    <a href="#"><i class="glyphicon glyphicon-plus"></i><span> الأنشطة</span></a>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a class="ajax-link" href="@Url.Action("Index", "Activities")"><i class="glyphicon glyphicon-home"></i><span> الأنشطة </span></a>
+                        </li>
+                        <li>
+                            <a class="ajax-link" href="@Url.Action("Index", "Activity_Years")"><i class="glyphicon glyphicon-home"></i><span> السنوات المنشطة </span></a>
+                        </li>
+                        </ul>
+                    </li>
+                        <li class="accordion">
+                            <a href="#"><i class="glyphicon glyphicon-plus"></i><span> القطاعات</span></a>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li>
+                                    <a class="ajax-link" href="@Url.Action("Index", "Sectors")"><i class="glyphicon glyphicon-euro"></i><span> القطاعات </span></a>
+                                </li>
+                                <li>
+                                    <a class="ajax-link" href="@Url.Action("Index", "Companies")"><i class="glyphicon glyphicon-eye-open"></i><span>الشركات</span></a>
+                                </li>
+                                <li>
+                                    <a class="ajax-link" href="@Url.Action("Index", "MarketAnalyses")"><i class="glyphicon glyphicon-picture"></i><span>الأسهم الحرة لقطاعات السوق المالية </span></a>
+                                </li>
+                            </ul>
+                        </li>
+                <li class="accordion">
+                    <a href="#"><i class="glyphicon glyphicon-plus"></i><span> البنوك</span></a>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a class="ajax-link" href="@Url.Action("Index", "Banks")"><i class="glyphicon glyphicon-home"></i><span> البنوك </span></a>
+                        </li>
+                        <li>
+                            <a class="ajax-link" href="@Url.Action("Index", "Bank_years")"><i class="glyphicon glyphicon-home"></i><span> بنوك/سنوات </span></a>
+                        </li>
+                    </ul>
+                </li>
+                    <li class="accordion">
+                        <a href="#"><i class="glyphicon glyphicon-plus"></i><span> تصنيف العالم</span></a>
+                        <ul class="nav nav-pills nav-stacked">
+
+                            <li>
+                                <a class="ajax-link" href="@Url.Action("Index", "Continents")"><i class="glyphicon glyphicon-eye-open"></i><span>القارات</span></a>
+                            </li>
+                            <li>
+                                <a class="ajax-link" href="@Url.Action("Index", "Regions")"><i class="glyphicon glyphicon-eye-open"></i><span>المنطقة</span></a>
+                            </li>
+                            <li>
+                                <a class="ajax-link" href="@Url.Action("Index", "Countries")"><i class="glyphicon glyphicon-eye-open"></i><span>الدول</span></a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="accordion">
+                        <a href="#"><i class="glyphicon glyphicon-plus"></i><span> الصادرات و الواردات</span></a>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li>
+                                <a class="ajax-link" href="@Url.Action("Index", "VolumeOfImportsOfGoodsAndServices")"><i class="glyphicon glyphicon-picture"></i><span>حجم الواردات من السلع والخدمات</span></a>
+                            </li>
+                            <li>
+                                <a class="ajax-link" href="@Url.Action("Index", "VolumeOfExportsOfGoodsAndServices")"><i class="glyphicon glyphicon-picture"></i><span>حجم الصادرات من السلع والخدمات</span></a>
+                            </li>
+                            <li>
+                                <a class="ajax-link" href="@Url.Action("Index", "GoodsExportVolumes")"><i class="glyphicon glyphicon-picture"></i><span>حجم صادرات السلع</span></a>
+                            </li>
+                            <li>
+                                <a class="ajax-link" href="@Url.Action("Index", "GoodsImportVolumes")"><i class="glyphicon glyphicon-picture"></i><span>حجم واردات السلع</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                <li>
+                    <a class="ajax-link" href="@Url.Action("Index", "GDPPriceFixed")"><i class="glyphicon glyphicon-picture"></i><span> الناتج المحلي الإجمالي  بالأسعار الثابتة</span></a>
+                </li>
+                    <li class="accordion">
+                        <a href="#"><i class="glyphicon glyphicon-plus"></i><span> وكالة التصنيف الإئتماني</span></a>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li>
+                                <a class="ajax-link" href="@Url.Action("Index", "CridetRatingAgencies")"><i class="glyphicon glyphicon-eye-open"></i><span>وكالة التصنيف الائتماني</span></a>
+                            </li>
+                            <li>
+                                <a class="ajax-link" href="@Url.Action("Index", "Country_CreditRatingAgencies")"><i class="glyphicon glyphicon-eye-open"></i><span>وكالة التصنيف الائتماني لكل دولة</span></a>
+                            </li>
+                            <li>
+                                <a class="ajax-link" href="@Url.Action("Index", "Region_CreditRatingAgencies")"><i class="glyphicon glyphicon-eye-open"></i><span>وكالة التصنيف الائتماني لكل منطقة</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="accordion">
+                        <a href="#"><i class="glyphicon glyphicon-plus"></i><span> الأسواق</span></a>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li>
+                                <a class="ajax-link" href="@Url.Action("Index", "Markets")"><i class="glyphicon glyphicon-picture"></i><span>الأسواق</span></a>
+                            </li>
+                            <li>
+                                <a class="ajax-link" href="@Url.Action("Index", "MarketTypes")"><i class="glyphicon glyphicon-picture"></i><span>أنواع الأسواق</span></a>
+                            </li>
+                            <li>
+                                <a class="ajax-link" href="@Url.Action("Index", "MarketValues")"><i class="glyphicon glyphicon-picture"></i><span>القيمة السوقية</span></a>
+                            </li>
+
+                            <li>
+                                <a class="ajax-link" href="@Url.Action("Index", "QuarterMarketValues")"><i class="glyphicon glyphicon-picture"></i><span>ربع القيمة السوقية</span></a>
+                            </li>
+                            <li>
+                                <a class="ajax-link" href="@Url.Action("Index", "RelativeSize")"><i class="glyphicon glyphicon-home"></i><span> الحجم النسبي </span></a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a class="ajax-link" href="@Url.Action("Index", "CurrentAccountBalances")"><i class="glyphicon glyphicon-eye-open"></i><span>ميزان الحساب الجاري</span></a>
+                    </li>
+                    <li>
+                        <a class="ajax-link" href="@Url.Action("Index", "MiseryIndexs")"><i class="glyphicon glyphicon-eye-open"></i><span>مؤشر البؤس</span></a>
+                    </li>
+                    <li>
+                        <a class="ajax-link" href="@Url.Action("Index", "Faqs")">
+                            <i class="glyphicon glyphicon-edit"></i><span>الاسئلة المتكررة</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="ajax-link" href="@Url.Action("Index", "Advices")"><i class="glyphicon glyphicon-list-alt"></i><span>النصائح</span></a>
+                    </li>
+                    <li>
+                        <a class="ajax-link" href="@Url.Action("Index", "Games")"><i class="glyphicon glyphicon-font"></i><span> الالعاب</span></a>
+                    </li>
+                    <li>
+                        <a class="ajax-link" href="@Url.Action("Index", "RelaxationVideo")"><i class="glyphicon glyphicon-font"></i><span> فيديوهات الإسترخاء</span></a>
+                    </li>
+                    <li>
+                        <a class="ajax-link" href="@Url.Action("Index", "Jobs")"><i class="glyphicon glyphicon-picture"></i><span>الوظائف</span></a>
+                    </li>
+                <li>
+                    <a class="ajax-link" href="@Url.Action("Index", "Knowledge")"><i class="glyphicon glyphicon-picture"></i><span>وسع ثقتك</span></a>
+                </li>
+
+                    <li>
+                        <a class="ajax-link" href="@Url.Action("Index", "Elders")"><i class="glyphicon glyphicon-font"></i><span> المؤلفون</span></a>
+                    </li>
+                    <li>
+                        <a class="ajax-link" href="@Url.Action("Index", "WiseSaying")"><i class="glyphicon glyphicon-picture"></i><span>أقوال الحكماء</span></a>
+                    </li>
+                    <li>
+                        <a class="ajax-link" href="@Url.Action("Index", "subject")"><i class="glyphicon glyphicon-picture"></i><span>المواضيع</span></a>
+                    </li>
+                    <li>
+                        <a class="ajax-link" href="@Url.Action("Index", "Unities")"><i class="glyphicon glyphicon-picture"></i><span>الوحدة</span></a>
+                    </li>
+                    <li>
+                        <a class="ajax-link" href="@Url.Action("Index", "Transaction")"><i class="glyphicon glyphicon-picture"></i><span>العملية</span></a>
+                    </li>
+                    <li>
+                        <a class="ajax-link" href="@Url.Action("Index", "Indecators")"><i class="glyphicon glyphicon-picture"></i><span>المؤشرات</span></a>
+                    </li>
+                    <li>
+                        <a class="ajax-link" href="@Url.Action("Index", "Evaluations")"><i class="glyphicon glyphicon-picture"></i><span>التقييم</span></a>
+                    </li>
+                    <li>
+
+                    <li>
+                        <a class="ajax-link" href="@Url.Action("Index", "Years")"><i class="glyphicon glyphicon-picture"></i><span>السنوات</span></a>
+                    </li>
+                    <li>
+                        <a class="ajax-link" href="@Url.Action("Index", "YearlyValueTraded")"><i class="glyphicon glyphicon-picture"></i><span>القيمة المتداولة السنوية</span></a>
+                    </li>
+
+
+                    <li class="nav-header hidden-md">الروابط الفرعية</li>
+                    <li>
+                        <a class="ajax-link" href="#">
+                            <i class="glyphicon glyphicon-align-justify"></i><span> الرابط الاول</span>
+                        </a>
+                    </li>
+                    <li class="accordion">
+                        <a href="#"><i class="glyphicon glyphicon-plus"></i><span> قائمة منسدلة</span></a>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">الرابط الفرعى الاول</a></li>
+                            <li><a href="#">الرابط الفرعى الثانى</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="ajax-link" href="#"><i class="glyphicon glyphicon-calendar"></i><span> الرابط الثانى</span></a>
+                    </li>
+                    <li>
+                        <a class="ajax-link" href="#">
+                            <i class="glyphicon glyphicon-th"></i><span> الرابط الثالث</span>
+                        </a>
+                    </li>
+                    <li><a href="#"><i class="glyphicon glyphicon-globe"></i><span> الرابط الرابع</span></a></li>
+                    <li>
+                        <a class="ajax-link" href="#">
+                            <i class="glyphicon glyphicon-star"></i><span>الرابط الخامس</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="glyphicon glyphicon-ban-circle"></i><span> الرابط السادس</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="glyphicon glyphicon-lock"></i><span>الرابط السابع</span></a>
+                    </li>
+                </ul>
+
+</div>
+    </div>
+</div>
+<!--/span-->
+<!-- left menu ends -->

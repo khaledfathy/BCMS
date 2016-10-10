@@ -1,0 +1,53 @@
+﻿@using BCMS.Models;
+@model Country
+<script src="~/Areas/Admin/js/jquery.validate.min.js"></script>
+<script src="~/Areas/Admin/js/jquery.validate.unobtrusive.js"></script>
+<link href="~/Areas/Admin/css/MyStyle.css" rel="stylesheet" />
+
+<div style=" text-align: center;width:82%">
+    <div class="box col-md-8" style="width:121%;text-align: center">
+
+        <div class="box-content" style="width:100%;">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                
+               <div class="form-group">
+                    <label for="exampleInputEmail1">الدولة باللغة العربية</label>
+                    @Html.EditorFor(model => model.CountryArName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CountryArName)
+                </div>
+                
+                      <div class="form-group">
+                    <label for="exampleInputEmail1">الدولة باللغة الإنجليزية</label>
+                    @Html.EditorFor(model => model.CountryEnName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CountryEnName)
+                </div>
+          <div class="form-group">
+                    <label for="exampleInputEmail1">العاصمة باللغة العربية</label>
+                    @Html.EditorFor(model => model.CountryCapitalAr, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CountryCapitalAr)
+                </div>
+          <div class="form-group">
+                    <label for="exampleInputEmail1">العاصمة باللغة الإنجليزية</label>
+                    @Html.EditorFor(model => model.CountryCapitalEn, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CountryCapitalEn)
+                </div>
+    
+                <div class="form-group">
+                    <label for="exampleInputEmail1">الحالة</label>
+                    @Html.DropDownListFor(model => model.State, (IEnumerable<SelectListItem>)ViewBag.state, "-- إختار الحالة --", new { @class = "StyleForDropDownList" })
+                    @*@Html.DropDownListFor(model => model.State,''true'',''false'', "-- إختار الحالة --", new { @class = "StyleForDropDownList" })*@
+                    @Html.ValidationMessageFor(model => model.State)
+                </div>
+    
+                <div style="margin:5px 20px 5px 5px;text-align:right">
+                    <button class="btn btn-primary12 btn-sm" style="width:80px">حفظ</button>
+                    <input type="button" value="إلغاء" class="btn btn-primary12 btn-sm" id="btncancel" />
+                </div>
+            }
+        </div>
+
+    </div>
+</div>

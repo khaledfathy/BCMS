@@ -1,0 +1,215 @@
+﻿@using BCMS.Models;
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<YearlyValueTraded>
+@helper Truncate(string input, int lenght)
+{
+    if (input.Length <= lenght)
+    {
+        @input
+    }
+    else
+    {
+        @input.Substring(0, lenght)<text>...</text>
+    }
+}
+
+
+@section Scripts{
+    <style type="text/css">
+        .ui-dialog .ui-dialog-title {
+            direction: rtl;
+            float: right;
+            margin: 0.1em 0 0.2em 16px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = "";
+            $("#dialog-alert").dialog({
+                autoOpen: false,
+                resizable: false,
+                title: 'رسالة تنبيهية',
+                height: 170,
+                width: 250,
+                show: { effect: 'drop', direction: "up" },
+                modal: true,
+                draggable: true,
+                open: function (event, ui) {
+                    $(".ui-dialog-titlebar-close").hide();
+                },
+                buttons: {
+                    "اغلاق": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+
+            if ('@TempData["msg"]' != "") {
+                $("#dialog-alert").dialog('open');
+            }
+
+            $("#dialog-edit").dialog({
+                title: "إضافة  ",
+                autoOpen: false,
+                resizable: false,
+                height: 500,
+                width: 500,
+                show: { effect: 'drop', direction: "up" },
+                modal: true,
+                draggable: true,
+                open: function (event, ui) {
+                    $(".ui-dialog-titlebar-close").hide();
+                    $(this).load(url);
+                }
+            });
+
+            $("#dialog-confirm").dialog({
+                autoOpen: false,
+                resizable: false,
+                title: 'رسالة تنبيهية',
+                height: 170,
+                width: 350,
+                show: { effect: 'drop', direction: "up" },
+                modal: true,
+                draggable: true,
+                open: function (event, ui) {
+                    $(".ui-dialog-titlebar-close").hide();
+
+                },
+                buttons: {
+                    "تأكيد": function () {
+                        $(this).dialog("close");
+                        window.location.href = url;
+                    },
+                    "إلغاء": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+
+            $("#dialog-detail").dialog({
+                title: 'التفاصيل ',
+                autoOpen: false,
+                resizable: false,
+                height: 500,
+                width: 400,
+                show: { effect: 'drop', direction: "up" },
+                modal: true,
+                draggable: true,
+                open: function (event, ui) {
+                    $(".ui-dialog-titlebar-close").hide();
+                    $(this).load(url);
+                },
+                buttons: {
+                    "اغلاق": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+
+            $(".btn-primary").live("click", function (e) {
+                //e.preventDefault(); //use this or return false
+                url = $(this).attr('href');
+                $("#dialog-edit").dialog('open');
+
+                return false;
+            });
+
+            $(".lnkEdit").live("click", function (e) {
+                // e.preventDefault(); use this or return false
+                url = $(this).attr('href');
+                $(".ui-dialog-title").html("تعديل ");
+                $("#dialog-edit").dialog('open');
+
+                return false;
+            });
+
+            $(".lnkDelete").live("click", function (e) {
+                // e.preventDefault(); use this or return false
+                url = $(this).attr('href');
+                $("#dialog-confirm").dialog('open');
+
+                return false;
+            });
+
+            $(".lnkDetail").live("click", function (e) {
+                // e.preventDefault(); use this or return false
+                url = $(this).attr('href');
+                $("#dialog-detail").dialog('open');
+
+                return false;
+            });
+
+            $("#btncancel").live("click", function (e) {
+                $("#dialog-edit").dialog("close");
+                return false;
+            });
+
+        });
+    </script>
+}
+
+<div id="dialog-alert" style="display: none;font-size:medium">
+    <p>
+        @TempData["msg"]
+    </p>
+</div>
+
+<div id="dialog-confirm" style="display: none">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float: right; margin: 0 7px 20px 0;"></span>
+        هل تريد تأكيد عملية الحذف ؟
+    </p>
+</div>
+
+<div id="dialog-edit" style="display: none"></div>
+
+<div id="dialog-detail" style="display: none"></div>
+
+
+<div style="margin:5px 20px 5px 5px;text-align:right">
+    @Html.ActionLink("إضافة  ", "Create", "YearlyValueTraded", new { @class = "btn btn-primary btn-sm" })
+</div>
+<table class="table table-striped table-bordered responsive" dir="rtl" align="center">
+    <thead>
+        <tr>
+            <th>السوق</th>
+            <th>السنة</th>
+            <th>القيمة المتداولة </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td class="center">@item.Market.MarketArName</td>
+                <td class="center">@item.Year.YearN</td>
+                <td class="center">@item.ValueTraded</td>
+
+                <td class="center">
+                    <a class="btn btn-info lnkEdit" href="@Url.Action("Edit", "YearlyValueTraded", new { id = item.ValueTradedId })">
+                        <i class="glyphicon glyphicon-edit icon-white"></i>
+                        تعديل
+                    </a>
+                    <a class="btn btn-danger lnkDelete" href="@Url.Action("Delete", "YearlyValueTraded", new { id = item.ValueTradedId })">
+                        <i class="glyphicon glyphicon-trash icon-white"></i>
+                        حذف
+                    </a>
+              
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+        new PagedListRenderOptions()
+        {
+            Display = PagedListDisplayMode.IfNeeded,
+            DisplayPageCountAndCurrentLocation = true
+        })

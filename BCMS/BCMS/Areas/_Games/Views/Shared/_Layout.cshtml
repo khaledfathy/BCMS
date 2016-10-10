@@ -1,0 +1,98 @@
+﻿
+@if (Request.Cookies["mvcname"] == null)
+{
+    Response.Redirect(Url.Action("Index", "Home", new { Area = "" }));
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    <link href="~/Areas/Games/Content/boilerplate.css" rel="stylesheet" />
+    <link href="~/Areas/Games/Content/Style-3.css" rel="stylesheet" />
+    <script src="~/Areas/Games/js/respond.min.js"></script>
+    <script src="~/Areas/Games/Materials/js/audio-fx.js"></script>
+    <script type="text/javascript" src="~/Areas/Games/Materials/js/audio-fx.min.js"></script>
+    <link href="~/Areas/Games/Materials/Private/Style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/Games/Materials/css/style.css" rel="stylesheet" />
+    <script src="~/Areas/Games/Materials/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Areas/Games/Materials/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Areas/Games/Materials/js/CTile.js"></script>
+    <script type="text/javascript" src="~/Areas/Games/Materials/js/jquery.flip.js"></script>
+    <script src="~/Areas/Games/Materials/js/CCode.js"></script>
+    <script src="~/Areas/Games/js/jquery.easing.1.3.js"></script>
+    <script src="~/Areas/Games/js/jquery.eislideshow.js"></script>
+
+
+
+ 
+</head>
+<body>
+ 
+    @RenderSection("scripts", required: false)
+
+
+    <!--============== start Header =========================-->
+    <div class="header">
+        <div class="gridContainer clearfix">
+
+            <a class="top" href="@Url.Action("Index", "Home")"> الرئيسية </a>
+            |
+            <a class="top" href="#"> إقتراحاتكم </a>
+            |
+            <a class="top" href="#"> الدعم الفني </a>
+            |
+            <a class="top" href="#"> إتصل بنا </a>
+
+
+        </div>
+        <div class="gridContainer clearfix">
+            <div class="logo"> <img src="~/Areas/Games/images/logo.png"></div>
+
+           
+        </div>
+    </div>
+
+
+    @RenderBody()
+
+    <div class="footer">
+        <div class="gridContainer clearfix">
+
+            <div class="right">
+                <a href="http://linked.com/" target="_blank"><img src="~/Areas/Games/images/linkedin.png"></a>
+                <a href="https://www.youtube.com/" target="_blank"><img src="~/Areas/Games/images/youtube.png"></a>
+                <a href="https://www.rss.com/" target="_blank"><img src="~/Areas/Games/images/rss.png"></a>
+                <a href="https://twitter.com/" target="_blank"><img src="~/Areas/Games/images/twitter.png"></a>
+                <a href="https://www.facebook.com/" target="_blank"><img src="~/Areas/Games/images/facebook.png"></a>
+            </div>
+
+            <div class="left" align="left">
+                <a href="http://borsacapital.com/">بورصة كابيتال</a> |<a href="#"> عن الشركة</a> |<a href="#"> أتصل بنا</a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="copyRight">2014© جميع الحقوق محفوظة لبورصة كابيتال</div>
+
+
+
+
+    <script type="text/javascript">
+        $(function () {
+            $('#ei-slider').eislideshow({
+                animation: 'center',
+                autoplay: true,
+                slideshow_interval: 3000,
+                titlesFactor: 0
+            });
+        });
+    </script>
+
+
+</body>
+</html>

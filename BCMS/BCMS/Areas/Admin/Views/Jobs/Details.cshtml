@@ -1,0 +1,226 @@
+﻿@using BCMS.Models;
+@model Job
+
+<script src="~/Areas/Admin/js/jquery.validate.min.js"></script>
+<script src="~/Areas/Admin/js/jquery.validate.unobtrusive.js"></script>
+<link href="~/Areas/Admin/css/MyStyle.css" rel="stylesheet" />
+
+    <div style=" text-align: center;width:82%">
+        <div class="box col-md-8" style="width:121%;text-align: center">
+            <div class="box-content">
+                <div class="box col-md-4" style="margin-top:-10px">
+                    <div class="form-group">
+                        <label>الحالة</label>
+                        <input id="StatusID" name="StatusID" class="form-control" value="@Model.Status.StatusName" disabled="disabled" />
+                    </div>
+                </div> <!-- الحالة -->
+                <div class="box col-md-4" style="margin-top:-10px">
+                    <div class="form-group">
+                        <label>التاريخ</label>
+                        <input id="JobDate" name="JobDate" class="form-control" value="@Model.JobDate.Value.ToShortDateString()" disabled="disabled" />
+                    </div>
+                </div> <!-- التاريخ -->
+                <div class="box col-md-4" style="margin-top:-10px">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">المسمى الوظيفي</label>
+                        <input id="JobTitle" name="JobTitle" class="form-control" value="@Model.JobTitle" disabled="disabled" />
+                    </div>
+                </div> <!-- المسمى الوظيفي -->
+                <br /><br /><br /><br />
+                <div class="form-group">
+                    <div class="panel-group" id="accordion-demo">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion-demo" href="#prerequisites" class="collapsed">
+                                        المواصـــفات
+                                    </a>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse in" id="prerequisites" style="height: auto;">
+                                <div class="panel-body">
+                                
+
+                                        <div style="margin:5px 20px 5px 5px;text-align:right" dir="rtl">
+                                            @Html.ActionLink("إضافة وصف جديد", "CreateSpecification", new { controller = "Jobs" , id=Model.JobID } , new { @class = "btn btn-primary12 btn-sm AddNewSub ", @style = "Color:#fff" })
+                                        </div>
+                                        <table class="table table-striped table-bordered responsive" dir="rtl" align="center">
+                                            <thead>
+                                                <tr>
+                                                    <th>الوصف</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in (List<Job_Specification>)ViewBag.Specification)
+                                                {
+                                                    <tr>
+                                                        <td class="center">@item.specification</td>
+                                                        <td class="center">
+                                                            <a class="btn btn-info lnkEditSP" style="color:white" href="@Url.Action("EditSpecification", "Jobs", new { id = item.JSID })">
+                                                                <i class="glyphicon glyphicon-edit icon-white"></i>
+                                                                تعديل
+                                                            </a>
+                                                            <a class="btn btn-danger lnkDelete" style="color:white" href="@Url.Action("DeleteSpecification", "Jobs", new { id = item.JSID })">
+                                                                <i class="glyphicon glyphicon-trash icon-white"></i>
+                                                                حذف
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                    
+                                            </tbody>
+                                        </table>
+
+                                  
+                                </div> <!--/.panel-body -->
+                            </div> <!-- /#prerequisites -->
+                        </div> <!-- المواصـــفات -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion-demo" href="#addwizard" class="collapsed">
+                                        المهارات
+                                    </a>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse" id="addwizard" style="height: 36.4px;">
+                                <div class="panel-body">
+                                        <div style="margin:5px 20px 5px 5px;text-align:right" dir="rtl">
+                                            @Html.ActionLink("إضافة مهاره جديدة", "CreateSkill", new { controller = "Jobs", id = Model.JobID }, new { @class = "btn btn-primary12 btn-sm AddNewSubSkill", @style = "Color:#fff" })
+                                        </div>
+                                        <table class="table table-striped table-bordered responsive" dir="rtl" align="center">
+                                            <thead>
+                                                <tr>
+                                                    <th>المهارات</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in (List<Job_Skill>)ViewBag.Skill)
+                                                {
+                                                    <tr>
+                                                        <td class="center">@item.Skill</td>
+                                                        <td class="center">
+                                                            <a class="btn btn-info lnkEditSkill" style="color:white" href="@Url.Action("EditSkill","Jobs",new{id=item.JobSkillID})" >
+                                                                <i class="glyphicon glyphicon-edit icon-white"></i>
+                                                                تعديل
+                                                            </a>
+                                                            <a class="btn btn-danger lnkDelete" style="color:white" href="@Url.Action("DeleteSkill", "Jobs", new { id = item.JobSkillID })">
+                                                                <i class="glyphicon glyphicon-trash icon-white"></i>
+                                                                حذف
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                
+
+
+
+                                            </tbody>
+                                        </table>
+                                  
+                                </div> <!--/.panel-body -->
+                            </div> <!-- /#addwizard -->
+                        </div> <!-- المهارات -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion-demo" href="#adjusthtml" class="collapsed">
+                                        الشهادات الدراسية
+                                    </a>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse" id="adjusthtml" style="height: 36.4px;">
+                                <div class="panel-body">
+                               
+                                        <div style="margin:5px 20px 5px 5px;text-align:right" dir="rtl">
+                                            @Html.ActionLink("إضافة شهاده دراسية جديدة", "CreateEducation", new { controller = "Jobs", id = Model.JobID }, new { @class = "btn btn-primary12 btn-sm AddNewSubEducation", @style = "Color:#fff" })
+                                        </div>
+                                        <table class="table table-striped table-bordered responsive" dir="rtl" align="center">
+                                            <thead>
+                                                <tr>
+                                                    <th>الشهادات الدراسية</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in (List<Job_Education>)ViewBag.Education)
+                                                {
+                                                    <tr>
+                                                        <td class="center">@item.Education</td>
+                                                        <td class="center">
+                                                            <a class="btn btn-info lnkEditEducation" style="color:white" href="@Url.Action("EditEducation", "Jobs", new { id = item.JEID })">
+                                                                <i class="glyphicon glyphicon-edit icon-white"></i>
+                                                                تعديل
+                                                            </a>
+                                                            <a class="btn btn-danger lnkDelete" style="color:white" href="@Url.Action("DeleteEducation", "Jobs", new { id = item.JEID })">
+                                                                <i class="glyphicon glyphicon-trash icon-white"></i>
+                                                                حذف
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                
+                                            </tbody>
+                                        </table>
+                               
+                                </div> <!--/.panel-body -->
+                            </div> <!-- /#adjusthtml -->
+                        </div> <!-- الشهادات الدراسية -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion-demo" href="#viewpage" class="">
+                                        التفضيلات
+                                    </a>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse " id="viewpage" style="height: auto;">
+                                <div class="panel-body">
+                               
+                                        <div style="margin:5px 20px 5px 5px;text-align:right" dir="rtl">
+                                            @Html.ActionLink("إضافة تفضيلات جديدة", "CreatePrefer", new { controller = "Jobs", id = Model.JobID }, new { @class = "btn btn-primary12 btn-sm AddNewSubPrefer", @style = "Color:#fff" })
+                                        </div>
+                                        <table class="table table-striped table-bordered responsive" dir="rtl" align="center">
+                                            <thead>
+                                                <tr>
+                                                    <th>المفضل</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in (List<Job_Prefer>)ViewBag.Prefer)
+                                                {
+                                                    <tr>
+                                                        <td class="center">@item.Prefer</td>
+                                                        <td class="center">
+                                                            <a class="btn btn-info lnkEditPrefer" style="color:white" href="@Url.Action("EditPrefer", "Jobs", new { id = item.JPID })">
+                                                                <i class="glyphicon glyphicon-edit icon-white"></i>
+                                                                تعديل
+                                                            </a>
+                                                            <a class="btn btn-danger lnkDelete" style="color:white" href="@Url.Action("DeletePrefer", "Jobs", new { id = item.JPID })">
+                                                                <i class="glyphicon glyphicon-trash icon-white"></i>
+                                                                حذف
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                
+                                            </tbody>
+                                        </table>
+
+                                 
+                                </div> <!--/.panel-body -->
+                            </div> <!-- /#adjusthtml -->
+                        </div> <!-- التفضيلات -->
+                    </div>
+                </div>
+               
+                <div style="margin:5px 20px 5px 5px;text-align:right">
+                    <input type="button" value="إغلاق" class="btn btn-primary12 btn-sm" id="btncancel" />
+                </div>
+            </div>
+        </div>
+    </div>
+

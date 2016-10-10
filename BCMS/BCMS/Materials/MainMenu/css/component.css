@@ -1,0 +1,214 @@
+@import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+.SubMenuDock
+{}
+.cbp-hrmenu {
+	/*width: 100%;*/
+}
+/* general ul style */
+.cbp-hrmenu ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+/* first level ul style */
+.cbp-hrmenu > ul,
+.cbp-hrmenu .cbp-hrsub-inner {
+	/*width: 100%;*/
+	/*max-width: 70em;*/
+	margin: 0 auto;
+	padding: 0 0em;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+.cbp-hrmenu > ul > li {
+	display: inline-block;
+    float: left;
+}
+.cbp-hrmenu > ul > li > a {
+    font-weight: normal;
+    font-family: Tahoma;
+    color: #c1cccc;
+    text-decoration:none;
+    display:block;
+    font-size: 0.8em;
+	
+	padding: .8em 2em .7em 2em;	
+	display: inline-block;
+    white-space: nowrap;
+}
+.cbp-hrmenu > ul > li > a:hover {
+	color: #FFF;
+	background: #367e27;
+}
+
+.cbp-hrmenu > ul > li.cbp-hropen a
+ {
+	color: #FFF;
+	background: #000;
+}
+
+.cbp-hrmenu > ul > li.cbp-hropen > a:hover {
+	color: #FFF;
+	background: #367e27;
+}
+
+
+.cbp-hrmenu > ul > li:hover > .cbp-hrsub {
+	display: block;
+	padding-bottom: .1em;
+    max-height: inherit;
+}
+/* sub-menu */
+.cbp-hrmenu .cbp-hrsub {
+    /*width: 100%;*/
+	display: none;
+	position: absolute;
+	background: #eeeeee;
+	left: 0;
+    z-index: 999999999999;
+    border-bottom: 0 solid #bfcaca;
+
+    max-height: 0;
+	overflow: hidden;
+
+	/* Set our transitions up. */
+	-webkit-transition: max-height 0.8s;
+	-moz-transition: max-height 0.8s;
+	transition: max-height 0.8s;
+}
+.cbp-hrmenu .FullScreen {
+    width: 100%;
+}
+.cbp-hropen .cbp-hrsub {
+	display: block;
+	padding-bottom: 0;
+    max-height: inherit;
+}
+.cbp-hrmenu .cbp-hrsub-inner > div {
+	/*width: 33%;*/
+	float: left;
+	padding: 0 0 0;
+}
+.cbp-hrmenu .cbp-hrsub-inner:before,
+.cbp-hrmenu .cbp-hrsub-inner:after {
+	content: " ";
+	display: table;
+}
+.cbp-hrmenu .cbp-hrsub-inner:after {
+	clear: both;
+}
+.cbp-hrmenu .cbp-hrsub-inner > div a {
+	line-height: 2em;
+    font-size: .9em;
+    font-family: Tahoma;
+    color: #1583be !important;
+}
+.cbp-hrsub h4 {
+    font-weight: normal;
+    font-family: Tahoma;
+	color: #333;
+	padding: 2em 0 0.6em;
+	margin: 0;
+	font-size: 100%;
+	font-weight: 300;
+}
+/* Hover */
+.cbp-hrmenu > ul > li:hover {
+         background-color: #000;
+        }
+.cbp-hrmenu > ul > li:hover > li > a {
+         
+        }
+.cbp-hrmenu > ul > li > div {
+	background-color: rgba( 40, 44, 47, 0.9 );
+}
+/*SUB*/
+.cbp-hrmenu > ul > li > div ul > li:hover > a {
+		
+	}
+/*
+.cbp-hrmenu > ul > li > div > ul > li > div {
+	background-color: rgba( 105, 181, 190, 1 );
+}
+.cbp-hrmenu > ul > li > div {
+	background-color: rgba( 40, 44, 47, 0.9 );
+}
+.cbp-hrmenu > ul > li > div ul > li > div {
+	background-color: rgba(54,64,188,.8);
+}*/
+
+/* Examples for media queries */
+
+@media screen and (max-width: 52.75em) { 
+
+	.cbp-hrmenu {
+		font-size: 80%;
+	}
+    
+.cbp-hrmenu > ul > li {
+	display: inline-block;
+    float: none;
+}
+
+}
+
+@media screen and (max-width: 43em) { 
+
+	.cbp-hrmenu {
+		font-size: 120%;
+		border: none;
+	}
+
+	.cbp-hrmenu > ul,
+	.cbp-hrmenu .cbp-hrsub-inner {
+		width: 100%;
+		padding: 0;
+	}
+
+	.cbp-hrmenu .cbp-hrsub-inner {
+		padding: 0 .1em;
+		font-size: 75%;
+	}
+
+	.cbp-hrmenu > ul > li {
+		display: block;
+		border-top: 1px solid #393939;
+	}
+
+	.cbp-hrmenu > ul > li > a {
+		display: block;
+		padding: .8em .1em;
+	}
+
+	.cbp-hrmenu .cbp-hrsub { 
+		position: relative;
+	}
+
+	.cbp-hrsub h4 {
+		padding-top: 0.6em;
+	}
+	.cbp-hrmenu ul li {		
+    background-color: #666;
+	}
+	.cbp-hrmenu ul li li {		
+    background-color: #367e27;
+	}
+.cbp-hrsub h4 {
+	font-size: 160%;
+}
+
+}
+
+@media screen and (max-width: 36em) { 
+	.cbp-hrmenu .cbp-hrsub-inner > div {
+		width: 100%;
+		float: none;
+		padding: 0 .1em;
+	}
+}
+
+
+

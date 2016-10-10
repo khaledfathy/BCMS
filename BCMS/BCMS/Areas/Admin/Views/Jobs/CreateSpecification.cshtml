@@ -1,0 +1,29 @@
+﻿@using BCMS.Models;
+@model Job_Specification
+<script src="~/Areas/Admin/js/jquery.validate.min.js"></script>
+<script src="~/Areas/Admin/js/jquery.validate.unobtrusive.js"></script>
+<link href="~/Areas/Admin/css/MyStyle.css" rel="stylesheet" />
+<div style=" text-align: center;width:82%">
+
+    <div class="box col-md-8" style="width:121%;text-align: center">
+        <div class="box-content" style="width:100%;">
+            @using (Html.BeginForm("CreateSpecification", "Jobs", FormMethod.Post))
+            {
+                @Html.ValidationSummary(true)
+
+                <input type="hidden" value="@Convert.ToInt32(ViewBag.CurrentID)" id="JobID" name="JobID" />
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">الصفه</label>
+                    <textarea id="specification" name="specification" class="form-control"></textarea>
+                    @Html.ValidationMessageFor(model => model.specification)
+                </div>
+
+                <div style="margin:5px 20px 5px 5px;text-align:right">
+                    <input type="submit" class="btn btn-primary12 btn-sm" style="width:80px" value="حفظ" />
+                    <input type="button" value="إلغاء" class="btn btn-primary12 btn-sm" id="btnSpecificationCancel" />
+                </div>
+            }
+        </div>
+    </div>
+</div>

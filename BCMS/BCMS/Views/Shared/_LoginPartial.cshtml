@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    string FullName = null;
+    if (HttpContext.Current.Request.Cookies["Name"] != null)
+    {
+        FullName = HttpContext.Current.Request.Cookies["Name"].Value;
+    }
+
+    <li>
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()">{{logout | translate}}</a>
+        }
+    </li>
+    <li><a href="#">{{welcome | translate}}  @FullName</a></li>
+}
+else
+{
+    <li><a href="#/Login"> {{login | translate}} </a></li>
+    <li><a href="#/Register"> {{register | translate}} </a></li>
+}
+

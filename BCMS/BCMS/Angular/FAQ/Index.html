@@ -1,0 +1,29 @@
+﻿
+<!--<script src="../Scripts/spin.min.js"></script>-->
+<div class="row" ng-controller="faqController">
+    <!--START OUR CLIENTS-->
+    <div ng-include="'../Angular/Sponsors.html'"></div>
+
+    <!--END OUR CLIENTS-->
+
+    <div class="large-10 column">
+        <div class="RegisterWrapper">
+            <h1 class="Spec InnerPage">
+                {{commonQuestions | translate}}
+            </h1>
+            <div class="large-12 columns">
+                <div class="large-12 column">
+                    <div ng-repeat="faq in faqs">
+                        <h4 class="acc-style-faq"><a href="#">{{faq.FaqQuestion}}</a></h4>
+                        <div>{{faq.FaqAnswer}}</div><br />
+                    </div>
+                </div>
+            </div>
+            <div id="loading" ng-show="loading" style="height:400px">
+
+            </div>
+            <div class="H10"></div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>

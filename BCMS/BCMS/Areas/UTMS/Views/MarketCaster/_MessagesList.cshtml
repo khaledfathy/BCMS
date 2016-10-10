@@ -1,0 +1,107 @@
+﻿@model IEnumerable<BCMS.Models.Tadawel>
+
+    <tr   class="header">
+
+        <th >
+            الرمز
+        </th>
+        <th>
+            الاسم
+        </th>
+        <th >
+            حجم السيولة 
+            <br> الداخلة
+        </th>
+        <th >
+            حجم السيولة
+            <br> الخارجة
+        </th>
+        <th>
+            الإتجاه
+        </th>
+        <th>
+            التغيير
+        </th>
+        <th>
+            التغير%
+        </th>
+        <th >
+            كمية أفضل <br>طلب
+        </th>
+        <th >
+            أفضل <br>عرض
+        </th>
+        <th>
+            كمية أفضل <br>عرض
+        </th>
+        <th>
+            الكمية
+        </th>
+        <th >
+            القيمة
+        </th>
+        <th>
+            العمليات
+        </th>
+        <th>
+            طلب/عرض
+        </th>
+        <th >
+            مخطط السيولة
+
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr id="rr" style="">
+            <td class="aaaa">
+                @Html.DisplayFor(modelItem => item.CODE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NAME)
+            </td>
+            <td id="ddd">
+                @Html.DisplayFor(modelItem => item.CASHFLOWIN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CASHFLOWOUT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TREND)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CHANGE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CHANGEPEST)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BESTASKQ)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BESTBIDP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BESTBIDQ)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.VOLUME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VALUE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TRANSACTIONS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ASKBID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CASHFLOWPLAN)
+            </td>
+        </tr>
+
+    }

@@ -1,0 +1,46 @@
+﻿@using BCMS.Models;
+@model WiseSaying
+<script src="~/Areas/Admin/js/jquery.validate.min.js"></script>
+<script src="~/Areas/Admin/js/jquery.validate.unobtrusive.js"></script>
+<link href="~/Areas/Admin/css/MyStyle.css" rel="stylesheet" />
+
+<div style=" text-align: center;width:82%">
+    <div class="box col-md-8" style="width:121%;text-align: center">
+
+        <div class="box-content" style="width:100%;">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+              
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">إسم المؤلف</label>
+                        @Html.DropDownListFor(model => model.EldersID, (IEnumerable<SelectListItem>)ViewBag.AllElders, "-- إختار مؤلف --", new { @class = "StyleForDropDownList" })
+                        @Html.ValidationMessageFor(model => model.EldersID)
+                    </div>
+               
+
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">الحالة</label>
+                    @Html.DropDownListFor(model => model.StatusID, (IEnumerable<SelectListItem>)ViewBag.AllStatus, "-- إختار الحالة --", new { @class = "StyleForDropDownList" })
+                    @Html.ValidationMessageFor(model => model.StatusID)
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">المقولة</label>
+                    @Html.TextAreaFor(model => model.WiseSayingContent, new { @class = "form-control" })
+                    <p style="color:#929292">يجب وضع علامة ( . ) بعد كل قطعه فى المقولة</p>
+                    @Html.ValidationMessageFor(model => model.WiseSayingContent)
+                </div>
+
+                <div style="margin:5px 20px 5px 5px;text-align:right">
+                    <button class="btn btn-primary12 btn-sm" style="width:80px">حفظ</button>
+                    <input type="button" value="إلغاء" class="btn btn-primary12 btn-sm" id="btncancel" />
+                </div>
+            }
+        </div>
+
+    </div>
+</div>

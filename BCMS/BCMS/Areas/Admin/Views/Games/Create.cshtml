@@ -1,0 +1,95 @@
+﻿@using BCMS.Models;
+@model Game
+<script src="~/Areas/Admin/js/jquery.validate.min.js"></script>
+<script src="~/Areas/Admin/js/jquery.validate.unobtrusive.js"></script>
+<link href="~/Areas/Admin/css/MyStyle.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#GameCreatedDate").datepicker();
+        $("#GamePuplishDate").datepicker();
+        $("input[type='text']").removeClass("text-box single-line").addClass("form-control");
+    });
+</script>
+<div style=" text-align: center;width:82%">
+    <div class="box col-md-8" style="width:121%;text-align: center">
+
+        <div class="box-content" style="width:100%;">
+            <form action="Create" method="post" enctype="multipart/form-data">
+
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">إسم العبة</label>
+                    @Html.EditorFor(model => model.GameName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.GameName)
+                </div>
+
+                <div class="form-group">
+                    <label style="margin-bottom:-30px">إسم المؤلف</label>
+                    @Html.EditorFor(model => model.GameAuther, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.GameAuther)
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">إسم المصمم</label>
+                    @Html.EditorFor(model => model.DesignedBy, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DesignedBy)
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">إسم المُطور</label>
+                    @Html.EditorFor(model => model.DevelopedBy, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DevelopedBy)
+                </div>
+
+                <div class="form-group">
+                    <label style="margin-bottom:-30px">الحالة</label>
+                    <div></div>
+                    @Html.DropDownListFor(model => model.StatusID,
+               (IEnumerable<SelectListItem>)ViewBag.Status, "-- إختار حالة --", new { @class = "StyleForDropDownList" })
+                    @Html.ValidationMessageFor(model => model.StatusID)
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">تاريخ الاصدار</label>
+                    @Html.EditorFor(model => model.GameCreatedDate, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.GameCreatedDate)
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">تاريخ النشر</label>
+                    @Html.EditorFor(model => model.GamePuplishDate, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.GamePuplishDate)
+                </div>
+
+                <div class="form-group">
+                    <label for="file">اللعبة</label>
+                    <div style="direction:rtl;text-align:right">
+                        @Html.TextBoxFor(model => model.file1, new { type = "file" })
+                        @Html.ValidationMessageFor(model => model.file1)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="file">الصورة</label>
+                    <div style="direction:rtl;text-align:right">
+                        @Html.TextBoxFor(model => model.file, new { type = "file" })
+                        @Html.ValidationMessageFor(model => model.file)
+                    </div>
+                </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">الوصف</label>
+                        @Html.TextAreaFor(model => model.GameDescription, new { @class = "form-control" })
+                    </div>
+
+                    <div style="margin:5px 20px 5px 5px;text-align:right">
+                        <button class="btn btn-primary12 btn-sm" style="width:80px">حفظ</button>
+                        <input type="button" value="إلغاء" class="btn btn-primary12 btn-sm" id="btncancel" />
+                    </div>
+</form>
+        </div>
+
+    </div>
+</div>

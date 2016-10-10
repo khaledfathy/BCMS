@@ -1,0 +1,69 @@
+﻿@using BCMS.Models;
+@model Country_CreditRatingAgency
+<script src="~/Areas/Admin/js/jquery.validate.min.js"></script>
+<script src="~/Areas/Admin/js/jquery.validate.unobtrusive.js"></script>
+<link href="~/Areas/Admin/css/MyStyle.css" rel="stylesheet" />
+
+<div style=" text-align: center;width:82%">
+    <div class="box col-md-8" style="width:121%;text-align: center">
+
+        <div class="box-content" style="width:100%;">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">الدولة</label>
+                    @Html.DropDownListFor(model => model.CountryId, (IEnumerable<SelectListItem>)ViewBag.AllCountry, "-- إختار دولة --", new { @class = "StyleForDropDownList" })
+
+
+                    @Html.ValidationMessageFor(model => model.CountryId)
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">السنة</label>
+                    @Html.EditorFor(model => model.Year, new { @class = "StyleForDropDownList" })
+                    @Html.ValidationMessageFor(model => model.Year)
+                </div>
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">وكالة التصنيف </label>
+        @Html.DropDownListFor(model => model.AgencyId, (IEnumerable<SelectListItem>)ViewBag.AllAgency, "-- إختار  --", new { @class = "StyleForDropDownList" })
+        @Html.ValidationMessageFor(model => model.AgencyId)
+    </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1"> ربع السنة </label>
+                    @Html.EditorFor(model => model.PeriodId, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PeriodId)
+                </div>
+ <div class="form-group">
+                    <label for="exampleInputEmail1"> التوقع </label>
+                    @Html.EditorFor(model => model.Excpectation, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Excpectation)
+                </div>
+                 <div class="form-group">
+                    <label for="exampleInputEmail1"> تاريخ التوقع </label>
+                    @Html.EditorFor(model => model.Excpectation_Date, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Excpectation_Date)
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1"> التقييم </label>
+                    @Html.EditorFor(model => model.Evaluation, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Evaluation)
+                </div>
+                 <div class="form-group">
+                    <label for="exampleInputEmail1"> تاريخ التقييم </label>
+                    @Html.EditorFor(model => model.Evaluation_Date, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Evaluation_Date)
+                </div>
+                <div style="margin:5px 20px 5px 5px;text-align:right">
+                    <button class="btn btn-primary12 btn-sm" style="width:80px">حفظ</button>
+                    <input type="button" value="إلغاء" class="btn btn-primary12 btn-sm" id="btncancel" />
+                </div>
+            }
+        </div>
+
+    </div>
+</div>   

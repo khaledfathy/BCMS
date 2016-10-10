@@ -1,0 +1,42 @@
+﻿@using BCMS.Models;
+@model Elder
+<script src="~/Areas/Admin/js/jquery.validate.min.js"></script>
+<script src="~/Areas/Admin/js/jquery.validate.unobtrusive.js"></script>
+<link href="~/Areas/Admin/css/MyStyle.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("input[type='text']").removeClass( "text-box single-line" ).addClass( "form-control" );
+    });
+</script>
+<div style=" text-align: center;width:82%">
+    <div class="box col-md-8" style="width:121%;text-align: center">
+
+        <div class="box-content" style="width:100%;">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                @Html.HiddenFor(model => model.EldersID)
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">إسم المؤلف</label>
+                    @Html.EditorFor(model => model.EldersName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EldersName)
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">الملاحظات</label>
+                    @Html.TextAreaFor(model => model.EldersDescription, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EldersDescription)
+                </div>
+
+                <div style="margin:5px 20px 5px 5px;text-align:right">
+                    <button class="btn btn-primary12 btn-sm" style="width:80px">حفظ</button>
+                    <input type="button" value="إلغاء" class="btn btn-primary12 btn-sm" id="btncancel" />
+                </div>
+            }
+        </div>
+
+    </div>
+</div>

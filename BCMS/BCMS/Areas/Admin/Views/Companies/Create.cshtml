@@ -1,0 +1,96 @@
+﻿@using BCMS.Models;
+@model CompanyInfo
+<script src="~/Areas/Admin/js/jquery.validate.min.js"></script>
+<script src="~/Areas/Admin/js/jquery.validate.unobtrusive.js"></script>
+<link href="~/Areas/Admin/css/MyStyle.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#CompanyIncorporation").datepicker();
+        $("input[type='text']").removeClass("text-box single-line").addClass("form-control");
+    });
+</script>
+<div style=" text-align: center;width:82%">
+    <div class="box col-md-8" style="width:121%;text-align: center">
+
+        <div class="box-content" style="width:100%;">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">كود الشركة</label>
+                    @Html.EditorFor(model => model.CompanyID, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CompanyID)
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">إسم الشركة</label>
+                    @Html.EditorFor(model => model.CompanyName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CompanyName)
+                </div>
+
+                <div class="form-group">
+                    <label style="margin-bottom:-30px">القطـــاع</label>
+                    <div></div>
+                    @Html.DropDownListFor(model => model.SectorID,
+      (IEnumerable<SelectListItem>)ViewBag.AllSectors, "-- إختار قطاع --", new { @class = "StyleForDropDownList" })
+                    @Html.ValidationMessageFor(model => model.SectorID)
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">تاريخ التأسيس</label>
+                    @Html.EditorFor(model => model.CompanyIncorporation, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CompanyIncorporation)
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">رأس المال المدفوع بالمليون</label>
+                    @Html.EditorFor(model => model.CompanyPaid_Up_Capital, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CompanyPaid_Up_Capital)
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">رئيس مجلس الادارة</label>
+                    @Html.EditorFor(model => model.ChairmanBoardOfDirectors, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ChairmanBoardOfDirectors)
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">عدد الموظفين</label>
+                    @Html.EditorFor(model => model.CompanyEmployees, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CompanyEmployees)
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">المركز الرئيسي</label>
+                    @Html.EditorFor(model => model.CompanyMain_Office, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CompanyMain_Office)
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">مواقع العمل</label>
+                    @Html.EditorFor(model => model.CompanyWork_sites, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CompanyWork_sites)
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">نشاط الشركة</label>
+                    @Html.TextAreaFor(model => model.CompanyActivity, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CompanyActivity)
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">الوصف</label>
+                    @Html.TextAreaFor(model => model.CompanyDescription, new { @class = "form-control" })
+                </div>
+
+                <div style="margin:5px 20px 5px 5px;text-align:right">
+                    <button class="btn btn-primary12 btn-sm" style="width:80px">حفظ</button>
+                    <input type="button" value="إلغاء" class="btn btn-primary12 btn-sm" id="btncancel" />
+                </div>
+            }
+        </div>
+
+    </div>
+</div>

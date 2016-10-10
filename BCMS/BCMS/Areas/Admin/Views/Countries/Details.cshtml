@@ -1,0 +1,44 @@
+﻿@using BCMS.Models;
+@model Country
+<link href="~/Areas/Admin/css/MyStyle.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.ui-dialog-buttonset button').addClass('btn btn-primary12 btn-sm');
+    });
+</script>
+
+<div style=" text-align: center;width:82%">
+    <div class="box col-md-8" style="width:121%;text-align: center">
+        <div class="box-content" style="width:100%;">
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">الدولة باللغة العربية</label>
+                <input name="WiseSayingID" class="form-control" type="text" disabled="disabled" value="@Model.CountryArName" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">الدولة باللغة الإنجليزية</label>
+                <input name="StatusName" class="form-control" type="text" disabled="disabled" value="@Model.CountryEnName" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">العاصمة باللغة العربية</label>
+                <input name="WiseSayingDate" class="form-control" type="text" disabled="disabled" value="@Model.CountryCapitalAr"/>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">العاصمة باللغة الإنجليزية</label>
+                <textarea name="WiseSayingContent" class="form-control" disabled="disabled">@Model.CountryCapitalEn</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">القارة</label>
+                <input name="StatusName" class="form-control" type="text" disabled="disabled" value="@Model.Continent.ContinentArName" />
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">الحالة</label>
+                <input name="StatusName" class="form-control" type="text" disabled="disabled" value="@Model.State.ToString()" />
+            </div>
+        </div>
+    </div>
+</div>

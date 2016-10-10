@@ -1,0 +1,52 @@
+﻿@import url(http://fonts.googleapis.com/css?family=Lato:400,700);
+
+* { 
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -o-box-sizing:border-box;
+  box-sizing:border-box;
+}
+
+.acc-container {
+  width:100%;
+  margin:0px auto 0 auto;
+  border-radius:2px;
+  overflow:hidden;
+}
+
+.acc-btn { 
+  width:100%;
+  margin:0 auto;
+  padding:0px 0px;
+  cursor:pointer;
+  background:none;
+  border-bottom:0 solid #2C3E50;
+}
+.acc-btn h1 { 
+  margin:0 0 4px 0;    
+  font-size: 16px;
+  padding: 10px;
+  color: #ff0000;
+  background:#000;
+  border-radius:2px;
+  border-bottom:0 solid #2C3E50;
+}
+
+.acc-content {
+  height:0px;
+  width:100%;
+  margin:0 auto;
+  overflow:hidden;
+  background:none;
+}
+
+.acc-content-inner {
+  padding:10px;
+}
+
+.open {
+  height: auto;
+}
+.selected {
+  color:#FFF;
+}

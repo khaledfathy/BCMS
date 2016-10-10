@@ -1,0 +1,55 @@
+﻿@using BCMS.Models;
+@model Job
+
+<script src="~/Areas/Admin/js/jquery.validate.min.js"></script>
+<script src="~/Areas/Admin/js/jquery.validate.unobtrusive.js"></script>
+<link href="~/Areas/Admin/css/MyStyle.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#JobDate").datepicker();
+        $("input[type='text']").removeClass("text-box single-line").addClass("form-control");
+    });
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div style=" text-align: center;width:82%">
+        <div class="box col-md-8" style="width:121%;text-align: center">
+            <div class="box-content">
+
+                @Html.HiddenFor(model => model.JobID)
+
+                <div class="box col-md-4" style="margin-top:-10px">
+                    <div class="form-group">
+                        <label>الحالة</label>
+                        @Html.DropDownListFor(model => model.StatusID, (IEnumerable<SelectListItem>)ViewBag.Status, "-- إختار حالة --", new { @class = "StyleForDropDownList", @style = "margin-top:-1px" })
+                        @Html.ValidationMessageFor(model => model.StatusID)
+                    </div>
+                </div> <!-- الحالة -->
+                <div class="box col-md-4" style="margin-top:-10px">
+                    <div class="form-group">
+                        <label>التاريخ</label>
+                        <input type="text" id="JobDate" name="JobDate" class="form-control" value="@Model.JobDate.Value.ToShortDateString()" />
+                               @Html.ValidationMessageFor(model => model.JobDate)
+                    </div>
+                </div> <!-- التاريخ -->
+                <div class="box col-md-4" style="margin-top:-10px">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">المسمى الوظيفي</label>
+                        @Html.EditorFor(model => model.JobTitle)
+                        @Html.ValidationMessageFor(model => model.JobTitle)
+                    </div>
+                </div> <!-- المسمى الوظيفي -->
+
+
+
+                <div style="margin:5px 20px 5px 5px;text-align:right">
+                    <input type="button" value="إلغاء" class="btn btn-primary12 btn-sm" id="btncancel" />
+                    <button class="btn btn-primary12 btn-sm" style="width:80px">حفظ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

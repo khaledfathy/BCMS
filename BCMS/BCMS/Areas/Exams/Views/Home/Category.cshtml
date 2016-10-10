@@ -1,0 +1,151 @@
+﻿@section scripts{
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var x = '@Session["max_category"]';
+            var x2 = '@Session["max_category2"]';
+            var x3 = '@Session["max_category3"]';
+            var x4 = '@Session["max_category4"]';
+            var x5 = '@Session["max_category5"]';
+            var x6 = '@Session["max_category6"]';
+            var x7 = '@Session["max_category7"]';
+           
+         
+            $("#exam1-" + x).removeClass("ButtonSelect");
+            $("#exam1-" + x).addClass("ButtonReady1");
+            $(".ButtonReady1").attr("href", '@Url.Action("Index", "RuningExam",new { category=Session["max_category"] })');
+            for (var i = x - 1; i > 0; i--) {
+                $("#exam1-" + i).removeClass("ButtonSelect");
+                $("#exam1-" + i).addClass("ButtonDone");
+            }
+
+
+            $("#exam1-" + x2).removeClass("ButtonSelect");
+            $("#exam1-" + x2).addClass("btnredady");
+            $(".btnredady").attr("href", '@Url.Action("Index", "RuningExam",new { category=Session["max_category2"] })');
+            for (var i = (x2) - 1; i > 5; i--) {
+                $("#exam1-" + i).removeClass("ButtonSelect");
+                $("#exam1-" + i).addClass("ButtonDone");
+            }
+
+
+            $("#exam1-" + x3).removeClass("ButtonSelect");
+            $("#exam1-" + x3).addClass("ButtonReady3");
+            $(".ButtonReady3").attr("href", '@Url.Action("Index", "RuningExam",new { category=Session["max_category3"] })');
+            for (var i = x3 - 1; i > 10; i--) {
+                $("#exam1-" + i).removeClass("ButtonSelect");
+                $("#exam1-" + i).addClass("ButtonDone");
+            }
+
+
+            $("#exam1-" + x4).removeClass("ButtonSelect");
+            $("#exam1-" + x4).addClass("ButtonReady4");
+            $(".ButtonReady4").attr("href", '@Url.Action("Index", "RuningExam",new { category=Session["max_category4"] })');
+            for (var i = x4 - 1; i > 15; i--) {
+                $("#exam1-" + i).removeClass("ButtonSelect");
+                $("#exam1-" + i).addClass("ButtonDone");
+            }
+
+            $("#exam1-" + x5).removeClass("ButtonSelect");
+            $("#exam1-" + x5).addClass("ButtonReady5");
+            $(".ButtonReady5").attr("href", '@Url.Action("Index", "RuningExam",new { category=Session["max_category5"] })');
+            for (var i = x5 - 1; i > 20; i--) {
+                $("#exam1-" + i).removeClass("ButtonSelect");
+                $("#exam1-" + i).addClass("ButtonDone");
+            }
+
+
+            $("#exam1-" + x6).removeClass("ButtonSelect");
+            $("#exam1-" + x6).addClass("ButtonReady6");
+            $(".ButtonReady6").attr("href", '@Url.Action("Index", "RuningExam",new { category=Session["max_category6"] })');
+            for (var i = x6 - 1; i > 25; i--) {
+                $("#exam1-" + i).removeClass("ButtonSelect");
+                $("#exam1-" + i).addClass("ButtonDone");
+            }
+
+            $("#exam1-" + x7).removeClass("ButtonSelect");
+            $("#exam1-" + x7).addClass("ButtonReady7");
+          $(".ButtonReady7").attr("href", '@Url.Action("Index", "RuningExam",new { category=Session["max_category7"] })');
+            for (var i = x7 - 1; i > 30; i--) {
+                $("#exam1-" + i).removeClass("ButtonSelect");
+                $("#exam1-" + i).addClass("ButtonDone");
+            }
+        });
+
+</script>
+}
+<div style="padding: 10px;">
+    <table border="0" cellpadding="0" cellspacing="0" style="width:100%;font-weight:bold; direction:rtl" class="ContainerW NormalTxt">
+        <tr class="RowHeader">
+            <td colspan="6" align="center">
+                الاختبارات
+
+            </td>
+
+        </tr>
+        <tr class="Row">
+            <td><p style="width:100px" id="type"> أسئلة عامة</p></td>
+            <td><a id="exam1-1" name="comand" class="ButtonSelect" />الإختبار الأول</td>
+        
+            <td><a id="exam1-2" name="comand" class="ButtonSelect" />الإختبار الثاني</td>
+            <td><a id="exam1-3" name="comand" class="ButtonSelect" />الإختبار الثالث</td>
+            <td><a id="exam1-4" name="comand" class="ButtonSelect" />الإختبار الرابع</td>
+            <td><a id="exam1-5" name="comand" class="ButtonSelect" />الإختبار الخامس</td>
+
+        </tr>
+        <tr class="AltRow">
+            <td><p id="Label2">تحليل اقتصادي</p></td>
+            <td><a id="exam1-6" name="comand" class="ButtonSelect" />الإختبار الأول</td>
+            <td><a id="exam1-7" name="comand" class="ButtonSelect" />الإختبار الثاني</td>
+            <td><a id="exam1-8" name="comand" class="ButtonSelect" />الإختبار الثالث</td>
+            <td><a id="exam1-9" name="comand" class="ButtonSelect" />الإختبار الرابع</td>
+            <td><a id="exam1-10" name="comand" class="ButtonSelect" />الإختبار الخامس</td>
+
+        </tr>
+        <tr class="Row">
+            <td><p id="Label2">تحليل استراتيجي</p></td>
+            <td><a id="exam1-11" name="comand" class="ButtonSelect" />الإختبار الأول</td>
+            <td><a id="exam1-12" name="comand" class="ButtonSelect" />الإختبار الثاني</td>
+            <td><a id="exam1-13" name="comand" class="ButtonSelect" />الإختبار الثالث</td>
+            <td><a id="exam1-14" name="comand" class="ButtonSelect" />الإختبار الرابع</td>
+            <td><a id="exam1-15" name="comand" class="ButtonSelect" />الإختبار الخامس</td>
+
+        </tr>
+        <tr class="AltRow">
+            <td><p id="Label2">تحليل أساسي</p></td>
+            <td><a id="exam1-16" name="comand" class="ButtonSelect" />الإختبار الأول</td>
+            <td><a id="exam1-17" name="comand" class="ButtonSelect" />الإختبار الثاني</td>
+            <td><a id="exam1-18" name="comand" class="ButtonSelect" />الإختبار الثالث</td>
+            <td><a id="exam1-19" name="comand" class="ButtonSelect" />الإختبار الرابع</td>
+            <td><a id="exam1-20" name="comand" class="ButtonSelect" />الإختبار الخامس</td>
+        </tr>
+        <tr class="Row">
+            <td><p id="Label2">تحليل فني</p></td>
+            <td><a id="exam1-21" name="comand" class="ButtonSelect" />الإختبار الأول</td>
+            <td><a id="exam1-22" name="comand" class="ButtonSelect" />الإختبار الثاني</td>
+            <td><a id="exam1-23" name="comand" class="ButtonSelect" />الإختبار الثالث</td>
+            <td><a id="exam1-24" name="comand" class="ButtonSelect" />الإختبار الرابع</td>
+            <td><a id="exam1-25" name="comand" class="ButtonSelect" />الإختبار الخامس</td>
+
+        </tr>
+        <tr class="AltRow">
+            <td><p id="Label2">تحليل نفسي</p></td>
+            <td><a id="exam1-26" name="comand" class="ButtonSelect" />الإختبار الأول</td>
+            <td><a id="exam1-27" name="comand" class="ButtonSelect" />الإختبار الثاني</td>
+            <td><a id="exam1-28" name="comand" class="ButtonSelect" />الإختبار الثالث</td>
+            <td><a id="exam1-29" name="comand" class="ButtonSelect" />الإختبار الرابع</td>
+            <td><a id="exam1-30" name="comand" class="ButtonSelect" />الإختبار الخامس</td>
+
+        </tr>
+        <tr class="Row">
+            <td><p id="Label2">امتحان الحكمة</p></td>
+            <td><a id="exam1-31" name="comand" class="ButtonSelect" />الإختبار الأول</td>
+            <td><a id="exam1-32" name="comand" class="ButtonSelect" />الإختبار الثاني</td>
+            <td><a id="exam1-33" name="comand" class="ButtonSelect" />الإختبار الثالث</td>
+            <td><a id="exam1-34" name="comand" class="ButtonSelect" />الإختبار الرابع</td>
+            <td><a id="exam1-35" name="comand" class="ButtonSelect" />الإختبار الخامس</td>
+
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,338 @@
+
+
+.color_blocks {
+    /*background-color: rgba(0, 0, 0, .1);*/
+    height: auto;
+    width: 90%;
+    margin: 0 auto;
+}
+
+    .color_blocks h1, .color_blocks h3, .color_blocks a {
+          font-family: 'Droid Arabic Kufi', serif;
+        
+    }
+
+        .color_blocks a.flipper {
+            height: 188px;
+            width: 100%;
+            display: block;
+        }
+
+    .color_blocks h1 {
+        color: #FFF;
+        font-size: 45px;
+        font-weight: 700;
+        line-height: normal;
+        margin: 38px 0 0;
+    }
+
+    .color_blocks h3 {
+        color: #FFF;
+        font-size: 20px;
+        font-weight: 100;
+        line-height: normal;
+        margin: 0 0 0px 0;
+    }
+
+    .color_blocks .blocks {
+        width: 100%;
+        height: 188px;
+        margin-bottom: 0px;
+    }
+
+    .color_blocks .flip-container {
+        float: right;
+        height: 188px;
+        width: 240px;
+        margin: 0 0px 10px 10px;
+    }
+
+    .color_blocks .front, .color_blocks .back {
+        border: 0;
+        color: #FFF;
+        height: 188px;
+        padding: 0;
+        width: 240px;
+    }
+
+    .color_blocks .back {
+        opacity: 1;
+    }
+
+        .color_blocks .back span {
+            background: url(../../images/home/nmhp_blocks.png) no-repeat;
+            display: inline-block;
+            margin-top: 0;
+        }
+
+        .color_blocks .back span img {
+            width: 100% !important;
+        }
+
+    .color_blocks .front {
+        font-size: 14px;
+    }
+
+        .color_blocks .front strong:first-child {
+            margin-top: 49px;
+        }
+
+        .color_blocks .front strong {
+            display: block;
+            font-size: 21px;
+            margin: 25px 0 12px;
+        }
+
+        .color_blocks .front span {
+            opacity: .5;
+        }
+
+        .color_blocks .front h3 {
+            margin: 60px auto;
+        }
+
+    .color_blocks .One .front, .color_blocks .One .back {
+        background-color: rgba(52,125,36,.7);
+        text-align: center;
+    }
+
+    .color_blocks .One span {
+        background-position: -428px 0;
+        width: 240px;
+    }
+
+    .color_blocks .Two .front, .color_blocks .Two .back {
+        background-color: rgba(255,10,0,.7);
+        text-align: center;
+    }
+
+    .color_blocks .Two span {
+        background-position: -347px 0;
+        width: 240px;
+    }
+
+    .color_blocks .Three .front, .color_blocks .Three .back {
+        background-color: rgba(141,179,185,.5);
+        text-align: center;
+    }
+
+    .color_blocks .Three span {
+        background-position: -338px -78px;
+        width: 51px;
+    }
+
+    .color_blocks .Four .front, .color_blocks .Four .back {
+        background-color: rgba(100,218,88,.5);
+        text-align: center;
+    }
+
+    .color_blocks .Four span {
+        background-position: -245px 0;
+        width: 96px;
+    }
+
+    .color_blocks .Five .front, .color_blocks .Five .back {
+        background-color: rgba(228,107,125,.5);
+        text-align: center;
+    }
+
+    .color_blocks .Five span {
+        background-position: -122px -78px;
+        width: 141px;
+    }
+
+    .color_blocks .Six .front, .color_blocks .Six .back {
+        background-color: rgba(154,56,182,.5);
+        text-align: center;
+    }
+
+    .color_blocks .Six span {
+        background-position: -2px -78px;
+        width: 109px;
+    }
+
+    .color_blocks .Seven .front, .color_blocks .Seven .back {
+        background-color: rgba(117,115,72,.5);
+        text-align: center;
+    }
+
+    .color_blocks .Seven span {
+        background-position: 0 0;
+        width: 170px;
+    }
+
+    .color_blocks .Eight .front, .color_blocks .Eight .back {
+        background-color: rgba(53,113,145,.5);
+        text-align: center;
+    }
+
+    .color_blocks .Eight span {
+        background-position: -270px -78px;
+        width: 63px;
+    }
+
+    .color_blocks .Nine .front, .color_blocks .Nine .back {
+        background-color: rgba(69,164,175,.5);
+        text-align: center;
+    }
+
+    .color_blocks .Nine span {
+        background-position: 0 -179px;
+        width: 159px;
+    }
+
+    .color_blocks .Ten .front, .color_blocks .Ten .back {
+        background-color: rgba(252,105,17,.5);
+        text-align: center;
+    }
+
+    .color_blocks .Ten span {
+        background-position: 0 -179px;
+        width: 159px;
+    }
+
+    .color_blocks .blocks .black {
+        background-color: #000;
+        float: right;
+        height: 188px;
+        text-align: center;
+        width: 100% !important;
+    }
+
+        .color_blocks .blocks .black span {
+            background: url(../../images/home/nmhp_blocks.png) no-repeat -422px -76px;
+            display: inline-block;
+            height: 51px;
+            margin: 0px 0 0px;
+            width: 100% !important;
+        }
+
+        .color_blocks .blocks .black a {
+            color: #000;
+            float: none;
+            font-size: 19px;
+            height: auto;
+            margin: 0;
+            white-space: nowrap;
+            width: 100% !important;
+        }
+
+    .color_blocks p {
+        font-size: 13px;
+        text-align: center;
+    }
+
+        .color_blocks p a {
+            color: #4C3E31;
+        }
+
+            .color_blocks p a span {
+                background: url(../../images/home/nmhp_blocks.png) -508px -137px;
+                display: block;
+                height: 30px;
+                margin: 4px auto 0;
+                width: 30px;
+            }
+
+.flip-container {
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -ms-perspective: 1000;
+    perspective: 1000;
+}
+
+    .flip-container:hover .back {
+        -webkit-transform: rotateY(0deg);
+        -moz-transform: rotateY(0deg);
+        -ms-transform: rotateY(0deg);
+        transform: rotateY(0deg);
+    }
+
+    .flip-container:hover .front {
+        -webkit-transform: rotateY(180deg);
+        -moz-transform: rotateY(180deg);
+        -ms-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+
+.flip-container, .front, .back {
+    width: 225px;
+    height: 225px;
+}
+
+.flipper {
+    -webkit-transition: .6s;
+    -moz-transition: .6s;
+    -ms-transition: .6s;
+    transition: .6s;
+    position: relative;
+}
+
+.front, .back {
+    -webkit-backface-visibility: hidden;
+    -webkit-transition: .6s;
+    -moz-backface-visibility: hidden;
+    -moz-transition: .6s;
+    -ms-backface-visibility: hidden;
+    -ms-transition: .6s;
+    backface-visibility: hidden;
+    transition: .6s;
+    position: absolute;
+    left: 0;
+    border: 1px solid #444;
+}
+
+.front {
+    z-index: 2;
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+    background-color: #fff;
+}
+
+.back {
+    -webkit-transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    -ms-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+    background-color: #ddd;
+}
+
+
+@media all and (max-width: 1030px) and (min-width: 520px) {
+    .color_blocks .flip-container {
+        width: 40%;
+    }
+    .color_blocks .blocks {
+        width: 100%;
+        height: auto;
+    }
+    .color_blocks {
+    width: 100%;
+}
+.color_blocks a.flipper {
+            height: auto;
+            width: 100%;
+        }
+}
+
+@media all and (max-width: 520px) {
+    .color_blocks .flip-container {
+        width: 80%;
+    }
+     .color_blocks .blocks {
+        width: 100%;
+        height: auto;
+    }
+    .color_blocks {
+    width: 100%;
+}
+.color_blocks a.flipper {
+            height: auto;
+            width: 100%;
+        }
+
+}
+
+

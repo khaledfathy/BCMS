@@ -1,0 +1,60 @@
+﻿
+<!--<script src="../Materials/Ar/js/spin.min.js"></script>-->
+
+<div class="row" ng-controller="JobsController">
+
+    <!--START OUR CLIENTS-->
+    <div ng-include="'../Angular/Sponsors.html'"></div>
+
+    <!--END OUR CLIENTS-->
+
+    <div class="large-10 column">
+        <div class="RegisterWrapper">
+            <h1 class="Spec InnerPage">{{availableJobs | translate}}</h1>
+
+            <div class="large-12 columns">
+                <div class="large-12 column">
+
+                    <accordion close-others="false">
+                        <accordion-group heading="{{job.JobTitle}}" ng-repeat="job in jobs">
+                            <div>
+
+                                <h3 ng-show="job.specification.length > 0">Job Description</h3>
+                                <ul ng-repeat="Spec in job.specification">
+                                    <li>{{Spec}}</li>
+                                </ul>
+
+                                <h3 ng-show="job.skill.length > 0">Skills</h3>
+                                <ul ng-repeat="Ski in job.skill">
+                                    <li>{{Ski}}</li>
+                                </ul>
+
+                                <h3 ng-show="job.prefer.length > 0">Prefer</h3>
+                                <ul ng-repeat="Pre in job.prefer">
+                                    <li>{{Pre}}</li>
+                                </ul>
+
+                                <h3 ng-show="job.education.length > 0">Education</h3>
+                                <ul ng-repeat="Edu in job.education">
+                                    <li>{{Edu}}</li>
+                                </ul>
+
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                    <!-- InstanceEndEditable -->
+
+                </div>
+            </div>
+
+            <div class="H10"></div>
+
+            <!--START TABLE-->
+
+            <div class="clear"></div>
+
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,143 @@
+﻿@using System.Web.Optimization
+
+<!doctype html>
+<html ng-app="UTMSApp" dir="rtl" lang="ar">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="application/xhtml+html; charset=utf-8" />
+    <title>BorsaCapital | Welcome</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/Materials/UTMS/Images/favicon.ico" type="image/x-icon">
+
+    @*<script src="~/Scripts/lodash.js"></script>*@
+    @Styles.Render("~/App_Start/bundles/BCMS/style")
+    @Scripts.Render("~/App_Start/bundles/BCMS/script")
+
+    @Scripts.Render("~/App_Start/bundles/UTMS/script")
+
+    <script src="~/signalr/Hubs"></script>
+    <script src="~/Areas/UTMS/Angular/UTMS_Controller.js"></script>
+    <script src="~/Areas/UTMS/Charts/angular-google-maps.js"></script>
+
+    @*<script src="~/Scripts/highcharts.js"></script>
+    <script src="~/Scripts/exporting.js"></script>*@
+
+    @*<script type="text/javascript" src="../Materials/LightBox/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+    <script type="text/javascript" src="../Materials/LightBox/source/jquery.fancybox.js?v=2.1.5"></script>
+    <link rel="stylesheet" type="text/css" href="../Materials/LightBox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
+    <script type="text/javascript" src="../Materials/LightBox/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+    <link rel="stylesheet" type="text/css" href="../Materials/LightBox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
+    <script type="text/javascript" src="../Materials/LightBox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+    <script type="text/javascript" src="../Materials/LightBox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+    <script src="~/Materials/LightBox/source/fancybox-script.js"></script>*@
+
+
+    @*<link href="~/Materials/Ar/css/Accordion.css" rel="stylesheet" />
+    <script src="~/Scripts/Accordion_annimition.js"></script>*@
+
+
+
+    <style>
+        .angular-google-map-container{
+            height:400px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="BGWrapper">
+
+        <!-- Start Header-->
+        @{Html.RenderPartial("_HeaderPartial");}
+        <!--End Header-->
+
+        <div class="MAINmainWrapper">
+
+            @{Html.RenderPartial("_LeftPartial");}
+
+            @{Html.RenderPartial("_RightPartial");}
+
+
+            <!--START CONTENT-->
+            <div class="MainWrapperCenter">
+
+                <div class="MarqueeS" id="NewsBar" style="display:none">
+                    <marquee direction="right" scrollamount="3" onmousedown="this.stop();" onmouseup="this.start();">
+                        <span>أوقات التداول حسب توقيت المملكة العربية السعودية</span>&nbsp;|&nbsp;
+                        <span>أوقات التداول حسب توقيت المملكة العربية السعودية</span>&nbsp;|&nbsp;
+                        <span>أوقات التداول حسب توقيت المملكة العربية السعودية</span>
+                    </marquee>
+                </div>
+
+                <div style="text-align:center;width:100%;margin-top:10px;display:none" id="Alerts">
+                    <ul style="display:inline;text-align:center;">
+                        <li style="display:inline"><img class="notificationTooltip" title="0" src="~/Areas/UTMS/Images/BlackNote1.png" alt="GreenNote" width="15" />&nbsp;&nbsp;&nbsp;</li>
+                        <li style="display:inline"><img class="notificationTooltip" title="10" src="~/Areas/UTMS/Images/RedNote1.png" alt="GreenNote" width="15" />&nbsp;&nbsp;&nbsp;</li>
+                        <li style="display:inline"><img class="notificationTooltip" title="0" src="~/Areas/UTMS/Images/BlackNote1.png" alt="GreenNote" width="15" />&nbsp;&nbsp;&nbsp;</li>
+                        <li style="display:inline"><img class="notificationTooltip" title="10" src="~/Areas/UTMS/Images/RedNote1.png" alt="GreenNote" width="15" />&nbsp;&nbsp;&nbsp;</li>
+                        <li style="display:inline"><img class="notificationTooltip" title="50" src="~/Areas/UTMS/Images/GreenNote1.png" alt="GreenNote" width="15" />&nbsp;&nbsp;&nbsp;</li>
+                        <li style="display:inline"><img class="notificationTooltip" title="20" src="~/Areas/UTMS/Images/RedNote1.png" alt="GreenNote" width="15" />&nbsp;&nbsp;&nbsp;</li>
+                        <li style="display:inline"><img class="notificationTooltip" title="13" src="~/Areas/UTMS/Images/GreenNote1.png" alt="GreenNote" width="15" />&nbsp;&nbsp;&nbsp;</li>
+                        <li style="display:inline"><img class="notificationTooltip" title="0" src="~/Areas/UTMS/Images/BlackNote1.png" alt="GreenNote" width="15" />&nbsp;&nbsp;&nbsp;</li>
+                        <li style="display:inline"><img class="notificationTooltip" title="80" src="~/Areas/UTMS/Images/GreenNote1.png" alt="GreenNote" width="15" />&nbsp;&nbsp;&nbsp;</li>
+                        <li style="display:inline"><img class="notificationTooltip" title="30" src="~/Areas/UTMS/Images/RedNote1.png" alt="GreenNote" width="15" />&nbsp;&nbsp;&nbsp;</li>
+                        <li style="display:inline"><img class="notificationTooltip" title="90" src="~/Areas/UTMS/Images/GreenNote1.png" alt="GreenNote" width="15" />&nbsp;&nbsp;&nbsp;</li>
+                        <li style="display:inline"><img class="notificationTooltip" title="0" src="~/Areas/UTMS/Images/BlackNote1.png" alt="GreenNote" width="15" />&nbsp;&nbsp;&nbsp;</li>
+                        <li style="display:inline"><img class="notificationTooltip" title="100" src="~/Areas/UTMS/Images/GreenNote1.png" alt="GreenNote" width="15" />&nbsp;&nbsp;&nbsp;</li>
+                        <li style="display:inline"><img class="notificationTooltip" title="0" src="~/Areas/UTMS/Images/BlackNote1.png" alt="GreenNote" width="15" />&nbsp;&nbsp;&nbsp;</li>
+                        <li style="display:inline"><img class="notificationTooltip" title="95" src="~/Areas/UTMS/Images/GreenNote1.png" alt="GreenNote" width="15" />&nbsp;&nbsp;&nbsp;</li>
+                        <li style="display:inline"><img class="notificationTooltip" title="0" src="~/Areas/UTMS/Images/BlackNote1.png" alt="GreenNote" width="15" />&nbsp;&nbsp;&nbsp;</li>
+                        <li style="display:inline"><img class="notificationTooltip" title="55" src="~/Areas/UTMS/Images/GreenNote1.png" alt="GreenNote" width="15" />&nbsp;&nbsp;&nbsp;</li>
+                        <li style="display:inline"><img class="notificationTooltip" title="5" src="~/Areas/UTMS/Images/RedNote1.png" alt="GreenNote" width="15" />&nbsp;&nbsp;&nbsp;</li>
+                        <li style="display:inline"><img class="notificationTooltip" title="0" src="~/Areas/UTMS/Images/BlackNote1.png" alt="GreenNote" width="15" />&nbsp;&nbsp;&nbsp;</li>
+                        <li style="display:inline"><img class="notificationTooltip" title="0" src="~/Areas/UTMS/Images/BlackNote1.png" alt="GreenNote" width="15" /></li>
+                    </ul>
+                </div>
+
+                @RenderBody()
+
+                @RenderSection("MarketCaster", required: false)
+
+                <div class="clearfix"></div>
+                <!--END CONTENT-->
+            </div>
+            @*<div class="clearfix"></div>*@
+        </div>
+        <div class="clearfix"></div>
+        @{Html.RenderPartial("_FooterPartial");}
+    </div>
+
+
+    <script type="text/javascript">
+        $(function () {
+            $(".btnMusic").click(function () {
+                window.open("/test/Home/Music", "", "width=500, height=600");
+            });
+
+            $("#InfoBar").click(function () {
+                $("#NewsBar").slideToggle("slow");
+            });
+
+            $("#alert").click(function () {
+                $("#Alerts").slideToggle("slow");
+            });
+
+            var $elem = $('#allBody');
+
+            $(".Fbutton").click(function (event) {
+                event.preventDefault();
+                $("#FooterDetails").slideToggle(500);
+                $('html, body').animate({ scrollTop: $elem.height() }, 500);
+            });
+        });
+
+    </script>
+    @*<script>
+        $(document).foundation();
+    </script>*@
+
+
+</body>
+</html>
+

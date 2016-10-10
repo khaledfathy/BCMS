@@ -1,0 +1,47 @@
+﻿@using BCMS.Models;
+@model Country_CreditRatingAgency
+<link href="~/Areas/Admin/css/MyStyle.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.ui-dialog-buttonset button').addClass('btn btn-primary12 btn-sm');
+    });
+</script>
+<div style=" text-align: center;width:82%">
+    <div class="box col-md-8" style="width:121%;text-align: center">
+        <div class="box-content" style="width:100%;">
+            <div class="form-group">
+                <label for="exampleInputEmail1">الدولة</label>
+                <input name="ActivityID" class="form-control" type="text" disabled="disabled" value="@Model.Country.CountryArName" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">وكالة التصنيف</label>
+                <input name="YearID" class="form-control" type="text" disabled="disabled" value="@Model.CridetRatingAgency.AgencyArName" />
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">السنة</label>
+                <input name="ValueActi" class="form-control" type="text" disabled="disabled" value="@Model.Year" />
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">ربع السنة</label>
+                <input name="CurrentActiv" class="form-control" type="text" disabled="disabled" value="@Model.PeriodId" />
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">التوقع</label>
+                <input name="ValueActi" class="form-control" type="text" disabled="disabled" value="@Model.Excpectation" />
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">تاريخ التوقع</label>
+                <input name="CurrentActiv" class="form-control" type="text" disabled="disabled" value="@Model.Excpectation_Date" />
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">التقييم</label>
+                <input name="ValueActi" class="form-control" type="text" disabled="disabled" value="@Model.Evaluation" />
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">تاريخ التقييم</label>
+                <input name="CurrentActiv" class="form-control" type="text" disabled="disabled" value="@Model.Evaluation_Date" />
+            </div>
+        </div>
+    </div>
+</div>

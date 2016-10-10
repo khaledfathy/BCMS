@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "AnalysesDetailes";
+    Layout = null;
+}
+
+<link href="~/Areas/UTMS/Angular/test.css" rel="stylesheet" />
+
+<div class="">
+    <h1 class="Spec InnerPage">
+        <a href="#BorsaGraphics"> بورصة جرافيكس </a>&raquo;<a href="#Analyses/{{Charts[0].ChartCategoryId}}"> {{Charts[0].ChartCategoryName}} </a>  &raquo; التحليل {{Charts[0].CAKName}}
+    </h1>
+
+    <div class="clear H10"></div>
+
+    <div class="large-12 columns">
+        <div class="large-3 column" ng-repeat="Chart in Charts">
+            <div class="TikerChartWrapper">
+                <h4>{{Chart.ChartName}}</h4>
+
+                @*<a class="fancybox fancybox.iframe" href="/UTMS/BorsaGraphics/_ChartDiv/{{Chart.ChartId}}" data-fancybox-group="gallery" title="{{Chart.ChartName}}">
+                    <img src="~/Areas/UTMS/Images/Chart/{{Chart.ChartId}}.jpg" />
+                </a>*@
+
+                <a href title="{{Chart.ChartName}}" id="{{Chart.ChartId}}" ng-click="popup(Chart.ChartId,Chart.ChartName)">
+                    <input type="hidden" value="{{Chart.ChartId}}" id="chartId" />
+                    <img src="../Areas/UTMS/Images/Chart/{{Chart.ChartId}}.jpg" />
+                </a>
+
+            </div>
+        </div>
+        <div id="loadingArea" ng-show="loading"></div>
+    </div>
+</div>
+
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">×</span>
+            <h2 id="title" style="text-align:center;"></h2>
+        </div>
+        <div class="modal-body" id="content">
+
+        </div>
+        <!--<div class="modal-footer">
+            <h3>Modal Footer</h3>
+        </div>-->
+    </div>
+
+</div>
+
+
+
+

@@ -1,0 +1,598 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BorsaCapital | Welcome</title>
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/Materials/Portfolio/Images/favicon.ico" type="image/x-icon">
+
+
+    <script src="~/Materials/Portfolio/js/lodash.js"></script>
+    <link href="~/Materials/Portfolio/css/foundation.css" rel="stylesheet" />
+    <link href="~/Materials/Portfolio/css/foundation.css" rel="stylesheet" />
+    <link href="~/Materials/Portfolio/css/MainStyle.css" rel="stylesheet" />
+    <link href="~/Materials/Portfolio/css/Inputs.css" rel="stylesheet" />
+    <link href="~/Materials/Portfolio/css/Css3.css" rel="stylesheet" />
+    <link href="~/Materials/Portfolio/css/Icons.css" rel="stylesheet" />
+    <link href="~/Materials/Portfolio/webicons-master/webicons.css" rel="stylesheet" />
+    <link href="~/Materials/Portfolio/MainMenu/css/component.css" rel="stylesheet" />
+    <link href="~/Materials/Portfolio/MainMenu/css/default.css" rel="stylesheet" />
+    <link href="~/Materials/Portfolio/MainMenu/css/css3.css" rel="stylesheet" />
+    <link href="~/Materials/Portfolio/Sliding/css/Sliding.css" rel="stylesheet" />
+    <link href="~/Materials/Portfolio/css/Graphics.css" rel="stylesheet" />
+
+    <script src="~/Materials/Portfolio/js/jquery.min.js"></script>
+   
+    <script src="~/Materials/Portfolio/MainMenu/js/modernizr.custom.js"></script>
+    <script src="~/Materials/Portfolio/js/foundation.min.js"></script>
+    <script src="~/Materials/Portfolio/js/spin.min.js"></script>
+
+    <script src="~/Materials/Portfolio/Charts/angular-google-maps.js"></script>
+
+    <style>
+        .angular-google-map-container {
+            height: 400px;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="BGWrapper">
+        <!-- Start Header-->
+
+        <div class="clear"></div>
+        <div class="MainMenuWrappe">
+            <div class="large-12 columns">
+                <div class="MainLogo"> <a class="right" href="#BorsaCloud"><img src="~/Materials/Portfolio/Images/Logo.png" /></a><h2 class="right">المحفظة التجريبية</h2></div>
+                <div class="left">
+                    <h4>
+                        <span class="color4">مرحبا</span>
+                        خالد الطويل
+                    </h4>
+                </div>
+                <div class="left">&nbsp;|&nbsp;</div>
+                <a href="" class="left NormalLink LoginNav"> تسجيل خروج</a>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <!--End Header-->
+
+        <div class="MAINmainWrapper">
+
+
+            <!--START CONTENT-->
+            <div class="MainWrapperCenter">
+
+
+
+                <!--START-->
+                <div class="large-12 columns">
+
+                    <div class="large-12 columns">
+                        <div class="large-8 column">
+                            <div class="TikerChartWrapperWhite">
+                                <div class="ChartList">
+                                    <ul>
+                                        <li>
+                                            <div class="" style="text-align: center">
+                                                <span>الرصيد النقدي</span>&nbsp;
+                                                <span class="color4 FZ20">123.00</span> رس
+                                                <div class="clear H5"></div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="" style="text-align: center">
+                                                <span>رصيد الاسهم</span>&nbsp;
+                                                <span class="color4 FZ20">234.10</span> رس
+                                                <div class="clear H5"></div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="" style="text-align: center">
+                                                <span>المجموع</span>&nbsp;
+                                                <span class="color4 FZ20">444.65</span> رس
+                                                <div class="clear H5"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="clearfix"></div>
+
+                            </div>
+                            
+                        </div>
+
+                        <div class="large-4 column">
+                            <div class="TikerChartWrapperWhite">
+                                <div class="MarqueeContent">
+                                    <!--<h3 class="Right">أسعار العملات</h3>-->
+                                    <div class="right ">
+                                        
+                                        <marquee scrollamount="5" direction="right">
+                                            <span>اسعار الذهب <span class="color2">212.3</span></span>::
+                                            <span>اسعار الفضه <span class="color2">212.3</span></span>::
+                                            <span>اسعار البلاتين <span class="color2">212.3</span></span>
+                                        </marquee>
+
+
+                                    </div>
+                                </div>
+                                <div class="clear H5"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="large-12 column">
+                        <div class="TikerChartWrapper">
+
+
+                            <h2>قائمة أسهمي</h2>
+
+                            <div class="left"><input id="Button1" type="button" value="نفذ" class="myButton" /></div>
+                            <div class="clear H5"></div>
+
+                            <table border="0" cellpadding="0" cellspacing="0" style="width: 100%" class="">
+                                <tr align="right">
+                                    <th>السهم</th>
+                                    <th>عدد الاسهم</th>
+                                    <th>متوسط السعر</th>
+                                    <th>التكلفه</th>
+                                    <th>سعر السوق</th>
+                                    <th>القيمه السوقيه</th>
+                                    <th>التغير</th>
+                                    <th>التغير %</th>
+                                    <th>الرسم البياني</th>
+                                    <th>
+                                        <select id="Select1" class="SmallSelect">
+                                            <option>يرجي اختيار البيع</option>
+                                            <option>الكل</option>
+                                            <option>نسبه</option>
+                                            <option>اختياري</option>
+                                        </select>
+                                    </th>
+                                    <th>
+                                        <select id="Select1" class="SmallSelect">
+                                            <option>يرجي اختيار الشراء</option>
+                                            <option>نسبه</option>
+                                            <option>اختياري</option>
+                                        </select>
+                                    </th>
+                                </tr>
+                                <tr class="CommandRow">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><input id="Text1" type="text" class="SmallTxt" value="%" /></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="tr" align="right">
+                                    <td><a href="@Url.Action("PortfolioAnalyses", "Home", new { Area = "Portfolio" })">السعودية</a> </td>
+                                    <td>33</td>
+                                    <td>85.13</td>
+                                    <td> 374.68  </td>
+                                    <td> 376.68  </td>
+                                    <td> 366.60  </td>
+                                    <td><img class="img" src="~/Materials/Portfolio/Images/up.png"></td>
+                                    <td class="color4">0.92 %</td>
+                                    <td><a href="#"> <img src="~/Materials/Portfolio/Images/Chart.jpg" alt="" style="height: 20px"></a></td>
+                                    <td>
+                                        <input id="Text1" type="text" class="SmallTxt" value="%" />
+                                    </td>
+                                    <td>نسبه</td>
+                                </tr>
+
+                                <tr class="tr" align="right">
+                                    <td><a href="@Url.Action("PortfolioAnalyses", "Home", new { Area = "Portfolio" })">دبي</a></td>
+                                    <td>33</td>
+                                    <td>85.13</td>
+                                    <td> 374.68  </td>
+                                    <td> 376.68  </td>
+                                    <td> 366.60  </td>
+                                    <td><img class="img" src="~/Materials/Portfolio/Images/down.png"></td>
+                                    <td class="color2">0.92 %</td>
+                                    <td><a href="#"> <img src="~/Materials/Portfolio/Images/Chart.jpg" alt="" style="height: 20px"></a></td>
+                                    <td class="AnyInlin">
+                                        <ul>
+                                            <li><input id="Text1" type="text" class="SmallTxt" value="%" /> </li>
+                                            <li><input id="Text1" type="text" class="SmallTxt" value="%" /></li>
+                                        </ul>
+
+                                    </td>
+                                    <td>اختياري</td>
+                                </tr>
+
+                                <tr class="tr" align="right">
+                                    <td><a href="@Url.Action("PortfolioAnalyses", "Home", new { Area = "Portfolio" })">أبو ظبي</a></td>
+                                    <td>33</td>
+                                    <td>85.13</td>
+                                    <td> 374.68  </td>
+                                    <td> 376.68  </td>
+                                    <td> 366.60  </td>
+                                    <td><img class="img" src="~/Materials/Portfolio/Images/up.png"></td>
+                                    <td class="color4">0.92 %</td>
+                                    <td><a href="#"> <img src="~/Materials/Portfolio/Images/Chart.jpg" alt="" style="height: 20px"></a></td>
+                                    <td><input id="Checkbox1" type="checkbox" /></td>
+                                    <td>نسبه</td>
+                                </tr>
+                                <tr class="tr" align="right">
+                                    <td><a href="@Url.Action("PortfolioAnalyses", "Home", new { Area = "Portfolio" })">الكويت</a></td>
+                                    <td>33</td>
+                                    <td>85.13</td>
+                                    <td> 374.68  </td>
+                                    <td> 376.68  </td>
+                                    <td> 366.60  </td>
+                                    <td><img class="img" src="~/Materials/Portfolio/Images/down.png"></td>
+                                    <td class="color2">0.92 %</td>
+                                    <td><a href="#"> <img src="~/Materials/Portfolio/Images/Chart.jpg" alt="" style="height: 20px"></a></td>
+                                    <td><input id="Checkbox1" type="checkbox" /></td>
+                                    <td>اختياري</td>
+                                </tr>
+                                <tr class="tr" align="right">
+                                    <td><a href="@Url.Action("PortfolioAnalyses", "Home", new { Area = "Portfolio" })">قطر</a></td>
+                                    <td>33</td>
+                                    <td>85.13</td>
+                                    <td> 374.68  </td>
+                                    <td> 376.68  </td>
+                                    <td> 366.60  </td>
+                                    <td><img class="img" src="~/Materials/Portfolio/Images/up.png"></td>
+                                    <td class="color4">0.92 %</td>
+                                    <td><a href="#"> <img src="~/Materials/Portfolio/Images/Chart.jpg" alt="" style="height: 20px"></a></td>
+                                    <td><input id="Checkbox1" type="checkbox" /></td>
+                                    <td>نسبه</td>
+                                </tr>
+                                <tr class="tr" align="right">
+                                    <td><a href="@Url.Action("PortfolioAnalyses", "Home", new { Area = "Portfolio" })">مسقط</a></td>
+                                    <td>33</td>
+                                    <td>85.13</td>
+                                    <td> 374.68  </td>
+                                    <td> 376.68  </td>
+                                    <td> 366.60  </td>
+                                    <td><img class="img" src="~/Materials/Portfolio/Images/down.png"></td>
+                                    <td class="color2">0.92 %</td>
+                                    <td><a href="#"> <img src="~/Materials/Portfolio/Images/Chart.jpg" alt="" style="height: 20px"></a></td>
+                                    <td><input id="Checkbox1" type="checkbox" /></td>
+                                    <td>اختياري</td>
+                                </tr>
+                                <tr class="tr" align="right">
+                                    <td><a href="@Url.Action("PortfolioAnalyses", "Home", new { Area = "Portfolio" })">البحرين</a></td>
+                                    <td>33</td>
+                                    <td>85.13</td>
+                                    <td> 374.68  </td>
+                                    <td> 376.68  </td>
+                                    <td> 366.60  </td>
+                                    <td><img class="img" src="~/Materials/Portfolio/Images/up.png"></td>
+                                    <td class="color4">0.92 %</td>
+                                    <td><a href="#"> <img src="~/Materials/Portfolio/Images/Chart.jpg" alt="" style="height: 20px"></a></td>
+                                    <td><input id="Checkbox1" type="checkbox" /></td>
+                                    <td>نسبه</td>
+                                </tr>
+                                <tr class="tr" align="right">
+                                    <td><a href="@Url.Action("PortfolioAnalyses", "Home", new { Area = "Portfolio" })">مصر</a></td>
+                                    <td>33</td>
+                                    <td>85.13</td>
+                                    <td> 374.68  </td>
+                                    <td> 376.68  </td>
+                                    <td> 366.60  </td>
+                                    <td><img class="img" src="~/Materials/Portfolio/Images/down.png"></td>
+                                    <td class="color2">0.92 %</td>
+                                    <td><a href="#"> <img src="~/Materials/Portfolio/Images/Chart.jpg" alt="" style="height: 20px"></a></td>
+                                    <td><input id="Checkbox1" type="checkbox" /></td>
+                                    <td>اختياري</td>
+                                </tr>
+                            </table>
+                            <div class="Clear H5"></div>
+
+                        </div>
+                    </div>
+
+                    <div class="large-12 column">
+                        <div class="TikerChartWrapper">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width: 100%" class="">
+                                <tr>
+                                    <td style="text-align: left;"><h3 style="text-align: left;">اجمالي قيمة الاسهم السوقيه</h3></td>
+                                    <td style="text-align: right;"><span class="color4 FZ40">3678 </span>رس</td>
+                                    <td style="text-align: left;"><h3 style="text-align: left;">اجمالي قيمة الاسهم بالتكلفه</h3></td>
+                                    <td style="text-align: right;"><span class="color2 FZ40">456 </span>رس</td>
+                                    <td style="text-align: left;"><h3 style="text-align: left;">اجمالي ربح \ خسارة المحفظه</h3></td>
+                                    <td style="text-align: right;"><span class="color4 FZ40">34445 </span>رس</td>
+                                    <td><img class="img" src="~/Materials/Portfolio/Images/up.png"> <span>ربح</span></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <div class="large-12 columns">
+                        <div class="large-8 column">
+                            <div class="">
+
+                                <div class="ChartList">
+                                    <ul>
+                                        <li>
+                                            <div class="">
+                                                <h2>تحليل فني</h2>
+                                                <div class="Clear H5"></div>
+                                                <div><a href="@Url.Action("PortfolioAnalyses", "Home", new { Area = "Portfolio" })"><img src="~/Materials/Portfolio/Images/BcSections/Technical.jpg" alt=""></a></div>
+                                                <div class="Clear H20"></div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="">
+                                                <h2>تحليل اساسي</h2>
+                                                <div class="Clear H5"></div>
+                                                <div><a href="@Url.Action("PortfolioAnalyses", "Home", new { Area = "Portfolio" })"><img src="~/Materials/Portfolio/Images/BcSections/Primary.jpg" alt=""></a></div>
+                                                <div class="Clear H20"></div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="">
+                                                <h2>تحليل استراتيجي</h2>
+                                                <div class="Clear H5"></div>
+                                                <div><a href="@Url.Action("PortfolioAnalyses", "Home", new { Area = "Portfolio" })"><img src="~/Materials/Portfolio/Images/BcSections/Stratigic.jpg" alt=""></a></div>
+                                                <div class="Clear H20"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+
+                            </div>
+
+                            
+                        </div>
+                        <div class="large-4 column">
+                            <div class="TikerChartWrapperGreen">
+                                <h2>السوق</h2>
+                                <div class="Clear H5"></div>
+                                <div>
+                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 100%" class="Empty2">
+                                        <tbody>
+                                            <tr align="right">
+                                                <th>الرمز</th>
+                                                <th>السهم</th>
+                                                <th>اخر</th>
+                                                <th>التغير %</th>
+                                                <th>الاتجاه</th>
+                                                <th>س ط</th>
+                                                <th>ك ط</th>
+                                                <th>س ع</th>
+                                                <th>ك ع</th>
+                                            </tr>
+                                            <tr class="tr" align="right">
+                                                <td>11150</td>
+                                                <td>السعودية</td>
+                                                <td>5678</td>
+                                                <td class="color4"> 0.01 %</td>
+                                                <td><img class="img" src="~/Materials/Portfolio/Images/up.png"></td>
+                                                <td class="BCcolor4">252.5</td>
+                                                <td class="BCcolor4">1234567</td>
+                                                <td class="BCcolor6">1234.6</td>
+                                                <td class="BCcolor6">1234567</td>
+                                            </tr>
+
+                                            <tr class="tr" align="right">
+                                                <td>11150</td>
+                                                <td>السعودية</td>
+                                                <td>5678</td>
+                                                <td class="color4"> 0.01 %</td>
+                                                <td><img class="img" src="~/Materials/Portfolio/Images/up.png"></td>
+                                                <td class="BCcolor4">252.5</td>
+                                                <td class="BCcolor4">1234567</td>
+                                                <td class="BCcolor6">1234.6</td>
+                                                <td class="BCcolor6">1234567</td>
+                                            </tr>
+
+                                            <tr class="tr" align="right">
+                                                <td>11150</td>
+                                                <td>السعودية</td>
+                                                <td>5678</td>
+                                                <td class="color4"> 0.01 %</td>
+                                                <td><img class="img" src="~/Materials/Portfolio/Images/up.png"></td>
+                                                <td class="BCcolor4">252.5</td>
+                                                <td class="BCcolor4">1234567</td>
+                                                <td class="BCcolor6">1234.6</td>
+                                                <td class="BCcolor6">1234567</td>
+                                            </tr>
+                                            <tr class="tr" align="right">
+                                                <td>11150</td>
+                                                <td>السعودية</td>
+                                                <td>5678</td>
+                                                <td class="color4"> 0.01 %</td>
+                                                <td><img class="img" src="~/Materials/Portfolio/Images/up.png"></td>
+                                                <td class="BCcolor4">252.5</td>
+                                                <td class="BCcolor4">1234567</td>
+                                                <td class="BCcolor6">1234.6</td>
+                                                <td class="BCcolor6">1234567</td>
+                                            </tr>
+                                            <tr class="tr" align="right">
+                                                <td>11150</td>
+                                                <td>السعودية</td>
+                                                <td>5678</td>
+                                                <td class="color2"> 0.01 %</td>
+                                                <td><img class="img" src="~/Materials/Portfolio/Images/down.png"></td>
+                                                <td class="BCcolor4">252.5</td>
+                                                <td class="BCcolor4">1234567</td>
+                                                <td class="BCcolor6">1234.6</td>
+                                                <td class="BCcolor6">1234567</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="Clear H20"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="large-12 column">
+                        <div class="TikerChartWrapper">
+
+
+                            <h2>اوامري</h2>
+                            <div class="Clear H5"></div>
+                            <table border="0" cellpadding="0" cellspacing="0" style="width: 100%" class="Empty3">
+                                <tbody>
+                                    <tr align="right">
+                                        <th>بيع / شراء</th>
+                                        <th>السهم</th>
+                                        <th>الكمية</th>
+                                        <th>السعر</th>
+                                        <th>
+                                            <select id="Select1" class="SmallSelect">
+                                                <option>يرجي اختيار الحاله</option>
+                                                <option>منفذ</option>
+                                                <option>معروض</option>
+                                                <option>معلق</option>
+                                                <option>ملغي</option>
+                                                <option>منتهي الصلاحية</option>
+                                            </select>
+                                        </th>
+                                        <th>التاريخ</th>
+                                    </tr>
+                                    <tr class="tr BCBg4" align="right">
+                                        <td>شراء</td>
+                                        <td>السعودية</td>
+                                        <td>33</td>
+                                        <td> 374.68  </td>
+                                        <td> معروض </td>
+                                        <td> 22/6/2015  </td>
+                                    </tr>
+
+                                    <tr class="tr" align="right">
+                                        <td>بيع</td>
+                                        <td>دبي</td>
+                                        <td>33</td>
+                                        <td> 374.68  </td>
+                                        <td> منتهي الصلاحية </td>
+                                        <td> 22/6/2015  </td>
+                                    </tr>
+
+                                    <tr class="tr BCBg4" align="right">
+                                        <td>شراء</td>
+                                        <td>أبو ظبي	</td>
+                                        <td>33</td>
+                                        <td> 374.68  </td>
+                                        <td> ملغي </td>
+                                        <td> 22/6/2015  </td>
+                                    </tr>
+                                    <tr class="tr BCBg6" align="right">
+                                        <td>بيع</td>
+                                        <td>الكويت</td>
+                                        <td>33</td>
+                                        <td> 374.68  </td>
+                                        <td> معروض </td>
+                                        <td> 22/6/2015  </td>
+                                    </tr>
+                                    <tr class="tr" align="right">
+                                        <td>شراء</td>
+                                        <td>قطر</td>
+                                        <td>33</td>
+                                        <td> 374.68  </td>
+                                        <td> منتهي الصلاحية </td>
+                                        <td> 22/6/2015  </td>
+                                    </tr>
+                                    <tr class="tr BCBg6" align="right">
+                                        <td>بيع</td>
+                                        <td>مسقط</td>
+                                        <td>33</td>
+                                        <td> 374.68  </td>
+                                        <td> ملغي </td>
+                                        <td> 22/6/2015  </td>
+                                    </tr>
+                                    <tr class=" BCBg4" align="right">
+                                        <td>شراء</td>
+                                        <td>البحرين</td>
+                                        <td>33</td>
+                                        <td> 374.68  </td>
+                                        <td> معلق </td>
+                                        <td> 22/6/2015  </td>
+                                    </tr>
+                                    <tr class=" BCBg6" align="right">
+                                        <td>بيع</td>
+                                        <td>مصر</td>
+                                        <td>33</td>
+                                        <td> 374.68  </td>
+                                        <td> منفذ </td>
+                                        <td> 22/6/2015  </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <div class="Clear H5"></div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <!--END-->
+
+
+                <div class="clearfix"></div>
+                <!--END CONTENT-->
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="FooterWrapperBG">
+            <div class="copyRight">حقوق النشر © BorsaCapital 2015</div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        $(function () {
+
+            $(".btnMusic").click(function () {
+                window.open("/test/Home/Music", "", "width=500, height=600");
+            });
+
+            $("#InfoBar").click(function () {
+                $("#NewsBar").slideToggle("slow");
+            });
+
+            $("#alert").click(function () {
+                $("#Alerts").slideToggle("slow");
+            });
+
+            var $elem = $('#allBody');
+
+            $(".Fbutton").click(function (event) {
+                event.preventDefault();
+                $("#FooterDetails").slideToggle(500);
+                $('html, body').animate({ scrollTop: $elem.height() }, 500);
+            });
+        });
+
+    </script>
+    <script>
+        $(document).foundation();
+    </script>
+
+
+</body>
+</html>
+
+

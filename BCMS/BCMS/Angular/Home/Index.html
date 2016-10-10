@@ -1,0 +1,71 @@
+﻿
+<div ng-controller="HomeController">
+    <!--slider-->
+    <div style="max-height: 250px;overflow: hidden">
+        <ul class="rslides">
+            <li><img alt="" src="../Materials/Ar/Slider/Images/1.jpg" /></li>
+            <li><img alt="" src="../Materials/Ar/Slider/Images/2.jpg" /></li>
+            <li><img alt="" src="../Materials/Ar/Slider/Images/3.jpg" /></li>
+            <li><img alt="" src="../Materials/Ar/Slider/Images/4.jpg" /></li>
+            <li><img alt="" src="../Materials/Ar/Slider/Images/5.jpg" /></li>
+        </ul>
+    </div>
+    <script>
+        $(function () {
+            $(".rslides").responsiveSlides();
+        });
+    </script>
+    <!--//slider-->
+
+    <div class="row">
+        <div class="large-12 columns">
+
+            <div class="large-3 column">
+                <div>
+                    <ul class="demo-2 effect">
+                        <li>
+                            <h2 class="zero">{{bc | translate}}</h2>
+                        </li>
+                        <li><img class="top" src="../Materials/Ar/Images/HomeImages/3.jpg" alt="" /></li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="large-3 column">
+                <div>
+                    <ul class="demo-2 effect">
+                        <li>
+                            <h2 class="zero">{{ourServices | translate}}</h2>
+                        </li>
+                        <li><img class="top" src="../Materials/Ar/Images/HomeImages/1.jpg" alt="" /></li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="large-3 column">
+                <div>
+                    <ul class="demo-2 effect">
+                        <li>
+                            <h2 class="zero">{{education | translate}}</h2>
+                        </li>
+                        <li><a href="http:\\www.google.com" target="_blank"><img class="top" src="../Materials/Ar/Images/HomeImages/2.jpg" alt="" /></a></li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="large-3 column">
+                <div>
+                    <ul class="demo-2 effect">
+                        <li>
+                            <h2 class="zero">{{entertainment | translate}}</h2>
+                        </li>
+                        <li><img class="top" src="../Materials/Ar/Images/HomeImages/4.jpg" alt="" /></li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

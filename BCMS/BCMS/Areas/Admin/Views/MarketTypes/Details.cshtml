@@ -1,0 +1,30 @@
+﻿@using BCMS.Models;
+@model MarketType
+<link href="~/Areas/Admin/css/MyStyle.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.ui-dialog-buttonset button').addClass('btn btn-primary12 btn-sm');
+    });
+</script>
+
+<div style=" text-align: center;width:82%">
+    <div class="box col-md-8" style="width:121%;text-align: center">
+        <div class="box-content" style="width:100%;">
+            <div class="form-group">
+                <label for="exampleInputEmail1">نوع السوق باللغة العربية</label>
+                <input name="MTArName" class="form-control" type="text" disabled="disabled" value="@Model.MarketTypeArName" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">نوع السوق باللغة الإنجليزية</label>
+                <input name="MTEnName" class="form-control" type="text" disabled="disabled" value="@Model.MarkeTypeEnName" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">نوع السوق الأولي </label>
+                <input name="Parent" class="form-control" type="text" disabled="disabled" value="@Model.ParentMarketTypeId" />
+
+            </div>
+        </div>
+    </div>
+</div>

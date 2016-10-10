@@ -1,0 +1,764 @@
+﻿/** index **/
+@import url("Font/stylesheet.css");
+@font-face {
+	font-family: "Hacen Liner Screen";
+        src: url("FontAr/hacen_liner_screen.eot"); /* IE 9 */
+        src: url("FontAr/hacen_liner_screen.eot?") format("eot"), /* IE 6-8 */
+             url("FontAr/hacen_liner_screen.otf") format("opentype"), /* Other browsers */
+             url("FontAr/hacen_liner_screen.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+.Left{float: left;}
+.Right{float: right;}
+.Clear{clear: both;}
+.Arabic{direction: rtl;text-align: right;}
+body
+{
+    font-family: "Hacen Liner Screen";
+    padding: 0;
+    margin: 0;
+    background-color:#151515;
+     background-image: url(../images/bg.jpg);
+     background-repeat: repeat-x;
+     background-position: top center;
+}
+
+#wrapper
+{
+	padding: 0px 0px;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 1;
+
+    margin: 0;
+
+    width: 100%;
+    min-height: 635px;
+
+     background-image: url(../Images/bgCircle.png);
+     background-repeat: no-repeat;
+     background-position: top center;
+}
+
+#wrapperContainer
+{
+    margin: 0 auto;
+
+    /*width: 525px;*/
+
+    /*width: 599px;*/
+
+    /*width: 821px;*/
+
+    width: 1043px;/**/
+}
+
+.PobUp
+{
+    position: absolute;
+	padding: 0px 0px;
+    top:11%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 3;
+
+    margin: auto;
+	overflow: hidden;
+
+    width: 850px;
+    height: 540px;
+
+     border: 5px solid #e4b1ee;
+     
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    
+    
+    background-image: url(../images/PobUpbg.png);
+    background-repeat: repeat;
+    -webkit-box-shadow: 0 3px 8px 3px #000000;
+    box-shadow: 0 3px 8px 3px #000000;
+}
+
+.Close
+{
+    font-size: 22px;
+    color: #FFF;
+    position: relative;
+    top:0;
+    bottom: 0;
+    right: 0;
+    left: 2%;
+
+    z-index: 4;
+
+    margin: 0px 0px 0 0;
+	padding: 17px 0px 0 50px;
+	overflow: hidden;
+
+    height: 67px;
+    width: 70px;
+
+     background-image: url(../images/close.png);
+     background-repeat: no-repeat;
+     background-position: top left;
+}
+.Close:hover
+{
+    cursor: pointer;
+
+     background-image: url(../images/closeH.png);
+     background-repeat: no-repeat;
+     background-position: top left;
+}
+
+.Done
+{
+    font-size: 22px;
+    color: #FFF;
+    position: relative;
+    top:-13%;
+    bottom: 0;
+    right: 0;
+    left: 43%;
+
+    z-index: 4;
+
+    margin: 0px 0px 0 0;
+	padding: 8px 0px 0 50px;
+	overflow: hidden;
+
+    height: 67px;
+    width: 70px;
+
+     background-image: url(../images/done.png);
+     background-repeat: no-repeat;
+     background-position: top left;
+
+}
+.Done:hover
+{
+    cursor: pointer;
+    
+
+     background-image: url(../images/doneH.png);
+     background-repeat: no-repeat;
+     background-position: top left;
+}
+
+.Back
+{
+    font-size: 22px;
+    color: #FFF;
+    position: relative;
+    top:-27%;
+    bottom: 0;
+    right: 0;
+    left: 83%;
+
+    z-index: 4;
+
+    margin: 0px 0px 0 0;
+	padding: 8px 0px 0 50px;
+	overflow: hidden;
+
+    height: 67px;
+    width: 70px;
+
+     background-image: url(../images/back.png);
+     background-repeat: no-repeat;
+     background-position: top left;
+
+}
+.Back:hover
+{
+    cursor: pointer;
+    
+
+     background-image: url(../images/backH.png);
+     background-repeat: no-repeat;
+     background-position: top left;
+}
+
+header
+{ 
+    width:100%;margin: 0 0 5px 0;
+}
+header table
+{
+    width: 100%;
+}
+#content table tr
+{
+    
+}
+#content table tr td
+{
+    vertical-align: top;
+}
+
+#content
+{
+    margin: 0 auto;
+    width: 100%;
+}
+#content table
+{
+    width: 100%;
+}
+#content table tr
+{
+    
+}
+#content table tr td
+{
+    vertical-align: top;
+}
+
+
+.TileContainer
+{
+    margin: 0 0;
+
+    padding: 10px 10px 10px 10px;
+
+     background-image: url(../images/TilesBG.png);
+     background-repeat: repeat;
+     background-position: top center;
+
+     border: 1px solid #4e4e4e;
+     
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+
+.TopBlock
+{
+
+    height: 50px;
+    width: 165px;
+
+    color: #FFF;
+    font-weight: bold;
+    font-family: Arial;
+
+    border: 1px solid #4e4e4e;
+    webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+
+    background: rgb(21,21,21); /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzE1MTUxNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0MTQxNDEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  rgba(21,21,21,1) 0%, rgba(65,65,65,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(21,21,21,1)), color-stop(100%,rgba(65,65,65,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(21,21,21,1) 0%,rgba(65,65,65,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(21,21,21,1) 0%,rgba(65,65,65,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(21,21,21,1) 0%,rgba(65,65,65,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(21,21,21,1) 0%,rgba(65,65,65,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#151515', endColorstr='#414141',GradientType=0 ); /* IE6-8 */
+
+}
+.MyImage
+{
+    width: 50px;
+    text-align: center;
+    padding: 7px 0 0 0;
+}
+.MyNum
+{
+    padding: 17px 0 0 0;
+}
+
+
+.RLoading
+{
+    width: 60px;
+    height: 309px;
+    padding: 10px 0 0 0;
+
+     background-image: url(../images/BgMenu.png);
+     background-repeat: no-repeat;
+     background-position: top center;
+}
+
+.ScoreLoadingContainer
+{
+    width: 20px;
+    height: 260px;
+    margin: 0 auto;
+    display: block;
+    overflow: hidden;
+    background-color: #ff5b5b;
+    border: 2px solid #131313;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+.ScoreLoading
+{
+    display: block;
+    bottom:0;
+    top: 0;
+    position: relative;
+    overflow: hidden;
+    width: 18px;
+    height: 200px;
+    margin: 0 auto;
+    background-color: #000;
+    border: 1px solid #f1eaff;
+    -webkit-border-radius: 15px 15px 0 0;
+border-radius: 15px 15px 0 0;
+
+}
+
+.TimeContainer_NUM
+{
+    color: #000 !important;
+    font-family: Arial !important;
+    font-weight: bold !important;
+    font-size: 18px !important;
+    text-align: center;
+    padding: 10px 0 0 0;
+}
+
+
+.LMenu
+{
+
+    width: 60px;
+    height: 319px;
+
+     background-image: url(../images/BgMenu.png);
+     background-repeat: no-repeat;
+     background-position: top center;
+}
+
+
+nav
+{
+
+    padding: 30px 0 0 0;margin: 0;
+
+}
+nav ul{list-style-type: none;padding: 0;margin: 0 auto;width: 50px;}
+nav ul li{padding: 0 0 20px 0;margin: 0;}
+
+.navA
+{ 
+    
+}
+.navA
+{ 
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    text-decoration: none;
+    display: block;
+    background-image: url(../images/Play.png);
+     background-repeat: no-repeat;
+     background-position: top center;
+}
+.navA:hover
+{ 
+    text-decoration: none;
+    display: block;
+    background-image: url(../images/PlayH.png);
+     background-repeat: no-repeat;
+     background-position: top center;
+}
+
+
+.navB
+{ 
+    
+}
+.navB
+{ 
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    text-decoration: none;
+    display: block;
+    background-image: url(../images/Home.png);
+     background-repeat: no-repeat;
+     background-position: top center;
+}
+.navB:hover
+{ 
+    text-decoration: none;
+    display: block;
+    background-image: url(../images/HomeH.png);
+     background-repeat: no-repeat;
+     background-position: top center;
+}
+
+
+.navC
+{ 
+    
+}
+.navC
+{ 
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    text-decoration: none;
+    display: block;
+    background-image: url(../images/Setting.png);
+     background-repeat: no-repeat;
+     background-position: top center;
+}
+.navC:hover
+{ 
+    text-decoration: none;
+    display: block;
+    background-image: url(../images/SettingH.png);
+     background-repeat: no-repeat;
+     background-position: top center;
+}
+
+
+.navD
+{ 
+    
+}
+.navD
+{ 
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    text-decoration: none;
+    display: block;
+    background-image: url(../images/Help.png);
+     background-repeat: no-repeat;
+     background-position: top center;
+}
+.navD:hover
+{ 
+    text-decoration: none;
+    display: block;
+    background-image: url(../images/HelpH.png);
+     background-repeat: no-repeat;
+     background-position: top center;
+}
+
+nav ul.MainMenu
+{
+    list-style-type: none;padding: 0;margin: 0 auto;width: 250px;
+}
+nav ul.MainMenu li
+{
+    cursor: pointer;
+    padding: 20px 0 20px 0;margin: 0;text-align: center;border-bottom: 1px dotted #c4c4c4;display: block;
+     color: #FFF;
+    font-family: "Hacen Liner Screen";
+    font-size: 22px;
+    font-weight: normal;
+    text-decoration: none;
+}
+nav ul.MainMenu li:hover
+{
+    color: yellow;
+    text-decoration: none;
+}
+nav ul.MainMenu li.LastItem
+{
+    border-bottom: 0px dotted #f1eaff;
+}
+nav ul.MainMenu li a
+{
+    color: #FFF;
+    font-family: "Hacen Liner Screen";
+    font-size: 22px;
+    font-weight: normal;
+    text-decoration: none;
+}
+nav ul.MainMenu li a:hover
+{
+    color: yellow;
+    text-decoration: none;
+}
+
+nav ul.MainMenuL
+{
+    height: 420px;width: 650px;
+
+    list-style-type: none;padding: 0;margin: 0 auto;
+}
+nav ul.MainMenuL li
+{
+    padding: 5px 0 5px 0;margin: 0;text-align: center;border-bottom: 1px dotted #c4c4c4;
+    
+    color: #FFF;
+    font-family: "Hacen Liner Screen";
+    font-size: 18px;
+    font-weight: normal;
+    text-decoration: none;
+}
+nav ul.MainMenuL li.LastItem
+{
+    border-bottom: 0px dotted #f1eaff;
+}
+nav ul.MainMenuL li a
+{
+    color: #FFF;
+    font-family: "Hacen Liner Screen";
+    font-size: 22px;
+    font-weight: normal;
+    text-decoration: none;
+}
+nav ul.MainMenuL li a:hover
+{
+    color: yellow;
+    text-decoration: none;
+}
+
+
+footer{font-size:small; border-top: 2px solid #989897; padding: 5px;}
+
+
+
+
+.PobUpExit
+{
+    position: absolute;
+	padding: 0px 0px;
+    top:11%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 3;
+
+    margin: auto;
+	overflow: hidden;
+
+    width: 420px;
+    height: 240px;
+
+     border: 5px solid #e4b1ee;
+     
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    
+    
+    background-image: url(../images/PobUpbg.png);
+    background-repeat: repeat;
+    -webkit-box-shadow: 0 3px 8px 3px #000000;
+    box-shadow: 0 3px 8px 3px #000000;
+}
+
+.ExitPobUp
+{
+    height: 120px;width: 100%;
+
+    padding: 10px 0 0 0;margin: 0 auto;
+}
+.ExitPobUp h1
+{
+    color: #FFF;
+    text-align: center;
+    font-size: 33px;
+}
+
+.PobUpExitClose
+{
+    font-size: 22px;
+    color: #FFF;
+
+    margin: 0px 0px 0 77px;
+	padding: 17px 0px 0 70px;
+	overflow: hidden;
+
+    height: 67px;
+    width: 70px;
+
+     background-image: url(../images/close.png);
+     background-repeat: no-repeat;
+     background-position: top left;
+}
+.PobUpExitClose:hover
+{
+    cursor: pointer;
+
+     background-image: url(../images/closeH.png);
+     background-repeat: no-repeat;
+     background-position: top left;
+}
+
+.PobUpExitDone
+{
+    font-size: 22px;
+    color: #FFF;
+
+    z-index: 4;
+
+    margin: 0px 0px 0 17px;
+	padding: 17px 0px 0 70px;
+	overflow: hidden;
+
+    height: 67px;
+    width: 70px;
+
+     background-image: url(../images/done.png);
+     background-repeat: no-repeat;
+     background-position: top left;
+
+}
+.PobUpExitDone:hover
+{
+    cursor: pointer;
+    
+
+     background-image: url(../images/doneH.png);
+     background-repeat: no-repeat;
+     background-position: top left;
+}
+
+.CheckBox
+{
+    width: 20px;
+    height: 20px;
+    border: 1px solid #4e4e4e;
+    webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+
+    background: rgb(21,21,21); /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzE1MTUxNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0MTQxNDEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  rgba(21,21,21,1) 0%, rgba(65,65,65,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(21,21,21,1)), color-stop(100%,rgba(65,65,65,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(21,21,21,1) 0%,rgba(65,65,65,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(21,21,21,1) 0%,rgba(65,65,65,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(21,21,21,1) 0%,rgba(65,65,65,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(21,21,21,1) 0%,rgba(65,65,65,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#151515', endColorstr='#414141',GradientType=0 ); /* IE6-8 */
+}
+
+
+.NormalLink
+{
+    cursor: pointer;
+    display: block;
+     color: #FFF;
+    font-family: "Hacen Liner Screen";
+    font-size: 22px;
+    font-weight: normal;
+    text-decoration: none;
+}
+.NormalLink:hover
+{
+    color: yellow;
+    text-decoration: none;
+}
+
+
+.Selected
+{
+    padding: 0 55px 0 0;
+    margin: 0 -55px 0 0;
+    height: 49px;
+    cursor: pointer;
+    display: block;
+     color: #cbe83d;
+    font-family: "Hacen Liner Screen";
+    font-size: 22px;
+    font-weight: normal;
+    text-decoration: none;
+     background-image: url(../images/doneHS.png);
+     background-repeat: no-repeat;
+     background-position: top right;
+}
+.Selected:hover
+{
+    text-decoration: none;
+}
+
+
+.HelpRapper
+{
+    text-align: justify;
+    color: yellowgreen;
+    padding: 10px;
+    height: 380px;
+    display: block;
+    overflow: auto;
+    border: 1px solid #0a4f66;
+    background-color: #000;
+}
+
+
+.RadioWrraper input[type=radio] {
+    padding-left:0px;
+    padding-right:0px;
+    border-radius:7px;
+
+    -webkit-appearance:button;
+
+    white-space: nowrap;
+    overflow:hidden;
+    padding: 4px;
+    background-color: #FFF;
+
+    width:25px;
+    height:25px;
+}
+
+
+.RadioWrraper input[type=radio]:checked {
+    background-color:#62a0e1;
+    padding: 4px;
+}
+
+.RadioWrraper input[type=radio]:hover {
+    box-shadow:0px 0px 10px #1300ff;
+}
+
+
+
+
+
+
+.RadioWrraper input[type=checkbox] {
+    padding-left:0px;
+    padding-right:0px;
+    border-radius:4px;
+    background-color: #FFF;
+
+    -webkit-appearance:button;
+    white-space: nowrap;
+    overflow:hidden;
+    padding: 4px;
+
+    width:15px;
+    height:15px;
+}
+
+.RadioWrraper input[type=checkbox]:checked {
+    padding: 4px;
+    background-color: green;
+    border-radius:4px;
+}
+
+.RadioWrraper input[type=checkbox]:hover {
+    box-shadow:0px 0px 10px #1300ff;
+}
+
+
+
+.RadioWrraper input[type=checkbox]:disabled {
+    padding: 4px;
+    background-color: #3d3d3d;
+    border-radius:4px;
+    border: 1px solid #205e71;
+}

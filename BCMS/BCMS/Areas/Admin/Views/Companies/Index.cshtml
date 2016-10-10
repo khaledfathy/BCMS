@@ -1,0 +1,236 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@using BCMS.Models
+@model IPagedList<CompanyInfo>
+
+@section Scripts{
+    <style type="text/css">
+        .ui-dialog .ui-dialog-title {
+            direction: rtl;
+            float: right;
+            margin: 0.1em 0 0.2em 16px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#AllSector").change(function () {
+                var num = $("#AllSector option:Selected").val();
+                $("#btnSearch").attr("href", "/Admin/Companies/index/" + num);
+            });
+
+
+
+        var url = "";
+        $("#dialog-alert").dialog({
+            autoOpen: false,
+            resizable: false,
+            title:'رسالة تنبيهية',
+            height: 170,
+            width: 250,
+            show: { effect: 'drop', direction: "up" },
+            modal: true,
+            draggable: true,
+            open: function (event, ui) {
+                $(".ui-dialog-titlebar-close").hide();
+            },
+            buttons: {
+                "اغلاق": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        if ('@TempData["msg"]' != "") {
+            $("#dialog-alert").dialog('open');
+        }
+
+        $("#dialog-edit").dialog({
+            title: "إضافة شركة جديدة",
+            autoOpen: false,
+            resizable: false,
+            height: 650,
+            width: 500,
+            show: { effect: 'drop', direction: "up" },
+            modal: true,
+            draggable: true,
+            open: function (event, ui) {
+                $(".ui-dialog-titlebar-close").hide();
+                $(this).load(url);
+            }
+        });
+
+        $("#dialog-confirm").dialog({
+            autoOpen: false,
+            resizable: false,
+            title: 'رسالة تنبيهية',
+            height: 170,
+            width: 350,
+            show: { effect: 'drop', direction: "up" },
+            modal: true,
+            draggable: true,
+            open: function (event, ui) {
+                $(".ui-dialog-titlebar-close").hide();
+
+            },
+            buttons: {
+                "تأكيد": function () {
+                    $(this).dialog("close");
+                    window.location.href = url;
+                },
+                "إلغاء": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        $("#dialog-detail").dialog({
+            title: 'تفاصيل الشركة',
+            autoOpen: false,
+            resizable: false,
+            height: 650,
+            width: 400,
+            show: { effect: 'drop', direction: "up" },
+            modal: true,
+            draggable: true,
+            open: function (event, ui) {
+                $(".ui-dialog-titlebar-close").hide();
+                $(this).load(url);
+            },
+            buttons: {
+                "اغلاق": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        $(".btn-primary").live("click", function (e) {
+           //e.preventDefault(); //use this or return false
+            url = $(this).attr('href');
+            $("#dialog-edit").dialog('open');
+
+            return false;
+        });
+
+        $(".lnkEdit").live("click", function (e) {
+            // e.preventDefault(); use this or return false
+            url = $(this).attr('href');
+          $(".ui-dialog-title").html("تعديل شركة");
+            $("#dialog-edit").dialog('open');
+
+            return false;
+        });
+
+        $(".lnkDelete").live("click", function (e) {
+            // e.preventDefault(); use this or return false
+            url = $(this).attr('href');
+            $("#dialog-confirm").dialog('open');
+
+            return false;
+        });
+
+        $(".lnkDetail").live("click", function (e) {
+            // e.preventDefault(); use this or return false
+            url = $(this).attr('href');
+            $("#dialog-detail").dialog('open');
+
+            return false;
+        });
+
+        $("#btncancel").live("click", function (e) {
+            $("#dialog-edit").dialog("close");
+            return false;
+        });
+    });
+    </script>
+}
+<div>
+   
+    <a id="btnSearch" href="/Admin/Companies/index/" style="border-radius: 3px; color: #fff; background-color: #428bca; border-color: #357ebd; margin-bottom: 0; font-weight: Bold; cursor: pointer; text-decoration: none; line-height: 1.5; display: inline-block; border: 1px solid transparent; white-space: nowrap; width:50px;">
+        بحث
+    </a>
+    @Html.DropDownList("AllSector", (IEnumerable<SelectListItem>)ViewBag.AllSector, "-- الكل --" ,new { @style = "Width:301px;color: #55802E;font-weight:bold;border-radius: 7px;height: 31px;" })
+    <label for="exampleInputEmail1"> القطاع</label>
+
+</div>
+<div id="dialog-alert" style="display: none;font-size:medium">
+    <p>
+        @TempData["msg"]
+    </p>
+</div>
+
+<div id="dialog-confirm" style="display: none">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float: right; margin: 0 7px 20px 0;"></span>
+        هل تريد تأكيد عملية الحذف ؟
+    </p>
+</div>
+
+<div id="dialog-edit" style="display: none"></div>
+
+<div id="dialog-detail" style="display: none"></div>
+
+
+
+
+
+
+
+
+
+
+
+<div style="margin:5px 20px 5px 5px;text-align:right">
+    @Html.ActionLink("إضافة شركة جديدة", "Create", "Companies", new { @class = "btn btn-primary btn-sm" })
+</div>
+<table class="table table-striped table-bordered responsive" dir="rtl" align="center">
+    <thead>
+        <tr>
+            <th >رمز الشركة</th>
+            <th>إسم الشركة</th>
+            <th>القطاع</th>
+            <th>التأسيس</th>
+            <th>رئيس مجلس الادارة</th>
+            <th>عدد الموظفين</th>
+            <th>المركز الرئيسي</th>
+            <th width="25%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CompanyID</td>
+                <td class="center">@item.CompanyLongName</td>
+                <td class="center">@item.Sector.SectorName</td>
+                <td>@item.CompanyIncorporation.Value.ToShortDateString() </td>
+                <td class="center">@item.ChairmanBoardOfDirectors</td>
+                <td class="center">@item.CompanyEmployees</td>
+                <td class="center">@item.CompanyMain_Office</td>
+
+                <td class="center">
+                    <a class="btn btn-info lnkEdit" href="@Url.Action("Edit", "Companies", new { id = item.CompanyID })"  >
+                        <i class="glyphicon glyphicon-edit icon-white"></i>
+                        تعديل
+                    </a>
+                    <a class="btn btn-danger lnkDelete" href="@Url.Action("Delete", "Companies", new { id = item.CompanyID })" >
+                        <i class="glyphicon glyphicon-trash icon-white"></i>
+                        حذف
+                    </a>
+                    <a class="btn btn-success lnkDetail" href="@Url.Action("Details", "Companies", new { id = item.CompanyID })" >
+                        <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                        عرض
+                    </a>
+                </td>
+            </tr>
+        }
+        
+    </tbody>
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+    new PagedListRenderOptions()
+    {
+        Display = PagedListDisplayMode.IfNeeded,
+        DisplayPageCountAndCurrentLocation = true
+    })
+

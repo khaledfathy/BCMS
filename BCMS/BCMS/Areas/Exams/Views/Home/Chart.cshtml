@@ -1,0 +1,119 @@
+﻿@section scripts{
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script src="~/Areas/Exams/Scripts/jquery-2.1.1.min.js"></script>
+<script src="~/Areas/Exams/Scripts/highcharts.js"></script>
+<script src="~/Areas/Exams/Scripts/exporting.js"></script>
+
+
+    <script type="text/javascript">
+    var x;
+
+    $(document).ready(function () {
+        var queryString = new Array();
+        if (queryString.length == 0) {
+            if (window.location.search.split('?').length > 1) {
+                var params = window.location.search.split('?')[1].split('&');
+                for (var i = 0; i < params.length; i++) {
+                    var key = params[i].split('=')[0];
+                    var value = decodeURIComponent(params[i].split('=')[1]);
+                    queryString[key] = value;
+                }
+            }
+        }
+        var Data = [];
+        if (queryString["TrueAnswer"] != null && queryString["WrongAnswer"] != null) {
+            var num1 = parseInt(queryString["TrueAnswer"]),
+                 num2 = parseInt(queryString["WrongAnswer"]),
+                 num3 = 100 - (num1 + num2);
+            if (parseInt(queryString["TrueAnswer"]) >= 70) {
+
+                $("#tab").append(" <tr><td style='text-align:center' > <label style='border:0;color:green;font-size:15px;padding-left:320px' > لقد انهيت الإختبار بنجاح وانتقلت إلى الإختبار الذي يليه</label> </td><td></td> </tr>");
+            }
+            else
+                 $("#tab").append(" <tr><<<td style='text-align:center' > <label style='border:0;color:red;font-size:15px;padding-left:210px' > لقد حققت " +num1+"   % و هي دون درجة النجاح ولن تستطيع الإنتقال إلى الإختبار يليه</label> </td><td></td> </tr>");
+
+
+
+
+
+
+            var Data = [
+                 ['الاجابات الصحيحة', num1],
+                    ['الاجابات الخاطئة ', num2],
+                    ['الأسئلة الغير مجابة ', num3]
+            ];
+        }
+
+
+
+        //// Radialize the colors
+        //Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
+        //    return {
+        //        radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+        //        stops: [
+        //            [0, color],
+        //            [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+        //        ]
+        //    };
+        //});
+
+        // Build the chart
+        $('#container').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'نتيجة الإختبار'
+            },
+            tooltip: {
+                shared: true,
+                useHTML: true,
+                headerFormat: '<p style="text-align: right;line-height:0.5px;font-weight:bold;color:Black">{point.key}</p><table>',
+                pointFormat: '<tr><td style="text-align: right"><span>{point.y} </span></td>' +
+                    '<td style="color: {series.color}"> : {series.name} </td></tr>',
+                footerFormat: '</table>'
+
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.0f}',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        },
+                        connectorColor: 'red'
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'النتيجة',
+                data: Data
+            }]
+        });
+    });
+
+
+    </script>
+}
+<div id="dialog">
+
+</div>
+<div id="mytable">
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto;">
+
+    </div>
+    <div style="text-align: center;">
+        <table id="tab" border="0" cellpadding="0" cellspacing="0" style="text-align:center;"></table>
+        <br />
+        <input type="button" class="Button2" value="الرجوع إلى صفحة الإختبارات" onclick="location.href='@Url.Action("Category", "Home") '" />
+    </div>
+</div>

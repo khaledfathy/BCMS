@@ -1,0 +1,27 @@
+﻿@using BCMS.Models;
+@model Advice
+<link href="~/Areas/Admin/css/MyStyle.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.ui-dialog-buttonset button').addClass('btn btn-primary12 btn-sm');
+    });
+</script>
+<div style=" text-align: center;width:82%">
+
+    <div class="box col-md-8" style="width:121%;text-align: center">
+
+
+        <div class="box-content" style="width:100%;">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">النصيحة</label>
+                    <textarea name="AdviceContent" class="form-control" disabled="disabled">@Model.AdviceContent</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">ملحوظات</label>
+                    <textarea name="AdviceDescription" class="form-control" disabled="disabled">@Model.AdviceDescription</textarea>
+                </div>
+        </div>
+
+    </div>
+</div>

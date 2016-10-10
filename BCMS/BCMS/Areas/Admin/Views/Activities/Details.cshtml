@@ -1,0 +1,30 @@
+﻿@using BCMS.Models;
+@model Activity
+<link href="~/Areas/Admin/css/MyStyle.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.ui-dialog-buttonset button').addClass('btn btn-primary12 btn-sm');
+    });
+</script>
+
+<div style=" text-align: center;width:82%">
+    <div class="box col-md-8" style="width:121%;text-align: center">
+        <div class="box-content" style="width:100%;">
+            <div class="form-group">
+                <label for="exampleInputEmail1">النشاط باللغة العربية</label>
+                <input name="ActivityArName" class="form-control" type="text" disabled="disabled" value="@Model.ActivityArName" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">النشاط باللغة الإنجليزية</label>
+                <input name="ActivityEnName" class="form-control" type="text" disabled="disabled" value="@Model.ActivityEngName" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">كود النشاط</label>
+                <input name="ActivityCode" class="form-control" type="text" disabled="disabled" value="@Model.ActivityCode" />
+
+            </div>
+        </div>
+    </div>
+</div>

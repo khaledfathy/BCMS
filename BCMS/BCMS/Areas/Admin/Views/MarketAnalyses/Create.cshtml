@@ -1,0 +1,90 @@
+﻿@using BCMS.Models;
+@model MarketAnalyse
+<script src="~/Areas/Admin/js/jquery.validate.min.js"></script>
+<script src="~/Areas/Admin/js/jquery.validate.unobtrusive.js"></script>
+<link href="~/Areas/Admin/css/MyStyle.css" rel="stylesheet" />
+
+<div style=" text-align: center;width:82%">
+    <div class="box col-md-8" style="width:121%;text-align: center">
+
+        <div class="box-content" style="width:100%;">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    <label for="exampleInputEmail1">القطاع</label>
+                    @Html.DropDownListFor(model => model.SectorId, (IEnumerable<SelectListItem>)ViewBag.AllSector, "-- إختار قطاع   --", new { @class = "StyleForDropDownList" })
+                    @Html.ValidationMessageFor(model => model.SectorId)
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">السوق</label>
+                    @Html.DropDownListFor(model =>model.MarketId, (IEnumerable<SelectListItem>)ViewBag.AllMarket, "-- إختار سوق   --", new { @class = "StyleForDropDownList" })
+                    @Html.ValidationMessageFor(model => model.MarketId)
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">السنة</label>
+                    @Html.DropDownListFor(model => model.YearId, (IEnumerable<SelectListItem>)ViewBag.AllYear, "-- إختار سنة   --", new { @class = "StyleForDropDownList" })
+                    @Html.ValidationMessageFor(model => model.YearId)
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">الأسهم المصدره (بالمليون)</label>
+                    @Html.EditorFor(model =>model.IssuedShares, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IssuedShares)
+                </div>
+           <div class="form-group">
+                    <label for="exampleInputEmail1">الأسهم الحرة (بالمليون)</label>
+                    @Html.EditorFor(model => model.FloatedShares, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FloatedShares)
+                </div>
+           <div class="form-group">
+                    <label for="exampleInputEmail1">صافي الدخل (بالمليون)</label>
+                    @Html.EditorFor(model => model.NetIncome, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.NetIncome)
+                </div>
+           <div class="form-group">
+                    <label for="exampleInputEmail1">حقوق المساهمين (بالمليون)</label>
+                    @Html.EditorFor(model => model.ShareHoldersEquity, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ShareHoldersEquity)
+                </div>
+           <div class="form-group">
+                    <label for="exampleInputEmail1">القيمه السوقيه (بالمليون)</label>
+                    @Html.EditorFor(model => model.MarketCap, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MarketCap)
+                </div>
+           <div class="form-group">
+                    <label for="exampleInputEmail1">العائد على السهم (بالريال)</label>
+                    @Html.EditorFor(model => model.EPS, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EPS)
+                </div>
+           <div class="form-group">
+                    <label for="exampleInputEmail1">السعر للعائد</label>
+                    @Html.EditorFor(model => model.PE, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PE)
+                </div>
+           <div class="form-group">
+                    <label for="exampleInputEmail1">القيمه الدفتريه</label>
+                    @Html.EditorFor(model => model.BookValue, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.BookValue)
+                </div>
+           <div class="form-group">
+                    <label for="exampleInputEmail1">السعر / القيمه الدفتريه</label>
+                    @Html.EditorFor(model => model.PBV, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PBV)
+                </div>
+           <div class="form-group">
+                    <label for="exampleInputEmail1">القيمة السوقية للأسهم الحرة (بالمليون)</label>
+                    @Html.EditorFor(model => model.FloatedSharesMarketCap, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FloatedSharesMarketCap)
+                </div>
+
+
+                <div style="margin:5px 20px 5px 5px;text-align:right">
+                    <button class="btn btn-primary12 btn-sm" style="width:80px">حفظ</button>
+                    <input type="button" value="إلغاء" class="btn btn-primary12 btn-sm" id="btncancel" />
+                </div>
+            }
+        </div>
+
+    </div>
+</div>   

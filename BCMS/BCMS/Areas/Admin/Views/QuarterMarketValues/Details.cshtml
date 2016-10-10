@@ -1,0 +1,57 @@
+﻿@using BCMS.Models;
+@model QuarterMarketValue
+
+<div style=" text-align: center;width:82%">
+    <div class="box col-md-8" style="width:121%;text-align: center">
+
+        <div class="box-content" style="width:100%;">
+
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">السوق</label>
+                <input type="text" disabled="disabled" value="@Model.Market.MarketArName" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">السنة</label>
+                <input type="text" disabled="disabled" value="@Model.Date" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">ربع السنة</label>
+                <input type="text" disabled="disabled" value="@Model.QuarterId" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">القيمة السوقية)</label>
+                <input type="text" disabled="disabled" value="@Model.MarketValue" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">القيمة المتداولة</label>
+                <input type="text" disabled="disabled" value="@Model.ValueTradedOfStocks" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">Daily Average Value Traded</label>
+                <input type="text" disabled="disabled" value="@Model.DailyAvaregeValueTraded" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">عدد الأسهم المتداولة</label>
+                <input type="text" disabled="disabled" value="@Model.NumberOfStockTraded" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">متوسط القيمة المتداولة اليومي</label>
+                <input type="text" disabled="disabled" value="@Model.DailyAverageOfStockTraded" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">عدد الشركات المدرجة</label>
+                <input type="text" disabled="disabled" value="@Model.NumberOfListedCompanies" name="CompanyID" class="form-control" />
+            </div>
+
+        </div>
+    </div>
+</div>

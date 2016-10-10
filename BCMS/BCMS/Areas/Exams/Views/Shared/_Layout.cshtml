@@ -1,0 +1,78 @@
+﻿@if (Request.Cookies["mvcname"] == null)
+{
+    Response.Redirect(Url.Action("Index", "Home", new { Area = "" }));
+}
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head dir="rtl">
+    <title></title>
+    <link href="~/Areas/Exams/content/Style.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+    @RenderSection("scripts",required:false)
+</head>
+<body>
+   
+        <header>
+        <div class="Width1000 Content_C">
+            <div class="Lang Left">
+                <ul>
+          @{
+          
+            
+                 
+                    <li style="direction: rtl; width: 250px; font-weight: bold"><span style="">مرحباً</span><span style="direction:rtl"> @Request.Cookies["mvcname"]["Username"].ToString()</span> </li>
+                      
+             
+          }
+                    
+                    
+                </ul>
+            </div>
+            <div class="Right" style="padding: 5px 5px 0 0;">
+                <a href="#">
+                    <img src="~/Areas/Exams/content/Images/LogoTop.png" />
+                 </a>
+            </div>
+            
+            <div class="Clear"></div>
+        </div>
+    </header>
+
+    <div class="Banner">
+        <div class="Width1000 Content_C">
+            <div class="BannerInner">
+                &nbsp;
+                
+            </div>
+         
+        </div>
+        <div class="Clear"></div>
+    </div>
+
+        <div id="MainContent">
+    <section>
+      <div class="MyContent Width1000 Content_C">
+             
+             @RenderBody()
+                 
+               </div>
+           </section>
+             </div>
+            
+    <div class="Clear"></div>
+        
+
+    <div class="Clear"></div>
+
+    <footer>
+        <div class="Width1000 Content_C">
+        <div class="CopyRight ">جميع الحقوق محفوظة ©   2014</div>
+        
+        
+            <div class="Clear"></div>
+        </div>
+    </footer>
+    
+</body>
+</html>

@@ -1,0 +1,96 @@
+﻿<div class="headerNavWrapper">
+    <div class="BorderBottom">
+        <div class="row">
+            <div class="TopNav">
+                <ul><li><a href="#"><span id="date_time">11 فبراير 2015,  12:33:27</span> </a></li>
+                    <li><a href="#"><img src="/Materials/Games/img/home.png" alt="" width="20" /></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="headerWrapper">
+    <div class="row">
+        <div class="LogoWraper">
+            <div class="logo"> <img src="/Materials/Games/images/logo.png"></div>
+                             
+            <div class="clear"></div>
+        </div>
+        
+    </div>
+</div>
+
+
+<div class="clear"></div>
+
+<div class="clear"></div>
+<div class="MainMenuWrappe">
+    <div class="row">
+        <div class="large-12 columns">
+            <nav id="cbp-hrmenu" class="cbp-hrmenu">
+                <ul>
+                    <li>
+                        <a href="#">الرئيسية</a>
+                        <div class="cbp-hrsub">
+                            <div class="cbp-hrsub-inner">
+                                <div>
+                                    <ul class="ca-menu">
+                                        <li>
+                                            <a href="@Url.Action("About", "home")">
+                                                <span class="ca-icon">A</span>
+                                                <div class="ca-content">
+                                                    <h3 class="ca-sub">نبذه عامه</h3>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Word", "home")">
+                                                <span class="ca-icon">c</span>
+                                                <div class="ca-content">
+                                                    <h3 class="ca-sub">كلمة بورصه كابيتال</h3>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("SKA", "home")">
+                                                <span class="ca-icon">A</span>
+                                                <div class="ca-content">
+                                                    <h3 class="ca-sub">نبذه عن المملكة العربية السعودية</h3>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("FQA","Home")">
+                                                <span class="ca-icon">e</span>
+                                                <div class="ca-content">
+                                                    <h3 class="ca-sub">أسئلة متكررة</h3>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Career","Home")">
+                                                <span class="ca-icon">h</span>
+                                                <div class="ca-content">
+                                                    <h3 class="ca-sub">وظائف شاغرة</h3>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="@Url.Action("Conatct", "home")">اتصل بنا</a></li>
+                </ul>
+            </nav>
+            @System.Web.Optimization.Scripts.Render("/bundles/BCGame/cbpHorizontalMenu")
+            <script>
+                    $(function () {
+                        cbpHorizontalMenu.init();
+                    });
+            </script>
+
+        </div>
+    </div>
+</div>

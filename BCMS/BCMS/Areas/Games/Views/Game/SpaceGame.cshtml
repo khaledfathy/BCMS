@@ -1,0 +1,467 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>غزو الفضاء</title>
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="~/Areas/Games/Private/style.css" rel="stylesheet" />
+    <script src="~/Areas/Games/Scripts/jquery-1.3.2.min.js"></script>
+    <script src="~/Areas/Games/Scripts/jquery.backgroundPosition.js"></script>
+    <script src="~/Areas/Games/Scripts/ev.js"></script>
+    <script src="~/Areas/Games/Scripts/e.js"></script>
+    <script src="~/Areas/Games/Scripts/g.js"></script>
+    <script type="text/javascript">
+
+        var funExit = function () {
+            window.location.href = "/Games/Home";
+        };
+
+        $(function () {
+
+            //$('#midground').css({ backgroundPosition: '0px 0px' });
+            $('#foreground').css({ backgroundPosition: '0px 0px' });
+            //$('#background').css({ backgroundPosition: '0px 0px' });
+
+            //$('#midground').animate({
+            //    backgroundPosition: "(-10000px -2000px)"
+            //}, 240000, 'linear');
+
+            $('#foreground').animate({
+                backgroundPosition: "(-10000px -2000px)"
+            }, 480000, 'linear');
+
+            //$('#background').animate({
+            //    backgroundPosition: "(-10000px -2000px)"
+            //}, 480000, 'linear');
+
+        });
+    </script>
+</head>
+<body>
+    <div id='loading'>
+        <div id='loading_container'>
+            تحميل...
+            <div id='loading_progress'></div>
+        </div>
+    </div>
+    <div id="background"></div>
+    <div id="midground"></div>
+    <div id="foreground"></div>
+
+
+    <div id="page-wrap" style="visibility: hidden;">
+
+
+        <!--START TOP BANNER-->
+        <div>
+            <div class="BgTopOne">
+                <div class="Logo Right"></div>
+                <div class="Score">
+                    <span id="headBorderText" style="visibility: hidden;">النتيجة</span>
+
+                </div>
+            </div>
+            <!--<div class="BgTopTwo"></div>-->
+            <!--START BACK CANVES-->
+            <canvas id="bgScene" class="BackCanvesContainer"></canvas>
+
+
+
+
+
+            <div id="topBanner" class="BgTopBanner">
+                <div id="tb_setting" class="Left Setting" style="visibility: hidden;">
+
+                    <img src="~/Areas/Games/SImages/setting.png" />
+                    خيارات
+                </div>
+
+
+                <div id="tb_lives" class="Right Lives" style="visibility: hidden;">
+                    <img alt="" src="~/Areas/Games/SImages/Lives.png" />
+
+                    <div id="lblLives" class="NumOne WidthTwoNum">55</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--START CONTENT-->
+        <canvas id="gameScene" class="Container"></canvas>
+        <svg id="gameGrid" class="BackGrid"></svg>
+
+        <div id="toolCont" style="position:absolute;">
+            <div id="tooltip"> </div>
+        </div>
+
+
+        <!--START INTRO-->
+        <div id="menuContainer" class="ContainerInnerLayer" style="visibility: hidden;">
+            <!--START INTRO MENU-->
+            <div class="ContainerInnerContainer">
+                <div class="ContainerInner">
+                    <ul>
+                        <li>
+                            <div id="btnNewGame" class="NormalLinkTwo">لعبة جديدة</div>
+                        </li>
+                        <!--<li>
+                            <div id="btnSetting" class="NormalLinkTwo">SETTING</div>
+                        </li>-->
+                        <li>
+                            <div id="btnHelp" class="NormalLinkTwo">مساعدة</div>
+                        </li>
+                        <li class="LastItem">
+                            <div id="btnExit" class="NormalLinkTwo">خروج</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--START SELECT LEVELS-->
+
+        </div>
+
+        <!--Option Menu -->
+        <div id="menuOption" class="ContainerInnerLayer" style="visibility: hidden;">
+            <!--START INTRO MENU-->
+            <div class="ContainerInnerContainer">
+                <div class="ContainerInnerLarge">
+                    <ul>
+                        <li>
+                            <div id="btnReset" class="NormalLinkTwo">لعبة جديدة</div>
+                        </li>
+                        <li>
+                            <div id="btnResume" class="NormalLinkTwo">متابعة اللعب</div>
+                        </li>
+
+                        <li>
+                            <div id="btnGameHelp" class="NormalLinkTwo">مساعدة</div>
+                        </li>
+                        <li class="LastItem">
+                            <div id="btnStartPage" class="NormalLinkTwo">إنهاء اللعبة</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--START SELECT LEVELS-->
+
+        </div>
+
+
+
+        <div id="menuSectionList" class="ContainerInnerLayer" style="visibility: hidden;">
+            <div class="ContainerInnerLevels FontAr Fsize01 Color3">
+                <!--START Left List-->
+                <div class="LeftList Left">
+                    <table border="0" cellpadding="0" cellspacing="0" dir="rtl" width="100%">
+                        <tr>
+                            <td style="width: 35px">
+                                <div class="RadioWrraper">
+                                    <input id="option1" type="checkbox" name="sectors" />
+                                </div>
+                            </td>
+                            <td id="allSectorCell" style="height: 40px;">
+                                السوق
+                                (جميع القطاعات )
+
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <form>
+                                    <div id="listMenu" class="ListContainer" style="font-size: 12px; font-family: Tahoma;">
+                                        <table border="0" cellpadding="0" cellspacing="0" dir="rtl" width="100%">
+                                            <tr>
+                                                <td style="width: 35px">
+                                                    <div class="RadioWrraper">
+                                                        <input id="tasi" type="checkbox" checked="checked" disabled="disabled" name="sector" />
+                                                    </div>
+                                                </td>
+                                                <td style="width: 250px">المؤشر العام للسوق السعودي</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="RadioWrraper">
+                                                        <input id="0" type="checkbox" name="sector" />
+                                                    </div>
+                                                </td>
+                                                <td>قطاع المصارف و الخدمات المالية</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="RadioWrraper">
+                                                        <input id="1" type="checkbox" name="sector" />
+                                                    </div>
+                                                </td>
+                                                <td>قطاع الصناعات البتروكيماوية </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="RadioWrraper">
+                                                        <input id="2" type="checkbox" name="sector" />
+                                                    </div>
+                                                </td>
+                                                <td>قطاع الاسمنت </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="RadioWrraper">
+                                                        <input id="3" type="checkbox" name="sector" />
+                                                    </div>
+                                                </td>
+                                                <td>قطاع التجزئة </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="RadioWrraper">
+                                                        <input id="4" type="checkbox" name="sector" />
+                                                    </div>
+                                                </td>
+                                                <td>قطاع الطاقة والمرافق الخدمية </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="RadioWrraper">
+                                                        <input id="5" type="checkbox" name="sector" />
+                                                    </div>
+                                                </td>
+                                                <td>قطاع الزراعة والصناعات الغذائية </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="RadioWrraper">
+                                                        <input id="6" type="checkbox" name="sector" />
+                                                    </div>
+                                                </td>
+                                                <td>قطاع الاتصالات وتقنية المعلومات </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="RadioWrraper">
+                                                        <input id="7" type="checkbox" name="sector" />
+                                                    </div>
+                                                </td>
+                                                <td>قطاع التأمين </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="RadioWrraper">
+                                                        <input id="8" type="checkbox" name="sector" />
+                                                    </div>
+                                                </td>
+                                                <td>قطاع شركات الأستثمار المتعدد </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="RadioWrraper">
+                                                        <input id="9" type="checkbox" name="sector" />
+                                                    </div>
+                                                </td>
+                                                <td>قطاع الأستثمار الصناعي </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="RadioWrraper">
+                                                        <input id="10" type="checkbox" name="sector" />
+                                                    </div>
+                                                </td>
+                                                <td>قطاع التشييد والبناء </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="RadioWrraper">
+                                                        <input id="11" type="checkbox" name="sector" />
+                                                    </div>
+                                                </td>
+                                                <td>قطاع التطوير العقاري </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="RadioWrraper">
+                                                        <input id="12" type="checkbox" name="sector" />
+                                                    </div>
+                                                </td>
+                                                <td>قطاع النقل </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="RadioWrraper">
+                                                        <input id="13" type="checkbox" name="sector" />
+                                                    </div>
+                                                </td>
+                                                <td>قطاع الاعلام والنشر </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="RadioWrraper">
+                                                        <input id="14" type="checkbox" name="sector" />
+                                                    </div>
+                                                </td>
+                                                <td>قطاع الفنادق والسياحة </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!--START Right List-->
+                <div class="RightList Right">
+                    <table border="0" cellpadding="0" cellspacing="0" dir="rtl">
+                        <tr>
+                            <td style="height: 40px;">نوع اللعبة</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="ListContainerHidden" style="font-size: 12px; font-family: Tahoma;">
+                                    <table border="0" cellpadding="0" cellspacing="0" dir="rtl">
+                                        <tr>
+                                            <td style="width: 35px">
+                                                <div class="RadioWrraper">
+                                                    <input id="rdTr" type="radio" checked="checked" name="GameType" />
+                                                </div>
+                                            </td>
+                                            <td style="width: 250px" class="FontAr Fsize01 Color3">تدريب</td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td colspan="2">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 35px">
+                                                <div class="RadioWrraper">
+                                                    <input id="rdCom" type="radio" name="GameType" />
+                                                </div>
+                                            </td>
+                                            <td style="width: 250px" class="FontAr Fsize01 Color3">تنافس</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                <!--START BUTTONS-->
+                <div class="Clear">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td colspan="2">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr>
+                                        <td align="center" style="width: 50%;">
+                                            <div id="listDone" class="NormalLinkTwo">إبدا اللعبة</div>
+                                        </td>
+                                        <td align="center">
+                                            <div id="listCancel" class="NormalLinkTwo">إلغاء</div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="txtContainer" class="PlanContainerOne" style="visibility: hidden;">
+            <input id="codeTExt" type="text" class="TxtBx_One" />
+        </div>
+        <div class="BgBottom">
+            <div class="BulletsContainer">
+
+
+
+
+                <ul id="bulletsList" style="visibility: hidden;">
+                    <li id="btnRock1">
+                        <div id="rock1" class="Blockselection">
+                            <img alt="" src="~/Areas/Games/SImages/bullet0ne.png" />
+                            <span id="lblBullet1" class="WidthThreeNum">0</span>
+                        </div>
+                    </li>
+                    <!--<li>
+                        <div id="rock2" class="Block">
+                            <img alt="" src="../../SImages/bulletTwo.png" /><span id="lblBullet2" class="WidthThreeNum">0</span>
+                        </div>
+                    </li>-->
+                    <li id="btnRock2">
+                        <div id="rock3" class="Block">
+                            <img alt="" src="~/Areas/Games/SImages/bulletThree.png" /><span id="lblBullet3" class="WidthThreeNum">0</span>
+                        </div>
+                    </li>
+
+                </ul>
+                <ul>
+                    <li id="btnSound" class="LastItem" style="visibility:hidden;">
+                        <div class="Block">
+                            <img id="soundIcon" alt="" src="~/Areas/Games/SImages/soundon.png" />
+                        </div>
+                    </li>
+                    <li id="btnPause" class="LastItem" style="visibility: hidden;">
+                        <div class="Block">
+                            <img alt="" src="~/Areas/Games/SImages/pause.png" />
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+
+        <!--START PobUp-->
+        <!--START PobUp-->
+        <div class="ContainerInnerLayer" style="visibility: hidden;">
+            <!--START-->
+            <div class="ContainerInnerPobUp">
+
+                <h2>رسالة ادارية</h2>
+
+                <div>
+                    <table border="0" cellpadding="4px" cellspacing="0" width="100%">
+                        <tr>
+                            <td valign="top">
+                                <p>هل انت متاكد انك تريد الخروج من اللعبة ؟</p>
+                            </td>
+                            <td align="left" valign="top">
+                                <img src="~/Areas/Games/SImages/question.png" />
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+
+                <!--START BUTTONS-->
+                <div>
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td align="center"><span class="NormalLinkTwo">نعم</span></td>
+                            <td align="center"><span class="NormalLinkTwo">لا</span></td>
+                            <td align="center"><span class="NormalLinkTwo">إلغاء</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!--END-->
+
+        </div>
+
+
+        <!--START BOTTOM-->
+
+
+    </div>
+    <audio id="soundPlayer" typeof="audio/mpeg"></audio>
+    <audio id="bgSoundPlayer" typeof="audio/mpeg" loop="loop"></audio>
+
+
+</body>
+</html>

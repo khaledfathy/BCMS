@@ -1,0 +1,32 @@
+﻿@using BCMS.Models;
+@model Faq
+<script src="~/Areas/Admin/js/jquery.validate.min.js"></script>
+<script src="~/Areas/Admin/js/jquery.validate.unobtrusive.js"></script>
+<link href="~/Areas/Admin/css/MyStyle.css" rel="stylesheet" />
+<div style=" text-align: center;width:82%">
+
+    <div class="box col-md-8" style="width:121%;text-align: center">
+
+
+        <div class="box-content" style="width:100%;">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">السؤال</label>
+                    <textarea name="AdviceContent" class="form-control" disabled="disabled">@Model.FaqQuestion</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">الاجابة</label>
+                    <textarea name="AdviceContent" class="form-control" disabled="disabled">@Model.FaqAnswer</textarea>
+                </div>
+
+                
+            }
+        </div>
+
+    </div>
+</div>

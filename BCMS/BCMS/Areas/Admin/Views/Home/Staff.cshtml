@@ -1,0 +1,52 @@
+﻿@using BCMS.Models
+
+
+
+<table class="table table-bordered table-hover table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Middle Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>User Status</th>
+            <th>User Role</th>
+
+        </tr>
+    </thead>
+    <tbody style="max-height:800px; overflow-y:auto;">
+        @foreach (Staff item in Model)
+        {
+            <tr>
+                <td>@item.FirstName</td>
+                <td>@item.MiddleName</td>
+                <td>@item.LastName</td>
+                <td>@item.Email</td>
+                <td>@item.UserStatus</td>
+                <td>
+                    @if (item.Roles == null)
+                    {
+                        <div>None</div>
+                    }
+                    else
+                    {
+                        <ul class="list-inline">
+                            @foreach (var role in item.Roles)
+                            {
+                                <li>@role</li>
+                            }
+                        </ul>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    $(function () {
+
+        $("#users").css("display", "block");
+        $("#staff").addClass("active");
+    });
+</script>

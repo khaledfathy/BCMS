@@ -1,0 +1,89 @@
+﻿@section scripts{
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var x = '@Session["max_category"]';
+            $("#exam1-"+x).removeClass("ButtonSelect");
+            $("#exam1-" + x).addClass("ButtonReady");
+            $(".ButtonReady").attr("href", '@Url.Action("Index", "RuningExam")');
+            for (var i = x-1; i >0; i--) {
+                $("#exam1-" + i).removeClass("ButtonSelect");
+                $("#exam1-" + i).addClass("ButtonDone");
+            }
+        });
+    </script>
+}
+
+<div style="padding: 10px;">
+    <table border="0" cellpadding="0" cellspacing="0" style="width:100%;font-weight:bold; direction:rtl" class="ContainerW NormalTxt">
+        <tr class="RowHeader">
+            <td colspan="6" align="center">
+                الاختبارات
+
+            </td>
+
+        </tr>
+        <tr class="Row">
+            <td><p style="width:100px" id="type"> أسئلة عامة</p></td>
+            <td><a id="exam1-1" name="comand" class="ButtonSelect" />الإختبار الأول</td>
+            <td><a id="exam1-2" name="comand" class="ButtonSelect" />الإختبار الثاني</td>
+            <td><a id="exam1-3" name="comand" class="ButtonSelect" />الإختبار الثالث</td>
+            <td><a id="exam1-4" name="comand" class="ButtonSelect" />الإختبار الرابع</td>
+            <td><a id="exam1-5" name="comand" class="ButtonSelect" />الإختبار الخامس</td>
+
+        </tr>
+        <tr class="AltRow">
+            <td><p id="Label2">تحليل اقتصادي</p></td>
+            <td><a id="exam1-6" name="comand" class="ButtonSelect" />الإختبار الأول</td>
+            <td><a id="exam1-7" name="comand" class="ButtonSelect" />الإختبار الثاني</td>
+            <td><a id="exam1-8" name="comand" class="ButtonSelect" />الإختبار الثالث</td>
+            <td><a id="exam1-9" name="comand" class="ButtonSelect" />الإختبار الرابع</td>
+            <td><a id="exam1-10" name="comand" class="ButtonSelect" />الإختبار الخامس</td>
+
+        </tr>
+        <tr class="Row">
+            <td><p id="Label2">تحليل استراتيجي</p></td>
+            <td><a id="exam1-11" name="comand" class="ButtonSelect" />الإختبار الأول</td>
+            <td><a id="exam1-12" name="comand" class="ButtonSelect" />الإختبار الثاني</td>
+            <td><a id="exam1-13" name="comand" class="ButtonSelect" />الإختبار الثالث</td>
+            <td><a id="exam1-14" name="comand" class="ButtonSelect" />الإختبار الرابع</td>
+            <td><a id="exam1-15" name="comand" class="ButtonSelect" />الإختبار الخامس</td>
+
+        </tr>
+        <tr class="AltRow">
+            <td><p id="Label2">تحليل أساسي</p></td>
+            <td><a id="exam1-16" name="comand" class="ButtonSelect" />الإختبار الأول</td>
+            <td><a id="exam1-17" name="comand" class="ButtonSelect" />الإختبار الثاني</td>
+            <td><a id="exam1-18" name="comand" class="ButtonSelect" />الإختبار الثالث</td>
+            <td><a id="exam1-19" name="comand" class="ButtonSelect" />الإختبار الرابع</td>
+            <td><a id="exam1-20" name="comand" class="ButtonSelect" />الإختبار الخامس</td>
+        </tr>
+        <tr class="Row">
+            <td><p id="Label2">تحليل فني</p></td>
+            <td><a id="exam1-21" name="comand" class="ButtonSelect" />الإختبار الأول</td>
+            <td><a id="exam1-22" name="comand" class="ButtonSelect" />الإختبار الثاني</td>
+            <td><a id="exam1-23" name="comand" class="ButtonSelect" />الإختبار الثالث</td>
+            <td><a id="exam1-24" name="comand" class="ButtonSelect" />الإختبار الرابع</td>
+            <td><a id="exam1-25" name="comand" class="ButtonSelect" />الإختبار الخامس</td>
+
+        </tr>
+        <tr class="AltRow">
+            <td><p id="Label2">تحليل نفسي</p></td>
+            <td><a id="exam1-26" name="comand" class="ButtonSelect" />الإختبار الأول</td>
+            <td><a id="exam1-27" name="comand" class="ButtonSelect" />الإختبار الثاني</td>
+            <td><a id="exam1-28" name="comand" class="ButtonSelect" />الإختبار الثالث</td>
+            <td><a id="exam1-29" name="comand" class="ButtonSelect" />الإختبار الرابع</td>
+            <td><a id="exam1-30" name="comand" class="ButtonSelect" />الإختبار الخامس</td>
+
+        </tr>
+        <tr class="Row">
+            <td><p id="Label2">امتحان الحكمة</p></td>
+            <td><a id="exam1-31" name="comand" class="ButtonSelect" />الإختبار الأول</td>
+            <td><a id="exam1-32" name="comand" class="ButtonSelect" />الإختبار الثاني</td>
+            <td><a id="exam1-33" name="comand" class="ButtonSelect" />الإختبار الثالث</td>
+            <td><a id="exam1-34" name="comand" class="ButtonSelect" />الإختبار الرابع</td>
+            <td><a id="exam1-35" name="comand" class="ButtonSelect" />الإختبار الخامس</td>
+
+        </tr>
+    </table>
+</div>

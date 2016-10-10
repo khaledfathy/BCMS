@@ -1,0 +1,56 @@
+﻿@using BCMS.Models;
+@model Game
+
+<div style=" text-align: center;width:82%">
+    <div class="box col-md-8" style="width:121%;text-align: center">
+
+        <div class="box-content" style="width:100%;">
+
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">كود اللعبة</label>
+                <input type="text" disabled="disabled" value="@Model.GameID" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">إسم اللعبة</label>
+                <input type="text" disabled="disabled" value="@Model.GameName" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">إسم المؤلف</label>
+                <input type="text" disabled="disabled" value="@Model.GameAuther" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">إسم المصمم</label>
+                <input type="text" disabled="disabled" value="@Model.DesignedBy" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">إسم المُطور</label>
+                <input type="text" disabled="disabled" value="@Model.DevelopedBy" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">الحالة</label>
+                <input type="text" disabled="disabled" value="@Model.Status.StatusName" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">تاريخ الاصدار</label>
+                <input type="text" disabled="disabled" value="@Model.GameCreatedDate.Value.ToShortDateString()" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">تاريخ النشر</label>
+                <input type="text" disabled="disabled" value="@Model.GamePuplishDate.Value.ToShortDateString()" name="CompanyID" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">الوصف</label>
+                <textarea class="form-control" name="CompanyActivity" disabled="disabled">@Model.GameDescription</textarea>
+            </div>
+        </div>
+    </div>
+</div>

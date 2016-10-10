@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Intro";
+    Layout = null;
+}
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Intro</title>
+    <style type="text/css">
+        body {
+            background-color: #000000;
+        }
+
+        .btn {
+            background: #50c416;
+            background-image: -webkit-linear-gradient(top, #50c416, #0a7317);
+            background-image: -moz-linear-gradient(top, #50c416, #0a7317);
+            background-image: -ms-linear-gradient(top, #50c416, #0a7317);
+            background-image: -o-linear-gradient(top, #50c416, #0a7317);
+            background-image: linear-gradient(to bottom, #50c416, #0a7317);
+            -webkit-border-radius: 10;
+            -moz-border-radius: 10;
+            border-radius: 10px;
+            font-family: Arial;
+            color: #ffffff;
+            font-size: 20px;
+            padding: 10px 20px 10px 20px;
+            text-decoration: none;
+        }
+
+            .btn:hover {
+                background: #ff0000;
+                background-image: -webkit-linear-gradient(top, #ff0000, #9e0000);
+                background-image: -moz-linear-gradient(top, #ff0000, #9e0000);
+                background-image: -ms-linear-gradient(top, #ff0000, #9e0000);
+                background-image: -o-linear-gradient(top, #ff0000, #9e0000);
+                background-image: linear-gradient(to bottom, #ff0000, #9e0000);
+                text-decoration: none;
+            }
+    </style>
+
+    <script src="~/Materials/Ar/flash/Scripts/swfobject_modified.js"></script>   
+</head>
+
+<body>
+    <div align="center">
+        <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="900" height="550">
+            <param name="movie" value="~/Materials/Ar/flash/intro.swf">
+
+            <param name="quality" value="high">
+            <param name="wmode" value="opaque">
+            <param name="swfversion" value="11.2.0.0">
+            <!-- This param tag prompts users with Flash Player 6.0 r65 and higher to download the latest version of Flash Player. Delete it if you don’t want users to see the prompt. -->
+            <param name="expressinstall" value="~/Materials/Ar/flash/Scripts/expressInstall.swf">
+            <!-- Next object tag is for non-IE browsers. So hide it from IE using IECC. -->
+            <!--[if !IE]>-->
+            <object type="application/x-shockwave-flash" data="~/Materials/Ar/flash/intro.swf" width="900" height="550">
+                <!--<![endif]-->
+                <param name="quality" value="high">
+                <param name="wmode" value="opaque">
+                <param name="swfversion" value="11.2.0.0">
+                <param name="expressinstall" value="~/Materials/Ar/flash/Scripts/expressInstall.swf">
+
+                <!-- The browser displays the following alternative content for users with Flash Player 6.0 and older. -->
+                <div>
+                    <h4>Content on this page requires a newer version of Adobe Flash Player.</h4>
+                    <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" width="112" height="33" /></a></p>
+                </div>
+                <!--[if !IE]>-->
+            </object>
+            <!--<![endif]-->
+        </object>
+    </div>
+    <div align="center" style="margin-top:5px; margin-bottom:10px">
+        <a class="btn" href="@Url.Action("Index","Home")">دخول الموقع</a>
+    
+    </div>
+    <script type="text/javascript">
+        swfobject.registerObject("FlashID");
+    </script>
+</body>
+</html>
+
+

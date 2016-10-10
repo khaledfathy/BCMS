@@ -1,0 +1,25 @@
+﻿<div style=" text-align: center;width:82%">
+
+    <div class="box col-md-8" style="width:121%;text-align: center">
+        <div class="box-content" style="width:100%;">
+
+            @using (Html.BeginForm("EditSpecification", "Jobs", FormMethod.Post))
+            {
+                @Html.ValidationSummary(true)
+
+                <input type="hidden" id="JobID" name="JSID" value="@ViewBag.JSID" />
+                <input type="hidden" id="JobID" name="JobID" value="@ViewBag.JobID" />
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">الصفه</label>
+                    <textarea id="specification" name="specification" class="form-control">@ViewBag.Specification</textarea>
+                </div>
+
+                <div style="margin:5px 20px 5px 5px;text-align:right">
+                    <input type="submit" class="btn btn-primary12 btn-sm" style="width:80px" value="حفظ" />
+                    <input type="button" value="إلغاء" class="btn btn-primary12 btn-sm" id="btnSpecificationCancel" />
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "TestToolTip";
+    Layout = null;
+}
+
+<h2>TestToolTip</h2>
+
+<link href="~/Areas/UTMS/MyStyle.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script src="~/Temp/jquery.rwdImageMaps.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+    var mainImage = $("#mainImg");
+    var tip = $("#tooltip");
+    var myContent = $("#content");
+    var pos = myContent.offset();
+    var maxLeft = mainImage.width() + mainImage.offset().left + pos.left;
+    var maxTop = mainImage.height();
+
+ 
+    $("area").each(function (i) {
+        var item = $(this)
+        item.bind("mouseover", function () {
+            tip.css("visibility", "visible");
+
+            if (item.attr("alt") + "" != "undefined") {
+                tip.text(item.attr("alt"));
+            }
+            else if (item.attr("href") + "" != "undefined") {
+                tip.text(item.attr("href"));
+            }
+            else {
+                tip.text("Sorry!! No Description Or URL.");
+            }
+
+        });
+        item.bind("mouseout", function () {
+            tip.css("visibility", "hidden");
+
+        });
+
+        item.bind("mousemove", function (event) {
+            if ((event.pageX - pos.left + 10 + tip.width()) < maxLeft) {
+                tip.css("left", event.pageX - pos.left + 10);
+
+            }
+            else {
+                tip.css("left", event.pageX - pos.left - 10 - tip.width());
+            }
+
+            if ((event.pageY - pos.top + 10 + tip.height()) < maxTop) {
+                tip.css("top", event.pageY - pos.top + 10);
+            }
+            else {
+                tip.css("top", event.pageY - pos.top - 10 - tip.height());
+            }
+        })
+
+    });
+
+     $('img[usemap]').rwdImageMaps();
+
+ });
+
+    
+
+</script>
+
+
+<section id="content"> 
+    <div style="margin: 0px; width: 100%; height: 100%; vertical-align: middle; text-align: center; padding:0px">
+        <div id="tooltip"></div>
+        <img id="mainImg" src="~/Areas/UTMS/Images/Chart/1.jpg" width="300" height="400" alt="Planets" usemap="#planetmap">
+
+        <map name="planetmap">
+            <area shape="rect" coords="0,0,82,126" href="sun.htm" alt="Sun" target="_blank">
+            <area shape="circle" coords="90,58,90" href="mercur.htm" alt="Mercury" target="_blank">
+            <area shape="circle" coords="124,58,8" href="venus.htm" alt="Venus" target="_blank">
+            @* <area shape="rect" coords="0,0,82,126" href="http://www.coffeecup.com" alt="Sun" title="CoffeeCup Software" onmouseover="window.status='CoffeeCup Software'; return true" onmouseout="window.status=''; return true" target="_blank">*@
+
+        </map>
+        </div>
+</section>

@@ -1,0 +1,47 @@
+﻿@using BCMS.Models;
+@model MiseryIndex
+<script src="~/Areas/Admin/js/jquery.validate.min.js"></script>
+<script src="~/Areas/Admin/js/jquery.validate.unobtrusive.js"></script>
+<link href="~/Areas/Admin/css/MyStyle.css" rel="stylesheet" />
+
+<div style=" text-align: center;width:82%">
+    <div class="box col-md-8" style="width:121%;text-align: center">
+
+        <div class="box-content" style="width:100%;">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+
+                    <label for="exampleInputEmail1">السوق</label>
+                    @Html.DropDownListFor(model => model.MarketID, (IEnumerable<SelectListItem>)ViewBag.AllMarket, "-- إختار سوق   --", new { @class = "StyleForDropDownList" })
+                    @Html.ValidationMessageFor(model => model.MarketID)
+                </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1"> السنة</label>
+        @Html.DropDownListFor(model => model.YearId, (IEnumerable<SelectListItem>)ViewBag.AllYears, "-- إختار سنة   --", new { @class = "StyleForDropDownList" })
+        @Html.ValidationMessageFor(model => model.YearId)
+    </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">معدل التضخم حسب أقسام الأنفاق الرئيسية</label>
+                    @Html.TextBoxFor(model => model.RateOfInflation, new { @class = "StyleForDropDownList" })
+                    @Html.ValidationMessageFor(model => model.RateOfInflation)
+                </div>
+                    <div class="form-group">
+                    <label for="exampleInputEmail1">معدل البطالة</label>
+                    @Html.TextBoxFor(model => model.UnemploymentRate, new { @class = "StyleForDropDownList" })
+                    @Html.ValidationMessageFor(model => model.UnemploymentRate)
+                </div>
+
+
+
+                <div style="margin:5px 20px 5px 5px;text-align:right">
+                    <button class="btn btn-primary12 btn-sm" style="width:80px">حفظ</button>
+                    <input type="button" value="إلغاء" class="btn btn-primary12 btn-sm" id="btncancel" />
+                </div>
+            }
+        </div>
+
+    </div>
+</div>   

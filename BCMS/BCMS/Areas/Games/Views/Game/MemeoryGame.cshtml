@@ -1,0 +1,1051 @@
+﻿@{
+    ViewBag.Title = "لعبة الذاكرة";
+    Layout = null;
+}
+
+    <link href="~/Areas/Games/Content/boilerplate.css" rel="stylesheet" />
+    <link href="~/Areas/Games/Content/Style-3.css" rel="stylesheet" />
+    <link href="~/Areas/Games/Materials/Private/Style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/Games/Materials/css/style.css" rel="stylesheet" />
+
+     <script src="~/Areas/Games/js/respond.min.js"></script>
+    <script src="~/Areas/Games/Materials/js/audio-fx.js"></script>
+    <script type="text/javascript" src="~/Areas/Games/Materials/js/audio-fx.min.js"></script>
+    <script src="~/Areas/Games/Materials/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Areas/Games/Materials/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Areas/Games/Materials/js/CTile.js"></script>
+    <script type="text/javascript" src="~/Areas/Games/Materials/js/jquery.flip.js"></script>
+    <script src="~/Areas/Games/Materials/js/CCode.js"></script>
+    <script src="~/Areas/Games/js/jquery.easing.1.3.js"></script>
+    <script src="~/Areas/Games/js/jquery.eislideshow.js"></script>
+
+
+<div class="gridContainer clearfix" style="margin-top:20px;">
+
+    <div id="wrapper">
+        <header>
+            <div id="mainHeaderDiv" class="gameName" align="center">
+                <img src="~/Areas/Games/Materials/images/Title.png" width="60%" alt="">
+            </div>
+        </header>
+
+        <div id="wrapperContainer">
+            <header>
+                <div id="secondHeaderDiv" class="AllNameGames" style="display:none;">
+                    <div class="clock">
+                        <div class="TopBlock2" id="divMyImageClock">
+                            <div class="MyImage Left">
+                                <img alt="" src="~/Areas/Games/Materials/images/Clock.png" />
+                            </div>
+                            <div class="MyNum Left" id="tim">00:00</div>
+                        </div>
+                    </div>
+                    <div class="logoNew">
+                        <div id="secondHeaderDiv">
+                            <img src="~/Areas/Games/Materials/images/Title.png" width="90%" alt="">
+                        </div>
+                    </div>
+                    <div class="clicks" align="right">
+                        <div align="right" class="TopBlock" id="divMyImageClicks">
+                            <div class="MyImage Left">
+                                <img alt="" src="~/Areas/Games/Materials/images/Clicks.png" />
+                            </div>
+                            <div class="MyNum Left" id="nClicks">0</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </header>
+            <div class="clear"></div>
+
+
+            <div id="content" style="visibility:hidden">
+
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td align="left" style="width: 65px;">
+                            <div class="LMenu" id="divLMenu">
+                                <nav>
+                                    <ul>
+                                        <li class="navA tooltip" id="startGameButton"><span>تشغيل</span></li>
+                                        <li class="navB tooltip" id="btt" onclick="runAlertMessage(1);"><span>الرئيسية</span></li>
+
+                                        <li class="navC tooltip" id="stt" onclick="runAlertMessage(2);"><span>الإعدادات</span></li>
+
+                                        <li class="navD tooltip" onclick="displayHelpFromGameScreen();"><span>المساعدة</span></li>
+                                        <li id="sound" class="navEOn" onclick="displySound();"><div style="display: block;width: 50px;height: 50px;" class="tooltip"><span>الصوت</span></div></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </td>
+                        <td align="center" class="TileContainer">
+                            <section id="board" style="visibility:hidden"></section>
+                        </td>
+                        <td align="right" style="width: 65px;">
+                            <div class="RLoading" id="divRLoading">
+                                <div class="ScoreLoadingContainer">
+                                    <div class="ScoreLoading"><span></span></div>
+                                </div>
+                                <div class="TimeContainer_NUM" id="sqr"></div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3">
+                            <div class="Allhelp">
+                                <div class="arrow"></div>
+                                <div class="help">
+                                    <ul>
+                                        <li> يبدأ عداد اللعبة من 10 %.</li>
+                                        <li>الإجابات الصحيحة ترفع النسبة والإجابات الخاطئة تخفض النسبة .</li>
+                                        <li> تنتهي اللعبة في حال إنخفاض النسبة دون الصفر  .</li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <div class="PobUp" id="divStart">
+                <div class="MainMenu">
+                    <nav>
+                        <ul class="MainMenu">
+                            @*<li id="liNew" onclick="displayContent();"> جديد</li>*@
+
+                            <li id="liNew" onclick="displaySetting();">لعبة جديدة</li>
+                            <li id="liHelp" onclick="displayHelp();">المساعدة</li>
+                            <li class="LastItem" id="liLevels"><a href="@Url.Action("Index", "Game")">خروج</a></li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="PobUp" id="divSetting" style="visibility:hidden">
+                <div class="MainMenuL">
+                    <nav>
+                        <ul class="MainMenuS">
+                            @*
+                                <li>
+                                    <table border="0" cellpadding="4" cellspacing="0" width="100%" class="Arabic">
+                                        <tr>
+                                            <td style="width: 5%"></td>
+                                            <td style="width: 60%"><span id="span1" class="Selected" onclick="changeClass('span1');">قطاعات مع قطاعات</span></td>
+                                            <td><img alt="" src="~/Materials/images/0901N.png" width="50px" /></td>
+                                            <td><img alt="" src="~/Materials/images/0901N.png" width="50px" /></td>
+                                        </tr>
+                                    </table>
+                                </li>*@
+                            <li>
+                                <table border="0" cellpadding="4" cellspacing="0" width="100%" class="Arabic">
+                                    <tr>
+                                        <td style="width: 5%">
+
+
+                                            @*<input type="radio" name="radiog_sett" id="stRdo2" class="CheckBox" />*@
+
+
+                                        </td>
+                                        <td style="width: 60%"><span id="span2" class="Selected" onclick="changeClass('span2');">قطاعات مع رموز</span></td>
+                                        <td>
+                                            <img alt="" src="~/Areas/Games/Materials/images/0901N.png" width="50px" />
+                                        </td>
+                                        <td>
+                                            <img alt="" src="~/Areas/Games/Materials/images/0901C.png" width="50px" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </li>
+                            <li>
+                                <table border="0" cellpadding="4" cellspacing="0" width="100%" class="Arabic">
+                                    <tr>
+                                        <td style="width: 5%"></td>
+                                        <td style="width: 60%"><span id="span3" class="NormalLink" onclick="changeClass('span3');">قطاعات مع شركات</span></td>
+                                        <td><img alt="" src="~/Areas/Games/Materials/images/0901N.png" width="50px" /></td>
+                                        <td><img alt="" src="~/Areas/Games/Materials/images/0902C.png" width="50px" /></td>
+                                    </tr>
+                                </table>
+                            </li>
+                            <li class="LastItem">
+                                <table border="0" cellpadding="4" cellspacing="0" width="100%" class="Arabic">
+                                    <tr>
+                                        <td style="width: 5%">
+                                            @*<input type="radio" name="radiog_sett" id="stRdo4" class="CheckBox" />*@
+                                        </td>
+                                        <td style="width: 60%"><span id="span4" class="NormalLink" onclick="changeClass('span4');">شركات مع رموز</span></td>
+                                        <td>
+                                            <img alt="" src="~/Areas/Games/Materials/images/0304N.png" width="50px" />
+                                        </td>
+                                        <td>
+                                            <img alt="" src="~/Areas/Games/Materials/images/0304C.png" width="50px" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </li>
+                            <li class="LastItem">
+                                <div class="Clear"></div>
+
+                                <div class="ColumnsWrapper">
+                                    <table border="0" cellpadding="4" cellspacing="0" width="100%" style="direction: rtl; text-align: right">
+                                        <tr>
+                                            <td>
+                                                <div class="CheckBox1">
+                                                    <input type="radio" name="radiog_lite" id="radio10" class="CheckBox" onclick="changeRadioCssClass('1');" checked /><span id="span10" class="checked">خمسة أعمدة</span>
+                                                </div>
+                                            </td>
+                                            <td rowspan="5" style="vertical-align: top; text-align: left;">
+                                                <div class="BlockNum Left"><div id="divBlockNum" class="BlockNum-12"></div></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="CheckBox1">
+                                                    <input type="radio" name="radiog_lite" id="radio11" class="CheckBox" onclick="changeRadioCssClass('2');" /><span id="span11">ستة أعمدة</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="CheckBox1">
+                                                    <input type="radio" name="radiog_lite" id="radio12" class="CheckBox" onclick="changeRadioCssClass('3');" /><span id="span12">تسعة أعمدة</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="CheckBox1">
+                                                    <input type="radio" name="radiog_lite" id="radio13" class="CheckBox" onclick="changeRadioCssClass('4');" /><span id="span13">عشرة أعمدة</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="CheckBox1">
+                                                    <input type="radio" name="radiog_lite" id="radio14" class="CheckBox" onclick="changeRadioCssClass('5');" /><span id="span14">اثني عشر عمود</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="BGSHADOW"></div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="Clear"></div>
+                <div class="ControlsContainer">
+                    <div class="Close" onclick="Back();">إلغاء</div>
+                    <div class="Done2" onclick="displayChoice();">موافق</div>
+                </div>
+                @*<div class="Back" onclick=" Back();"> رجوع</div>*@
+            </div>
+
+            <div class="PobUp" id="divSectorList" style="visibility:hidden">
+                <div class="MainMenuL">
+                    <nav>
+                        <ul class="MainMenuL">
+                            <li>
+
+                                <table border="0" cellpadding="2" cellspacing="0" width="100%" class="Arabic">
+                                    <tr>
+                                        <td style="width: 5%">
+                                            <div class="RadioWrraper">
+                                                <input type="checkbox" name="radiogSect" id="radio6" onclick='disabelCheckBox();' />
+                                            </div>
+                                        </td>
+                                        <td>جميع القطاعات </td>
+
+                                        @*<%--
+                                            <td style="width: 5%">
+                                                <div class="RadioWrraper">
+                                                    <input type="radio" name="radiogSect" id="radio7" onclick='enableCheckBox();' />
+                                                </div>
+                                            </td>
+                                            <td>اختار قطاع </td>--%>*@
+
+                                    </tr>
+                                </table>
+                            </li>
+                            <li class="LastItem">
+                                <table id="listMenu" border="0" cellpadding="0" cellspacing="0" width="100%" class="Arabic ArabicTa Size12">
+                                    <tr>
+                                        <td style="width: 5%">
+                                            <div class="RadioWrraper">
+                                                <input id="Checkbox1" type="checkbox" onclick="displayCheckBox('Checkbox1');" />
+                                            </div>
+                                        </td>
+                                        <td>المؤشر العام للسوق السعودي</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="RadioWrraper">
+                                                <input id="Checkbox2" type="checkbox" onclick="displayCheckBox('Checkbox2');" />
+                                            </div>
+                                        </td>
+                                        <td>قطاع المصارف والخدمات المالية</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="RadioWrraper">
+                                                <input id="Checkbox3" type="checkbox" onclick="displayCheckBox('Checkbox3');" />
+                                            </div>
+                                        </td>
+                                        <td>قطاع الصناعات البتروكيماوية</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="RadioWrraper">
+                                                <input id="Checkbox4" type="checkbox" onclick="displayCheckBox('Checkbox4');" />
+                                            </div>
+                                        </td>
+                                        <td>قطاع الاسمنت</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="RadioWrraper">
+                                                <input id="Checkbox5" type="checkbox" onclick="displayCheckBox('Checkbox5');" />
+                                            </div>
+                                        </td>
+                                        <td>قطاع التجزئة</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="RadioWrraper">
+                                                <input id="Checkbox6" type="checkbox" onclick="displayCheckBox('Checkbox6');" />
+                                            </div>
+                                        </td>
+                                        <td>قطاع الطاقة والمرافق الخدمية</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="RadioWrraper">
+                                                <input id="Checkbox7" type="checkbox" onclick="displayCheckBox('Checkbox7');" />
+                                            </div>
+                                        </td>
+                                        <td>قطاع الزراعة والصناعات الغذائية</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="RadioWrraper">
+                                                <input id="Checkbox8" type="checkbox" onclick="displayCheckBox('Checkbox8');" />
+                                            </div>
+                                        </td>
+                                        <td>قطاع الاتصالات وتقنية المعلومات</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="RadioWrraper">
+                                                <input id="Checkbox9" type="checkbox" onclick="displayCheckBox('Checkbox9');" />
+                                            </div>
+                                        </td>
+                                        <td>قطاع التأمين</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="RadioWrraper">
+                                                <input id="Checkbox10" type="checkbox" onclick="displayCheckBox('Checkbox10');" />
+                                            </div>
+                                        </td>
+                                        <td>قطاع شركات الأستثمار المتعدد</td>
+                                    </tr>
+                                    <tr>
+
+                                        <td>
+                                            <div class="RadioWrraper">
+                                                <input id="Checkbox11" type="checkbox" onclick="displayCheckBox('Checkbox11');" />
+                                            </div>
+                                        </td>
+                                        <td>قطاع الأستثمار الصناعي</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="RadioWrraper">
+                                                <input id="Checkbox12" type="checkbox" onclick="displayCheckBox('Checkbox12');" />
+                                            </div>
+                                        </td>
+                                        <td>قطاع التشييد والبناء</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="RadioWrraper">
+                                                <input id="Checkbox13" type="checkbox" onclick="displayCheckBox('Checkbox13');" />
+                                            </div>
+                                        </td>
+                                        <td>قطاع التطوير العقاري</td>
+                                    </tr>
+                                    <tr>
+
+                                        <td>
+                                            <div class="RadioWrraper">
+                                                <input id="Checkbox14" type="checkbox" onclick="displayCheckBox('Checkbox14');" />
+                                            </div>
+                                        </td>
+                                        <td>قطاع النقل</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="RadioWrraper">
+                                                <input id="Checkbox15" type="checkbox" onclick="displayCheckBox('Checkbox15');" />
+                                            </div>
+                                        </td>
+                                        <td>قطاع الاعلام والنشر</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="RadioWrraper">
+                                                <input id="Checkbox16" type="checkbox" onclick="displayCheckBox('Checkbox16');" />
+                                            </div>
+                                        </td>
+                                        <td>قطاع الفنادق والسياحة</td>
+
+
+                                    </tr>
+
+                                </table>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="Clear"></div>
+                <div class="ControlsContainer">
+                    <div class="Close" onclick="clearSelection();">مسح الكل</div>
+                    <div class="Done2" id="btndone" onclick="displayDone();">تم</div>
+                    <div class="Back2" onclick="BackToChoiceList();">الرجوع</div>
+                    <div class="Clear"></div>
+                </div>
+
+
+            </div>
+
+            <div class="PobUp" id="divHelp" style="visibility:hidden">
+                <div class="">
+                    <nav>
+                        <ul class="MainMenuL">
+                            <li class="LastItem">
+                                <div class="HelpRapper" dir="rtl">
+                                    <div style="padding: 10px; width: 95%;">
+
+                                        <div class="HelpListOne">
+                                            <ul>
+                                                <li><h3>الهدف من اللعبة</h3></li>
+                                                <li>
+
+                                                    <img src="~/Areas/Games/Materials/Images/Help/training.png" />
+                                                </li>
+                                                <li>تدريب اللاعب على حفظ أسماء ورموز المؤشر العام، الشركات والقطاعات.</li>
+                                                <li><h3>طريقة اللعب</h3></li>
+                                                <li><img src="~/Areas/Games/Materials/Images/Help/1.jpg" /></li>
+                                                <li>أضغط على "لعبة جديدة" لكي تدخل على شاشة الإعدادات.</li>
+                                                <li>
+                                                    <img src="~/Areas/Games/Materials/Images/Help/2.jpg" />
+                                                    <img src="~/Areas/Games/Materials/Images/Help/3.jpg" />
+                                                </li>
+                                                <li>أختر نوع اللعبة (قطاعات مع رموز، شركات مع رموز أو شركات مع قطاعات).</li>
+                                                <li><h3>أختر طريقة العرض </h3></li>
+                                                <li>
+                                                    <img src="~/Areas/Games/Materials/Images/Help/4.jpg" />
+                                                    <img src="~/Areas/Games/Materials/Images/Help/5.jpg" />
+                                                </li>
+                                                <li>أنقر "موافق" للاختيار من بين القطاعات ثم أنقر "تم" للاستمرار أو "الرجوع" للرجوع إلى القائمة السابقة</li>
+                                                <li>أو "مسح الكل" لإلغاء الخيارات</li>
+                                                <li>
+                                                    <img src="~/Areas/Games/Materials/Images/Help/6.jpg" />
+                                                    <img src="~/Areas/Games/Materials/Images/Help/7.jpg" />
+                                                </li>
+                                                <li>أنقر تم لتحميل اللعبة</li>
+                                                <li>
+                                                    <img src="~/Areas/Games/Materials/Images/Help/8.jpg" />
+                                                </li>
+                                                <li>أضغط على السهم "العب" للبدء باللعب</li>
+                                                <li>عند الانتهاء من اللعب سوف يتم حساب النتيجة </li>
+                                            </ul>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="ControlsContainer">
+                    <div class="Close" id="divCloseHelp" onclick="displayCloseHelp();">اغلاق</div>
+                    <div class="Done2" onclick="Back();" id="divdoneHelp">تم</div>
+                    <div class="Back2" onclick="Back();" id="divBackHelp">الرجوع</div>
+                </div>
+            </div>
+
+            <div class="PobUpExit" id="divAlert" style="visibility:hidden">
+                <div class="ExitPobUp">
+                    <h1>هل انت متاكد انك تريد الخروج ؟</h1>
+                </div>
+                <div class="PobUpExitClose Left" id="divCloseAlert" onclick="displayAlertSetting('divCloseAlert');">لا</div>
+                <div class="PobUpExitDone Left" id="divOkAlert" onclick="displayAlertSetting('divOkAlert');">نعم</div>
+            </div>
+
+
+
+
+
+            <div class="PobUpExit" id="divAlert2" style="visibility:hidden">
+                <div class="ExitPobUp">
+                    <h1>إنتهت اللعبة وبإمكانك ان تبدأ من جديد </h1>
+                </div>
+                <div class="PobUpExitDone right" id="divBackAlert" onclick="displayAlertSetting('divBackAlert');"> اضغط هنا</div>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+    <audio id="audioEngine"></audio>
+    <script type="text/javascript">
+        var msgItem;
+        function showGameOverHelp() {
+            msgItem = 3;
+            document.getElementById('divAlert2').style.visibility = 'visible';
+        }
+
+        function hiddDiv() {
+
+            ClearTiles();
+            clearSelection();
+            document.getElementById('divLMenu').style.visibility = 'hidden';
+            document.getElementById('divRLoading').style.visibility = 'hidden';
+
+            //document.getElementById('divMyImageClock').style.visibility = 'hidden';
+            //document.getElementById('divMyImageClicks').style.visibility = 'hidden';
+
+            //document.getElementById('mainHeaderDiv').style.visibility = 'visible';//////////
+            document.getElementById('mainHeaderDiv').style.display = "";//////////
+            //document.getElementById('secondHeaderDiv').style.visibility = 'hidden';//////////
+            document.getElementById('secondHeaderDiv').style.display = "none";
+
+
+            document.getElementById('divSectorList').style.visibility = 'hidden';
+            document.getElementById('divSetting').style.visibility = 'hidden';
+            document.getElementById('divHelp').style.visibility = 'hidden';
+            document.getElementById('content').style.visibility = 'hidden';
+            document.getElementById('divAlert').style.visibility = 'hidden';
+            document.getElementById('divAlert2').style.visibility = 'hidden';
+            // hidden 2 button in help form
+
+
+            //document.getElementById('divCloseHelp').style.visibility = 'hidden';
+            //document.getElementById('divBackHelp').style.visibility = 'hidden';
+
+
+        }
+        window.addEventListener("DOMContentLoaded", hiddDiv, false);
+
+        function HiddDivs() {
+
+            document.getElementById('content').style.visibility = 'hidden';
+            document.getElementById('divLMenu').style.visibility = 'hidden';
+            document.getElementById('divRLoading').style.visibility = 'hidden';
+            //document.getElementById('divMyImageClock').style.visibility = 'hidden';
+            //document.getElementById('divMyImageClicks').style.visibility = 'hidden';
+            //document.getElementById('mainHeaderDiv').style.visibility = 'visible';//////////
+            document.getElementById('mainHeaderDiv').style.display = "";//////////
+
+
+            //document.getElementById('secondHeaderDiv').style.visibility = 'hidden';//////////
+            document.getElementById('secondHeaderDiv').style.display = "none";
+            ClearTiles();
+        };
+
+        function displaySetting() {
+            ClearTiles();
+            HiddDivs();
+            document.getElementById('divSetting').style.visibility = 'visible';
+            document.getElementById('divStart').style.visibility = 'hidden';
+
+        };
+        function displayAlertSetting(msg) {
+
+            if (msg == 'divOkAlert' && msgItem == 2) {
+                document.getElementById('divSetting').style.visibility = 'visible';
+                document.getElementById('divStart').style.visibility = 'hidden';
+                HiddDivs();
+                document.getElementById('divAlert').style.visibility = 'hidden';
+                ClearTiles();
+                clearSelection();
+
+            }
+            else if (msg == 'divOkAlert' && msgItem == 1) {
+
+                document.getElementById('divSetting').style.visibility = 'hidden';
+                document.getElementById('divStart').style.visibility = 'visible';
+                HiddDivs();
+                document.getElementById('divAlert').style.visibility = 'hidden';
+                ClearTiles();
+                clearSelection();
+
+
+            }
+            else if (msg == 'divBackAlert' && msgItem == 3) {
+                ClearTiles();
+                clearSelection();
+
+                document.getElementById('divSetting').style.visibility = 'hidden';
+                document.getElementById('divStart').style.visibility = 'visible';
+                HiddDivs();
+
+                document.getElementById('divAlert2').style.visibility = 'hidden';
+                console.log('msgItem Value' + msgItem);
+            }
+            else {
+
+                document.getElementById('divAlert').style.visibility = 'hidden';
+                filpEnd = false;
+            }
+
+        };
+        function displayContent() {
+            //newGameDirectly();
+
+
+            document.getElementById('content').style.visibility = 'visible';
+            document.getElementById('divStart').style.visibility = 'hidden';
+            document.getElementById('divLMenu').style.visibility = 'visible';
+            document.getElementById('divRLoading').style.visibility = 'visible';
+
+            document.getElementById('divMyImageClock').style.visibility = 'visible';
+            document.getElementById('divMyImageClicks').style.visibility = 'visible';
+
+            //document.getElementById('secondHeaderDiv').style.visibility = 'visible';//////////
+            document.getElementById('secondHeaderDiv').style.display = "inline";//////////
+
+            //document.getElementById('mainHeaderDiv').style.visibility = 'hidden';//////////
+            document.getElementById('mainHeaderDiv').style.display = "none";//////////
+
+            //document.getElementById('radio1').checked = true;
+        };
+        function Back() {
+            // hiddDiv();
+            document.getElementById('divdoneHelp').style.visibility = 'hidden';
+            document.getElementById('divSetting').style.visibility = 'hidden';
+            document.getElementById('content').style.visibility = 'hidden';
+            document.getElementById('divStart').style.visibility = 'visible';
+            document.getElementById('divHelp').style.visibility = 'hidden';
+            document.getElementById('radio1').checked = true;
+
+        };
+
+
+
+        function displayHelp() {
+
+            //
+            ClearTiles();
+
+            document.getElementById('divSetting').style.visibility = 'hidden';
+            document.getElementById('divHelp').style.visibility = 'visible';
+            document.getElementById('divStart').style.visibility = 'hidden';
+            document.getElementById('divdoneHelp').style.visibility = 'visible';
+            document.getElementById('divCloseHelp').style.visibility = 'hidden';
+
+            document.getElementById('divBackHelp').style.visibility = 'hidden';
+        };
+
+        function displayHelpFromGameScreen() {
+            document.getElementById('divCloseHelp').style.visibility = 'visible';
+            document.getElementById('divdoneHelp').style.visibility = 'hidden';////////////////
+            document.getElementById('divHelp').style.visibility = 'visible';
+            document.getElementById('divStart').style.visibility = 'hidden';
+            document.getElementById('divBackHelp').style.visibility = 'hidden';
+        };
+        function displayCloseHelp() {
+            document.getElementById('divHelp').style.visibility = 'hidden';
+            document.getElementById('divCloseHelp').style.visibility = 'hidden';
+
+        };
+        function displayChoice() {
+
+
+            document.getElementById('divSectorList').style.visibility = 'visible';
+            document.getElementById('divSetting').style.visibility = 'hidden';
+
+        };
+        function displayDone() {
+            displayContent();
+            document.getElementById('divSectorList').style.visibility = 'hidden';
+            changeWrapperContainer();
+            Play();
+            $('#startGameButton').bind('click', function () { continuePick(); });
+        };
+        function BackToChoiceList() {
+            document.getElementById('divSectorList').style.visibility = 'visible';
+            document.getElementById('divSetting').style.visibility = 'visible';
+            document.getElementById('divSectorList').style.visibility = 'hidden';
+            clearSelection();
+
+
+        };
+        function displayHome() {
+
+            hiddDiv();
+            document.getElementById('divStart').style.visibility = 'visible';
+            clearSelection();
+            ClearTiles();
+
+        };
+        function clearSelection() {
+            _checked = false;
+            $('input:checkbox').removeAttr('checked');
+        };
+        function changeWrapperContainer() {
+            if (radio10.checked == true) {
+                $('#wrapperContainer').css({ width: 525 + 'px' });
+            }
+            else if (radio11.checked == true) {
+                $('#wrapperContainer').css({ width: 599 + 'px' });
+            }
+            else if (radio12.checked == true) {
+                $('#wrapperContainer').css({ width: 821 + 'px' });
+            } else if (radio13.checked == true) {
+                $('#wrapperContainer').css({ width: 895 + 'px' });
+
+            }
+
+            else if (radio14.checked == true) {
+                $('#wrapperContainer').css({ width: 1043 + 'px' });
+            }
+
+        };
+
+        function runAlertMessage(item) {
+            msgItem = item;
+            filpEnd = true;
+            document.getElementById('divAlert').style.visibility = 'visible';
+
+
+        };
+        var selectionSetting;
+        function selectSetting(itemId) {
+
+            if (stRdo1.checked == true) {
+                selectionSetting = 1;
+            } else if (stRdo2.checked == true) {
+                selectionSetting = 2;
+            } else if (stRdo3.checked == true) {
+                selectionSetting = 3;
+            } else if (stRdo4.checked == true) {
+                selectionSetting = 4;
+            }
+
+        };
+        var KindPlay = 2;
+        function changeClass(elementID) {
+
+            if (elementID == 'span2') {
+                KindPlay = 2;
+                GameType = '';
+                //console.log(GameType);
+                var element = document.getElementById(elementID);
+                element.setAttribute("class", 'Selected'); //For Most Browsers
+
+                var x = document.getElementById('span4');//.class='NormalLink';
+                x.setAttribute('class', 'NormalLink');
+                var y = document.getElementById('span3');//.class='NormalLink';
+                y.setAttribute('class', 'NormalLink');
+            }
+                // sectors with com
+            else if (elementID == 'span3') {
+                GameType = 'SectorsCompanies';
+                console.log(GameType);
+                KindPlay = 4;
+                var element = document.getElementById(elementID);
+                element.setAttribute("class", 'Selected'); //For Most Browsers
+                var x = document.getElementById('span4');//.class='NormalLink';
+                x.setAttribute('class', 'NormalLink');
+                var y = document.getElementById('span2');//.class='NormalLink';
+                y.setAttribute('class', 'NormalLink');
+
+            }
+
+            else {
+                KindPlay = 3;
+                GameType = '';
+                console.log(GameType);
+                var element = document.getElementById(elementID);
+                element.setAttribute("class", 'Selected'); //For Most Browsers
+                var x = document.getElementById('span2');//.class='NormalLink';
+                x.setAttribute('class', 'NormalLink');
+                var y = document.getElementById('span3');//.class='NormalLink';
+                y.setAttribute('class', 'NormalLink');
+
+
+            }
+
+        }
+        function changeRadioCssClass(elementID) {
+
+            if (elementID == '1') {
+                for (var i = 10; i <= 14; i++) {
+                    var x = document.getElementById('span' + i);
+                    x.setAttribute('class', 'gray');
+
+                }
+                var x = document.getElementById('span10');
+                x.setAttribute('class', 'checked');
+                var y = document.getElementById('divBlockNum');
+                y.setAttribute('class', 'BlockNum-5');
+            }
+            else if (elementID == '2') {
+                for (var i = 10; i <= 14; i++) {
+                    var x = document.getElementById('span' + i);
+                    //console.log(x);
+                    x.setAttribute('class', 'gray');
+
+
+                }
+                var x = document.getElementById('span11');
+                x.setAttribute('class', 'checked');
+                console.log(x.getAttribute("class"));
+
+                var y = document.getElementById('divBlockNum');
+                y.setAttribute('class', 'BlockNum-6');
+            }
+            else if (elementID == '3') {
+                for (var i = 10; i <= 14; i++) {
+                    var x = document.getElementById('span' + i);
+                    x.setAttribute('class', 'gray');
+
+                }
+                var x = document.getElementById('span12');
+                x.setAttribute('class', 'checked');
+
+                var y = document.getElementById('divBlockNum');
+                y.setAttribute('class', 'BlockNum-9');
+            }
+
+            else if (elementID == '4') {
+                for (var i = 10; i <= 14; i++) {
+                    var x = document.getElementById('span' + i);
+                    x.setAttribute('class', 'gray');
+                }
+                var x = document.getElementById('span13');//.class='NormalLink';
+                x.setAttribute('class', 'checked');
+                var y = document.getElementById('divBlockNum');
+                y.setAttribute('class', 'BlockNum-10');
+
+            }
+            else if (elementID == '5') {
+                for (var i = 10; i <= 14; i++) {
+                    var x = document.getElementById('span' + i);
+                    x.setAttribute('class', 'gray');
+
+                }
+                var x = document.getElementById('span14');//.class='NormalLink';
+                x.setAttribute('class', 'checked');
+
+                var y = document.getElementById('divBlockNum');
+                y.setAttribute('class', 'BlockNum-12');
+            }
+
+
+        }
+        function enableCheckBox() {
+            $("#listMenu *").attr("disabled", false);
+
+        };
+        var _checked = false;
+        function disabelCheckBox() {
+            //clearSelection();
+            /*
+              if (_checked == false) {
+                  $("#listMenu *").attr("checked", true);
+                  _checked = true;
+              } else {
+                  $("#listMenu *").attr("checked", false);
+                  _checked = false;
+              }
+           */
+
+            if (_checked == false) {
+                for (var i = 1; i <= 16; i++) {
+                    var obj = document.getElementById("Checkbox" + i);
+                    obj.checked = true;
+                }
+                _checked = true;
+            }
+            else {
+                for (var i = 1; i <= 16; i++) {
+                    var obj = document.getElementById("Checkbox" + i);
+                    obj.checked = false;
+                }
+                _checked = false;
+            }
+        };
+        var _checkedBox = false;
+        function displayCheckBox(item) {
+
+            if (_checkedBox == false) {
+
+                $(item).attr("checked", true);
+                _checkedBox = true;
+            } else {
+
+                $(item).attr("checked", false);
+                _checkedBox = false;
+            }
+
+
+        };
+        $(document).ready(function () {
+
+
+            clearSelection();
+            ClearTiles();
+            $("#listMenu *").attr("disabled", false);
+
+            //
+            var y = document.getElementById('divBlockNum');
+            y.setAttribute('class', 'BlockNum-5');
+
+        });
+        function Play() {
+
+            // $("#listMenu *").attr("disabled", true);
+            //
+            //btndone
+            sectorArray.length = 0;
+            sectorArrayData.length = 0;
+            tileLength = 0;
+            //console.log(KindPlay);
+            //console.log(GameType);
+            var numberOfChBox = $('.RadioWrraper input:checkbox').length;
+
+
+            if ($('#radio6').is(':checked')) {
+                if (KindPlay == 2)// sector and codes
+                {
+                    sectorArray.push("0101");
+                    for (i = 2; i <= 16; i++) {
+                        //console.log(LeadingZero(i));
+                        sectorArray.push(LeadingZero(i) + LeadingZero(1));//'0'+i+'0'+'1'
+
+
+                    }
+
+                }
+                else if (KindPlay == 4) {
+                    for (i = 2; i <= 16; i++) {
+                        for (var j = 1; j <= sectorsData[i - 1]; j++) {
+
+                            sectorArray.push(LeadingZero(i) + LeadingZero(j));
+                            if (j == 1) {
+                                sectorArrayData.push({ sectorType: 1, companyCount: sectorsData[i - 1], imgno: i });
+
+                            }
+                            else {
+                                sectorArrayData.push({ sectorType: 0, companyCount: 0, imgno: i });
+                                tileLength++;
+
+                            }
+                        }
+                    }
+                    // tileLength*=2;
+                }
+
+                else {
+                    sectorArray.push("0101");
+                    for (i = 2; i <= 16; i++) {
+                        for (var j = 1; j <= sectorsData[i - 1]; j++) {
+
+                            sectorArray.push(LeadingZero(i) + LeadingZero(j));
+
+                        }
+                    }
+                }
+
+            }
+
+            else {
+                console.log(KindPlay);
+
+                if (KindPlay == 2)// sector and codes
+                {
+                    sectorArray.push("0101");
+                    for (i = 2; i <= numberOfChBox; i++) {
+                        if ($('#Checkbox' + i).is(':checked')) {
+                            sectorArray.push(LeadingZero(i) + LeadingZero(1));
+
+                        }
+
+                    }
+                }
+
+                else if (KindPlay == 4) {
+                    for (i = 2; i <= numberOfChBox; i++) {
+                        if ($('#Checkbox' + i).is(':checked')) {
+                            for (var j = 1; j <= sectorsData[i - 1]; j++) {
+
+                                sectorArray.push(LeadingZero(i) + LeadingZero(j));
+                                if (j == 1) {
+                                    sectorArrayData.push({ sectorType: 1, companyCount: sectorsData[i - 1], imgno: i });
+
+                                }
+                                else {
+                                    sectorArrayData.push({ sectorType: 0, companyCount: 0, imgno: i });
+                                    tileLength++;
+                                }
+                            }
+
+                        }
+                    }
+
+                    // tileLength *= 2;
+                }
+
+                else {
+                    sectorArray.push("0101");
+                    for (i = 2; i <= numberOfChBox; i++) {
+                        if ($('#Checkbox' + i).is(':checked')) {
+
+                            for (var j = 1; j <= sectorsData[i - 1]; j++) {
+                                sectorArray.push(LeadingZero(i) + LeadingZero(j));
+
+                            }
+                        };
+                    };
+                };
+            }
+            console.log(tileLength);
+        };
+        function continuePick() {
+            PickCopmlete = true;
+            onPeekStart();
+            $('#startGameButton').unbind('click');
+
+
+        }
+        var _sound = false;
+        function displySound() {
+            if (_sound == false) {
+                var x = document.getElementById('sound');
+                x.setAttribute("class", "navEOf");
+                soundeffect = _sound;
+                _sound = true;
+                console.log(_sound);
+
+            } else {
+                var x = document.getElementById('sound');
+                x.setAttribute("class", "navEOn");
+                soundeffect = _sound;
+                _sound = false;
+                console.log(_sound);
+            }
+
+        };
+
+    </script>
+</div>

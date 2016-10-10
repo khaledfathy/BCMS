@@ -1,0 +1,35 @@
+﻿@using BCMS.Models
+@{
+    int i = 0;
+}
+
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        
+        <tr>
+            <th>No.</th>
+            <th>Role Name</th>
+            <th>No. of users in role</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody style="max-height:800px; overflow-y:auto;">
+        @foreach (var Role in Model)
+        {
+            <tr>
+                <td>@{i++;} @i</td>
+                <td>@Role.Name</td>
+                <td> 
+                    @*@Ajax.ActionLink(item.Users.Count, "GetUsersInRole", new { id = item.Id }, new AjaxOptions() { UpdateTargetId = "divBody", InsertionMode = InsertionMode.Replace, OnSuccess = "$('#AddRole').modal({ show: true, backdrop: true });" })*@
+                
+                    <a data-ajax="true" data-ajax-mode="Replace" data-ajax-success="$('#AddRole').modal({ show: true, backdrop: true });" data-ajax-update="#divBody" href="/Admin/Home/GetUsersInRole/@Role.Id">@Role.Users.Count</a>
+                </td>
+                <td>
+                    @Ajax.ActionLink("Remove role", "RemoveRole", new { id = Role.Id }, new AjaxOptions() { UpdateTargetId = "divBody", InsertionMode = InsertionMode.Replace, OnSuccess = "$('#AddRole').modal({ show: true, backdrop: true });" }, new { @class = "btn btn-danger" })
+                    @Ajax.ActionLink("Add user to role", "AddUserToRole", new { id = Role.Id }, new AjaxOptions() { UpdateTargetId = "divBody", InsertionMode = InsertionMode.Replace, OnSuccess = "$('#AddRole').modal({ show: true, backdrop: true });" }, new { @class = "btn btn-primary" })
+                    @Ajax.ActionLink("Remove user from role", "RemoveUserFromRole", new { id = Role.Id }, new AjaxOptions() { UpdateTargetId = "divBody", InsertionMode = InsertionMode.Replace, OnSuccess = "$('#AddRole').modal({ show: true, backdrop: true });" }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

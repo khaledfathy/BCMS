@@ -1,0 +1,306 @@
+@import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+.SubMenuDock
+{}
+.LogoMenu
+{}
+.cbp-hrmenu {
+	/*width: 100%;*/
+    padding-right: 50px;
+}
+
+
+.cbp-hrmenu h4
+{
+    padding: 10px 0 !important;
+    margin: 0px !important;
+    border-bottom: 1px solid rgba(255,255,255,.2);
+}
+/* general ul style */
+.cbp-hrmenu ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+/* first level ul style */
+.cbp-hrmenu > ul, .cbp-hrmenu .cbp-hrsub-inner {
+	/*width: 100%;*/
+	/*max-width: 70em;*/
+	margin: 0 auto;
+	padding: 0 0em;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
+.cbp-hrsub-inner-FullScreen {
+	width: 100%;
+	/*max-width: 70em;*/
+}
+
+.cbp-hrmenu > ul > li {
+	display: inline-block;
+    float: right;
+    
+}
+.cbp-hrmenu > ul > li > a {
+    font-family: "Droid Arabic Kufi",serif;
+    color: #c1cccc;
+    text-decoration:none;
+    display:block;
+    font-size: 0.6em;
+	
+	padding: .8em .8em .7em .8em;	
+	display: inline-block;
+    white-space: nowrap;
+}
+li.LogoMenu {
+    float: left;
+}
+li.LogoMenu > a {
+	padding: .8em .5em .7em .5em !important;
+}
+li.LogoMenu > a:hover {
+	background: none !important;	
+}
+.cbp-hrmenu > ul > li.LogoMenu:hover {
+	background: rgba(255,255,255,.0) !important;	
+}
+.cbp-hrmenu > ul > li > a:hover {
+	color: #FFF;
+	background: #367e27;
+}
+
+.cbp-hrmenu > ul > li.cbp-hropen a
+ {
+	color: #FFF;
+	background: #000;
+}
+
+.cbp-hrmenu > ul > li.cbp-hropen > a:hover {
+	color: #FFF;
+	background: #367e27;
+}
+
+
+.cbp-hrmenu > ul > li:hover > .cbp-hrsub {
+	display: block;
+	padding-bottom: .1em;
+    max-height: inherit;
+}
+.cbp-hrmenu > ul > li:hover > .cbp-hrsub,.cbp-hrmenu > ul > li > .cbp-hrsub {
+    z-index: 11;
+}
+
+/* sub-menu */
+.cbp-hrmenu > ul > li:hover > .full-Menu-width
+{
+    width: 100%;
+    right: 0;
+    background: #367e27;
+}
+.cbp-hrmenu > ul > li:hover > .full-Menu-width,.cbp-hrmenu > ul > li > .full-Menu-width
+{
+    z-index: 10;
+}
+.cbp-hrmenu > ul > li > .full-Menu-width
+{
+    width: 100%;
+    right: 0;
+    background: #000;
+}
+.full-Menu-width > .AnyInlin > ul
+{
+    padding: 10px;
+    margin: 0 5px;
+}
+.full-Menu-width li
+{
+    font-family: Tahoma;
+    font-size: 12px;
+    color: #FFF;
+}
+
+.cbp-hrmenu > ul > li:hover > .full-Menu-width li a
+{    
+    background: #367e27;
+}
+.full-Menu-width li a
+{
+    font-family: Tahoma;
+    font-size: 12px;
+    color: #FFF;
+}
+.full-Menu-width li h2
+{
+}
+.full-Menu-width li h3
+{
+}
+.full-Menu-width li h4
+{
+}
+.full-Menu-width li h5
+{
+    font-size: 11px;
+    color: #999;
+    font-weight: bold;
+}
+.cbp-hrmenu > ul > li:hover > .full-Menu-width li h5
+{
+    color: #000;
+}
+
+
+
+
+.cbp-hrmenu .cbp-hrsub {
+    /*width: 100%;*/
+	display: none;
+	position: absolute;
+	background: #eeeeee;
+    z-index: 999999999999;
+    border-bottom: 0 solid #bfcaca;
+
+    max-height: 0;
+	overflow: hidden;
+
+	/* Set our transitions up. */
+	-webkit-transition: max-height 0.8s;
+	-moz-transition: max-height 0.8s;
+	transition: max-height 0.8s;
+}
+.cbp-hropen .cbp-hrsub {
+	display: block;
+	padding-bottom: 0;
+    max-height: inherit;
+}
+.cbp-hrmenu .cbp-hrsub-inner > div {
+	/*width: 33%;*/
+	float: right;
+	padding: 0 0 0;
+}
+.cbp-hrmenu .cbp-hrsub-inner:before,
+.cbp-hrmenu .cbp-hrsub-inner:after {
+	content: " ";
+	display: table;
+}
+.cbp-hrmenu .cbp-hrsub-inner:after {
+	clear: both;
+}
+.cbp-hrmenu .cbp-hrsub-inner > div a {
+	line-height: 2em;
+    font-size: .9em;
+    font-family: Tahoma;
+    color: #1583be !important;
+}
+.cbp-hrsub h4 {
+    font-family: "Droid Arabic Kufi",serif;
+	color: #333;
+	padding: 2em 0 0.6em;
+	margin: 0;
+	font-size: 100%;
+	font-weight: 300;
+}
+/* Hover */
+.cbp-hrmenu > ul > li:hover {
+         background-color: #000;
+        }
+.cbp-hrmenu > ul > li:hover > li > a {
+         
+        }
+.cbp-hrmenu > ul > li > div {
+	background-color: rgba( 40, 44, 47, 0.9 );
+}
+/*SUB*/
+.cbp-hrmenu > ul > li > div ul > li:hover > a {
+		
+	}
+/*
+.cbp-hrmenu > ul > li > div > ul > li > div {
+	background-color: rgba( 105, 181, 190, 1 );
+}
+.cbp-hrmenu > ul > li > div {
+	background-color: rgba( 40, 44, 47, 0.9 );
+}
+.cbp-hrmenu > ul > li > div ul > li > div {
+	background-color: rgba(54,64,188,.8);
+}*/
+
+/* Examples for media queries */
+
+@media screen and (max-width: 52.75em) { 
+	.cbp-hrmenu {
+		font-size: 80%;
+        clear: both;
+        margin: 0px 0 0 0;
+        width: 100%;
+        background-color: #666;
+	}
+    
+.cbp-hrmenu > ul > li {
+	display: inline-block;
+    float: none;
+}
+
+}
+
+@media screen and (max-width: 43em) { 
+
+	.cbp-hrmenu {
+		font-size: 120%;
+		border: none;
+        clear: both
+	}
+
+	.cbp-hrmenu > ul,
+	.cbp-hrmenu .cbp-hrsub-inner {
+		width: 100%;
+		padding: 0;
+	}
+
+	.cbp-hrmenu .cbp-hrsub-inner {
+		padding: 0 .1em;
+		font-size: 75%;
+	}
+
+	.cbp-hrmenu > ul > li {
+		display: block;
+		border-top: 1px solid #393939;
+	}
+
+	.cbp-hrmenu > ul > li > a {
+		display: block;
+		padding: .8em .1em;
+	}
+
+	.cbp-hrmenu .cbp-hrsub { 
+		position: relative;
+	}
+
+	.cbp-hrsub h4 {
+		padding-top: 0.6em;
+	}
+	.cbp-hrmenu ul li {		
+    background-color: #666;
+	}
+	.cbp-hrmenu ul li li {		
+    background-color: #367e27;
+	}
+.cbp-hrsub h4 {
+	font-size: 160%;
+}
+
+}
+
+@media screen and (max-width: 36em) { 
+	.cbp-hrmenu .cbp-hrsub-inner > div {
+		width: 100%;
+		float: none;
+		padding: 0 .1em;
+	}
+}
+
+
+

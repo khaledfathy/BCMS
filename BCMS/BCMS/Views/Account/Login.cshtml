@@ -1,0 +1,153 @@
+﻿@using System.Web.Optimization
+@{ 
+    Layout = null;
+}
+<!doctype html>
+<html ng-app="langApp" dir="rtl" lang="ar">
+<head>
+    @*<base href="/" />*@
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @if (Request.Cookies["language"] != null)
+    {
+        var lang = Request.Cookies["language"].Value;
+        if (lang == "en")
+        {
+            @Styles.Render("~/Materials/En/css/login.css")
+        }
+        else
+        {
+            @Styles.Render("~/Materials/Ar/css/login.css")
+        }
+    }
+    else
+    {
+        @Styles.Render("~/Materials/Ar/css/login.css")
+    }
+
+    @Scripts.Render("~/bundles/BCMS/script")
+
+    @*<script src="~/Scripts/angular-translate.js"></script>*@
+    @*<script src="~/Language/langApp.js"></script>*@
+    @*<script src="~/Language/languageController.js"></script>*@
+
+    @*<script src="~/Language/layoutController.js"></script>*@
+    @*<script src="/signalr/Hubs"></script>*@
+
+</head>
+<body>
+    
+    <div class="headerWrapper">
+
+        <div class="BorderBottom">
+            <div class="row">
+                <div class="TopNav">
+                    <ul>
+                        <li ng-controller="languageController">
+
+                            <a ng-show="!arabic" class="btn btn-sm" ng-click="switchLanguage('ar');">
+                                عربى
+                                <img width="35" height="20" src="~/Language/saudiarabia-flag.jpg" />
+                            </a>
+                            <a ng-show="arabic" class="btn btn-sm" ng-click="switchLanguage('en');">
+                                English
+                                <img width="35" height="20" src="~/Language/british-flag.png" />
+                            </a>
+                        </li>
+
+                        <li><a href="#/"><img src="~/Materials/Ar/img/home.png" alt="" width="20" /></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="headerWrapper">
+        <div class="row">
+            <div class="LogoWraper">
+                <div class="logo"> <a href="#/"><img src="~/Materials/Ar/images/logo.png"></a></div>
+            </div>
+            
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div>
+        <section class="main" ng-controller="LoginController">
+            <form name="LoginForm" class="form-3" ng-submit="LoginForm.$valid && LoginUTMS()" novalidate>
+                <div id="sendCodeMsg">
+                    <h2>{{message}}</h2>
+                </div>
+                <div ng-show="!IsLogedin">
+                    <h1>
+                        <span class="log-in">{{login | translate}}</span>
+                        <span class="sign-up">{{bc | translate}}</span>&nbsp;
+                        <i class="fa fa-lock"></i>
+                    </h1>
+
+                    <div class="right">
+                        <p class="clearfix">
+                            <label class="control-label" for="email">{{email | translate}}</label>
+                            <input type="text" ng-model="Member.Email" id="email" placeholder="{{email | translate}}" ng-class="Submitted?'ng-dirty':''" required autofocus />
+                        </p>
+
+                        <p class="clearfix">
+                            <label class="control-label" for="password">{{password | translate}}</label>
+                            <input type="password" ng-model="Member.Password" id="password" placeholder="{{password | translate}}" ng-class="Submitted?'ng-dirty':''" required autofocus />
+
+                        </p>
+
+                        <div class="clearfix">
+                            <label class="TitleRemeber" for="RememberMe">{{rememberMe | translate}}</label>
+                            <div class="Remeberme RememberCheck">
+                                <input type="checkbox" id="RememberMe" name="remember" style="cursor:pointer;" ng-model="Member.RememberMe" />
+                            </div>
+                        </div>
+
+                        <div class="clear">
+                            <div class="Remeberme">
+                                <div class="H10"></div>
+                                <input type="submit" name="submit" value="{{loginBtn | translate}}" />
+
+                            </div>
+                        </div>
+                        <div class="clear">
+                            <div class="Remeberme" style="padding-top: 5px;">
+                                <a href="#Forgotpassword" style="font-size:14px;">{{forgotPassword | translate}}</a>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="Remeberme" style="padding-top: 5px;">
+                                <span class="colorW FZ12">ليس لديك حساب؟</span>
+                                <a href="Register" class="FZ17 FKufi">{{createAccount | translate}}</a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="left">
+                        <h1><span class="sign-up">{{moreInformation | translate}}</span></h1>
+                        <br />
+                        <h2><a href="mailto:info@borsacapital.com">info@borsacapital.com</a></h2>
+                        <br />
+                    </div>
+
+                    <div class="clear"></div>
+                    <br /><br />
+                </div>
+            </form>
+        </section>
+
+
+    </div>
+
+    <!--STARTFooter-->
+    <div class="FooterWrapperBG">
+        <div class="clear"></div>
+        <div class="copyRight">{{copyRights | translate}} © BorsaCapital 2015</div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

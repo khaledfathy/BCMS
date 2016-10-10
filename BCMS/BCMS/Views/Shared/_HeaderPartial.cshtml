@@ -1,0 +1,148 @@
+﻿
+<div ng-controller="headerController">
+    <div class="headerWrapper">
+
+        <div class="BorderBottom">
+            <div class="row">
+                <div class="TopNav">
+                    <ul>
+                        <li ng-controller="languageController">
+
+                            <a ng-show="!arabic" class="btn btn-sm" ng-click="switchLanguage('ar');">عربى
+                                <img width="35" height="20" src="~/Language/saudiarabia-flag.jpg" /></a>
+                            <a ng-show="arabic" class="btn btn-sm" ng-click="switchLanguage('en');">English
+                                <img width="35" height="20" src="~/Language/british-flag.png" />
+                            </a>
+                        </li>
+                        <li><span id="date_time">{{Date.now() | date:'yyyy-MM-dd'}}</span></li>
+                        @Html.Partial("_LoginPartial")
+                        <li><a href="http://pixel.borsacapital.com/" target="_blank">{{pixel | translate}}</a></li>
+                        <li><a href="#Feedback">{{feedback | translate}}</a></li>
+                        <li><a href="#/">{{onlineSupport | translate}}</a></li>
+
+                        <li><a href="#/"><img src="~/Materials/Ar/img/home.png" alt="" width="20" /></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="headerWrapper">
+        <div class="row">
+            <div class="LogoWraper">
+                <div class="logo"> <img src="~/Materials/Ar/images/logo.png"></div>
+                <div class="clear"></div>
+                <div class="date"></div>
+            </div>
+            <div class="SearchWraper">
+                <form>
+                    <div class="H10"></div>
+                    <div class="large-12 columns">
+                        <div>
+                            <input type="text" placeholder="{{search | translate}}" class="SearchTxtBox">
+                            <div class="FindIcon"><a href="#"><img src="~/Materials/Ar/Images/Grid/Find.png" /></a></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="clear"></div>
+    <div class="Marquee">
+
+        <marquee direction="right" scrollamount="3" onmousedown="this.stop();" onmouseup="this.start();">
+            السعودية: تراجع مستوى التضخم إلى 2.5 % خلال شهر نوفمبر
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            انخفاض أرباح "مكة للإنشاء" إلى 241 مليون ريال (- 4 %) بنهاية التسعة أشهر الأولى المنتهية فى المحرم 1436 هـ
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            صحيفة: هيئة السوق المالية تواصل تحقيقاتها في قوائم "موبايلي".. والقرارات التي ستصدر قد تؤدي لحل مجلس إدارة الشركة
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            رئيس طائفة العقار بجدة: نصف عمائر مكة المكرمة مهجورة 11 شهرا في العام
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            مجلس إدارة "أسمنت نجران" يوصي بتوزيع أرباح نقدية بنسبة 6 % ( بواقع 0.60 ريال للسهم) عن العام 2014
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            المبيعات الإجمالية لشركات الأسمنت السعودية ترتفع إلى 5.09 مليون طن (+ 39 %) خلال نوفمبر 2014
+        </marquee>
+
+    </div>
+    <div class="clear"></div>
+    <div class="MainMenuWrappe">
+        <div class="row">
+            <div class="large-12 columns">
+                <nav id="cbp-hrmenu" class="cbp-hrmenu">
+                    <ul>
+                        <li class="SubMenuDock">
+                            <a href="#/">{{home | translate}}</a>
+                            <div class="cbp-hrsub">
+                                <div class="cbp-hrsub-inner">
+                                    <div>
+                                        <ul class="ca-menu">
+                                            <li>
+                                                <a href="#AboutUs">
+                                                    <span class="ca-icon">A</span>
+                                                    <div class="ca-content">
+                                                        <h3 class="ca-sub">{{about | translate}}</h3>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#BCWord">
+                                                    <span class="ca-icon">c</span>
+                                                    <div class="ca-content">
+                                                        <h3 class="ca-sub">{{bcWord | translate}}</h3>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#AboutSaudi">
+                                                    <span class="ca-icon">A</span>
+                                                    <div class="ca-content">
+                                                        <h3 class="ca-sub">{{aboutKSA | translate}}</h3>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#FAQ">
+                                                    <span class="ca-icon">e</span>
+                                                    <div class="ca-content">
+                                                        <h3 class="ca-sub">{{commonQuestions | translate}}</h3>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#Jobs">
+                                                    <span class="ca-icon">h</span>
+                                                    <div class="ca-content">
+                                                        <h3 class="ca-sub">{{jobs | translate}}</h3>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="#PyramidServices">{{pyramidServices | translate}}</a></li>
+                        <li><a href="#/">{{download | translate}}</a></li>
+                        <li><a href="/UTMS/Home">UTMs</a></li>
+                        <li><a href="#Demo">{{demo | translate}}</a></li>
+                        <li><a href="#Partners">{{partners | translate}}</a></li>
+                        <li><a href="#ContactUs">{{contactus | translate}}</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Hany -->
+                @*@System.Web.Optimization.Scripts.Render("~/bundles/BCMS/cbpHorizontalMenu")
+                    <script>
+                        $(function () {
+                            cbpHorizontalMenu.init();
+                        });
+                    </script>*@
+                <!-- /Hany -->
+
+
+            </div>
+        </div>
+    </div>
+</div>
