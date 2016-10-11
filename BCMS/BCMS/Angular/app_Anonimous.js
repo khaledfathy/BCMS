@@ -93,6 +93,10 @@ MyApp.config(["$routeProvider", "$locationProvider", function ($routeProvider, $
         templateUrl: '/Angular/Account/ResetPassword.html',
         controller: 'ResetpasswordController'
     })
+    .when('/Chart', {
+        templateUrl: '/Home/Chart',
+        controller: 'ChartController'
+    })
     .otherwise({
         redirectTo: '/'
     });
@@ -165,6 +169,10 @@ function DoLoading() {
 }
 
 /**************************************************** Controllers ***********************************************************/
+
+MyApp.controller('ChartController', function ($scope) {
+
+});
 
 MyApp.controller('BorsaCloudCtrl', function ($scope) {
     window.location.href = '/UTMS/Home/index';

@@ -234,7 +234,24 @@ App.controller('MarketCasterController', function ($scope) {
 });
 
 App.controller('StockUpController', function ($scope) {
-
+    $scope.gotoAnchor = function (id) {
+        for (i = 0; i <= 6; i++) {
+            $("#" + i + "").removeClass("active");
+            $("#li" + i + "").removeClass("active");
+        }
+        if (id >= 0 && id <= 6) {
+            $("#" + id + "").addClass("active");
+            $("#li" + id + "").addClass("active");
+        }
+    };
+    $scope.gotoAnchorShare = function (id) {
+        for (i = 7; i <= 9; i++) {
+            $("#" + i + "").removeClass("active");
+            $("#li" + i + "").removeClass("active");
+        }
+        $("#" + id + "").addClass("active");
+        $("#li" + id + "").addClass("active");
+    }
 });
 
 App.controller('BorsaGraphicsController', ["$scope", "$http", function ($scope, $http) {
@@ -294,18 +311,21 @@ App.controller('AnalysesDetailsController', function ($scope, $http, $routeParam
         }
     }
 
-    $scope.popup = function (id,title) {
-           modal.style.display = "block";
-           $("#title").html(title);
-        $http({
-            url: "/UTMS/BorsaGraphics/_ChartDiv",
-            method: 'GET',
-            params: { id: id }
-        }).success(function (data) {
-            $("#content").html(data);
-        }).error(function () {
-            alert("error");
-        });
+    $scope.popup = function (id, title) {
+        modal.style.display = "block";
+        $("#title").html(title);
+        $("#content").html("<iframe src='/UTMS/BorsaGraphics/ChartDiv/" + id + "' style='height:400px; width:100%; overflow-y:auto;'></iframe>")
+               //.src = "/UTMS/BorsaGraphics/ChartDiv?id=" + id;
+
+        //$http({
+        //    url: "/UTMS/BorsaGraphics/ChartDiv",
+        //    method: 'GET',
+        //    params: { id: id }
+        //}).success(function (data) {
+        //    $("#content").src
+        //}).error(function () {
+        //    alert("error");
+        //});
 
     }
 

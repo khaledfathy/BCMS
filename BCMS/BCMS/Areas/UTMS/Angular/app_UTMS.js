@@ -1,5 +1,7 @@
 ﻿
-var App = angular.module('UTMSApp', ['ngRoute', 'uiGmapgoogle-maps']);
+//var App = angular.module('UTMSApp', ['ngRoute', 'uiGmapgoogle-maps']);
+var App = angular.module('UTMSApp', ['ngRoute']);
+
 
 App.config(['$routeProvider', function ($routeProvider) {
  
@@ -17,7 +19,7 @@ App.config(['$routeProvider', function ($routeProvider) {
 
     .when('/AnalysesDetails/:KindId', { templateUrl: '/Areas/UTMS/Angular/BorsaGraphics/AnalysesDetails.html', controller: 'AnalysesDetailsController' })
 
-    .when('/ChartDiv/:ChartId', { templateUrl: '/UTMS/BorsaGraphics/ChartDiv', controller: 'ChartDivController' })
+    .when('/ChartDiv', { templateUrl: '/UTMS/BorsaGraphics/ChartDiv', controller: 'ChartDivController' })
 
     //.when('/BorsaGraphics', { templateUrl: '/UTMS/BorsaGraphics/Index', controller: 'BorsaGraphicsController' })
 
@@ -80,22 +82,9 @@ App.config(['$routeProvider', function ($routeProvider) {
 
 
 
-//App.controller('ChartDivController', function ($scope) {
-//    $scope.loading = true;
-//    DoLoading();
-//    $scope.ChartId = $routeParams.ChartId;
-//    $http({
-//        url: "/UTMS/BorsaGraphics/ChartDiv",
-//        method: 'GET',
-//        params: { id: $scope.ChartId }
-//    }).success(function (data) {
-//        $scope.Chart = data;
-//        $scope.loading = false;
-//    }).error(function () {
-//        alert("error");
-//        $scope.loading = false;
-//    });
-//});
+App.controller('ChartDivController', function ($scope) {
+ 
+});
 
 App.controller('GreenRedController', function ($scope) {
 
@@ -169,8 +158,8 @@ App.controller('InvestmentsController', function ($scope) {
 });
 
 App.controller('BcCountersController', function ($scope) {
-    $scope.loading = true;
-    DoLoading();
+    //$scope.loading = true;
+    //DoLoading();
     //  $scope.loading = false;
 
 });

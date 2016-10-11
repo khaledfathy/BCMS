@@ -86,7 +86,7 @@ namespace BCMS
                 ));
             ////////////////////////////-- BCMS JS --//////////////////////////////////
             bundles.Add(new ScriptBundle("~/App_Start/bundles/BCMS/script").Include(
-                "~/Scripts/lodash.js",
+                //"~/Scripts/lodash.js",
                 //"~/Scripts/jquery-1.9.1.js",
                 "~/Scripts/jquery.js",
                 //"~/Scripts/jquery-3.1.0.js",
@@ -99,6 +99,21 @@ namespace BCMS
                 "~/Scripts/spin.js"
              
                 ));
+
+            //bundles.Add(new ScriptBundle("~/App_Start/bundles/BCMS/script").Include(
+            //    "~/Scripts/lodash.js",
+            //    //"~/Scripts/jquery-1.9.1.js",
+            //    "~/Scripts/jquery.js",
+            //    //"~/Scripts/jquery-3.1.0.js",
+            //    "~/Scripts/angular.js",
+            //    "~/Scripts/angular-route.js",
+            //    "~/Areas/UTMS/Angular/app_UTMS.js",
+            //    "~/Scripts/jquery.signalR-2.2.0.js",
+            //    "~/Scripts/modernizr.custom.js",
+            //    "~/Scripts/foundation.min.js",
+            //    "~/Scripts/spin.js"
+
+            //    ));
             ////////////////////////////-- UTMS JS --//////////////////////////////////
             bundles.Add(new ScriptBundle("~/App_Start/bundles/UTMS/script").Include(
                 "~/Scripts/highcharts.js",

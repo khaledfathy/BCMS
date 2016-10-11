@@ -10,33 +10,19 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="~/Materials/UTMS/Images/favicon.ico" type="image/x-icon">
 
-    @*<script src="~/Scripts/lodash.js"></script>*@
-    @Styles.Render("~/App_Start/bundles/BCMS/style")
-    @Scripts.Render("~/App_Start/bundles/BCMS/script")
-
-    @Scripts.Render("~/App_Start/bundles/UTMS/script")
-
-    <script src="~/signalr/Hubs"></script>
-    <script src="~/Areas/UTMS/Angular/UTMS_Controller.js"></script>
-    <script src="~/Areas/UTMS/Charts/angular-google-maps.js"></script>
-
-    @*<script src="~/Scripts/highcharts.js"></script>
-    <script src="~/Scripts/exporting.js"></script>*@
-
-    @*<script type="text/javascript" src="../Materials/LightBox/lib/jquery.mousewheel-3.0.6.pack.js"></script>
-    <script type="text/javascript" src="../Materials/LightBox/source/jquery.fancybox.js?v=2.1.5"></script>
-    <link rel="stylesheet" type="text/css" href="../Materials/LightBox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
-    <script type="text/javascript" src="../Materials/LightBox/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
-    <link rel="stylesheet" type="text/css" href="../Materials/LightBox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
-    <script type="text/javascript" src="../Materials/LightBox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
-    <script type="text/javascript" src="../Materials/LightBox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
-    <script src="~/Materials/LightBox/source/fancybox-script.js"></script>*@
-
-
-    @*<link href="~/Materials/Ar/css/Accordion.css" rel="stylesheet" />
-    <script src="~/Scripts/Accordion_annimition.js"></script>*@
-
-
+    @*@Styles.Render("~/App_Start/bundles/BCMS/style")*@
+    <link href="~/Materials/UTMS/css/foundation.css" rel="stylesheet" />
+    <link href="~/Materials/UTMS/css/MainStyle.css" rel="stylesheet" />
+    @*<link href="~/Materials/UTMS/css/Inputs.css" rel="stylesheet" />*@
+    @*<link href="~/Materials/UTMS/css/Css3.css" rel="stylesheet" />*@
+    @*<link href="~/Materials/UTMS/css/Icons.css" rel="stylesheet" />*@
+    @*<link href="~/Materials/UTMS/webicons.css" rel="stylesheet" />*@
+    <link href="~/Materials/UTMS/MainMenu/css/component.css" rel="stylesheet" />
+    <link href="~/Materials/UTMS/MainMenu/css/css3.css" rel="stylesheet" />
+    @*<link href="~/Materials/UTMS/MainMenu/css/default.css" rel="stylesheet" />*@
+    @*<link href="~/Materials/UTMS/Sliding.css" rel="stylesheet" />*@
+    <link href="~/Materials/UTMS/css/Graphics.css" rel="stylesheet" />
+    
 
     <style>
         .angular-google-map-container{
@@ -97,19 +83,40 @@
 
                 @RenderBody()
 
-                @RenderSection("MarketCaster", required: false)
+                @*@RenderSection("MarketCaster", required: false)*@
 
                 <div class="clearfix"></div>
                 <!--END CONTENT-->
             </div>
-            @*<div class="clearfix"></div>*@
+            <div class="clearfix"></div>
+
         </div>
         <div class="clearfix"></div>
         @{Html.RenderPartial("_FooterPartial");}
     </div>
 
+    @*@Scripts.Render("~/App_Start/bundles/BCMS/script")*@
 
-    <script type="text/javascript">
+    @*@Scripts.Render("~/App_Start/bundles/UTMS/script")*@
+    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+    @*<script src="~/Scripts/modernizr.js"></script>
+    <script src="~/Scripts/foundation.js"></script>*@
+    <script src="~/Scripts/spin.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-route.js"></script>
+    <script src="~/Areas/UTMS/Angular/app_UTMS.js"></script>
+    <script src="~/Scripts/highcharts.js"></script>
+    <script src="~/Areas/UTMS/Angular/UTMS_Controller.js"></script>
+    <script src="~/signalr/Hubs"></script>
+    
+    @*<script src="~/Areas/UTMS/Charts/angular-google-maps.js"></script>*@
+    <!--BC-Counters-->
+    <script src="~/Scripts/highcharts-more.js"></script>
+    <script src="~/Scripts/solid-gauge.src.js"></script>
+    <!--/BC-Counters-->
+
+    @*<script type="text/javascript">
         $(function () {
             $(".btnMusic").click(function () {
                 window.open("/test/Home/Music", "", "width=500, height=600");
@@ -132,7 +139,7 @@
             });
         });
 
-    </script>
+    </script>*@
     @*<script>
         $(document).foundation();
     </script>*@

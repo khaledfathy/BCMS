@@ -1,0 +1,189 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<div id="ChartContainer" style="height: 350px;"></div>
+@*<script src="~/Scripts/jquery.js"></script>*@
+@*<script src="~/Scripts/jquery-3.1.0.js"></script>*@
+@*<script src="~/Scripts/highcharts.js"></script>*@
+<!-- Begin -->
+<script>
+    $(function () {
+        LoadChart();
+        function LoadChart() {
+            $.ajax({
+                type: "Get",
+                url: '/UTMS/BorsaGraphics/_Partial1Data',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                //timeout: 3000,
+                success: function (result) {
+                    var ArrayMarkets = [];
+                    var ArrayValues = [];
+
+                    for (var i = 0; i < result.length; i++) {
+                        ArrayMarkets.push(result[i].Market);
+                        ArrayValues.push(result[i].MarketValue);
+                    }
+                    var r;
+                    var a_dataPerct = [];
+                    for (var i = 0; i < result.length; i++) {
+                        r = result[i];
+                        a_dataPerct.push([r.Market, r.MarketValue]);
+                    }
+
+
+                    var sum = 0;
+                    for (var i = 0; i < ArrayValues.length; i++) {
+                        sum += ArrayValues[i];
+                    }
+                    var ArrayAvg = [];
+
+                    for (var i = 0; i < result.length; i++) {
+                        ArrayAvg.push((Math.round(((result[i].MarketValue) * 100 / sum) * 100) / 100));
+                    }
+
+
+                    $('#ChartContainer').highcharts({
+                        chart: {
+                            type: 'pie',
+                            backgroundColor: '#fff'
+                        },
+                        title: {
+                            text: ' معدل قيمة التداولات اليومية للأسواق العربية '
+                        },
+                        subtitle: {
+                            text: '(' + CurrencyFormat(sum) + ')' + ' إجمالي قيمة التداولات اليومية للأسواق العربية',
+                            style: {
+                                fontSize: '15px',
+                                fontFamily: 'Verdana, sans-serif'
+                            }
+                        },
+
+                        credits: {
+                            position: {
+                                align: 'left',
+                                x: 75,
+                            },
+                            text: 'Borsa Capital',
+                            href: 'http://test.borsacapital.com'
+                        },
+                        xAxis: {
+                            lineWidth: 0,
+                            minorGridLineWidth: 0,
+                            lineColor: 'transparent',
+                            minorTickLength: 0,
+                            tickLength: 0,
+                            categories: ArrayMarkets,
+                            labels: {
+                                enabled: true,
+                                rotation: -45,
+                                style: {
+                                    fontSize: '15px',
+                                    fontFamily: 'Verdana, sans-serif'
+                                }
+                            }
+                        },
+                        yAxis: [{
+                            lineWidth: 1,
+                            gridLineWidth: 0,
+                            minorGridLineWidth: 0,
+                            min: 0,
+                            title: {
+                                text: 'قيمة التداولات اليومية '
+                            }
+                        }
+
+                        ]
+                        ,
+                        tooltip: {
+                            headerFormat: '<p style="text-align: right;line-height:0.5px;font-weight:bold;">{point.key}</p><table style="width:170px">',
+                            pointFormat: '<tr><td style="padding-left:50px;text-align:right"><span>  {point.y:.1f}</span></td>' +
+                                     '<td style="color:{series.color};padding:0;text-align:right">: {series.name} </td> </tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: true,
+                                    connectorPadding: 10,
+                                    formatter: function () {
+                                        return this.point.y + '(' + Math.round((this.point.y * 100 / sum) * 100) / 100 + '%)' + ' ' + this.point.name;
+                                        /* if (status) {
+                                             return this.point.y + ' ' + this.point.name;
+                                         } else {
+                                             return Math.round((this.point.y * 100 / sum) * 100) / 100 + '% ' + this.point.name;
+                                         }*/
+                                    },
+                                    style: {
+                                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                    }
+                                }
+                            }
+
+
+                        },
+                        series: [
+                                    {
+                                        name: 'القيمة السوقية',
+                                        data: a_dataPerct
+                                    }
+
+                        ],
+                        navigation: {
+                            buttonOptions: {
+                                enabled: false
+                            }
+                        }
+
+                    }
+                    );
+                },
+                error: function (xhr, status, error) {
+                    alert('يوجد خطأ : ' + error + " - " + status + " - " + xhr);
+                }
+            });
+
+        }
+    });
+</script>
+
+<!-- End -->
+
+<script type="text/javascript">
+    function CurrencyFormat(number) {
+        var decimalplaces = 2;
+        var decimalcharacter = ".";
+        var thousandseparater = ",";
+        number = parseFloat(number);
+        var sign = number < 0 ? "-" : "";
+        var formatted = new String(number.toFixed(decimalplaces));
+        if (decimalcharacter.length && decimalcharacter != ".") { formatted = formatted.replace(/\./, decimalcharacter); }
+        var integer = "";
+        var fraction = "";
+        var strnumber = new String(formatted);
+        var dotpos = decimalcharacter.length ? strnumber.indexOf(decimalcharacter) : -1;
+        if (dotpos > -1) {
+            if (dotpos) { integer = strnumber.substr(0, dotpos); }
+            fraction = strnumber.substr(dotpos + 1);
+        }
+        else { integer = strnumber; }
+        if (integer) { integer = String(Math.abs(integer)); }
+        while (fraction.length < decimalplaces) { fraction += "0"; }
+        temparray = new Array();
+        while (integer.length > 3) {
+            temparray.unshift(integer.substr(-3));
+            integer = integer.substr(0, integer.length - 3);
+        }
+        temparray.unshift(integer);
+        integer = temparray.join(thousandseparater);
+        return sign + integer + decimalcharacter + fraction;
+    }
+</script>

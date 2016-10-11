@@ -22,11 +22,11 @@ namespace BCMS.Controllers
             return View();
         }
 
-        public ActionResult Chart(int id)
+        public ActionResult Chart()
         {
-            var model = DB.Charts.FirstOrDefault(w => w.ChartId == id);
+            //var model = DB.Charts.FirstOrDefault(w => w.ChartId == id);
 
-            return View(model);
+            return View();
         }
     }
 }

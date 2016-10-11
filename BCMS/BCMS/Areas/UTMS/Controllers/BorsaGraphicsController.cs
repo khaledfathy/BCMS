@@ -59,6 +59,11 @@ namespace BCMS.Areas.UTMS.Controllers
 
             return View(model);
         }
+        //public ActionResult ChartDiv()
+        //{
+            
+        //    return View();
+        //}
 
         #region التقييم الإتماني
         [HttpPost]

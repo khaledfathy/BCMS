@@ -3661,6 +3661,8 @@
     <Content Include="Materials\UTMS\MainMenu\js\cbpHorizontalMenu.js" />
     <Content Include="Materials\UTMS\MainMenu\js\cbpHorizontalMenu.min.js" />
     <Content Include="Materials\UTMS\MainMenu\js\modernizr.custom.js" />
+    <Content Include="Materials\UTMS\Sliding.css" />
+    <Content Include="Materials\UTMS\webicons.css" />
     <Content Include="Migrations\GulfMap.svg" />
     <Content Include="Materials\Portfolio\css\alerts\alert.png" />
     <Content Include="Materials\Portfolio\css\alerts\alertify.css" />
@@ -4586,6 +4588,7 @@
     <Content Include="Views\Shared\ErrorEn.cshtml" />
     <Content Include="Areas\UTMS\Views\MarketCaster\_MessagesList.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Home\Chart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
