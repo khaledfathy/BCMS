@@ -11,18 +11,9 @@ namespace BCMS.Areas.UTMS.Controllers
     {
         BorsaCapitalDataModel DB = new BorsaCapitalDataModel();
 
-        //
-        // GET: /UTMS/Knowledge/
-
-        public ActionResult Index()
-        {
-            // GetAllKnowledge();
-            return View();
-        }
         [HttpGet]
         public JsonResult GetAllKnowledge()
         {
-
             return Json(DB.Knowledges.Select(x => new {
                 KnowledgeID = x.KnowledgeID,
                 KnowledgeTitle = x.KnowledgeTitle,

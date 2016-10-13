@@ -1,12 +1,9 @@
 ﻿
-//var App = angular.module('UTMSApp', ['ngRoute', 'uiGmapgoogle-maps']);
-var App = angular.module('UTMSApp', ['ngRoute']);
-
+var App = angular.module('UTMSApp', ['ngRoute', 'uiGmapgoogle-maps', 'ngAnimate']);
 
 App.config(['$routeProvider', function ($routeProvider) {
- 
-    $routeProvider
 
+    $routeProvider
     .when('/', { templateUrl: '/Areas/UTMS/Angular/BorsaCloud/Index.html', controller: 'BorsaCloudController' })
 
     .when('/StockUp', { templateUrl: '/Areas/UTMS/Angular/StockUp/Index.html', controller: 'StockUpController' })
@@ -19,177 +16,53 @@ App.config(['$routeProvider', function ($routeProvider) {
 
     .when('/AnalysesDetails/:KindId', { templateUrl: '/Areas/UTMS/Angular/BorsaGraphics/AnalysesDetails.html', controller: 'AnalysesDetailsController' })
 
-    .when('/ChartDiv', { templateUrl: '/UTMS/BorsaGraphics/ChartDiv', controller: 'ChartDivController' })
+    .when('/BcCounters', { templateUrl: '/Areas/UTMS/Angular/BC-Counters/Counters.html', controller: 'BcCountersController' })
 
-    //.when('/BorsaGraphics', { templateUrl: '/UTMS/BorsaGraphics/Index', controller: 'BorsaGraphicsController' })
+    .when('/BcIndicators', { templateUrl: '/Areas/UTMS/Angular/BC-Indicators/Indicators.html', controller: 'BcIndicatorsController' })
 
-    //.when('/Analyses/:CategoryId', { templateUrl: '/UTMS/BorsaGraphics/Analyses', controller: 'AnalysesController' })
-
-    //.when('/AnalysesDetails/:KindId', { templateUrl: '/UTMS/BorsaGraphics/AnalysesDetails', controller: 'AnalysesDetailsController' })
-
-
-
-
+    .when('/MetaStock', { templateUrl: '/Areas/UTMS/Angular/MetaStock/MetaStock.html', controller: 'MetaStockController' })
 
     .when('/BorsaCloud', { templateUrl: '/Areas/UTMS/Angular/BorsaCloud/Index.html', controller: 'BorsaCloudController' })
 
-    
+    .when('/BorsaBreak', { templateUrl: '/Areas/UTMS/Angular/BorsaBreak/BorsaBreak.html', controller: 'BorsaBreakController' })
 
+    .when('/MarketNews', { templateUrl: '/Areas/UTMS/Angular/BorsaBreak/MarketNews.html', controller: 'MarketNewsController' })
 
-    .when('/GreenRed', { templateUrl: '/UTMS/GreenRed/Index', controller: 'GreenRedController' })
+    .when('/Television', { templateUrl: '/Areas/UTMS/Angular/BorsaBreak/Television.html', controller: 'TelevisionController' })
 
-    .when('/MetaStock', { templateUrl: '/UTMS/MetaStock/Index', controller: 'MetaStockController' })
+    .when('/Magazines', { templateUrl: '/Areas/UTMS/Angular/BorsaBreak/Magazines.html', controller: 'MagazinesController' })
 
-    .when('/Trader', { templateUrl: '/UTMS/Trader/Index', controller: 'TraderController' })
+    .when('/Petrochemicals', { templateUrl: '/Areas/UTMS/Angular/Petrochemical/Petrochemical.html', controller: 'PetrochemicalsController' })
 
-    .when('/bullsAndBears', { templateUrl: '/UTMS/bullsAndBears/Index', controller: 'bullsAndBearsController' })
+    .when('/investment', { templateUrl: '/Areas/UTMS/Angular/Investment/Investment.html', controller: 'InvestmentsController' })
 
-    .when('/Petrochemicals', { templateUrl: '/UTMS/Petrochemicals/Index', controller: 'PetrochemicalsController' })
+    .when('/CompaniesMap', { templateUrl: '/Areas/UTMS/Angular/CompaniesMap/CompaniesMap.html', controller: 'CompaniesMapController' })
 
-    .when('/CompaniesMap', { templateUrl: '/UTMS/CompaniesMap/Index', controller: 'CompaniesMapController' })
+    .when('/CompanyCard', { templateUrl: '/Areas/UTMS/Angular/CompanyCard/Index.html', controller: 'CompanyCardController' })
 
-    .when('/Knowledge', { templateUrl: '/UTMS/Knowledge/Index', controller: 'KnowledgeController' })
+    .when('/Knowledge', { templateUrl: '/Areas/UTMS/Angular/Knowledge/Knowledge.html', controller: 'KnowledgeController' })
 
-    .when('/investment', { templateUrl: '/UTMS/Investments/Index', controller: 'InvestmentsController' })
+    .when('/TradingTime', { templateUrl: '/Areas/UTMS/Angular/HelperPages/TradingTime.html', controller: 'TradingTimeController' })
 
-    .when('/BcCounters', { templateUrl: '/UTMS/BcCounters/Index', controller: 'BcCountersController' })
+    .when('/BorsaMarket', { templateUrl: '/Areas/UTMS/Angular/HelperPages/BorsaMarket.html', controller: 'BorsaMarketController' })
 
-    .when('/BcIndicators', { templateUrl: '/UTMS/BcIndicators/Index', controller: 'BcIndicatorsController' })
+    .when('/GovernmentAgencies', { templateUrl: '/Areas/UTMS/Angular/HelperPages/GovernmentAgencies.html', controller: 'GovernmentAgenciesController' })
 
-    .when('/MarketCaster2', { templateUrl: '/UTMS/MarketCaster/MarketCaster2', controller: 'MarketCaster2Controller' })
+    .when('/Media', { templateUrl: '/Areas/UTMS/Angular/HelperPages/Media.html', controller: 'MediaController' })
 
-    .when('/MarketCaster3', { templateUrl: '/UTMS/MarketCaster/MarketCaster3', controller: 'MarketCaster3Controller' })
+    .when('/MediationCompanies', { templateUrl: '/Areas/UTMS/Angular/HelperPages/MediationCompanies.html', controller: 'MediationCompaniesController' })
 
-    .when('/BorsaBreak', { templateUrl: '/UTMS/BorsaBreak/Index', controller: 'BorsaBreakController' })
+    .when('/OtherEconomicsSources', { templateUrl: '/Areas/UTMS/Angular/HelperPages/OtherEconomicsSources.html', controller: 'OtherEconomicsSourcesController' })
 
-    
+    .when('/Regulators', { templateUrl: '/Areas/UTMS/Angular/HelperPages/Regulators.html', controller: 'RegulatorsController' })
 
-    .when('/TradingTime', { templateUrl: '/UTMS/HelpTools/TradingTime', controller: 'TradingTimeController' })
-
-    .when('/CompanyCard', { templateUrl: '/UTMS/CompanyCard/Card', controller: 'CompanyCardController' })
-        //.when("/signalr/hubs/", { templateUrl: "/signalr/hubs/", controller:"signalr" })
-    .when('/WorldEconomy', {
-        templateUrl: '/UTMS/WorldEconomy/Index',
-        controller: 'WorldEconomyController'
-    })
-
-    
-    //.when('/AboutUs', { templateUrl: '/Home/Index/#AboutUs', controller: 'AboutUsController' })
-    .otherwise({
-        redirectTo: '/'
-    });
-}]);
-
-
-
-App.controller('ChartDivController', function ($scope) {
- 
-});
-
-App.controller('GreenRedController', function ($scope) {
-
-});
-
-App.controller('WorldEconomyController', function ($scope) {
-
-});
-
-App.controller('MetaStockController', function ($scope) {
-
-});
-
-App.controller('TraderController', function ($scope) {
-
-});
-
-App.controller('bullsAndBearsController', function ($scope) {
-
-});
-
-App.controller('PetrochemicalsController', ["$scope", "$http", function ($scope, $http) {
-    $scope.loading = true;
-    DoLoading();
-    $http.get("/UTMS/Petrochemicals/GetAllPetrochemicals").success(function (data) {
-        $scope.MyData = data;
-        $scope.loading = false;
-    }).error(function (error) {
-        alert(error);
-        $scope.loading = false;
-    });
+    .otherwise({ redirectTo: '/' });
 }]);
 
 App.controller('CompanyCardController', function ($scope) {
 
 });
 
-App.controller('CompaniesMapController', function ($scope) {
-
-    $scope.map = { center: { latitude: 24.3269853, longitude: 45.0858763 }, zoom: 6 };
-
-    $scope.markers = [
-        { 'latitude': 24.4564278, 'longitude': 39.6433692, 'message': 'dd' },
-        { 'latitude': 24.797819, 'longitude': 46.722355, 'message': 'ee' }
-    ];
-});
-
-App.controller('KnowledgeController', ["$scope", "$http", function ($scope, $http) {
-    $scope.loading = true;
-    DoLoading();
-
-    $http.get("/UTMS/Knowledge/GetAllKnowledge").success(function (data) {
-
-        $scope.knowledges = data;
-        console.log(data);
-        $scope.loading = false;
-    }).error(function (error) {
-        alert(error);
-        $scope.loading = false;
-    });
-
-    $scope.status = {
-        isCustomHeaderOpen: false,
-        isFirstOpen: true,
-        isFirstDisabled: false
-    };
-}]);
-
-App.controller('InvestmentsController', function ($scope) {
-
-});
-
-App.controller('BcCountersController', function ($scope) {
-    //$scope.loading = true;
-    //DoLoading();
-    //  $scope.loading = false;
-
-});
-
-App.controller('BcIndicatorsController', function ($scope) {
-
-
-});
-
-App.controller('MarketCaster2Controller', function ($scope) {
-
-
-});
-
-App.controller('MarketCaster3Controller', function ($scope) {
-
-
-});
-
-App.controller('BorsaBreakController', function ($scope) {
-
-});
-
-App.controller('AboutUsController', function ($scope) {
-
-});
-
-App.controller('TradingTimeController', function ($scope) {
-
-});
 
 function DoLoading() {
     var opts = {

@@ -15,13 +15,6 @@ namespace BCMS.Areas.UTMS.Controllers
     public class BcCountersController : Controller
     {
         BorsaCapitalDataModel DB = new BorsaCapitalDataModel();
-        // GET: UTMS/BcCounters
-        public ActionResult Index()
-        {
-         
-            return View();
-        }
-
         OleDbConnection oledbConn;
         private JsonResult GenerateExcelData()
         {
@@ -48,9 +41,6 @@ namespace BCMS.Areas.UTMS.Controllers
             dt.Load(reader);
             oledbConn.Close();
             return Json(dt, JsonRequestBehavior.AllowGet);
-
-
-
         }
 
         [HttpGet]

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace BCMS.Areas.Games.Controllers
 {
+    [Authorize]
     public class GameController : Controller
     {
         // GET: NewGames/Home

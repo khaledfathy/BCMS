@@ -144,12 +144,12 @@ namespace BCMS
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/BCGame/script").Include(
-                //"~/Materials/Games/js/jquery-1.9.1.js",
-                "~/Scripts/jquery-3.1.0.js",
+                "~/Materials/Games/js/jquery-1.9.1.js",
+                //"~/Scripts/jquery-3.1.0.js",
                 "~/Scripts/modernizr.custom.js",
                 "~/Scripts/angular.js",
                 "~/Scripts/angular-route.js",
-                "~/Scripts/RouteController.js",
+                "~/Areas/Games/Angular/RouteController.js",
                 "~/Scripts/jquery.validate.min.js",
                 "~/Scripts/jquery.validate.unobtrusive.js"
                 //"~/scripts/jquery.signalR-2.2.0.js"
@@ -161,8 +161,8 @@ namespace BCMS
                //"~/SignalR/Hubs",
 
                ));
-
             #endregion
+
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*"));
 

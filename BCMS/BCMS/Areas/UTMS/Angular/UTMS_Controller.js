@@ -314,19 +314,58 @@ App.controller('AnalysesDetailsController', function ($scope, $http, $routeParam
     $scope.popup = function (id, title) {
         modal.style.display = "block";
         $("#title").html(title);
-        $("#content").html("<iframe src='/UTMS/BorsaGraphics/ChartDiv/" + id + "' style='height:400px; width:100%; overflow-y:auto;'></iframe>")
-               //.src = "/UTMS/BorsaGraphics/ChartDiv?id=" + id;
-
-        //$http({
-        //    url: "/UTMS/BorsaGraphics/ChartDiv",
-        //    method: 'GET',
-        //    params: { id: id }
-        //}).success(function (data) {
-        //    $("#content").src
-        //}).error(function () {
-        //    alert("error");
-        //});
-
+        $("#content").html("<iframe src='/UTMS/BorsaGraphics/ChartDiv/" + id + "' style='min-height:450px; width:100%; overflow-y:auto;'></iframe>");
     }
 
 });
+
+App.controller('BcIndicatorsController', function ($scope) {
+    $scope.active = true;
+    $scope.active1 = true;
+    $scope.active2 = true;
+    $scope.active3 = true;
+});
+
+App.controller('PetrochemicalsController', ["$scope", "$http", function ($scope, $http) {
+    $scope.loading = true;
+    DoLoading();
+    $http.get("/UTMS/Petrochemicals/GetAllPetrochemicals").success(function (data) {
+        $scope.MyData = data;
+        $scope.loading = false;
+    }).error(function (error) {
+        alert(error);
+        $scope.loading = false;
+    });
+}]);
+
+App.controller('KnowledgeController', ["$scope", "$http", function ($scope, $http) {
+    $scope.loading = true;
+    DoLoading();
+
+    $http.get("/UTMS/Knowledge/GetAllKnowledge").success(function (data) {
+
+        $scope.knowledges = data;
+        console.log(data);
+        $scope.loading = false;
+    }).error(function (error) {
+        alert(error);
+        $scope.loading = false;
+    });
+
+    $scope.status = {
+        isCustomHeaderOpen: false,
+        isFirstOpen: true,
+        isFirstDisabled: false
+    };
+}]);
+
+App.controller('CompaniesMapController', function ($scope) {
+
+    $scope.map = { center: { latitude: 24.3269853, longitude: 45.0858763 }, zoom: 6 };
+
+    $scope.markers = [
+        { 'latitude': 24.4564278, 'longitude': 39.6433692, 'message': 'dd' },
+        { 'latitude': 24.797819, 'longitude': 46.722355, 'message': 'ee' }
+    ];
+});
+

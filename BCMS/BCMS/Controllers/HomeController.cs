@@ -15,18 +15,5 @@ namespace BCMS.Controllers
         {
             return View();
         }
-
-        [HttpGet]
-        public ActionResult Intro()
-        {
-            return View();
-        }
-
-        public ActionResult Chart()
-        {
-            //var model = DB.Charts.FirstOrDefault(w => w.ChartId == id);
-
-            return View();
-        }
     }
 }

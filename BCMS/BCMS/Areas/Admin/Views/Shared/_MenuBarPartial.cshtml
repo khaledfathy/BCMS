@@ -1,6 +1,5 @@
-﻿  <!-- topbar starts -->
+﻿
 <div class="navbar navbar-default" role="navigation">
-
     <div class="navbar-inner">
         <button type="button" class="navbar-toggle pull-left animated flip">
             <span class="sr-only">Toggle navigation</span>
@@ -8,30 +7,27 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand">
             <span>Borsa Capital</span>
         </a>
 
-        <!-- user dropdown starts -->
         <div class="btn-group pull-right">
             <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> مدير الموقع</span>
+                <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs">مدير الموقع</span>
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" style="text-align:center">
                 <li><a href="#">الملف الشخصى</a></li>
                 <li class="divider"></li>
-               
                 <li>
                     <form action="/Account/LogOff" method="post">
                         @Html.AntiForgeryToken()
-                        <button type="submit" class="ui-icon-link" >تسجيل خروج</button>
+                        <button type="submit" class="ui-icon-link">تسجيل خروج</button>
                     </form>
 
                 </li>
             </ul>
         </div>
-        <!-- user dropdown ends -->
 
         <div class="btn-group pull-right">
             <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -39,37 +35,13 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" style="text-align:center">
-                <li><a href="/Admin/Home/UsersList">Users</a></li>
+                <li><a href="/Admin/Home/UsersList">المستخدمين</a></li>
                 <li class="divider"></li>
                 <li><a href="/Admin/Home/Roles">Roles</a></li>
             </ul>
         </div>
-
-
-        <ul class="collapse navbar-collapse nav navbar-nav top-menu">
-            <li><a href="/"><i class="glyphicon glyphicon-globe"></i> الذهاب الى الموقع الرسمى</a></li>
-            <li class="dropdown">
-                <a href="#" data-toggle="dropdown">
-                    <i class="glyphicon glyphicon-star"></i> قائمة منسدلة <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">One more separated link</a></li>
-                </ul>
-            </li>
-            <li>
-                <form class="navbar-search pull-left">
-                    <input placeholder="بحث" class="search-query form-control col-md-10" name="query"
-                           type="text">
-                </form>
-            </li>
+        <ul class="collapse navbar-collapse nav navbar-nav top-menu pull-right">
+            <li style="font-size:12px;"><a href="/" style="font-size:18px;"><i class="glyphicon glyphicon-globe"></i>الموقع الرسمى</a></li>
         </ul>
-
     </div>
 </div>
-<!-- topbar ends -->

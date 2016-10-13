@@ -1,0 +1,101 @@
+﻿
+<div style="overflow: auto;direction:ltr">
+    <div class="large-12 columns">
+        <div style="height:500px">
+            <table border="0" cellpadding="0" cellspacing="0" style="width: 120%; direction: ltr; overflow: auto" class="English3 Empty2 ToolTipDiv">
+                <tr>
+                    <th rowspan="2">Products&nbsp;74</th>
+                    <th rowspan="2">Price</th>
+                    <th colspan="2">SABIC 36</th>
+                    <th colspan="2"> Petro&nbsp;Rabigh&nbsp;8 </th>
+                    <th colspan="2">SAFCO 2</th>
+                    <th colspan="2">Kayan 14</th>
+                    <th colspan="2">Yansab 15</th>
+                    <th colspan="2">Sipchem&nbsp;8</th>
+                    <th colspan="2">SIIG 10</th>
+                    <th colspan="2">Tasnee&nbsp;8</th>
+                    <th colspan="2">Sahara&nbsp;8</th>
+                    <th colspan="2">Chemanol&nbsp;10</th>
+                    <th colspan="2">Alujain&nbsp;1</th>
+                    <th colspan="2">petrochem</th>
+                    <th colspan="2">Advanced</th>
+                    <th colspan="2">Nama</th>
+                </tr>
+
+                <tr class="SecondHeader">
+                    <td>Prod.</td>
+                    <td>%</td>
+                    <td>Prod.</td>
+                    <td>%</td>
+                    <td>Prod.</td>
+                    <td>%</td>
+                    <td>Prod.</td>
+                    <td>%</td>
+                    <td>Prod.</td>
+                    <td>%</td>
+                    <td>Prod.</td>
+                    <td>%</td>
+                    <td>Prod.</td>
+                    <td>%</td>
+                    <td>Prod.</td>
+                    <td>%</td>
+                    <td>Prod.</td>
+                    <td>%</td>
+                    <td>Prod.</td>
+                    <td>%</td>
+                    <td>Prod.</td>
+                    <td>%</td>
+                    <td>Prod.</td>
+                    <td>%</td>
+                    <td>Prod.</td>
+                    <td>%</td>
+                    <td>Prod.</td>
+                    <td>%</td>
+                </tr>
+
+                <tr ng-repeat="item in MyData">
+                    <td>
+                        <a href="#">
+                            {{item.products}}
+                            <div>
+                                {{item.usage}}
+                            </div>
+                        </a>
+                    </td>
+                   
+                    <td>{{item.price}}</td>
+                    <td>{{item.SABIC_prod}}</td>
+                    <td>{{item.SABIC_perc}}</td>
+                    <td>{{item.Petro_prod}}</td>
+                    <td>{{item.Petro_perc}}</td>
+                    <td>{{item.SAFCO_prod}}</td>
+                    <td>{{item.SAFCO_perc}}</td>
+                    <td>{{item.Kayan_prod}}</td>
+                    <td>{{item.Kayan_perc}}</td>
+                    <td>{{item.Yansab_prod}}</td>
+                    <td>{{item.Yansab_perc}}</td>
+                    <td>{{item.Sipchem_prod}}</td>
+                    <td>{{item.Sipchem_perc}}</td>
+                    <td>{{item.SIIG_prod}}</td>
+                    <td>{{item.SIIG_perc}}</td>
+                    <td>{{item.Tasnee_prod}}</td>
+                    <td>{{item.Tasnee_perc}}</td>
+                    <td>{{item.Sahara_prod}}</td>
+                    <td>{{item.Sahara_perc}}</td>
+                    <td>{{item.APPC_prod}}</td>
+                    <td>{{item.APPC_perc}}</td>
+                    <td>{{item.Chemanol_prod}}</td>
+                    <td>{{item.Chemanol_perc}}</td>
+                    <td>{{item.Alujain_prod}}</td>
+                    <td>{{item.Alujain_perc}}</td>
+                    <td>{{item.Adv_prod}}</td>
+                    <td>{{item.Adv_perc}}</td>
+                    <td>{{item.Nama_prod}}</td>
+                    <td>{{item.Nama_perc}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="loadingArea" ng-show="loading"></div>
+</div>
+

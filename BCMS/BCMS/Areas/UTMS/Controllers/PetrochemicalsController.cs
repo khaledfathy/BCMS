@@ -11,9 +11,6 @@ namespace BCMS.Areas.UTMS.Controllers
     {
         BorsaCapitalDataModel DB = new BorsaCapitalDataModel();
 
-        //
-        // GET: /UTMS/Petrochemicals/
-
         [HttpGet]
         public JsonResult GetAllPetrochemicals()
         {
@@ -49,10 +46,6 @@ namespace BCMS.Areas.UTMS.Controllers
                 Nama_prod=x.Nama_Prod,
                 Nama_perc=x.Nama_Per            
             }), JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult Index()
-        {
-            return View();
         }
 
     }

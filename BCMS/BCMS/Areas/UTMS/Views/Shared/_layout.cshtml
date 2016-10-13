@@ -9,21 +9,12 @@
     <title>BorsaCapital | Welcome</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="~/Materials/UTMS/Images/favicon.ico" type="image/x-icon">
-
-    @*@Styles.Render("~/App_Start/bundles/BCMS/style")*@
     <link href="~/Materials/UTMS/css/foundation.css" rel="stylesheet" />
     <link href="~/Materials/UTMS/css/MainStyle.css" rel="stylesheet" />
-    @*<link href="~/Materials/UTMS/css/Inputs.css" rel="stylesheet" />*@
-    @*<link href="~/Materials/UTMS/css/Css3.css" rel="stylesheet" />*@
-    @*<link href="~/Materials/UTMS/css/Icons.css" rel="stylesheet" />*@
-    @*<link href="~/Materials/UTMS/webicons.css" rel="stylesheet" />*@
     <link href="~/Materials/UTMS/MainMenu/css/component.css" rel="stylesheet" />
     <link href="~/Materials/UTMS/MainMenu/css/css3.css" rel="stylesheet" />
-    @*<link href="~/Materials/UTMS/MainMenu/css/default.css" rel="stylesheet" />*@
-    @*<link href="~/Materials/UTMS/Sliding.css" rel="stylesheet" />*@
     <link href="~/Materials/UTMS/css/Graphics.css" rel="stylesheet" />
-    
-
+    @*@Styles.Render("~/App_Start/bundles/BCMS/style")*@
     <style>
         .angular-google-map-container{
             height:400px;
@@ -31,23 +22,15 @@
     </style>
 </head>
 <body>
-
     <div class="BGWrapper">
-
         <!-- Start Header-->
-        @{Html.RenderPartial("_HeaderPartial");}
+        @Html.Partial("_HeaderPartial")
         <!--End Header-->
-
         <div class="MAINmainWrapper">
-
-            @{Html.RenderPartial("_LeftPartial");}
-
-            @{Html.RenderPartial("_RightPartial");}
-
-
+            @Html.Partial("_LeftPartial")
+            @Html.Partial("_RightPartial")
             <!--START CONTENT-->
             <div class="MainWrapperCenter">
-
                 <div class="MarqueeS" id="NewsBar" style="display:none">
                     <marquee direction="right" scrollamount="3" onmousedown="this.stop();" onmouseup="this.start();">
                         <span>أوقات التداول حسب توقيت المملكة العربية السعودية</span>&nbsp;|&nbsp;
@@ -80,71 +63,35 @@
                         <li style="display:inline"><img class="notificationTooltip" title="0" src="~/Areas/UTMS/Images/BlackNote1.png" alt="GreenNote" width="15" /></li>
                     </ul>
                 </div>
-
                 @RenderBody()
-
-                @*@RenderSection("MarketCaster", required: false)*@
-
                 <div class="clearfix"></div>
                 <!--END CONTENT-->
             </div>
             <div class="clearfix"></div>
-
         </div>
         <div class="clearfix"></div>
-        @{Html.RenderPartial("_FooterPartial");}
+        @Html.Partial("_FooterPartial")
     </div>
 
-    @*@Scripts.Render("~/App_Start/bundles/BCMS/script")*@
-
-    @*@Scripts.Render("~/App_Start/bundles/UTMS/script")*@
     <script src="~/Scripts/jquery.js"></script>
     <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
-    @*<script src="~/Scripts/modernizr.js"></script>
-    <script src="~/Scripts/foundation.js"></script>*@
+    <script src="~/Scripts/modernizr.js"></script>
+    <script src="~/Scripts/foundation.js"></script>
     <script src="~/Scripts/spin.js"></script>
     <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-animate.js"></script>
     <script src="~/Scripts/angular-route.js"></script>
     <script src="~/Areas/UTMS/Angular/app_UTMS.js"></script>
     <script src="~/Scripts/highcharts.js"></script>
     <script src="~/Areas/UTMS/Angular/UTMS_Controller.js"></script>
     <script src="~/signalr/Hubs"></script>
-    
-    @*<script src="~/Areas/UTMS/Charts/angular-google-maps.js"></script>*@
+    <script src="~/Areas/UTMS/Charts/angular-google-maps.js"></script>
     <!--BC-Counters-->
     <script src="~/Scripts/highcharts-more.js"></script>
     <script src="~/Scripts/solid-gauge.src.js"></script>
     <!--/BC-Counters-->
-
-    @*<script type="text/javascript">
-        $(function () {
-            $(".btnMusic").click(function () {
-                window.open("/test/Home/Music", "", "width=500, height=600");
-            });
-
-            $("#InfoBar").click(function () {
-                $("#NewsBar").slideToggle("slow");
-            });
-
-            $("#alert").click(function () {
-                $("#Alerts").slideToggle("slow");
-            });
-
-            var $elem = $('#allBody');
-
-            $(".Fbutton").click(function (event) {
-                event.preventDefault();
-                $("#FooterDetails").slideToggle(500);
-                $('html, body').animate({ scrollTop: $elem.height() }, 500);
-            });
-        });
-
-    </script>*@
-    @*<script>
-        $(document).foundation();
-    </script>*@
-
-
+    @*@Scripts.Render("~/App_Start/bundles/BCMS/script")*@
+    @*@Scripts.Render("~/App_Start/bundles/UTMS/script")*@
 </body>
 </html>
 

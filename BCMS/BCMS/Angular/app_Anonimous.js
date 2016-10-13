@@ -93,10 +93,6 @@ MyApp.config(["$routeProvider", "$locationProvider", function ($routeProvider, $
         templateUrl: '/Angular/Account/ResetPassword.html',
         controller: 'ResetpasswordController'
     })
-    .when('/Chart', {
-        templateUrl: '/Home/Chart',
-        controller: 'ChartController'
-    })
     .otherwise({
         redirectTo: '/'
     });
@@ -178,7 +174,6 @@ MyApp.controller('BorsaCloudCtrl', function ($scope) {
     window.location.href = '/UTMS/Home/index';
 });
 
-
 MyApp.controller('HomeController', ["$scope", "$location", function ($scope) {
     $scope.bc = 'bc';
     $scope.ourServices = 'ourServices';
@@ -186,7 +181,6 @@ MyApp.controller('HomeController', ["$scope", "$location", function ($scope) {
     $scope.entertainment = 'entertainment';
 
 }]);
-
 
 MyApp.controller('AboutUsController', ["$scope", function ($scope) {
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
@@ -279,9 +273,11 @@ MyApp.controller('RelaxingController', ["$scope", "$http", function ($scope, $ht
 MyApp.controller('AdminstrationMessageController', ["$scope", function ($scope) {
 
 }]);
+
 MyApp.controller('MyPortfolioController', ["$scope", function ($scope) {
 
 }]);
+
 MyApp.controller('MusicController', ["$scope", function ($scope) {
 
 }]);

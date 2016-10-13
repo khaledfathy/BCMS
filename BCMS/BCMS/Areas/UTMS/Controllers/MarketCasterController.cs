@@ -14,15 +14,5 @@ namespace BCMS.Areas.UTMS.Controllers
             MessagesRepository _messageRepository = new MessagesRepository();
             return PartialView("~/Areas/UTMS/Views/MarketCaster/_MarketCaster.cshtml", _messageRepository.GetAllMessages());
         }
-
-        public ActionResult MarketCaster2()
-        {
-            return View();
-        }
-
-        public ActionResult MarketCaster3()
-        {
-            return View();
-        }
     }
 }

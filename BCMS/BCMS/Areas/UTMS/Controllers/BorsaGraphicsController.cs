@@ -12,15 +12,6 @@ namespace BCMS.Areas.UTMS.Controllers
     public class BorsaGraphicsController : Controller
     {
         BorsaCapitalDataModel DB = new BorsaCapitalDataModel();
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult test()
-        {
-            return View();
-        }
 
         public JsonResult GetAllChartCategories()
         {
@@ -28,24 +19,12 @@ namespace BCMS.Areas.UTMS.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Analyses()
-        {
-            return View();
-        }
-
-        //[HttpPost]
         public JsonResult GetAllChartAnalysesKind(int id)
         {
             var model = DB.ChartAnalysesKinds.Where(w => w.ChartCategoryId == id).Select(c => new { c.CAKId, c.CAKName, c.Description,c.ImgId, c.ChartCategory.ChartCategoryName  }).ToList();
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult AnalysesDetails()
-        {
-            return View();
-        }
-
-        //[HttpPost]
         public JsonResult GetAllCharts(int id)
         {
             var model = DB.Charts.Where(w => w.CAKId == id).Select(c => new { c.ChartId, c.ChartName , c.ChartAnalysesKind.CAKName , c.ChartAnalysesKind.ChartCategory.ChartCategoryName , c.ChartAnalysesKind.ChartCategoryId }).ToList();
@@ -59,11 +38,6 @@ namespace BCMS.Areas.UTMS.Controllers
 
             return View(model);
         }
-        //public ActionResult ChartDiv()
-        //{
-            
-        //    return View();
-        //}
 
         #region التقييم الإتماني
         [HttpPost]

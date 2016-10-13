@@ -1,0 +1,476 @@
+﻿
+<style>
+    .container {
+        margin-top: 100px;
+    }
+
+    .expandcollapse-item {
+        overflow: hidden;
+    }
+
+    .expandcollapse-heading-collapsed {
+        cursor: pointer;
+        padding: 10px 20px;
+        position: relative;
+        color: black;
+        background-color: #ffffdd;
+        border: 1px solid grey;
+        z-index: 2;
+    }
+
+    .expandcollapse-heading-collapsed p {
+        font-size: 16px;
+        font-weight: normal;
+        margin: 0px;
+    }
+    .expandcollapse-heading-expanded {
+        cursor: pointer;
+        padding: 15px 20px;
+        position: relative;
+        color: white;
+        background-color: black;
+        border: 1px solid gray;
+        z-index: 2;
+    }
+    .expandcollapse-heading-expanded h2 {
+        color: white;
+        font-size: 18px;
+    }
+    .expandcollapse-heading-expanded p {
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0px;
+    }
+    .expandcollapse-heading-collapsed > span,
+    .expandcollapse-heading-expanded > span {
+        position: absolute;
+        top: 25px;
+        right: 15px;
+        font-size: 20px;
+        line-height: 0px;
+    }
+    .expand-collapse-content {
+        padding: 20px;
+        border-left: 1px solid gray;
+        border-right: 1px solid gray;
+        border-bottom: 1px solid gray;
+    }
+
+
+    /*
+    animation:*/
+
+    .slideDown.ng-hide-remove,
+    .slideDown.ng-hide-add {
+        /* remember, the .hg-hide class is added to element
+      when the active class is added causing it to appear
+      as hidden. Therefore set the styling to display=block
+      so that the hide animation is visible */
+        display: block !important;
+    }
+
+
+    .slideDown.ng-hide-add {
+        animation-name: hide;
+        -webkit-animation-name: hide;
+        animation-duration: .5s;
+        -webkit-animation-duration: .5s;
+        animation-timing-function: ease-in;
+        -webkit-animation-timing-function: ease-in;
+    }
+
+    @keyframes hide {
+        0% {
+            transform: translateY(0%);
+        }
+
+        100% {
+            transform: translateY(-100%);
+        }
+    }
+
+    @-webkit-keyframes hide {
+        0% {
+            -webkit-transform: translateY(0%);
+        }
+
+        100% {
+            -webkit-transform: translateY(-100%);
+        }
+    }
+
+
+    .slideDown.ng-hide-remove {
+        animation-name: show;
+        -webkit-animation-name: show;
+        animation-duration: .5s;
+        -webkit-animation-duration: .5s;
+        animation-timing-function: ease-out;
+        -webkit-animation-timing-function: ease-out;
+    }
+
+    @keyframes show {
+        0% {
+            transform: translateY(-100%);
+        }
+
+        100% {
+            transform: translateY(0%);
+        }
+    }
+
+    @-webkit-keyframes show {
+        0% {
+            -webkit-transform: translateY(-100%);
+        }
+
+        100% {
+            -webkit-transform: translateY(0%);
+        }
+    }
+</style>
+
+<div style="margin: 1em 0;">
+    <script>
+        (function ($) {
+
+            var allPanels = $('.accordionNew > dd').hide();
+
+            $('.accordionNew > dt > a').click(function () {
+                allPanels.slideUp();
+                $(this).parent().next().slideDown();
+                return false;
+            });
+
+        })(jQuery);
+    </script>
+
+    <div class="expandcollapse-item">
+        <div ng-click="active = !active" ng-class="{'expandcollapse-heading-collapsed': active, 'expandcollapse-heading-expanded': !active}">
+            <h2>المتوسطات المتحركة (Moving Averages)</h2>
+            <!--<div class="clearfix"></div>-->
+
+        </div>
+        <div class="slideDown" ng-hide="active">
+            <div class="expand-collapse-content">
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;">المتوسطات المتحركة هي واحدة من أقدم تقنيات التحليل الفني وأكثرها انتشارًا، وتستخدم بشكل رئيسي كأداة لملاحقة الاتجاه<span style="color: rgb(255, 0, 0);"> (Trend Following)</span>.</span></span></p>
+
+                <p dir="rtl" style="text-align: center;"><span style="font-family:tahoma;"><span style="font-size: 14px;"><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/132251-1.jpg" vspace="20"></span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;"><span style="color: rgb(255, 0, 0);">&nbsp;نوع المؤشر:</span> من المؤشرات الاتجاهية <span style="color: rgb(255, 0, 0);">(Trend Indicators).</span></span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;">المتوسطات المتحركة هي حساب لمتوسط حركة السعر في فترة زمنية محددة، حيث تؤخذ مجموعة من البيانات السعرية لفترة محددة (كأسعار الإغلاق على سبيل المثال) وتجمع هذه الأسعار وتقسم على عددها فينتج منها رقم يكون هو المتوسط المتحرك. </span></span></p>
+
+                <p dir="rtl" style="text-align: justify;">&nbsp;</p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;"><span style="color: rgb(0, 128, 0);"><strong>هناك أكثر من نوع من المتوسطات المتحركة وأشهرها هي:</strong></span></span></span></p>
+
+                <ul>
+                    <li style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;">المتوسط المتحرك البسيط <span style="color: rgb(255, 0, 0);">(Simple Moving Average) أو (SMA).</span></span></span></li>
+                    <li style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;">المتوسط المتحرك الأسي <span style="color: rgb(255, 0, 0);">(Exponential Moving Average) أو (EMA).&nbsp;</span></span></span></li>
+                </ul>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;"><span style="color: rgb(255, 0, 0);">المتوسط المتحرك البسيط (Simple Moving Average):</span></span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;">هو عبارة عن متوسط للأسعار في فترة زمنية محددة، ويمكن حسابه على أساس أسعار الإغلاق أو الافتتاح أو الحد الأدنى والأعلى للسعر، ولكن يفضل احتسابه على أسعار الإغلاق نظرًا لأهميتها.</span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;">ولحساب المتوسط المتحرك البسيط تؤخذ أسعار الإغلاق لفترة معينة (<span style="color: rgb(255, 0, 0);">50</span> يوم مثلًا) ثم يتم جمع هذه الأسعار وقسمتها على الفترة <span style="color: rgb(255, 0, 0);">(50)</span>.</span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;">وبشكل عام كل ما عليك هو اختيار الفترة الزمنية للمتوسط المتحرك في برنامج الرسوم البيانية لديك، وسيتم إدراج المتوسط على الرسم البياني تلقائيًا.</span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;">&nbsp;</span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;"><span style="color: rgb(255, 0, 0);">المتوسط المتحرك الأسي (Exponential Moving Average):</span></span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;">نظرًا لأن المتوسطات المتحركة تتأخر إلى حد كبير عن حركة السعر، يستخدم المحللون أحيانًا المتوسط المتحرك الأسي الذي يعطي أهمية أكبر للأسعار الحديثة وذلك من خلال مجموعة من المعادلات للتغلب على التأخير في حركة المتوسط.</span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;">وجدير بالذكر أن الفرق بين كلا المتوسطين ليس كبيرًا جدًا ولكن يكون المتوسط الأسي أقرب إلى حركة السعر عن المتوسط البسيط، وهناك من المحللون من يفضل استخدام المتوسط الأسي على اعتبار أن إشاراته أكثر سرعة وتوافقًا مع السعر، وهناك من يفضلون المتوسط البسيط على اعتبار أن إشاراته أكثر مصداقية ولا يعطي الكثير من الإشارات الكاذبة مثل المتوسط الأسي.</span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;">واستخدام أي منهم بصفة عامة يجب أن يعتمد على مدى رد فعل السوق تجاه المتوسط المستخدم، فإذا كان أداء المتوسط البسيط أفضل مع السعر من المتوسط الأسي فيمكنك استخدام المتوساطت البسيطة. والعكس صحيح. </span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;">&nbsp;</span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;"><span style="color: rgb(0, 128, 0);"><strong>استخدامات المتوسطات المتحركة:</strong></span></span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;"><span style="color: rgb(255, 0, 0);">1- كسر السعر للمتوسط المتحرك.</span></span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;">يستخدم كسر السعر للمتوسط المتحرك كإشارة للشراء والبيع، فعندما يكسر السعر المتوسط المتحرك للأعلى تكون إشارة للشراء، والعكس في حالة الكسر لأسفل تكون إشارة بيع، لاحظ المثال التالي:</span></span></p>
+
+                <p dir="rtl" style="text-align: center;"><span style="font-family:tahoma;"><span style="font-size: 14px;"><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/132257-2.jpg" vspace="20"></span></span></p>
+
+                <p dir="rtl" style="text-align: justify;">&nbsp;</p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;">ويلاحظ أنه كلما زادت فترة المتوسط المتحرك كلما قلت الإشارات وازدادت دقتها والعكس في المتوسطات ذات الفترات القصيرة، وتعد أشهر المتوسطات التي تستخدم لهذا الغرض <span style="color: rgb(255, 0, 0);">20</span> و <span style="color: rgb(255, 0, 0);">50 </span>و <span style="color: rgb(255, 0, 0);">89 </span>و <span style="color: rgb(255, 0, 0);">150 </span>و <span style="color: rgb(255, 0, 0);">200</span></span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;">&nbsp;</span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;"><span style="color: rgb(153, 51, 0);">2- تقاطع متوسطين متحركين.</span></span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;">يمكن استخدام تقاطع متوسطين متحركين لتوليد إشارات الشراء والبيع كما يلي:</span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;"><span style="color: rgb(153, 51, 0);">إشارات الشراء:</span> عندما يتقاطع متوسط قصير المدى مع متوسط طويل المدى للأعلى.</span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;"><span style="color: rgb(153, 51, 0);">إشارات البيع:</span> عندما يتقاطع متوسط قصير المدى مع متوسط طويل المدى للأسفل.</span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;">وأشهر المتوسطات التي تستخدم لهذا الغرض هي <span style="color: rgb(255, 0, 0);"><span style="color: rgb(0, 0, 0);">(</span>5<span style="color: rgb(0, 0, 0);">،</span> 20<span style="color: rgb(0, 0, 0);">)</span></span> و <span style="color: rgb(255, 0, 0);"><span style="color: rgb(0, 0, 0);">(</span>10<span style="color: rgb(0, 0, 0);">،</span> 50<span style="color: rgb(0, 0, 0);">)</span></span>، لاحظ المثال التالي:</span></span></p>
+
+                <p dir="rtl" style="text-align: center;">
+                    <br>
+                    <span style="font-family:tahoma;"><span style="font-size: 14px;"><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/132255-3.jpg" vspace="20"></span></span>
+                </p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;"><span style="color: rgb(153, 51, 0);">3- تقاطع ثلاثة متوسطات متحركة:</span></span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;">&nbsp;&nbsp;&nbsp; يمكن استخدام تقاطع ثلاثة متوسطات متحركة لتوليد إشارات الشراء والبيع، ومن أشهر تطبيقاتها استخدام تقاطع المتوسطات <span style="color: rgb(255, 0, 0);"><span style="color: rgb(0, 0, 0);">(</span>5 <span style="color: rgb(0, 0, 0);">،</span> 10 <span style="color: rgb(0, 0, 0);">،</span> 20<span style="color: rgb(0, 0, 0);">)</span></span>.</span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;"><span style="color: rgb(153, 51, 0);">إشارات الشراء:</span> تقاطع <span style="color: rgb(255, 0, 0);">5</span> مع <span style="color: rgb(255, 0, 0);">10 </span>للأعلى، ثم تقاطع <span style="color: rgb(255, 0, 0);">10 </span>مع <span style="color: rgb(255, 0, 0);">20 </span>للأعلى بحيث يكون أعلاهم هو <span style="color: rgb(255, 0, 0);">5 </span>يليه <span style="color: rgb(255, 0, 0);">10 </span>ثم <span style="color: rgb(255, 0, 0);">20</span>.</span></span></p>
+
+                <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;"><span style="color: rgb(153, 51, 0);">إشارات البيع:</span> تقاطع <span style="color: rgb(255, 0, 0);">5 </span>مع <span style="color: rgb(255, 0, 0);">10 </span>للأسفل، ثم تقاطع <span style="color: rgb(255, 0, 0);">10 </span>مع <span style="color: rgb(255, 0, 0);">20 </span>للأسفل بحيث يكون أعلاهم هو <span style="color: rgb(255, 0, 0);">20 </span>يليه <span style="color: rgb(255, 0, 0);">10</span> ثم <span style="color: rgb(255, 0, 0);">5</span>، لاحظ المثال التالي:</span></span></p>
+
+                <p dir="rtl" style="text-align: justify;">&nbsp;</p>
+
+                <p dir="rtl" style="text-align: center;"><span style="font-family:tahoma;"><span style="font-size: 14px;"><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/132253-4.jpg" vspace="20"></span></span></p>
+
+                <p dir="rtl" style="text-align: justify;">&nbsp;</p>
+            </div>
+            <!--<div class="clearfix"></div>-->
+        </div>
+    </div>
+
+    <div class="expandcollapse-item">
+        <div ng-click="active1 = !active1" ng-class="{'expandcollapse-heading-collapsed': active1, 'expandcollapse-heading-expanded': !active1}">
+            <h2>حدود بولنجر (Bollinger Bands)</h2>
+            <!--<div class="clearfix"></div>-->
+        </div>
+        <div class="slideDown" ng-hide="active1">
+            <div class="expand-collapse-content">
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;"><span style="color:#008000;"><strong>مبتكر المؤشر:</strong></span></span></span></p>
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">مبتكر المؤشر هو "جون بولنجر" (<span dir="LTR"><span style="color:#FF0000;">John Bollinger</span></span>) في بداية الثمانينيات</span></span></p>
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">بنى "بولنجر" فكرة المؤشر على افتراض أن السوق في حركة تبادلية دائمة ويبقى ثابتًا ولذلك فلابد من وجود مستويات دعم ومقاومة متحركة تحاصر السعر ويمكنها التنبؤ بمناطق الارتداد بدلًا من المستويات الثابتة.</span></span></p>
+
+                <p dir="RTL" style="text-align: justify;">&nbsp;</p>
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">نوع المؤشر: المؤشر <span style="color:#FF0000;">اتجاهي </span>كما أنه من مؤشرات قياس <span style="color:#FF0000;">السيولة </span>في السوق.</span></span></p>
+
+                <p dir="RTL" style="text-align: justify;">&nbsp;</p>
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;"><span style="color:#008000;"><strong>يتكون المؤشر من:</strong></span></span></span></p>
+
+                <ul>
+                    <li dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">حد أوسط<span dir="LTR"> :</span> وهو متوسط متحرك بسيط<span dir="LTR">.</span></span></span></li>
+                    <li dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">حد علوي<span dir="LTR">:</span> وهو انحراف معياري موجب للمتوسط البسيط<span dir="LTR">.</span></span></span></li>
+                    <li dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">حد سفلي<span dir="LTR">:</span> وهو انحراف معياري سالب للمتوسط البسيط<span dir="LTR">.</span></span></span></li>
+                </ul>
+
+                <p dir="RTL" style="text-align: justify;">&nbsp;</p>
+
+                <p dir="RTL" style="text-align: center;"><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/132845-1.jpg" vspace="20"></p>
+
+                <p dir="RTL" style="text-align: justify;">&nbsp;</p>
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">والإعدادات الافتراضية للمؤشر التي استخدمها "جون بولنجر" هي:</span></span></p>
+
+                <ul>
+                    <li dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">&nbsp;<span style="color:#FF0000;">متوسط بسيط <span dir="LTR">20</span></span></span></span></li>
+                    <li dir="RTL" style="text-align: justify;"><span style="color:#FF0000;"><span style="font-size: 14px;"><span style="font-family: tahoma;">انحراف معياري إيجابي <span dir="LTR">(2+)</span><span dir="LTR">.</span></span></span></span></li>
+                    <li dir="RTL" style="text-align: justify;"><span style="color:#FF0000;"><span style="font-size: 14px;"><span style="font-family: tahoma;">انحراف معياري سلبي <span dir="LTR">(2-)</span><span dir="LTR">.</span></span></span></span></li>
+                </ul>
+
+                <p dir="RTL" style="text-align: justify;">&nbsp;</p>
+
+                <p dir="RTL" style="text-align: justify;"><span style="color:#008000;"><strong><span style="font-size: 14px;"><span style="font-family: tahoma;">الاستفادة من خطوط بولنجر:</span></span></strong></span></p>
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">1- استخدام البولنجر كمؤشر لدرجة تقلب الأسعار (<span style="color:#FF0000;"><span dir="LTR">Volatility</span></span>):</span></span></p>
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">خطوط بولنجر توضح بشكل كبير درجات تقلب الأسعار في السوق</span></span></p>
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">فإذا تقارب حدي بولنجر وتحركا في نطاق نطاق عرضي ضيق فهذا يعني أن هناك ضعف في درجة تقلب الأسعار، وغالبًا ما تتبعه حركة سعرية قوية في أحد الاتجاهات، لذلك فعليك أن تحذر إذا وجدت المؤشر يتحرك في نطاق ضيق ويجب أن تستعد لحركة قوية في أحد الاتجاهات، وتستخدم أدواتك الفنية للدخول مع اتجاهها.</span></span></p>
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">لاحظ الحركة القوية بعد <span style="color:#FF0000;">ضيق </span>حدود المؤشر.</span></span></p>
+
+                <p dir="RTL" style="text-align: justify;">&nbsp;</p>
+
+                <p dir="RTL" style="text-align: center;"><span style="font-size:14px;"><span style="font-family: tahoma;">. <img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/132847-2.jpg" vspace="20"></span></span></p>
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">أما في حالة ارتفاع درجة تقلبات الأسعار فإن المسافة بين حدود المؤشر تزداد، ويكون السعر قد وصل إلى ذروة الحركة فتزداد احتمالات الانعكاس، ويمكن التنبؤ بمناطق الانعكاس بدمج حدود بولنجر مع <span style="color:#FF0000;">مؤشرات الزخم</span>.</span></span></p>
+
+                <p dir="RTL" style="text-align: center;"><span style="font-size:14px;"><span style="font-family: tahoma;">&nbsp;.<img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/132847-3.jpg" vspace="20"></span></span></p>
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">2- استخدام خطوط بولنجر كأهداف.</span></span></p>
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">بالرغم من إمكانية اعتبار الحد العلوي للمؤشر كمقاومة والحد السفلي كدعم واستخدامها كنقاط لدخول الصفقات، إلا أنه يفضل استخدامها كأهداف وعدم الاعتماد عليها كنقاط دخول تجنبًا للإشارات الكاذبة، فيمكن الاعتماد في الدخول على كسر الحد الأوسط (المتوسط البسيط) ويكون الهدف بعد كسره إما الحد العلوي أو الحد السفلي كما بالمثال التالي:</span></span></p>
+
+                <p dir="RTL" style="text-align: center;"><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/132848-4.jpg" vspace="20"></p>
+
+                <p dir="RTL" style="text-align: justify;">&nbsp;</p>
+
+                <p dir="RTL" style="text-align: justify;">&nbsp;</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="expandcollapse-item">
+        <div ng-click="active2 = !active2" ng-class="{'expandcollapse-heading-collapsed': active2, 'expandcollapse-heading-expanded': !active2}">
+            <h2>مؤشر متوسط الحركة الاتجاهية (ADX- Average Directional Movement Index)</h2>
+        </div>
+        <div class="slideDown" ng-hide="active2">
+            <div class="expand-collapse-content">
+                <p style="text-align: justify;"><span style="color:#008000;"><strong><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">مبتكر المؤشر:</span></span></strong></span></p>
+
+                <p style="text-align: justify;"><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">ويلز ويلدر (<span style="color: #ff0000;">WELLES WILDER</span>)</span></span></p>
+
+                <p style="text-align: justify;"><span style="color:#008000;"><strong><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">نوع المؤشر:</span></span></strong></span></p>
+
+                <p style="text-align: justify;"><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">مؤشر اتجاهي (</span></span><span style="color: #ff0000;"><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">Trend Following</span></span></span><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">)</span></span></p>
+
+                <p style="text-align: justify;"><span style="color:#008000;"><strong><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">فكرة عمل المؤشر:</span></span></strong></span></p>
+
+                <p style="text-align: justify;"><span style="font-family: tahoma,arial,helvetica,sans-serif;"><span style="font-size: small;"><span style="color: #993300;"><span style="color: #000000;">● </span></span></span></span><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">تقوم فكرة عمل المؤشر على الإشارة إلى وجود اتجاه عندما يكون السوق فى أعلى درجات الاتجاه. أي أنه مؤشر اتجاهي يبحث فقط عن الاتجاه القوي (<span style="color: #ff0000;">DM-Directional movement</span>).</span></span></p>
+
+                <p style="text-align: justify;"><span style="font-family: tahoma,arial,helvetica,sans-serif;"><span style="font-size: small;"><span style="color: #993300;"><span style="color: #000000;">● </span></span></span></span><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">اشتق مؤشر <span style="color: #ff0000;">(</span></span></span><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;"><span style="color: #ff0000;">ADX</span></span></span><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;"><span style="color: #ff0000;">)</span> من مؤشرين آخرين تم تطويرهم بواسطة&nbsp; (<span style="color: #ff0000;">WELLES WILDER</span>) وهما (<span style="color: #ff0000;">DI+</span>) و </span></span><span style="color: #ff0000;"><span style="color: #000000;"><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">(</span></span></span></span><span style="color: #ff0000;"><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">DI</span></span><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">-</span></span></span><span style="color: #000000;"><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">)</span></span></span></p>
+
+                <p style="text-align: justify;"><span style="color:#008000;"><strong><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">حيث أن:</span></span></strong></span></p>
+
+                <p style="text-align: justify;">
+                    <span style="font-size: small;">
+                        <span style="font-family: tahoma,arial,helvetica,sans-serif;">
+                            <span style="color: #800000;">ADX</span>: يقيس مدى قوة الاتجاه بغض النظر إذا كان هذا الاتجاه صاعد أو هابط.<br>
+                            <span style="color: #800000;">DI</span>
+                        </span>
+                    </span><span style="color: #800000;"><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">+</span></span></span><span style="font-size: small;">
+                        <span style="font-family: tahoma,arial,helvetica,sans-serif;">
+                            : يقيس قوة الاتجاه الصاعد.<br>
+                            <span style="color: #800000;">DI-</span> : يقيس قوة الاتجاه الهابط.
+                        </span>
+                    </span>
+                </p>
+
+                <p style="text-align: center;"><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/133651-1+.jpg" vspace="20"></p>
+
+                <p style="text-align: justify;"><span style="color:#008000;"><strong><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">طريقة عمل المؤشر</span></span></strong></span></p>
+
+                <p style="text-align: justify;"><span style="color:#FF0000;"><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">1- تقاطع خط (DI+</span></span><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">) مع خط (</span></span><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">DI-):</span></span></span></p>
+
+                <p style="text-align: justify;"><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">تعتبر تقاطعات خط (<span style="color: #ff0000;">DI</span></span></span><span style="color: #ff0000;"><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">+</span></span></span><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">) مع خط (</span></span><span style="color: #ff0000;"><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">DI</span></span></span><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;"><span style="color: #ff0000;">-</span>) هى الإشارة الرئيسية لهذا المؤشر، </span><span style="font-family: tahoma,arial,helvetica,sans-serif;">فتظهر إشارات الشراء عندما يقطع خط (</span></span><span style="color: #ff0000;"><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">DI</span></span></span><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;"><span style="color: #ff0000;">+</span>) خط (</span></span><span style="color: #ff0000;"><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">DI</span></span><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">-</span></span></span><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">) لأعلى.</span></span></p>
+
+                <p style="text-align: center;"><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/133655-2.jpg" vspace="20"></p>
+
+                <p style="text-align: justify;"><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">وتظهر إشارات البيع عندما يقطع خط ( <span style="color: #ff0000;">DI</span></span></span><span style="color: #ff0000;"><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">-</span></span></span><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">) خط (</span></span><span style="color: #ff0000;"><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">DI</span></span><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">+</span></span></span><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">) لأعلى.</span></span></p>
+
+                <p style="text-align: center;"><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/133654-2 ±±.jpg" vspace="20"></p>
+
+                <p style="text-align: justify;"><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">ولكن استخدام تلك الإشارات فى حالة الاتجاه الجانبي يؤدي إلى خسائر متكررة لذلك فنحتاج إلى استخدام أداه أخرى مع مؤشر ( <span style="color: #ff0000;">ADX</span>) لترشيح تلك الاشارات الخاطئة.</span></span></p>
+
+                <p style="text-align: justify;">&nbsp;</p>
+
+                <p style="text-align: justify;"><span style="color:#FF0000;"><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">2- تحديد قوة الاتجاه من خلال خط (ADX):</span></span></span></p>
+
+                <p style="text-align: justify;">إذا كان خط (<span style="color: #ff0000;">ADX</span>) أعلى مستوى <span style="color: #ff0000;">40 </span>فيشير ذلك إلى وجود اتجاه قوي (سواء كان الاتجاه صاعد أو هابط، أما إذا كان المؤشر أقل من مستوى <span style="color: #ff0000;">20 </span>فيشير ذلك&nbsp; إلى وجود حركة اتجاهية ضعيفة أو اتجاه جانبي.</p>
+
+                <p style="text-align: center;"><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/133654-3.jpg" vspace="20"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="expandcollapse-item">
+        <div ng-click="active3 = !active3" ng-class="{'expandcollapse-heading-collapsed': active3, 'expandcollapse-heading-expanded': !active3}">
+            <h2>مؤشر الزخم (Momentum)</h2>
+        </div>
+        <div class="slideDown" ng-hide="active3">
+            <div class="expand-collapse-content">
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;"><span style="color: rgb(0, 128, 0);"><strong>نوع المؤشر<span dir="LTR">:</span></strong></span></span></span></p>
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">مؤشر <span style="color:#FF0000;">زخم</span>، أي أنه يقيس سرعة وقوة حركة السعر، ويعتبر أحد أهم الأدوات المكملة للمؤشرات الاتجاهية، ويستعين بها أغلب المحللين والمتاجرين في الأسواق المالية لتوليد إشارات بالبيع والشراء سواءً في التحركات الاتجاهية أو التحركات العرضية</span></span></p>
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">فكرة المؤشر وطريقة استخدامة<span dir="LTR">:</span></span></span></p>
+
+                <ul>
+                    <li dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">يعتبر مؤشر "<span style="color:#FF0000;">الزخم</span>" هو الصورة الأولية والرئيسية لكل المؤشرات الفنية الخاصة بقياس الزخم، حيث يقيس معدل التغير فى حركة الأسعار</span></span></li>
+                    <li dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">فإذا كان نطاق التداول لفترة زمنية معينة أعلى منه في الفترة الزمنية السابقة فيعتبر ذلك زيادة فى معدل التغير (<span style="color:#FF0000;">تسارع في حركة السعر</span>) ومن ثم يرتفع المؤشر</span></span></li>
+                    <li dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">والعكس صحيح، إذا كان نطاق التداول للفترة الزمنية أقل من نطاق الفترة الزمنية السابقة فيعتبر&nbsp; ذلك انخفاض فى معدل التغير (<span style="color:#FF0000;">تباطؤ في حركة السعر</span>) ويؤدي هذا إلى قراءة أقل على المؤشر<span dir="LTR">.</span></span></span></li>
+                    <li dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">تعمل مؤشرات الزخم بشكل مثالي عندما يتحرك السوق بشكل جانبي وقد لا تعطي نتائج قوية فى توقع نقاط إنعكاس السعر عندما يكون السوق في حالة حركة اتجاهية، لذلك لابد من وضع الاتجاه في الاعتبار عند التعامل مع المؤشر الزخم هذا أو أي من أنواع&nbsp; مؤشرات الزخم الأخرى</span></span></li>
+                </ul>
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;"><span style="color: rgb(0, 128, 0);"><strong>إشارات مؤشر الزخم</strong></span></span></span></p>
+
+                <ol>
+                    <li dir="RTL" style="text-align: justify;"><span style="color:#FF0000;"><span style="font-size: 14px;"><span style="font-family: tahoma;">التشبع الشرائي، والتشبع البيعي</span></span>&nbsp;</span></li>
+                </ol>
+
+                <ul>
+                    <li dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">بوجه عام تصل مؤشرات الزخم إلى حالة التشبع الشرائي عند وصولها إلى مستوى مرتفع من حركة الأسعار مقارنة بقمم سابقة التي كونها السعر وهذا يعني أن السوق اكتفى حاليا من الصعود وعلى استعداد للهبوط، ولو للتصحيح.</span></span></li>
+                    <li dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">تصل مؤشرات الزخم لحالة التشبع البيعي عند وصولها إلى مستوى منخفض مقارنة بقيعان سابقة وهذا يعني أن السوق اكتفى حاليا من الهبوط ومستعد للصعود ولو للتصحيح.</span></span></li>
+                    <li dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">يجب ملاحظة أن التشبع الشرائي لا يعني بالضرورة أن نقوم بالبيع، ولا يعني التشبع البيعي أن نقوم بالشراء، فمن الممكن أن تكون الحركة الانعكاسية تصحيحية مؤقتة ويعود السعر لسابق اتجهه، لذلك فمتابعة سياق الحركة مهم جدا قبل تحديد إشارة الدخول</span></span></li>
+                </ul>
+
+                <ol>
+                    <li dir="RTL" style="text-align: justify;" value="2"><span style="color:#FF0000;"><span style="font-size: 14px;"><span style="font-family: tahoma;">الانفراج أو التباعد (<span dir="LTR">Divergence</span>)</span></span></span></li>
+                </ol>
+
+                <ul>
+                    <li dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">أغلب تحركات المؤشر تتبع تحركات السعر، صعودا وهبوطا، وحدوث الانفراج يعني حدوث اختلاف بين حكرة المؤشر وحركة السعر</span></span></li>
+                    <li dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">إشارة الإنفراج إشارة انعكاسية، وتعتبر إشارة رائدة لتحركات السعر، لأنها تتنبأ بالحركة قبل حدوثها، وهي نوعان إنفراج سلبي يدعم البيع، وانفراج إيجابي يدعم الشراء</span></span></li>
+                    <li dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">الانفراج السلبي، ويطلق عليه الانفراج البيعي، يحدث في الحركة الصاعدة عندما يكون السعر قمة أعلى من القمة السابقة لها، في حين يكافئهما قمة أدنى من السابقة لها على المؤشر</span></span></li>
+                    <li dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">الانفراج الإيجابي، ويطلق عليه الانفراج الشرائي، يحدث في الحركة الهابطة عندما يكون السعر قاع أدنى من القاع السابق له، في حين يكافئهما قاع أعلى من السابق له على المؤشر</span></span></li>
+                </ul>
+
+                <p dir="RTL" style="text-align: center;"><span style="font-size:14px;"><span style="font-family: tahoma;"><span dir="LTR"><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/134441-1.jpg" vspace="20"><span style="color:#FFF0F5;"></span></span></span></span></p>
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;"><span style="color: rgb(0, 128, 0);"><strong>أمثلة من الرسم البياني:</strong></span></span></span></p>
+
+                <p dir="RTL" style="text-align: center;">
+                    <span style="color:#FFF0F5;"></span><br>
+                    <span style="font-size:14px;"><span style="font-family: tahoma;"><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/134455-3.jpg" vspace="20"></span></span>
+                </p>
+
+                <p dir="RTL" style="text-align: center;">&nbsp;</p>
+
+                <p dir="RTL" style="text-align: center;"><span style="font-size:14px;"><span style="font-family: tahoma;"><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/134446-2.jpg" vspace="20"></span></span></p>
+
+                <p dir="RTL" style="text-align: center;">
+                    <br>
+                    &nbsp;
+                </p>
+
+                <p dir="RTL" style="text-align: justify;">&nbsp;</p>
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;"><span style="color: rgb(0, 128, 0);"><strong>توليد إشارات بيع وشراء مباشرة من المؤشر<span dir="LTR">:</span></strong></span></span></span></p>
+
+                <ol>
+                    <li dir="RTL" style="text-align: justify;"><span style="color:#FF0000;"><span style="font-size: 14px;"><span style="font-family: tahoma;">في الحركة الاتجاهية</span></span></span></li>
+                </ol>
+
+                <ul>
+                    <li dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">إشارة الشراء، عندما يكون الاتجاه صاعد ويهبط المؤشر أسفل خط المنتصف 100 ويعود إلى أعلى مجدداً.</span></span></li>
+                    <li dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">إشارة البيع، تكون في الاتجاه الهابط، عندما يصعد خط المؤشر أعلى خط المنتصف 100 ثم يعود ادناه مرة أخرى.</span></span></li>
+                </ul>
+
+                <p dir="RTL" style="text-align: center;"><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/134449-4.jpg" vspace="20"></p>
+
+                <p dir="RTL" style="text-align: center;">&nbsp;</p>
+
+                <p dir="RTL" style="text-align: center;"><span style="color:#FFF0F5;"></span><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/134448-5.jpg" vspace="20"></p>
+
+                <ol>
+                    <li dir="RTL" style="text-align: justify;" value="2"><span style="color:#FF0000;"><span style="font-size: 14px;"><span style="font-family: tahoma;">كسر خط الاتجاه المرسوم على المؤشر</span></span></span></li>
+                </ol>
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">حركة المؤشر المتعرجة شديدة الشبه بتحركات السعر، وغالبا ما تتبعه صعودا وهبوطا تزامنا مع القمم والقيعان التي يكونها، لذلك يمكن الاستفادة من تقنية خط الاتجاه للتنبؤ بتحولات حركة السعر</span></span></p>
+
+                <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;"><span style="color: rgb(0, 128, 0);"><strong>نلاحظ معا</strong></span></span></span></p>
+
+                <ol>
+                    <li dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">كسر خط الاتجاه الصاعد المرسوم على المؤشر دائما ما يسبق تحول حركة السعر من الصعود إلى الهبوط</span></span></li>
+                    <li dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">كسر خط الاتجاه الهابط المرسوم على المؤشر دائما ما يسبق تحول حركة السعر من الهبوط إلى الصعود</span></span></li>
+                </ol>
+
+                <p dir="RTL" style="text-align: center;"><span style="color:#FFF0F5;"></span><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/134452-7.jpg" vspace="20"><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/134451-6.jpg" vspace="20"></p>
+            </div>
+        </div>
+    </div>
+</div>
+

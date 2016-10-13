@@ -1,183 +1,57 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="utf-8">
     <title> Borsa Admin </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
-
-
-    <!-- The styles -->
-   
-    <link href="~/Areas/Admin/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Areas/Admin/css/charisma-app.css" rel="stylesheet">
-
-    <link href='bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
-    <link href='bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'>
-    <link href='bower_components/chosen/chosen.min.css' rel='stylesheet'>
-    <link href='bower_components/colorbox/example3/colorbox.css' rel='stylesheet'>
-    <link href='bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' rel='stylesheet'>
-
-    <link href='~/Areas/Admin/bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'>
-    <link href='~/Areas/Admin/css/jquery.noty.css' rel='stylesheet'>
-    <link href='~/Areas/Admin/css/noty_theme_default.css' rel='stylesheet'>
-    <link href="~/Areas/Admin/css/elfinder.theme.css" rel="stylesheet" />
-    <link href="~/Areas/Admin/css/elfinder.min.css" rel="stylesheet" />
-
-    <link href="~/Areas/Admin/css/jquery.iphone.toggle.css" rel="stylesheet" />
-    <link href="~/Areas/Admin/css/uploadify.css" rel="stylesheet" />
-
-
-    <link href='~/Areas/Admin/css/animate.min.css' rel='stylesheet'>
-
-    <!-- jQuery -->
-    <script src="~/Areas/Admin/bower_components/jquery/jquery.min.js"></script>
     <link rel="shortcut icon" href="~/Areas/Admin/img/favicon.ico">
-
+    <link href="~/Areas/Admin/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href='~/Areas/Admin/bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'>
+    <link href="~/Areas/Admin/css/charisma-app.css" rel="stylesheet">
     @*Dialogs Javascript And CSS*@
     <link href="~/Areas/Admin/Content/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
     <script src="~/Areas/Admin/js/jquery-1.8.2.min.js"></script>
     <script src="~/Areas/Admin/js/jquery-ui-1.8.24.min.js"></script>
-
-    
-
    @RenderSection("Scripts", required: false)
 </head>
-
 <body>
     @{Html.RenderPartial("_MenuBarPartial");}
-
     <div class="ch-container">
         <div class="row">
-
          @{Html.RenderPartial("_RightSidePartial");}
-
-            <noscript>
-                <div class="alert alert-block col-md-12">
-                    <h4 class="alert-heading">Warning!</h4>
-
-                    <p>
-                        You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
-                        enabled to use this site.
-                    </p>
-                </div>
-            </noscript>
 
             <div id="content" class="col-lg-10 col-sm-10">
                 <!-- content starts -->
-                
-                
-
                 <div class="row">
                     <div class="box col-md-12">
                         <div class="box-inner">
                             <div class="box-header well">
-                                <h2><i class="glyphicon glyphicon-info-sign"></i> </h2>
-
-                                <div class="box-icon">
-                                    <a href="#" class="btn btn-setting btn-round btn-default">
-                                        <i class="glyphicon glyphicon-cog"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-minimize btn-round btn-default">
-                                        <i class="glyphicon glyphicon-chevron-up"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-close btn-round btn-default">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </a>
-                                    
-                                </div>
                                 <div id="users" style="display:none;">
                                     <a href="/Admin/Home/UsersList" id="customer" class="btn btn-sm btn-default">Customers</a>
                                     <a href="/Admin/Home/Staff" id="staff" class="btn btn-sm btn-default">Staff</a>
-
                                 </div>
-                                
-                                
                             </div>
                             <div class="box-content row" style="text-align:center; margin-left:0px; margin-right:0px;">
-
-                          
                                 @RenderBody()
-
-                        
-
                             </div>
                         </div>
                     </div>
                 </div>
-
-            
             </div>
         </div>
-   
-
-        <hr>
-
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-             aria-hidden="true">
-
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">×</button>
-                        <h3>Settings</h3>
-                    </div>
-                    <div class="modal-body">
-                        <p>Here settings can be configured...</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
-                        <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <hr />
         @{Html.RenderPartial("_FooterPartial");}
-
     </div>
 
-    <!--/.fluid-container-->
-    <!-- external javascript -->
-    @*<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>*@
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script src="~/Areas/Admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-
-
-    <!-- library for cookie management -->
     <script src="~/Areas/Admin/js/jquery.cookie.js"></script>
-    <!-- calender plugin -->
     <script src='~/Areas/Admin/bower_components/moment/min/moment.min.js'></script>
     <script src='~/Areas/Admin/bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
-    <!-- data table plugin -->
-    <script src='~/Areas/Admin/js/jquery.dataTables.min.js'></script>
-
-    <!-- select or dropdown enhancer -->
     <script src="~/Areas/Admin/bower_components/chosen/chosen.jquery.min.js"></script>
-    <!-- plugin for gallery image view -->
-    <script src="~/Areas/Admin/bower_components/colorbox/jquery.colorbox-min.js"></script>
-    <!-- notification plugin -->
-    <script src="~/Areas/Admin/js/jquery.noty.js"></script>
-    <!-- library for making tables responsive -->
     <script src="~/Areas/Admin/bower_components/responsive-tables/responsive-tables.js"></script>
-    <!-- tour plugin -->
-    <script src="~/Areas/Admin/bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
-    <!-- star rating plugin -->
-    <script src="~/Areas/Admin/js/jquery.raty.min.js"></script>
-    <!-- for iOS style toggle switch -->
-    <script src="~/Areas/Admin/js/jquery.iphone.toggle.js"></script>
-    <!-- autogrowing textarea plugin -->
-    <script src="~/Areas/Admin/js/jquery.autogrow-textarea.js"></script>
-    <!-- multiple file upload plugin -->
-    <script src="~/Areas/Admin/js/jquery.uploadify-3.1.min.js"></script>
-    <!-- history.js for cross-browser state change on ajax -->
-    <script src="~/Areas/Admin/js/jquery.history.js"></script>
-    <!-- application script for Charisma demo -->
-
     <script src="~/Areas/Admin/js/charisma.js"></script>
 
-   
 </body>
 </html>
