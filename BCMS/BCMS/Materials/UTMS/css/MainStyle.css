@@ -1916,3 +1916,22 @@ table.TimeWorld td.Night, table.TimeWorld th.Night, td.Night, th.Night
     width: 100%;
     height: 45px;
 }
+
+/*Edit by hala 16-10-2016*/
+.company_logo{
+    width:190px;
+    float:right;
+    background:#ffffff;
+    padding:20px 8px 10px 8px;
+    margin:15px;
+    border:#999 solid 1px;
+    height:140px;
+    text-align:center;
+    font-weight:500;
+    font-size:18px;
+}
+
+    .company_logo img {
+        width:100%;
+         height: 65px;
+    }
