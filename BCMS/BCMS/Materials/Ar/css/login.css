@@ -460,6 +460,10 @@ padding-right: 0.0rem;
 }
 
 @media all and (max-width: 520px) {
+    .MobileWrapper section
+    {    width: 90%;
+    margin: 0 auto;
+    }
   .LogoWraper
 {
 width: 50%;
@@ -494,11 +498,14 @@ width: 99%;
 
         .form-3 input[type=text], .form-3 input[type=email], .form-3 input[type=password]
         {
-            width: 50%;
+           width: 94%;
+    display: block;
+    text-align: right;
         }
         .Remeberme
         {
-            width: 53%;
+            width: 96%;
+    display: block;
         }
 }
 
