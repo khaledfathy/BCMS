@@ -7,13 +7,12 @@ using BCMS.Models;
 
 namespace BCMS.Areas.Exams.Controllers
 {
+    [Authorize]
     public class RuningExamController : Controller
     {
-        BorsaCapitalDB DB = new BorsaCapitalDB();
+        BorsaCapitalDataModel DB = new BorsaCapitalDataModel();
         public ActionResult Index(int category)
-
         {
-           // category = 5;
             Session["tttt"] = category;
             return View();
         }
@@ -54,58 +53,7 @@ namespace BCMS.Areas.Exams.Controllers
             int SubCat = Convert.ToInt32(Session["tttt"]);
            
             var Random_id = DB.ExamQuestions.Where(x => x.subcategory_id == SubCat).Select(a => a.id).OrderBy(s => Guid.NewGuid()).ToList();
-            #region sss
-            //var Result = ((from x in DB.questions
-            //               where x.subcategory_id == SubCat
-            //                 select new{ id = x.id}).Take(1)
-            //         .Union((from x in DB.questions
-            //                 where x.subcategory_id == SubCat
-            //                 orderby x.id descending
-            //                 select new{ id = x.id}).Take(1)
-            //         )).ToList();
-
-            //int[] Nums = new int[100];
-
-            //int[] FirstAndLast = new int [2];
-
-            //int index = 0;
-            //foreach (var item in Result)
-            //{
-            //    FirstAndLast[index] = item.id;
-            //    index++;
-            //}
-            #endregion
-            #region mmmmm
-            /*
-            for (int i = 0; i < Nums.Length; i++)
-            {
-                bool Flag = false;
-                int n = new Random().Next(FirstAndLast[0], FirstAndLast[1] + 1);
-                while (!Flag)
-                {
-                    for (int x = i; x >= 0; x--)
-                    {
-                        if (Nums[x] == n)
-                        {
-                            Flag = false;
-                            Nums[i] = 0;
-                            n = new Random().Next(FirstAndLast[0], FirstAndLast[1] + 1);
-                            break;
-                        }
-                        else
-                        {
-                            Nums[i] = n;
-                            Flag = true;
-                        }
-
-                    }//End Small For
-                }//End While
-            }//End Big For
-            */
-            #endregion
-
-            //Nums[0] = new Random().Next(201, 301);
-
+         
             return Json(Random_id, JsonRequestBehavior.AllowGet);
         }
 

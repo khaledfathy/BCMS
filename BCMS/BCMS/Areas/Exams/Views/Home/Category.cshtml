@@ -10,8 +10,8 @@
             var x5 = '@Session["max_category5"]';
             var x6 = '@Session["max_category6"]';
             var x7 = '@Session["max_category7"]';
-           
-         
+
+
             $("#exam1-" + x).removeClass("ButtonSelect");
             $("#exam1-" + x).addClass("ButtonReady1");
             $(".ButtonReady1").attr("href", '@Url.Action("Index", "RuningExam",new { category=Session["max_category"] })');
@@ -66,28 +66,27 @@
 
             $("#exam1-" + x7).removeClass("ButtonSelect");
             $("#exam1-" + x7).addClass("ButtonReady7");
-          $(".ButtonReady7").attr("href", '@Url.Action("Index", "RuningExam",new { category=Session["max_category7"] })');
+            $(".ButtonReady7").attr("href", '@Url.Action("Index", "RuningExam",new { category=Session["max_category7"] })');
             for (var i = x7 - 1; i > 30; i--) {
                 $("#exam1-" + i).removeClass("ButtonSelect");
                 $("#exam1-" + i).addClass("ButtonDone");
             }
         });
 
-</script>
+    </script>
 }
+
 <div style="padding: 10px;">
     <table border="0" cellpadding="0" cellspacing="0" style="width:100%;font-weight:bold; direction:rtl" class="ContainerW NormalTxt">
         <tr class="RowHeader">
             <td colspan="6" align="center">
                 الاختبارات
-
             </td>
 
         </tr>
         <tr class="Row">
             <td><p style="width:100px" id="type"> أسئلة عامة</p></td>
             <td><a id="exam1-1" name="comand" class="ButtonSelect" />الإختبار الأول</td>
-        
             <td><a id="exam1-2" name="comand" class="ButtonSelect" />الإختبار الثاني</td>
             <td><a id="exam1-3" name="comand" class="ButtonSelect" />الإختبار الثالث</td>
             <td><a id="exam1-4" name="comand" class="ButtonSelect" />الإختبار الرابع</td>
@@ -145,7 +144,6 @@
             <td><a id="exam1-33" name="comand" class="ButtonSelect" />الإختبار الثالث</td>
             <td><a id="exam1-34" name="comand" class="ButtonSelect" />الإختبار الرابع</td>
             <td><a id="exam1-35" name="comand" class="ButtonSelect" />الإختبار الخامس</td>
-
         </tr>
     </table>
 </div>

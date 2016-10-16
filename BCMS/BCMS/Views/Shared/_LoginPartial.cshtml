@@ -1,12 +1,11 @@
 ﻿@using Microsoft.AspNet.Identity
+@using BCMS.Models
 @if (Request.IsAuthenticated)
 {
+    ApplicationDbContext db = new ApplicationDbContext();
     string FullName = null;
-    if (HttpContext.Current.Request.Cookies["Name"] != null)
-    {
-        FullName = HttpContext.Current.Request.Cookies["Name"].Value;
-    }
-
+    var UserId = User.Identity.GetUserId();
+    FullName = db.Users.FirstOrDefault(a => a.Id == UserId).FullName;
     <li>
         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
         {

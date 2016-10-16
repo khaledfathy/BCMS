@@ -83,8 +83,8 @@ namespace BCMS.Controllers
                 ViewBag.name = user.FirstName;
                 HttpCookie userIdCookie = new HttpCookie("UserId", user.Id);
                 HttpContext.Response.SetCookie(userIdCookie);
-                HttpCookie userNameCookie = new HttpCookie("Name", user.FullName);
-                HttpContext.Response.SetCookie(userNameCookie);
+                //HttpCookie userNameCookie = new HttpCookie("Name", user.FullName);
+                //HttpContext.Response.SetCookie(userNameCookie);
                 if (user.EmailConfirmed)
                 {
                     if (user.UserStatus == UserStatus.Active)

@@ -257,8 +257,6 @@
     <Compile Include="Areas\Admin\Controllers\YearsController.cs" />
     <Compile Include="Areas\Exams\Controllers\HomeController.cs" />
     <Compile Include="Areas\Exams\Controllers\RuningExamController.cs" />
-    <Compile Include="Areas\Exams\Controllers\_HomeController.cs" />
-    <Compile Include="Areas\Exams\Controllers\_RuningExamController.cs" />
     <Compile Include="Areas\Exams\ExamsAreaRegistration.cs" />
     <Compile Include="Areas\Games\Controllers\GameController.cs" />
     <Compile Include="Areas\Games\GamesAreaRegistration.cs" />
@@ -1937,7 +1935,6 @@
     <Content Include="Areas\Exams\Views\Home\Chart.cshtml" />
     <Content Include="Areas\Exams\Views\Home\_Category.cshtml" />
     <Content Include="Areas\Exams\Views\RuningExam\Index.cshtml" />
-    <Content Include="Areas\Exams\Views\RuningExam\_Index.cshtml" />
     <Content Include="Areas\Exams\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Exams\Views\web.config" />
     <Content Include="Areas\Exams\Views\_ViewStart.cshtml" />

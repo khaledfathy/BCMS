@@ -4,13 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BCMS.Models;
-using BCMS.RegisterService;
+using BCMS.Models;
 
 namespace BCMS.Areas.Exams.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-        BorsaCapitalDB DB = new BorsaCapitalDB();
+        BorsaCapitalDataModel DB = new BorsaCapitalDataModel();
+        
         public object getmaxcategory(int id,int defualtid,string user)
         {
             object maxcategory;
@@ -30,29 +32,30 @@ namespace BCMS.Areas.Exams.Controllers
         [HttpGet]
         public ActionResult Category()
         {
-
-            if (Request.Cookies["mvcname"] != null)
-            {
-                string user = Request.Cookies["mvcname"]["Username"];
-                Session["max_category"]=   getmaxcategory(1,1,user);
-                Session["max_category2"]= getmaxcategory(2,6, user);
-                Session["max_category3"]=  getmaxcategory(3,11, user);
-                Session["max_category4"]=   getmaxcategory(4,16, user);
-                Session["max_category5"]=   getmaxcategory(5,21, user);
-                Session["max_category6"]=   getmaxcategory(6,26, user);
-                Session["max_category7"]=   getmaxcategory(7,31,  user);
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home", new { Area = "" });
-            }
+            //if (Request.Cookies["mvcname"] != null)
+            //{
+            //string user = Request.Cookies["mvcname"]["Username"];
+            var user = User.Identity.Name;
+            Session["max_category"]=   getmaxcategory(1,1,user);
+            Session["max_category2"]= getmaxcategory(2,6, user);
+            Session["max_category3"]=  getmaxcategory(3,11, user);
+            Session["max_category4"]=   getmaxcategory(4,16, user);
+            Session["max_category5"]=   getmaxcategory(5,21, user);
+            Session["max_category6"]=   getmaxcategory(6,26, user);
+            Session["max_category7"]=   getmaxcategory(7,31,  user);
+            return View();
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Index", "Home", new { Area = "" });
+            //}
            
         }
         [HttpGet]
         public JsonResult getcategory ()
         {
-            string user = Request.Cookies["mvcname"]["Username"];
+            // string user = Request.Cookies["mvcname"]["Username"];
+            var user = User.Identity.Name;
             var lst = DB.ExamResults.Select(x => new { x.username, x.subcategory_id }).Where(x => x.username == user).ToList();
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
@@ -71,7 +74,8 @@ namespace BCMS.Areas.Exams.Controllers
       
         public ActionResult Chart()
         {
-            string user = Request.Cookies["mvcname"]["Username"];
+            //string user = Request.Cookies["mvcname"]["Username"];
+            var user = User.Identity.Name;
             var yourItem = DB.ExamResults.Where(x => x.username == user).Take(1).SingleOrDefault();
             if (yourItem == null)
             {
