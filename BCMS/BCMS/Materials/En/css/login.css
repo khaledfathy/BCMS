@@ -465,12 +465,43 @@ padding-right: 0.0rem;
 @media all and (max-width: 520px) {
   .LogoWraper
 {
-width: 100%;
+width: 50%;
+padding-left: 1em;
 }
 .SearchWraper
 {
 width: 99%;
 }
+
+    .form-3 {
+        width: 90%;
+        margin: .5em auto;
+    }
+
+        .form-3 .left {
+            clear: both;
+            width: 100%;
+            float: none;
+            margin-right: 0px;
+            display: block;
+        }
+
+        .form-3 .right {
+            clear: both;
+            width: 100%;
+            float: none;
+            margin-top: 0px;
+            display: block;
+        }
+
+        .form-3 input[type=text], .form-3 input[type=email], .form-3 input[type=password]
+        {
+            width: 50%;
+        }
+        .Remeberme
+        {
+            width: 53%;
+        }
 }
 
 
@@ -547,6 +578,9 @@ width: 99%;
 
 .FooterWrapperBG
 {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     background-color: #000;
     border: 0.063em solid #dadada;
     -webkit-border-radius: 0.375em 0.375em 0.375em 0.375em;
