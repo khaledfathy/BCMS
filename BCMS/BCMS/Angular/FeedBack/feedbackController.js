@@ -55,7 +55,6 @@ MyApp.controller('FeedbackController', ["$scope", "$http", function ($scope, $ht
                                 alertify.error("Error occured at sending message", 5);
                             }
                         }).error(function (data) {
-                            //$scope.loading = false;
                             alertify.error("Error occured at sending message", 5);
                         });
                     } else {
@@ -90,7 +89,6 @@ MyApp.controller('FeedbackController', ["$scope", "$http", function ($scope, $ht
                                 alertify.error("حدث خطأ فى إرسال الرسالة", 5);
                             }
                         }).error(function (data) {
-                            //$scope.loading = false;
                             alertify.error("حدث خطأ فى إرسال الرسالة", 5);
                         });
                     } else {

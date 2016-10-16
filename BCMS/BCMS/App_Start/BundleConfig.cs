@@ -47,7 +47,7 @@ namespace BCMS
 
             bundles.Add(new ScriptBundle("~/bundles/BCMS/script").Include(
                 "~/Scripts/jquery.min.js",
-                "~/Scripts/spin.min.js",
+                //"~/Scripts/spin.min.js",
                 "~/Scripts/alertify.min.js",
                 "~/scripts/angular.js",
                 "~/scripts/angular-route.js",

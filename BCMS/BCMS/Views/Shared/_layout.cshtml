@@ -23,6 +23,7 @@
     {
         @Styles.Render("~/bundles/BCMS/style/ar")
     }
+    <link href="~/Content/loading-bar.css" rel="stylesheet" />
 
     @Scripts.Render("~/bundles/BCMS/script")
 
@@ -33,6 +34,8 @@
     @RenderSection("scripts", required: false)
     @*<script src="~/Language/layoutController.js"></script>*@
     @*<script src="/signalr/Hubs"></script>*@
+    <script src="~/Scripts/angular-animate.min.js"></script>
+    <script src="~/Scripts/loading-bar.js"></script>
     
 </head>
 

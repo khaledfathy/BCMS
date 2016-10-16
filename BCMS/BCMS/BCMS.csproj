@@ -2251,10 +2251,8 @@
     <Content Include="Areas\UTMS\TimeLine_World\Untitled-1_edge.js" />
     <Content Include="Areas\UTMS\TimeLine_World\Untitled-1_edgeActions.js" />
     <Content Include="Areas\UTMS\Views\Shared\GulfMap.html" />
-    <Content Include="Areas\UTMS\Views\StockUp\FB_IMG_1473504890242.jpg" />
     <Content Include="Areas\UTMS\Views\StockUp\GulfMap.html" />
     <Content Include="Areas\UTMS\Views\StockUp\GulfMap.svg" />
-    <Content Include="Areas\UTMS\Views\StockUp\HtmlPage1.html" />
     <Content Include="Areas\Admin\bower_components\bootstrap-tour\.bower.json" />
     <Content Include="Areas\Admin\bower_components\bootstrap-tour\.gitignore" />
     <Content Include="Areas\Admin\bower_components\bootstrap-tour\.travis.yml" />
@@ -2665,7 +2663,6 @@
     <Content Include="Areas\UTMS\Views\Shared\_LeftPartial.cshtml" />
     <Content Include="Areas\UTMS\Views\Shared\_RightPartial.cshtml" />
     <Content Include="Areas\UTMS\Views\StockUp\Index.cshtml" />
-    <Content Include="Areas\UTMS\Views\StockUp\_Index.cshtml" />
     <Content Include="Areas\UTMS\Views\Web.config" />
     <Content Include="Areas\UTMS\Views\_ViewStart.cshtml" />
     <Content Include="Areas\UTMS\Views\BorsaCloud\_BorsaCloud.cshtml" />
@@ -2673,6 +2670,7 @@
     <Content Include="Areas\UTMS\Views\BorsaGraphics\ChartDiv.cshtml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\loading-bar.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -3929,6 +3927,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\loading-bar.js" />
     <Content Include="Scripts\lodash.js" />
     <Content Include="Scripts\mm-foundation-tpls-0.6.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />

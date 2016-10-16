@@ -15,19 +15,15 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", function ($
     $scope.loginBtn = 'LOGIN_BUTTON';
     var sendCodeMessage = '';
     $scope.message = '';
-    $scope.loading = false;
-    DoLoading();
     var userId = getCookie("UserId");
     $scope.LoginUTMS = function () {
         var returUrl = $("#returnUrl").val();
-        $scope.loading = true;
         var params = { 'model': this.Member, 'returnUrl': returUrl }
         var lang = getCookie('language');
         switch (lang) {
             case "en":
                 $http.post("/Account/Login", params)
                 .success(function (data) {
-                    $scope.loading = false;
                     if (data != "Admin" && data != "Active" && data != "NotConfirmed" && data != "PasswordError" && data != "Waiting" && data != "ErrorInUserNameOrPassword") {
                         $scope.IsLogedin = true;
                         $scope.message = 'Just a second please...';
@@ -66,14 +62,12 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", function ($
                                 alertify.error("Email or Password is incorrect", 5);
                                 break;
                             default:
-                                $scope.loading = false;
                                 alertify.set('notifier', 'position', 'bottom-right');
                                 alertify.error("Email or Password is incorrect", 5);
                         }
                     }
                     
                 }).error(function (data) {
-                    $scope.loading = false;
                     alertify.set('notifier', 'position', 'bottom-right');
                     alertify.error("Error in login process");
                 });
@@ -81,7 +75,6 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", function ($
             default:
                 $http.post("/Account/Login", params)
                 .success(function (data) {
-                    $scope.loading = false;
                     if (data != "Admin" && data != "Active" && data != "NotConfirmed" && data != "PasswordError" && data != "Waiting" && data != "ErrorInUserNameOrPassword") {
                         $scope.IsLogedin = true;
                         $scope.message = 'لحظة من فضلك...';
@@ -122,14 +115,12 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", function ($
                                 alertify.error("البريد الإلكترونى أو كلمة المرور غير صحيحة", 5);
                                 break;
                             default:
-                                $scope.loading = false;
                                 alertify.set('notifier', 'position', 'bottom-left');
                                 alertify.error("البريد الإلكترونى أو كلمة المرور غير صحيحة", 5);
                         }
                     }
                     
                 }).error(function (data) {
-                    $scope.loading = false;
                     alertify.set('notifier', 'position', 'bottom-left');
                     alertify.error("خطأ فى عملية الدخول");
                 });
@@ -166,6 +157,7 @@ MyApp.controller('RegisterController', function ($scope, registerationService) {
     $scope.isFormValid = false;
     $scope.validationSummary = false;
     $scope.registerSuccess = '';
+
     //Check Form Validation
     $scope.$watch('f1.$valid', function (newValue) {
         $scope.isFormValid = newValue;
@@ -217,9 +209,10 @@ MyApp.controller('RegisterController', function ($scope, registerationService) {
             }
         }
     }
+
 });
 
-MyApp.controller('ForgotpasswordController', ["$scope", "$http", function ($scope, $http) {
+MyApp.controller('ForgotpasswordController', ["$scope", "$http",  function ($scope, $http) {
 
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
@@ -233,18 +226,14 @@ MyApp.controller('ForgotpasswordController', ["$scope", "$http", function ($scop
     $scope.sendBtn = 'SEND_BTN';
 
     $scope.emailSent = false;
-    $scope.loading = false;
     $scope.message = "";
-    DoLoading();
 
     $scope.Send = function () {
         var lang = getCookie('language');
 
-        $scope.loading = true;
         if (lang == 'en') {
             $http.post("/Account/ForgotPassword", this.Member)
             .success(function (data) {
-                $scope.loading = false;
                 $scope.emailSent = true;
                 switch (data) {
                     case "InvalidUser":
@@ -255,7 +244,6 @@ MyApp.controller('ForgotpasswordController', ["$scope", "$http", function ($scop
                         $scope.message = "Please check your email address and click the link in email";
                 }
             }).error(function (data) {
-                $scope.loading = false;
                 alertify.set('notifier', 'position', 'bottom-left');
                 alertify.error("Processing Error!, please try again. ", 5);
             });
@@ -264,7 +252,6 @@ MyApp.controller('ForgotpasswordController', ["$scope", "$http", function ($scop
         else {
             $http.post("/Account/ForgotPassword", this.Member)
             .success(function (data) {
-                $scope.loading = false;
                 $scope.emailSent = true;
                 switch (data) {
                     case "InvalidUser":
@@ -272,10 +259,9 @@ MyApp.controller('ForgotpasswordController', ["$scope", "$http", function ($scop
                     case "NotConfirmed":
                         $scope.message = "حسابك لم يتم تأكيده بعد، من فضلك قم بتأكيد حسابك عن طريق الضغط على الرابط الذى تم ارساله الى بريدك الالكترونى";
                     case "EmailSent":
-                        $scope.message = "من فضلك افحص بريد الالكترونى وقم بالضغط على الرابط";
+                        $scope.message = " من فضلك افحص البريد الالكترونى وقم بالضغط على الرابط الموجود به";
                 }
             }).error(function (data) {
-                $scope.loading = false;
                 alertify.set('notifier', 'position', 'bottom-left');
                 alertify.error(data + "خطأ فى عملية الإرسال، من فضلك اعد المحاولة ", 5);
             });
@@ -283,19 +269,16 @@ MyApp.controller('ForgotpasswordController', ["$scope", "$http", function ($scop
     }
 }]);
 
-MyApp.controller('ResetpasswordController', ["$scope", "$http", function ($scope, $http) {
-    $scope.loading = false;
+MyApp.controller('ResetpasswordController', ["$scope", "$http","$timeout", "cfpLoadingBar", function ($scope, $http, $timeout, cfpLoadingBar) {
     $scope.submitted = false;
     $scope.message = '';
     var message = '';
-    DoLoading();
+    //DoLoading();
     $scope.Send = function () {
-        $scope.loading = true;
         this.user.Code = $("#code").val();
         // $scope.user.code = $("#code").val();
         $http.post("/Account/ResetPassword", this.user)
      .success(function (data) {
-         $scope.loading = false;
 
          switch (data) {
              case 'InvalidUser':
@@ -315,7 +298,6 @@ MyApp.controller('ResetpasswordController', ["$scope", "$http", function ($scope
          //    $scope.Member = [];
          //}
      }).error(function (data) {
-         $scope.loading = false;
          alertify.set('notifier', 'position', 'bottom-left');
          alertify.error(data + " خطأ فى عملية إعدة التعيين ", 5);
      });
@@ -340,7 +322,6 @@ var compareTo = function () {
 };
 
 MyApp.directive("compareTo", compareTo);
-
 
 function sendCode(userId) {
     var lang = localStorage.getItem('language');

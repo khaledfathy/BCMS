@@ -1,8 +1,10 @@
 ﻿/// <reference path="C:\Users\hany\Documents\Visual Studio 2015\Projects\BCMS\BCMS\Scripts/angular.js" />
 
-var MyApp = angular.module('MyApp', ['ngRoute', 'mm.foundation', 'pascalprecht.translate']);
+var MyApp = angular.module('MyApp', ['ngRoute', 'mm.foundation', 'pascalprecht.translate', 'chieffancypants.loadingBar', 'ngAnimate']);
 
-MyApp.config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
+MyApp.config(["$routeProvider", "$locationProvider", "cfpLoadingBarProvider", function ($routeProvider, $locationProvider, cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = true;
+
     $routeProvider
     .when('/', {
         templateUrl: '/Angular/Home/Index.html',
@@ -130,39 +132,36 @@ MyApp.config(["$routeProvider", "$locationProvider", function ($routeProvider, $
 //    });
 //})
 
-function DoLoading() {
-    var opts = {
-        lines: 13, // The number of lines to draw
-        length: 16, // The length of each line
-        width: 10, // The line thickness
-        radius: 33, // The radius of the inner circle
-        corners: 1, // Corner roundness (0..1)
-        rotate: 49, // The rotation offset
-        direction: 1, // 1: clockwise, -1: counterclockwise
-        color: '#000', // #rgb or #rrggbb or array of colors
-        speed: 2.2, // Rounds per second
-        trail: 58, // Afterglow percentage
-        shadow: false, // Whether to render a shadow
-        hwaccel: false, // Whether to use hardware acceleration
-        className: 'spinner', // The CSS class to assign to the spinner
-        zIndex: 2e9, // The z-index (defaults to 2000000000)
-        top: '50%', // Top position relative to parent
-        left: '50%' // Left position relative to parent
-    };
-    var target = document.getElementById('loading');
-    if (target != null && target != undefined && target != "") {
-        var spinner = new Spinner(opts).spin(target);
-        target.appendChild(spinner.el);
-    }
-
-
-    var TargetWithBackground = document.getElementById('loadingArea');
-    if (TargetWithBackground != null && TargetWithBackground != undefined && TargetWithBackground != "") {
-        var spinner1 = new Spinner(opts).spin(TargetWithBackground);
-        TargetWithBackground.appendChild(spinner1.el);
-    }
-
-}
+//function DoLoading() {
+//    var opts = {
+//        lines: 13, // The number of lines to draw
+//        length: 16, // The length of each line
+//        width: 10, // The line thickness
+//        radius: 33, // The radius of the inner circle
+//        corners: 1, // Corner roundness (0..1)
+//        rotate: 49, // The rotation offset
+//        direction: 1, // 1: clockwise, -1: counterclockwise
+//        color: '#000', // #rgb or #rrggbb or array of colors
+//        speed: 2.2, // Rounds per second
+//        trail: 58, // Afterglow percentage
+//        shadow: false, // Whether to render a shadow
+//        hwaccel: false, // Whether to use hardware acceleration
+//        className: 'spinner', // The CSS class to assign to the spinner
+//        zIndex: 2e9, // The z-index (defaults to 2000000000)
+//        top: '50%', // Top position relative to parent
+//        left: '50%' // Left position relative to parent
+//    };
+//    var target = document.getElementById('loading');
+//    if (target != null && target != undefined && target != "") {
+//        var spinner = new Spinner(opts).spin(target);
+//        target.appendChild(spinner.el);
+//    }
+//    var TargetWithBackground = document.getElementById('loadingArea');
+//    if (TargetWithBackground != null && TargetWithBackground != undefined && TargetWithBackground != "") {
+//        var spinner1 = new Spinner(opts).spin(TargetWithBackground);
+//        TargetWithBackground.appendChild(spinner1.el);
+//    }
+//}
 
 /**************************************************** Controllers ***********************************************************/
 

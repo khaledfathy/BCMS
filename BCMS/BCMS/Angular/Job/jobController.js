@@ -1,9 +1,6 @@
 ﻿/// <reference path="../anonymousApp.js" />
 
 MyApp.controller('JobsController', ["$scope", "$http", function ($scope, $http) {
-    
-    DoLoading();
-    $scope.loading = true;
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
     $scope.goldenSponsor = 'GOLDEN_SPONSOR';
@@ -13,7 +10,6 @@ MyApp.controller('JobsController', ["$scope", "$http", function ($scope, $http) 
     
     $http.get('/Job/GetAllJobs').success(function (data) {
         $scope.jobs = data;
-        $scope.loading = false;
     }).error(function (error) {
         alert(error);
     });

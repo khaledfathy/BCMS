@@ -1,8 +1,7 @@
 ﻿/// <reference path="../anonymousApp.js" />
 
 MyApp.controller('ContactUsController', ["$scope", "$http", function ($scope, $http) {
-    DoLoading();
-    $scope.loading = true;
+    //DoLoading();
     $scope.message = "";
     $scope.isFormValid = false;
     $scope.validationMessage = "";
@@ -59,17 +58,14 @@ MyApp.controller('ContactUsController', ["$scope", "$http", function ($scope, $h
                 } else {
                     if ($("#txtVerify").val() == $("#capture").text()) {
                         $("#match").attr("hidden", "hidden").removeClass("error");
-                        $scope.loading = true;
                         alertify.set('notifier', 'position', 'bottom-left');
                         $http.post("/ContactUs/Send", this.newContactUs)
                         .success(function (data) {
                             $scope.sent = true;
-                            $scope.loading = false;
                             //alertify.success(data.msg, 5);
                             $scope.feedback = "Your message sent succesfuly, Thank you.";
                             $scope.newContactUs = [];
                         }).error(function (data) {
-                            $scope.loading = false;
                             alertify.error(data.msg, 5);
                         });
                     } else {
@@ -91,17 +87,14 @@ MyApp.controller('ContactUsController', ["$scope", "$http", function ($scope, $h
                 } else {
                     if ($("#txtVerify").val() == $("#capture").text()) {
                         $("#match").attr("hidden", "hidden").removeClass("error");
-                        $scope.loading = true;
                         alertify.set('notifier', 'position', 'bottom-left');
                         $http.post("/ContactUs/Send", this.newContactUs)
                         .success(function (data) {
                             $scope.sent = true;
-                            $scope.loading = false;
                             //alertify.success(data.msg, 5);
                             $scope.feedback = "تم ارسال الرساله بنجاح";
                             $scope.newContactUs = [];
                         }).error(function (data) {
-                            $scope.loading = false;
                             alertify.error(data.msg, 5);
                         });
                     } else {
@@ -117,6 +110,5 @@ MyApp.controller('ContactUsController', ["$scope", "$http", function ($scope, $h
         }
 
     }
-    $scope.loading = false;
 
 }]);
