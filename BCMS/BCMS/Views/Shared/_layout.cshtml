@@ -26,14 +26,8 @@
     <link href="~/Content/loading-bar.css" rel="stylesheet" />
 
     @Scripts.Render("~/bundles/BCMS/script")
-
-    @*<script src="~/Scripts/angular-translate.js"></script>*@
-    @*<script src="~/Language/langApp.js"></script>*@
-    @*<script src="~/Language/languageController.js"></script>*@
     
     @RenderSection("scripts", required: false)
-    @*<script src="~/Language/layoutController.js"></script>*@
-    @*<script src="/signalr/Hubs"></script>*@
     <script src="~/Scripts/angular-animate.min.js"></script>
     <script src="~/Scripts/loading-bar.js"></script>
     
@@ -61,40 +55,6 @@
     <!-- Start Footer-->
     @{Html.RenderPartial("_FooterPartial");}
     <!--End Footer-->
-
-    <script type="text/javascript">
-        $(function () {
-
-            $("#btnMusic").click(function (e) {
-                e.preventDefault();
-                window.open("@Url.Action("Music", "Entertainment")", "", "width=500, height=600");
-            });
-
-            $(".btnMusic").click(function () {
-                window.open("/test/Home/Music", "", "width=500, height=600");
-            });
-
-            var $elem = $('#allBody');
-
-            $(".Fbutton").click(function (event) {
-                event.preventDefault();
-                $("#FooterDetails").slideToggle(500);
-                $('html, body').animate({ scrollTop: $elem.height() }, 500);
-            });
-        });
-
-    </script>
-    
-
-    @*<script src="~/Scripts/jquery.js"></script>*@
-    @*<script src="~/Scripts/jquery-3.1.0.js"></script>*@
-    <script src="~/Scripts/highcharts.js"></script>
-
-    <!-- Hany -->
-    @*<script>
-        $(document).foundation();
-    </script>*@
-    <!-- /Hany -->
 
 </body>
 </html>

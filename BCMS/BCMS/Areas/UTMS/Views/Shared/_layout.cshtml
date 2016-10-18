@@ -15,6 +15,7 @@
     <link href="~/Materials/UTMS/MainMenu/css/css3.css" rel="stylesheet" />
     <link href="~/Materials/UTMS/css/Graphics.css" rel="stylesheet" />
     <link href="~/Content/loading-bar.css" rel="stylesheet" />
+    @*<link href="~/Materials/Ar/css/login.css" rel="stylesheet" />*@
     @*@Styles.Render("~/App_Start/bundles/BCMS/style")*@
     <style>
         .angular-google-map-container{
@@ -69,9 +70,10 @@
                 <!--END CONTENT-->
             </div>
             <div class="clearfix"></div>
+            @Html.Partial("_FooterPartial")
         </div>
         <div class="clearfix"></div>
-        @Html.Partial("_FooterPartial")
+        @*@Html.Partial("_FooterPartial")*@
     </div>
 
     <script src="~/Scripts/jquery.js"></script>

@@ -1,17 +1,17 @@
 ﻿
-<style>
+@*<style>
     .siteMap{
         display:none;
     }
-</style>
+</style>*@
 
 
 <div ng-controller="footerController">
     <div class="FooterWrapperBG">
         <div style="height: 55px;margin: 0 auto">
             <div id="footer_wrapper">
-                <div class="footer_middle_section siteMap" id="sitemap">
-                    <div class="footer_middle_section_content" id="footerFocus">
+                @*<div class="footer_middle_section">*@
+                    <div class="footer_middle_section_content">
                         <div class="Bottom">
                             <div class="row">
                                 <div class="large-12 columns">
@@ -68,21 +68,21 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="footer_bottom_section">
+                @*</div>*@
+                @*<div class="footer_bottom_section">
                     <div class="sitemap">
                         <div class="sitemap_content"><h2> <a href="javascript:close();" class="close" title="{{siteMap | translate}}">{{siteMap | translate}}</a> </h2></div>
                     </div>
-                </div>
+                </div>*@
             </div>
         </div>
-        <div class="clear"></div>
+        @*<div class="clear"></div>*@
         <div class="copyRight">{{copyRights | translate}} © BorsaCapital 2015</div>
-        <div class="clear"></div>
+        @*<div class="clear"></div>*@
     </div>
 </div>
 
-<script>
+@*<script>
     function close() {
         $('#sitemap').slideToggle('slow');
         $('#sitemap').toggleClass("siteMap");
@@ -90,4 +90,4 @@
         $("#footerFocus").focus();
     }
     
-</script>
+</script>*@
