@@ -939,10 +939,14 @@ App.controller('BC-CounterController', function ($scope, $http) {
 });
 
 App.controller('BcIndicatorsController', function ($scope) {
-    $scope.active = true;
-    $scope.active1 = true;
-    $scope.active2 = true;
-    $scope.active3 = true;
+    $scope.gotoAnchor = function (id) {
+        for (i = 1; i <= 4; i++) {
+            $("#" + i + "").removeClass("active");
+            $("#tab" + i + "").removeClass("active");
+        }
+        $("#" + id + "").addClass("active");
+        $("#tab" + id + "").addClass("active");
+    };
 });
 
 App.controller('PetrochemicalsController', ["$scope", "$http", function ($scope, $http) {
@@ -954,18 +958,21 @@ App.controller('PetrochemicalsController', ["$scope", "$http", function ($scope,
 }]);
 
 App.controller('KnowledgeController', ["$scope", "$http", function ($scope, $http) {
-    $scope.active = true;
+    $scope.knowledges = null;
     $http.get("/UTMS/Knowledge/GetAllKnowledge").success(function (data) {
         $scope.knowledges = data;
-        console.log(data);
+        
     }).error(function (error) {
         alert(error);
     });
 
-    $scope.status = {
-        isCustomHeaderOpen: false,
-        isFirstOpen: true,
-        isFirstDisabled: false
+    $scope.gotoAnchor = function (index) {
+        for (i = 0; i <= $scope.knowledges.length; i++) {
+            $("#" + i + "").removeClass("active");
+            $("#tab" + i + "").removeClass("active");
+        }
+        $("#" + index + "").addClass("active");
+        $("#tab" + index + "").addClass("active");
     };
 }]);
 

@@ -32,32 +32,34 @@
                                         <ul>
                                             <li><h2>{{ourServices | translate}}</h2></li>
                                             <li><a href="#Advice">{{investmentAdvices | translate}}</a></li>
-                                            <li><a href="#Login">UTMs</a></li>
-                                            <li><a href="#">{{download | translate}}</a></li>
+                                            @*<li><a href="#Login">UTMs</a></li>*@
+                                            @*<li><a href="#">{{download | translate}}</a></li>*@
                                             <li><a href="#PyramidServices">{{pyramidServices | translate}}</a></li>
                                             <li><a href="http://pixel.borsacapital.com/" target="_blank">{{pixel | translate}}</a></li>
-                                            <li><a href="#Register">{{register | translate}}</a></li>
-                                            <li><a href="#Login">{{login | translate}}</a></li>
+                                            @*<li><a href="#Register">{{register | translate}}</a></li>*@
+                                            @*<li><a href="#Login">{{login | translate}}</a></li>*@
                                         </ul>
                                     </div>
                               
                                     <div class="large-3 columns">
                                         <ul>
                                             <li><h2>{{education | translate}}</h2></li>
-                                            <li><a href="#">{{library | translate}}</a></li>
+                                            @*<li><a href="#">{{library | translate}}</a></li>*@
                                             <li><a href="@Url.Action("Category", "Home", new { Area = "Exams" })" target="_blank">{{exams | translate}}</a></li>
                                             <li><a href="#Terminology">{{terminology | translate}}</a></li>
                                             <li><a href="#FAQ">{{commonQuestions | translate}}</a></li>
-                                            <li><a href="#">{{educationalVideos | translate}}</a></li>
+                                            @*<li><a href="#">{{educationalVideos | translate}}</a></li>*@
                                             <li><a href="@Url.Action("Index", "Game", new { Area = "Games" })" target="_blank">{{educationalGames | translate}}</a></li>
                                         </ul>
                                     </div>
                                     <div class="large-3 columns">
                                         <ul>
                                             <li><h2>{{entertainment | translate}}</h2></li>
-                                            <li><a href="#">{{caricature | translate}}</a></li>
+                                            @*<li><a href="#">{{caricature | translate}}</a></li>*@
                                             <li><a href="#Games">{{entertainmentGames | translate}}</a></li>
-                                            <li><a id="btnMusic" href="#">{{music | translate}}</a></li>
+                                            <li><a href="#Music" target="_blank">{{music | translate}}</a></li>
+
+                                            @*<li><a id="btnMusic" href="#">{{music | translate}}</a></li>*@
                                             <li><a href="#Relaxing">{{videos | translate}}</a></li>
                                         </ul>
                                     </div>

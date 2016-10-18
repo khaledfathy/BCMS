@@ -1,173 +1,24 @@
 ﻿
-<style>
-    .container {
-        margin-top: 100px;
-    }
-
-    .expandcollapse-item {
-        overflow: hidden;
-    }
-
-    .expandcollapse-heading-collapsed {
-        cursor: pointer;
-        padding: 10px 20px;
-        position: relative;
-        color: black;
-        background-color: #ffffdd;
-        border: 1px solid grey;
-        z-index: 2;
-    }
-
-        .expandcollapse-heading-collapsed p {
-            font-size: 16px;
-            font-weight: normal;
-            margin: 0px;
-        }
-
-    .expandcollapse-heading-expanded {
-        cursor: pointer;
-        padding: 15px 20px;
-        position: relative;
-        color: white;
-        background-color: black;
-        border: 1px solid gray;
-        z-index: 2;
-    }
-
-        .expandcollapse-heading-expanded h2 {
-            color: white;
-            font-size: 18px;
-        }
-
-        .expandcollapse-heading-expanded p {
-            font-size: 16px;
-            font-weight: bold;
-            margin: 0px;
-        }
-
-        .expandcollapse-heading-collapsed > span,
-        .expandcollapse-heading-expanded > span {
-            position: absolute;
-            top: 25px;
-            right: 15px;
-            font-size: 20px;
-            line-height: 0px;
-        }
-
-    .expand-collapse-content {
-        padding: 20px;
-        border-left: 1px solid gray;
-        border-right: 1px solid gray;
-        border-bottom: 1px solid gray;
-    }
-
-
-    /*
-    animation:*/
-
-    .slideDown.ng-hide-remove,
-    .slideDown.ng-hide-add {
-        /* remember, the .hg-hide class is added to element
-      when the active class is added causing it to appear
-      as hidden. Therefore set the styling to display=block
-      so that the hide animation is visible */
-        display: block !important;
-    }
-
-
-    .slideDown.ng-hide-add {
-        animation-name: hide;
-        -webkit-animation-name: hide;
-        animation-duration: .5s;
-        -webkit-animation-duration: .5s;
-        animation-timing-function: ease-in;
-        -webkit-animation-timing-function: ease-in;
-    }
-
-    @keyframes hide {
-        0% {
-            transform: translateY(0%);
-        }
-
-        100% {
-            transform: translateY(-100%);
-        }
-    }
-
-    @-webkit-keyframes hide {
-        0% {
-            -webkit-transform: translateY(0%);
-        }
-
-        100% {
-            -webkit-transform: translateY(-100%);
-        }
-    }
-
-
-    .slideDown.ng-hide-remove {
-        animation-name: show;
-        -webkit-animation-name: show;
-        animation-duration: .5s;
-        -webkit-animation-duration: .5s;
-        animation-timing-function: ease-out;
-        -webkit-animation-timing-function: ease-out;
-    }
-
-    @keyframes show {
-        0% {
-            transform: translateY(-100%);
-        }
-
-        100% {
-            transform: translateY(0%);
-        }
-    }
-
-    @-webkit-keyframes show {
-        0% {
-            -webkit-transform: translateY(-100%);
-        }
-
-        100% {
-            -webkit-transform: translateY(0%);
-        }
-    }
-</style>
-<script>
-        (function ($) {
-
-            var allPanels = $('.accordionNew > dd').hide();
-
-            $('.accordionNew > dt > a').click(function () {
-                allPanels.slideUp();
-                $(this).parent().next().slideDown();
-                return false;
-            });
-
-        })(jQuery);
-</script>
-
 <div class="RegisterWrapper">
     <h1 class="Spec InnerPage">وسع ثقافتك </h1>
     <div class="large-12 columns">
         <div class="large-12 column">
             <div class="acc-container">
-           
-                <div class="acc-btn" ng-repeat="know in knowledges">
-                    
-                    <div class="expandcollapse-item">
-                        <div ng-click="active = !active" ng-class="{'expandcollapse-heading-collapsed': active, 'expandcollapse-heading-expanded': !active}">
-                            <h1>{{know.KnowledgeTitle}}</h1>
-                        </div>
+                
+                <div style="margin: 1em 0;">
 
-                        <div class="slideDown" ng-hide="active">
-                            <div class="expand-collapse-content">
-                                <p ng-repeat="Spec in know.informatoins">{{Spec}}</p>
-                            </div>
+                    <ul class="tabs">
+                        <li class="tab-title" ng-repeat="know in knowledges" id="tab{{$index}}" ng-class="{'active':$index==0}">
+                        
+                            <a ng-click="gotoAnchor($index)">{{know.KnowledgeTitle}}</a>
+                        </li>
+                    </ul>
+
+                    <div class="tabs-content">
+                        <div class="content" id="{{$index}}" ng-repeat="know in knowledges" ng-class="{'active':$index==0}">
+                            <p ng-repeat="Spec in know.informatoins" style="margin-right:10px; font-size:14px;">{{Spec}}</p>
                         </div>
                     </div>
-               
 
                 </div>
             </div>
@@ -176,4 +27,3 @@
 
     <div class="clear H10"></div>
 </div>
-<!--<div id="loadingArea" ng-show="loading"></div>-->

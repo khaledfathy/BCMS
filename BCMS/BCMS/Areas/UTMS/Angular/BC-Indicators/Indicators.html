@@ -1,157 +1,23 @@
 ﻿
-<style>
-    .container {
-        margin-top: 100px;
-    }
-
-    .expandcollapse-item {
-        overflow: hidden;
-    }
-
-    .expandcollapse-heading-collapsed {
-        cursor: pointer;
-        padding: 10px 20px;
-        position: relative;
-        color: black;
-        background-color: #ffffdd;
-        border: 1px solid grey;
-        z-index: 2;
-    }
-
-    .expandcollapse-heading-collapsed p {
-        font-size: 16px;
-        font-weight: normal;
-        margin: 0px;
-    }
-    .expandcollapse-heading-expanded {
-        cursor: pointer;
-        padding: 15px 20px;
-        position: relative;
-        color: white;
-        background-color: black;
-        border: 1px solid gray;
-        z-index: 2;
-    }
-    .expandcollapse-heading-expanded h2 {
-        color: white;
-        font-size: 18px;
-    }
-    .expandcollapse-heading-expanded p {
-        font-size: 16px;
-        font-weight: bold;
-        margin: 0px;
-    }
-    .expandcollapse-heading-collapsed > span,
-    .expandcollapse-heading-expanded > span {
-        position: absolute;
-        top: 25px;
-        right: 15px;
-        font-size: 20px;
-        line-height: 0px;
-    }
-    .expand-collapse-content {
-        padding: 20px;
-        border-left: 1px solid gray;
-        border-right: 1px solid gray;
-        border-bottom: 1px solid gray;
-    }
-
-
-    /*
-    animation:*/
-
-    .slideDown.ng-hide-remove,
-    .slideDown.ng-hide-add {
-        /* remember, the .hg-hide class is added to element
-      when the active class is added causing it to appear
-      as hidden. Therefore set the styling to display=block
-      so that the hide animation is visible */
-        display: block !important;
-    }
-
-
-    .slideDown.ng-hide-add {
-        animation-name: hide;
-        -webkit-animation-name: hide;
-        animation-duration: .5s;
-        -webkit-animation-duration: .5s;
-        animation-timing-function: ease-in;
-        -webkit-animation-timing-function: ease-in;
-    }
-
-    @keyframes hide {
-        0% {
-            transform: translateY(0%);
-        }
-
-        100% {
-            transform: translateY(-100%);
-        }
-    }
-
-    @-webkit-keyframes hide {
-        0% {
-            -webkit-transform: translateY(0%);
-        }
-
-        100% {
-            -webkit-transform: translateY(-100%);
-        }
-    }
-
-
-    .slideDown.ng-hide-remove {
-        animation-name: show;
-        -webkit-animation-name: show;
-        animation-duration: .5s;
-        -webkit-animation-duration: .5s;
-        animation-timing-function: ease-out;
-        -webkit-animation-timing-function: ease-out;
-    }
-
-    @keyframes show {
-        0% {
-            transform: translateY(-100%);
-        }
-
-        100% {
-            transform: translateY(0%);
-        }
-    }
-
-    @-webkit-keyframes show {
-        0% {
-            -webkit-transform: translateY(-100%);
-        }
-
-        100% {
-            -webkit-transform: translateY(0%);
-        }
-    }
-</style>
-
 <div style="margin: 1em 0;">
-    <script>
-        (function ($) {
+    <ul class="tabs">
+        <li class="tab-title active" id="tab1">
+            <a ng-click="gotoAnchor(1)">المتوسطات المتحركة (Moving Averages)</a>
+        </li>
+        <li class="tab-title" id="tab2">
+            <a ng-click="gotoAnchor(2)">حدود بولنجر (Bollinger Bands)</a>
+        </li>
+        <li class="tab-title" id="tab3">
+            <a ng-click="gotoAnchor(3)">مؤشر متوسط الحركة الاتجاهية (ADX- Average Directional Movement Index)</a>
+        </li>
+        <li class="tab-title" id="tab4">
+            <a ng-click="gotoAnchor(4)">مؤشر الزخم (Momentum)</a>
+        </li>
+    </ul>
 
-            var allPanels = $('.accordionNew > dd').hide();
-
-            $('.accordionNew > dt > a').click(function () {
-                allPanels.slideUp();
-                $(this).parent().next().slideDown();
-                return false;
-            });
-
-        })(jQuery);
-    </script>
-
-    <div class="expandcollapse-item">
-        <div ng-click="active = !active" ng-class="{'expandcollapse-heading-collapsed': active, 'expandcollapse-heading-expanded': !active}">
-            <h2>المتوسطات المتحركة (Moving Averages)</h2>
-        </div>
-
-        <div class="slideDown" ng-hide="active">
-            <div class="expand-collapse-content">
+    <div class="tabs-content">
+        <div class="content active" id="1">
+            <div>
                 <p dir="rtl" style="text-align: justify;"><span style="font-family:tahoma;"><span style="font-size: 14px;">المتوسطات المتحركة هي واحدة من أقدم تقنيات التحليل الفني وأكثرها انتشارًا، وتستخدم بشكل رئيسي كأداة لملاحقة الاتجاه<span style="color: rgb(255, 0, 0);"> (Trend Following)</span>.</span></span></p>
 
                 <p dir="rtl" style="text-align: center;"><span style="font-family:tahoma;"><span style="font-size: 14px;"><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/132251-1.jpg" vspace="20"></span></span></p>
@@ -232,18 +98,10 @@
 
                 <p dir="rtl" style="text-align: justify;">&nbsp;</p>
             </div>
-            <!--<div class="clearfix"></div>-->
         </div>
-    </div>
 
-    <div class="expandcollapse-item">
-        <div ng-click="active1 = !active1" ng-class="{'expandcollapse-heading-collapsed': active1, 'expandcollapse-heading-expanded': !active1}">
-            <h2>حدود بولنجر (Bollinger Bands)</h2>
-            <!--<div class="clearfix"></div>-->
-        </div>
-        <div class="slideDown" ng-hide="active1">
-            <div class="expand-collapse-content">
-
+        <div class="content" id="2">
+            <div>
                 <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;"><span style="color:#008000;"><strong>مبتكر المؤشر:</strong></span></span></span></p>
 
                 <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">مبتكر المؤشر هو "جون بولنجر" (<span dir="LTR"><span style="color:#FF0000;">John Bollinger</span></span>) في بداية الثمانينيات</span></span></p>
@@ -309,14 +167,9 @@
                 <p dir="RTL" style="text-align: justify;">&nbsp;</p>
             </div>
         </div>
-    </div>
 
-    <div class="expandcollapse-item">
-        <div ng-click="active2 = !active2" ng-class="{'expandcollapse-heading-collapsed': active2, 'expandcollapse-heading-expanded': !active2}">
-            <h2>مؤشر متوسط الحركة الاتجاهية (ADX- Average Directional Movement Index)</h2>
-        </div>
-        <div class="slideDown" ng-hide="active2">
-            <div class="expand-collapse-content">
+        <div class="content" id="3">
+            <div>
                 <p style="text-align: justify;"><span style="color:#008000;"><strong><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">مبتكر المؤشر:</span></span></strong></span></p>
 
                 <p style="text-align: justify;"><span style="font-size: small;"><span style="font-family: tahoma,arial,helvetica,sans-serif;">ويلز ويلدر (<span style="color: #ff0000;">WELLES WILDER</span>)</span></span></p>
@@ -372,15 +225,9 @@
                 <p style="text-align: center;"><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/133654-3.jpg" vspace="20"></p>
             </div>
         </div>
-    </div>
 
-    <div class="expandcollapse-item">
-        <div ng-click="active3 = !active3" ng-class="{'expandcollapse-heading-collapsed': active3, 'expandcollapse-heading-expanded': !active3}">
-            <h2>مؤشر الزخم (Momentum)</h2>
-        </div>
-        <div class="slideDown" ng-hide="active3">
-            <div class="expand-collapse-content">
-
+        <div class="content" id="4">
+            <div>
                 <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;"><span style="color: rgb(0, 128, 0);"><strong>نوع المؤشر<span dir="LTR">:</span></strong></span></span></span></p>
 
                 <p dir="RTL" style="text-align: justify;"><span style="font-size:14px;"><span style="font-family: tahoma;">مؤشر <span style="color:#FF0000;">زخم</span>، أي أنه يقيس سرعة وقوة حركة السعر، ويعتبر أحد أهم الأدوات المكملة للمؤشرات الاتجاهية، ويستعين بها أغلب المحللين والمتاجرين في الأسواق المالية لتوليد إشارات بالبيع والشراء سواءً في التحركات الاتجاهية أو التحركات العرضية</span></span></p>
@@ -470,6 +317,28 @@
                 <p dir="RTL" style="text-align: center;"><span style="color:#FFF0F5;"></span><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/134452-7.jpg" vspace="20"><img hspace="20" src="http://www.arabictrader.com/arabictrader_storage_server/atcop/imgs/2015/Sep/134451-6.jpg" vspace="20"></p>
             </div>
         </div>
+
     </div>
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
