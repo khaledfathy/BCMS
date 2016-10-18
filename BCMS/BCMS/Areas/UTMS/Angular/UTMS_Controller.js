@@ -233,10 +233,9 @@ App.controller('StockUpController', function ($scope) {
             $("#" + i + "").removeClass("active");
             $("#li" + i + "").removeClass("active");
         }
-        if (id >= 0 && id <= 6) {
-            $("#" + id + "").addClass("active");
-            $("#li" + id + "").addClass("active");
-        }
+        $("#" + id + "").addClass("active");
+        $("#li" + id + "").addClass("active");
+
     };
     $scope.gotoAnchorShare = function (id) {
         for (i = 7; i <= 9; i++) {
@@ -961,7 +960,7 @@ App.controller('KnowledgeController', ["$scope", "$http", function ($scope, $htt
     $scope.knowledges = null;
     $http.get("/UTMS/Knowledge/GetAllKnowledge").success(function (data) {
         $scope.knowledges = data;
-        
+
     }).error(function (error) {
         alert(error);
     });

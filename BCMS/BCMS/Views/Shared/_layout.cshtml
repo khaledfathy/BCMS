@@ -30,26 +30,25 @@
     @RenderSection("scripts", required: false)
     <script src="~/Scripts/angular-animate.min.js"></script>
     <script src="~/Scripts/loading-bar.js"></script>
-    
 </head>
 
 <body>
     <!-- Start Header-->
     @{Html.RenderPartial("_HeaderPartial");}
     <!--End Header-->
+    <div style="min-height:460px;">
+        <div class="large-12 columns">
+            <div class="large-12 column" id="body">
 
-    <div class="large-12 columns">
-        <div class="large-12 column" id="body">
+                <!--START CONTENT-->
 
-            <!--START CONTENT-->
-            
-            @RenderBody()
-            
-            <!--END CONTENT-->
+                @RenderBody()
 
+                <!--END CONTENT-->
+
+            </div>
         </div>
     </div>
-   
     <div class="clear"></div>
 
     <!-- Start Footer-->
