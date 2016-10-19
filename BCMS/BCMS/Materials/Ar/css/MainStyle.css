@@ -648,7 +648,8 @@ table.table-dark2 td
     height:125px;
     overflow:hidden;
     margin-right:0px;
-    background-color:rgba(26,76,110,0.5)
+    background-color:rgba(26,76,110,0.5);
+    margin-bottom: -40px;
 }
 .demo-2 p,.demo-2 h2 {
     color:#fff;
@@ -749,6 +750,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#999999', end
   .Adv{
         padding-left: 10px !important;
     }
+  .demo-2{margin-bottom: 0;}
 }
 @media (min-width: 768px) and (max-width: 979px) {
 

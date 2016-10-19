@@ -443,14 +443,16 @@ border-radius: 70px;
     padding: 0.313em 0;
     border-top: 0px solid #b5edff;
     
-    background-color: #f3f3f3;
+    background-color: #131313;
+    margin: 0 1em;
    /* background-image: url(../images/bgfooter.jpg);
     background-position: center;*/
 }
 .Bottom h2
 {    
+        font-size: 12px;
     padding-bottom: 0.613em;
-    border-bottom: .1em solid #cacaca;
+    border-bottom: .1em solid #333;
 }
 .Bottom ul
 {
@@ -459,7 +461,7 @@ border-radius: 70px;
 .Bottom li
 {
     padding: 0.2em 0.1em !important;
-    border-bottom: .1em dotted #cacaca !important;
+    border-bottom: .1em dotted #333 !important;
 }
 .Bottom li:first-child
 {
@@ -468,7 +470,7 @@ border-radius: 70px;
 .Bottom li a
 {
     font-family: Tahoma;
-    font-size: .8em;
+    font-size: 10px;
     text-decoration: none;
     color: #795554;
     display: block;
@@ -481,7 +483,7 @@ border-radius: 70px;
 }
 .Bottom li a:hover
 {
-    color: #333 !important;
+    color: #fff !important;
     padding-right: 1em !important;
     background-image:url(../images/LArrow.png);
     background-position: right;
@@ -497,7 +499,8 @@ background-color: #000;
 color: #666;
 font-size: 0.750em;
 text-align: center;
-padding: 1.313em;
+padding: 1.313em;;
+margin: 0 1.7em;
 }
 
 

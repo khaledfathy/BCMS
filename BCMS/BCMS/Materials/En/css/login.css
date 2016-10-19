@@ -151,7 +151,7 @@ p
 
         .form-3 .left {
             width: 30%;
-            float: left;
+            float: left !important;
             margin-top: 20px;
             text-align: left;
             border-left: 1px #B8B8B8 solid;
@@ -161,7 +161,7 @@ p
 
         .form-3 .right {
             width: 60%;
-            float: left;
+            float: left !important;
             margin-top: 20px;
         }
 
@@ -385,6 +385,13 @@ p
 
     .Remeberme{
         width: 69%;
+    float: right;
+    padding:0;
+    margin-bottom: 0;
+    font-size: 12px;
+    }
+    .Remebermearhome{
+    width: 66%;
     float: right;
     padding:0;
     margin-bottom: 0;
