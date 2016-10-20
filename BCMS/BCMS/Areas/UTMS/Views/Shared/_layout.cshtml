@@ -96,6 +96,19 @@
     <!--/BC-Counters-->
     @*@Scripts.Render("~/App_Start/bundles/BCMS/script")*@
     @*@Scripts.Render("~/App_Start/bundles/UTMS/script")*@
+
+    @{
+        if (Request.IsAuthenticated)
+        {
+            <script>
+                var connect;
+                $(function () {
+                    connect = $.connection.mainHub;
+                    $.connection.hub.start();
+                })
+            </script>
+        }
+    }
 </body>
 </html>
 

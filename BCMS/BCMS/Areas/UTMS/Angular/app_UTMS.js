@@ -62,3 +62,5 @@ App.config(['$routeProvider', "cfpLoadingBarProvider", function ($routeProvider,
 App.controller('CompanyCardController', function ($scope) {
 
 });
+
+

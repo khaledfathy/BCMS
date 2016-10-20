@@ -1,7 +1,8 @@
 ﻿/// <reference path="../anonymousApp.js" />
+/// <reference path="C:\Users\sameh\Desktop\BCMS\BCMS\BCMS\Scripts/angular.js" />
 
 
-MyApp.controller('LoginController', ["$scope", "$http", "$location", function ($scope, $http) {
+MyApp.controller('LoginController', ["$scope", "$http", "$location", function ($scope, $http, $location) {
     //alert("login Controller");
     $scope.IsLogedin = false;
     $scope.login = 'LOGIN';
@@ -16,20 +17,117 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", function ($
     var sendCodeMessage = '';
     $scope.message = '';
     var userId = getCookie("UserId");
-    $scope.LoginUTMS = function () {
+    //var params = null;
+
+    $scope.LoginChecker = function () {
         var returUrl = $("#returnUrl").val();
-        var params = { 'model': this.Member, 'returnUrl': returUrl }
+        var params = { 'model': this.Member, 'returnUrl': returUrl };
         var lang = getCookie('language');
         switch (lang) {
             case "en":
-                $http.post("/Account/Login", params)
+                $http.post("/Account/LoginChecker", params)
                 .success(function (data) {
+                    
+                    switch (data) {
+                        case "Connected":
+                            var modal = document.getElementById('myModal');
+                            modal.style.display = "block";
+                            break;
+
+                            // $("#title").html();
+                            // $("#content").html("<iframe src='/UTMS/BorsaGraphics/ChartDiv/" + id + "' style='min-height:450px; width:100%; overflow-y:auto;'></iframe>");
+
+
+                            $location.path()
+                        
+                        case "Waiting":
+                            $scope.IsLogedin = true;
+                            sendCodeMessage = "<h2>Your account waiting for approval</h2>";
+                            $("#sendCodeMsg").append(sendCodeMessage);
+                            break;
+                        case "NotConfirmed":
+                            $scope.IsLogedin = true;
+                            sendCodeMessage = "<h2 id='sendEmail' style='display:none;'>We have sent an email with a confirmation link to your email address. In order to complete the registration process, please click the confirmation link</h2><div id='loginMessage'><h2>Your account has not been activated yet, please check your email address and click the confirmation link</h2>";
+                            sendCodeMessage += "<h2> If you do not receive a confirmation email, please click <a href=\"javascript:sendCode('" + userId + "')\">here </a>to send another one</h2></div>";
+                            $("#sendCodeMsg").append(sendCodeMessage);
+                            break;
+                            
+                        case "ErrorInUserNameOrPassword":
+                            $scope.IsLogedin = false;
+                            alertify.set('notifier', 'position', 'bottom-right');
+                            alertify.error("Email or Password is incorrect", 5);
+                            break;
+                        default:
+                            alertify.set('notifier', 'position', 'bottom-right');
+                            alertify.error("Email or Password is incorrect", 5);
+                    }
+                    
+
+                }).error(function (data) {
+                    alertify.set('notifier', 'position', 'bottom-right');
+                    alertify.error("Error in login process");
+                });
+                break;
+            default:
+                $http.post("/Account/LoginChecker", params)
+                .success(function (data) {
+                   
+                    switch (data) {
+                        case "Connected":
+                            var modal = document.getElementById('myModal');
+                            modal.style.display = "block";
+                            $("#title").html("<h2>تحذير</h2>");
+                            var content = "<p>أنت بالفعل مسجل دخولك من جهاز اخر</p><p>هل تريد تسجيل الخروج من الجهاز الاخر وتسجيل الدخول من هنا </p>";
+                            content += "<a href='javascript:Login("+params+")' class='button alert'>نعم</a>";
+                            content += "<a class='button' ng-click='close()'>لا</a>";
+                            $("#content").html(content);
+                            break;
+                        case "Active":
+                            Login(params);
+                            break;
+                        case "Waiting":
+                            sendCodeMessage = "<h2>أنت قيد الانتظار لحين الموافقه على حسابك من قبل مدير الموقع</h2>";
+                            $scope.IsLogedin = true;
+                            $("#sendCodeMsg").append(sendCodeMessage);
+                            break;
+                        case "NotConfirmed":
+                            $scope.IsLogedin = true;
+                            $scope.sendCodeMessage = '';
+                            sendCodeMessage = "<h2 id='sendEmail' style='display:none;'>لقد تم إرسال رسالة بريد إلكترونى على حسابك، برجاء تفقد البريد الإلكترونى الخاص بك</h2><div id='loginMessage'><h2>انت لم تقم بتاكيد حسابك، برجاء تأكيد الحساب أولا، من فضلك قم بفحص البريد الإلكترونى الخاص بك</h2>";
+                            sendCodeMessage += "<h2> لإعادة ارسال بريد الكترونى آخر برجاء الضغط <a href=\"javascript:sendCode('" + userId + "')\">هنــا</a></h2></div>";
+                            $("#sendCodeMsg").append(sendCodeMessage);
+                            break;
+                           
+                        case "ErrorInUserNameOrPassword":
+                            $scope.IsLogedin = false;
+                            alertify.set('notifier', 'position', 'bottom-left');
+                            alertify.error("البريد الإلكترونى أو كلمة المرور غير صحيحة", 5);
+                            break;
+                        default:
+                            alertify.set('notifier', 'position', 'bottom-left');
+                            alertify.error("البريد الإلكترونى أو كلمة المرور غير صحيحة", 5);
+                    }
+                    
+
+                }).error(function (data) {
+                    alertify.set('notifier', 'position', 'bottom-left');
+                    alertify.error("خطأ فى عملية الدخول");
+                });
+        }
+    };
+
+    function Login(params) {
+        var lang = getCookie('language');
+        switch (lang) {
+            case "en":
+                //
+                $http.post("/Account/Login", params).success(function (response) {
                     if (data != "Admin" && data != "Active" && data != "NotConfirmed" && data != "PasswordError" && data != "Waiting" && data != "ErrorInUserNameOrPassword") {
                         $scope.IsLogedin = true;
                         $scope.message = 'Just a second please...';
                         window.location.href = data;
-                    }else {
-                        switch (data) {
+                    } else {
+                        switch (response) {
                             case "Admin":
                                 $scope.IsLogedin = true;
                                 $scope.message = 'Just a second please...';
@@ -40,92 +138,69 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", function ($
                                 $scope.message = 'Just a second please...'
                                 window.location.href = '/UTMS/Home';
                                 break;
-                            case "Waiting":
-                                $scope.IsLogedin = true;
-                                sendCodeMessage = "<h2>Your account waiting for approval</h2>";
-                                $("#sendCodeMsg").append(sendCodeMessage);
-                                break;
-                            case "NotConfirmed":
-                                $scope.IsLogedin = true;
-                                sendCodeMessage = "<h2 id='sendEmail' style='display:none;'>We have sent an email with a confirmation link to your email address. In order to complete the registration process, please click the confirmation link</h2><div id='loginMessage'><h2>Your account has not been activated yet, please check your email address and click the confirmation link</h2>";
-                                sendCodeMessage += "<h2> If you do not receive a confirmation email, please click <a href=\"javascript:sendCode('" + userId + "')\">here </a>to send another one</h2></div>";
-                                $("#sendCodeMsg").append(sendCodeMessage);
-                                break;
+
                             case "PasswordError":
                                 $scope.IsLogedin = false;
                                 alertify.set('notifier', 'position', 'bottom-right');
                                 alertify.error("Password is not correct", 5);
                                 break;
-                            case "ErrorInUserNameOrPassword":
-                                $scope.IsLogedin = false;
-                                alertify.set('notifier', 'position', 'bottom-right');
-                                alertify.error("Email or Password is incorrect", 5);
-                                break;
+
                             default:
                                 alertify.set('notifier', 'position', 'bottom-right');
                                 alertify.error("Email or Password is incorrect", 5);
                         }
                     }
-                    
-                }).error(function (data) {
-                    alertify.set('notifier', 'position', 'bottom-right');
-                    alertify.error("Error in login process");
-                });
+
+                }).error(function (response) {
+
+                })
                 break;
             default:
                 $http.post("/Account/Login", params)
-                .success(function (data) {
-                    if (data != "Admin" && data != "Active" && data != "NotConfirmed" && data != "PasswordError" && data != "Waiting" && data != "ErrorInUserNameOrPassword") {
-                        $scope.IsLogedin = true;
-                        $scope.message = 'لحظة من فضلك...';
-                        window.location.href = data;
+                  .success(function (data) {
+                      if (data != "Admin" && data != "Active" && data != "NotConfirmed" && data != "PasswordError" && data != "Waiting" && data != "ErrorInUserNameOrPassword") {
+                          $scope.IsLogedin = true;
+                          $scope.message = 'لحظة من فضلك...';
+                          window.location.href = data;
 
-                    } else {
-                        switch (data) {
-                            case "Admin":
-                                $scope.IsLogedin = true;
-                                $scope.message = 'لحظة من فضلك...'
-                                window.location.href = '/Admin/Home/Index';
-                                break;
-                            case "Active":
-                                $scope.IsLogedin = true;
-                                $scope.message = 'لحظة من فضلك...'
-                                window.location.href = '/UTMS/Home';
-                                break;
-                            case "Waiting":
-                                sendCodeMessage = "<h2>أنت قيد الانتظار لحين الموافقه على حسابك من قبل مدير الموقع</h2>";
-                                $scope.IsLogedin = true;
-                                $("#sendCodeMsg").append(sendCodeMessage);
-                                break;
-                            case "NotConfirmed":
-                                $scope.IsLogedin = true;
-                                $scope.sendCodeMessage = '';
-                                sendCodeMessage = "<h2 id='sendEmail' style='display:none;'>لقد تم إرسال رسالة بريد إلكترونى على حسابك، برجاء تفقد البريد الإلكترونى الخاص بك</h2><div id='loginMessage'><h2>انت لم تقم بتاكيد حسابك، برجاء تأكيد الحساب أولا، من فضلك قم بفحص البريد الإلكترونى الخاص بك</h2>";
-                                sendCodeMessage += "<h2> لإعادة ارسال بريد الكترونى آخر برجاء الضغط <a href=\"javascript:sendCode('" + userId + "')\">هنــا</a></h2></div>";
-                                $("#sendCodeMsg").append(sendCodeMessage);
-                                break;
-                            case "PasswordError":
-                                $scope.IsLogedin = false;
-                                alertify.set('notifier', 'position', 'bottom-left');
-                                alertify.error("كلمة المرور غير صحيحة", 5);
-                                break;
-                            case "ErrorInUserNameOrPassword":
-                                $scope.IsLogedin = false;
-                                alertify.set('notifier', 'position', 'bottom-left');
-                                alertify.error("البريد الإلكترونى أو كلمة المرور غير صحيحة", 5);
-                                break;
-                            default:
-                                alertify.set('notifier', 'position', 'bottom-left');
-                                alertify.error("البريد الإلكترونى أو كلمة المرور غير صحيحة", 5);
-                        }
-                    }
-                    
-                }).error(function (data) {
-                    alertify.set('notifier', 'position', 'bottom-left');
-                    alertify.error("خطأ فى عملية الدخول");
-                });
+                      } else {
+                          switch (data) {
+                              case "Admin":
+                                  $scope.IsLogedin = true;
+                                  $scope.message = 'لحظة من فضلك...'
+                                  window.location.href = '/Admin/Home/Index';
+                                  break;
+                              case "Active":
+                                  $scope.IsLogedin = true;
+                                  $scope.message = 'لحظة من فضلك...'
+                                  window.location.href = '/UTMS/Home';
+                                  break;
+                              case "PasswordError":
+                                  $scope.IsLogedin = false;
+                                  alertify.set('notifier', 'position', 'bottom-left');
+                                  alertify.error("كلمة المرور غير صحيحة", 5);
+                                  break;
+
+                              default:
+                                  alertify.set('notifier', 'position', 'bottom-left');
+                                  alertify.error("البريد الإلكترونى أو كلمة المرور غير صحيحة", 5);
+                          }
+                      }
+
+                  }).error(function (data) {
+                      alertify.set('notifier', 'position', 'bottom-left');
+                      alertify.error("خطأ فى عملية الدخول");
+                  });
+
         }
-    };
+    }
+
+    var modal = document.getElementById('myModal');
+
+    $scope.close = function () {
+        modal.style.display = "none";
+    }
+
 }]);
 
 MyApp.controller('RegisterController', function ($scope, registerationService) {
@@ -164,7 +239,7 @@ MyApp.controller('RegisterController', function ($scope, registerationService) {
     });
     //Save Data
     $scope.SaveData = function (user) {
-        
+
         var lang = getCookie('language');
         if (lang == 'en') {
             if ($scope.isFormValid) {
@@ -212,7 +287,7 @@ MyApp.controller('RegisterController', function ($scope, registerationService) {
 
 });
 
-MyApp.controller('ForgotpasswordController', ["$scope", "$http",  function ($scope, $http) {
+MyApp.controller('ForgotpasswordController', ["$scope", "$http", function ($scope, $http) {
 
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
@@ -269,7 +344,7 @@ MyApp.controller('ForgotpasswordController', ["$scope", "$http",  function ($sco
     }
 }]);
 
-MyApp.controller('ResetpasswordController', ["$scope", "$http","$timeout", "cfpLoadingBar", function ($scope, $http, $timeout, cfpLoadingBar) {
+MyApp.controller('ResetpasswordController', ["$scope", "$http", "$timeout", "cfpLoadingBar", function ($scope, $http, $timeout, cfpLoadingBar) {
     $scope.submitted = false;
     $scope.message = '';
     var message = '';

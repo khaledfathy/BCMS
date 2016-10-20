@@ -62,68 +62,142 @@ namespace BCMS.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> LoginChecker(LoginViewModel model, string returnUrl)
         {
+            ApplicationDbContext db = new ApplicationDbContext();
             if (!ModelState.IsValid)
             {
                 return Json("InvalidLogin", JsonRequestBehavior.AllowGet);
                 //return View(model);
             }
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
             var user = await UserManager.FindByEmailAsync(model.Email);
             if (user != null)
             {
-                ViewBag.name = user.FirstName;
-                HttpCookie userIdCookie = new HttpCookie("UserId", user.Id);
-                HttpContext.Response.SetCookie(userIdCookie);
-                //HttpCookie userNameCookie = new HttpCookie("Name", user.FullName);
-                //HttpContext.Response.SetCookie(userNameCookie);
-                if (user.EmailConfirmed)
+                var UserConnection = db.Connections.Where(a => a.UserId == user.Id).FirstOrDefault();
+                if (UserConnection != null)
                 {
-                    if (user.UserStatus == UserStatus.Active)
-                    {
-                        var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-                        switch (result)
-                        {
-                           
-                            case SignInStatus.Success:
-                                if (returnUrl != null)
-                                {
-                                    return Json(returnUrl, JsonRequestBehavior.AllowGet);
-                                }
-                                else if (IsAdminUser(user.Id))
-                                    return Json("Admin", JsonRequestBehavior.AllowGet);
-                                return Json("Active", JsonRequestBehavior.AllowGet);
-                            case SignInStatus.Failure:
-                            default:
-                                return Json("PasswordError", JsonRequestBehavior.AllowGet);
-                        }
-                    }
-                    else if (user.UserStatus == UserStatus.Pending)
-                    {
-                        return Json("Pending", JsonRequestBehavior.AllowGet);
-                    }
-                    else
-                    {
-                        return Json("Waiting", JsonRequestBehavior.AllowGet);
-                    }
+                    return Json("Connected", JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    return Json("NotConfirmed", JsonRequestBehavior.AllowGet);
+                    if(user.EmailConfirmed)
+                    {
+                        switch (user.UserStatus)
+                        {
+                            case UserStatus.Active:
+                                return Json("Active", JsonRequestBehavior.AllowGet);
+
+                            case UserStatus.Pending:
+                                return Json("Waiting", JsonRequestBehavior.AllowGet);
+                        }
+                    }
+                    else
+                    {
+                        return Json("NotConfirmed", JsonRequestBehavior.AllowGet);
+
+                    }
+
                 }
             }
             else
             {
                 return Json("ErrorInUserNameOrPassword", JsonRequestBehavior.AllowGet);
             }
+            return View();
+        }
+
+        //
+        // POST: /Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        {
+            //ApplicationDbContext db = new ApplicationDbContext();
+            //if (!ModelState.IsValid)
+            //{
+            //    return Json("InvalidLogin", JsonRequestBehavior.AllowGet);
+            //    //return View(model);
+            //}
+
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var user = await UserManager.FindByEmailAsync(model.Email);
+
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            switch (result)
+            {
+
+                case SignInStatus.Success:
+                    if (returnUrl != null)
+                    {
+                        return Json(returnUrl, JsonRequestBehavior.AllowGet);
+                    }
+                    else if (IsAdminUser(user.Id))
+                        return Json("Admin", JsonRequestBehavior.AllowGet);
+                    return Json("Active", JsonRequestBehavior.AllowGet);
+                case SignInStatus.Failure:
+                default:
+                    return Json("PasswordError", JsonRequestBehavior.AllowGet);
+            }
+
+
+
+            //if (user != null)
+            //{
+            //    var UserConnection = db.Connections.Where(a => a.UserId == user.Id).FirstOrDefault();
+            //    if (UserConnection != null)
+            //    {
+            //        return Json("Connected", JsonRequestBehavior.AllowGet);
+            //    }
+            //    else
+            //    {
+            //        ViewBag.name = user.FirstName;
+            //        //HttpCookie userIdCookie = new HttpCookie("UserId", user.Id);
+            //        //HttpContext.Response.SetCookie(userIdCookie);
+            //        //HttpCookie userNameCookie = new HttpCookie("Name", user.FullName);
+            //        //HttpContext.Response.SetCookie(userNameCookie);
+            //        if (user.EmailConfirmed)
+            //        {
+            //            if (user.UserStatus == UserStatus.Active)
+            //            {
+            //                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            //                switch (result)
+            //                {
+
+            //                    case SignInStatus.Success:
+            //                        if (returnUrl != null)
+            //                        {
+            //                            return Json(returnUrl, JsonRequestBehavior.AllowGet);
+            //                        }
+            //                        else if (IsAdminUser(user.Id))
+            //                            return Json("Admin", JsonRequestBehavior.AllowGet);
+            //                        return Json("Active", JsonRequestBehavior.AllowGet);
+            //                    case SignInStatus.Failure:
+            //                    default:
+            //                        return Json("PasswordError", JsonRequestBehavior.AllowGet);
+            //                }
+            //            }
+            //            else if (user.UserStatus == UserStatus.Pending)
+            //            {
+            //                return Json("Pending", JsonRequestBehavior.AllowGet);
+            //            }
+            //            else
+            //            {
+            //                return Json("Waiting", JsonRequestBehavior.AllowGet);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            return Json("NotConfirmed", JsonRequestBehavior.AllowGet);
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    return Json("ErrorInUserNameOrPassword", JsonRequestBehavior.AllowGet);
+            //}
 
             #region old
 

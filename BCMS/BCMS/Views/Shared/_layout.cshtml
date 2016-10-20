@@ -1,7 +1,11 @@
 ﻿@using System.Web.Optimization
+
 <!doctype html>
 <html ng-app="langApp" dir="rtl" lang="ar" >
 <head>
+    
+
+
     @*<base href="/" />*@
     <title></title>
     <meta charset="utf-8" />
@@ -26,10 +30,13 @@
     <link href="~/Content/loading-bar.css" rel="stylesheet" />
 
     @Scripts.Render("~/bundles/BCMS/script")
-    
+
+    <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+    <script src="~/signalr/Hubs"></script>
     @RenderSection("scripts", required: false)
     <script src="~/Scripts/angular-animate.min.js"></script>
     <script src="~/Scripts/loading-bar.js"></script>
+    <link href="~/Materials/UTMS/css/borsagraphicspobup.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -54,6 +61,43 @@
     <!-- Start Footer-->
     @{Html.RenderPartial("_FooterPartial");}
     <!--End Footer-->
+
+    <div id="myModal" class="modal" ng-controller="LoginController">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" ng-click="close()">×</span>
+                <h2 id="title" style="text-align:center;"></h2>
+            </div>
+            <div class="modal-body" id="content">
+
+            </div>
+            <!--<div class="modal-footer">
+                <h3>Modal Footer</h3>
+            </div>-->
+        </div>
+    </div>
+
+
+
+    @{
+        if (Request.IsAuthenticated)
+        {
+            <script>
+                var connect;
+                $(function () {
+                    connect = $.connection.mainHub;
+                    $.connection.hub.start();
+                    connect.client.anotherDeviceConnected = function () {
+                        alert("you are connected via another device");
+                    }
+
+                    
+                });
+            </script>
+        }
+
+    }
 
 </body>
 </html>

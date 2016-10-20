@@ -61,6 +61,9 @@ namespace BCMS.Models
         }
 
 
+        public DbSet<Connection> Connections { get; set; }
+
+
 
     }
 

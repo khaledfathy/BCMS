@@ -7,13 +7,13 @@ namespace BCMS.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class EditPetrochemicals2 : IMigrationMetadata
+    public sealed partial class connection : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(EditPetrochemicals2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(connection));
         
         string IMigrationMetadata.Id
         {
-            get { return "201609200936041_EditPetrochemicals2"; }
+            get { return "201610191003421_connection"; }
         }
         
         string IMigrationMetadata.Source

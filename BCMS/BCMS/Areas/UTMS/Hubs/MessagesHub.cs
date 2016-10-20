@@ -13,7 +13,7 @@ namespace BCMS.Areas.UTMS.Hubs
     [HubName("MessagesHub")]
     public class MessagesHub : Hub
     {
-        private static string conString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+        private static string conString = ConfigurationManager.ConnectionStrings["BorsaCapitalDataModel"].ToString();
         public void Hello()
         {
             Clients.All.hello();

@@ -285,21 +285,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201609200924588_InitialMigration.cs" />
-    <Compile Include="Migrations\201609200924588_InitialMigration.Designer.cs">
-      <DependentUpon>201609200924588_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609200926480_petrochemical.cs" />
-    <Compile Include="Migrations\201609200926480_petrochemical.Designer.cs">
-      <DependentUpon>201609200926480_petrochemical.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609200932332_EditPetrochemical.cs" />
-    <Compile Include="Migrations\201609200932332_EditPetrochemical.Designer.cs">
-      <DependentUpon>201609200932332_EditPetrochemical.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609200936041_EditPetrochemicals2.cs" />
-    <Compile Include="Migrations\201609200936041_EditPetrochemicals2.Designer.cs">
-      <DependentUpon>201609200936041_EditPetrochemicals2.cs</DependentUpon>
+    <Compile Include="Hubs\HitLogOffHub.cs" />
+    <Compile Include="Hubs\MainHub.cs" />
+    <Compile Include="Migrations\201610191003421_connection.cs" />
+    <Compile Include="Migrations\201610191003421_connection.Designer.cs">
+      <DependentUpon>201610191003421_connection.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -313,6 +303,7 @@
     <Compile Include="Models\ChartAnalysesKind.cs" />
     <Compile Include="Models\ChartCategory.cs" />
     <Compile Include="Models\CompanyInfo.cs" />
+    <Compile Include="Models\Connection.cs" />
     <Compile Include="Models\ContactUs.cs" />
     <Compile Include="Models\Continent.cs" />
     <Compile Include="Models\Country.cs" />
@@ -2960,7 +2951,6 @@
     <Content Include="Materials\Games\MessageBox\css\default.css" />
     <Content Include="Materials\Games\MessageBox\css\github.css" />
     <Content Include="Materials\Games\MessageBox\css\jquery-fallr-1.3.css" />
-    <Content Include="Materials\UTMS\css\borsagraphicspobup.css" />
     <Content Include="Materials\UTMS\Images\companyLogo\7AAL.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\7akeer.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\A7%27wan.png" />
@@ -3058,7 +3048,6 @@
     <Content Include="Materials\UTMS\MainMenu\js\modernizr.custom.js" />
     <Content Include="Materials\UTMS\Sliding.css" />
     <Content Include="Materials\UTMS\webicons.css" />
-    <Content Include="Migrations\GulfMap.svg" />
     <Content Include="Materials\Portfolio\css\alerts\alert.png" />
     <Content Include="Materials\Portfolio\css\alerts\alertify.css" />
     <Content Include="Materials\Portfolio\css\alerts\alertify.min.css" />
@@ -3966,17 +3955,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201609200924588_InitialMigration.resx">
-      <DependentUpon>201609200924588_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609200926480_petrochemical.resx">
-      <DependentUpon>201609200926480_petrochemical.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609200932332_EditPetrochemical.resx">
-      <DependentUpon>201609200932332_EditPetrochemical.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609200936041_EditPetrochemicals2.resx">
-      <DependentUpon>201609200936041_EditPetrochemicals2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201610191003421_connection.resx">
+      <DependentUpon>201610191003421_connection.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
