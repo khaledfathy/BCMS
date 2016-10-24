@@ -2,7 +2,7 @@
 /// <reference path="C:\Users\sameh\Desktop\BCMS\BCMS\BCMS\Scripts/angular.js" />
 
 
-MyApp.controller('LoginController', ["$scope", "$http", "$location", function ($scope, $http, $location) {
+MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile", function ($scope, $http, $location, $compile) {
     //alert("login Controller");
     $scope.IsLogedin = false;
     $scope.login = 'LOGIN';
@@ -17,29 +17,26 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", function ($
     var sendCodeMessage = '';
     $scope.message = '';
     var userId = getCookie("UserId");
-    //var params = null;
+    var params = null;
+    var connect = null;
 
     $scope.LoginChecker = function () {
-        var returUrl = $("#returnUrl").val();
-        var params = { 'model': this.Member, 'returnUrl': returUrl };
+        var returnUrl = $("#returnUrl").val();
+        var member = this.Member;
+        params = { 'model': this.Member, 'returnUrl': returnUrl };
         var lang = getCookie('language');
         switch (lang) {
             case "en":
                 $http.post("/Account/LoginChecker", params)
                 .success(function (data) {
-                    
                     switch (data) {
                         case "Connected":
-                            var modal = document.getElementById('myModal');
-                            modal.style.display = "block";
+                            var popup = '<div id="myModal" class="modal"><div class="modal-content" style="width:600px;"><div class="modal-header"><span class="close" ng-click="close()">×</span><h2 id="title" style="text-align:center;">Warning</h2></div>';
+                            popup += '<div class="modal-body" style="text-align:center;"><p>You are already logged in from another device</p><p>Do you want to log off from there and log in from here?</p>';
+                            popup += '<hr /><a ng-click="Login()" class="button alert">Yes</a>&nbsp;<a class="button" ng-click="close()" style="width:39px;">No</a></div></div></div>';
+                            angular.element("#login").append($compile(popup)($scope));
+                            angular.element("#myModal").css("display", "block");
                             break;
-
-                            // $("#title").html();
-                            // $("#content").html("<iframe src='/UTMS/BorsaGraphics/ChartDiv/" + id + "' style='min-height:450px; width:100%; overflow-y:auto;'></iframe>");
-
-
-                            $location.path()
-                        
                         case "Waiting":
                             $scope.IsLogedin = true;
                             sendCodeMessage = "<h2>Your account waiting for approval</h2>";
@@ -51,7 +48,7 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", function ($
                             sendCodeMessage += "<h2> If you do not receive a confirmation email, please click <a href=\"javascript:sendCode('" + userId + "')\">here </a>to send another one</h2></div>";
                             $("#sendCodeMsg").append(sendCodeMessage);
                             break;
-                            
+
                         case "ErrorInUserNameOrPassword":
                             $scope.IsLogedin = false;
                             alertify.set('notifier', 'position', 'bottom-right');
@@ -61,7 +58,7 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", function ($
                             alertify.set('notifier', 'position', 'bottom-right');
                             alertify.error("Email or Password is incorrect", 5);
                     }
-                    
+
 
                 }).error(function (data) {
                     alertify.set('notifier', 'position', 'bottom-right');
@@ -71,19 +68,18 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", function ($
             default:
                 $http.post("/Account/LoginChecker", params)
                 .success(function (data) {
-                   
+
                     switch (data) {
+
                         case "Connected":
-                            var modal = document.getElementById('myModal');
-                            modal.style.display = "block";
-                            $("#title").html("<h2>تحذير</h2>");
-                            var content = "<p>أنت بالفعل مسجل دخولك من جهاز اخر</p><p>هل تريد تسجيل الخروج من الجهاز الاخر وتسجيل الدخول من هنا </p>";
-                            content += "<a href='javascript:Login("+params+")' class='button alert'>نعم</a>";
-                            content += "<a class='button' ng-click='close()'>لا</a>";
-                            $("#content").html(content);
+                            var popup = '<div id="myModal" class="modal"><div class="modal-content" style="width:600px;"><div class="modal-header"><span class="close" ng-click="close()">×</span><h2 id="title" style="text-align:center;">تحذير</h2></div>';
+                            popup += '<div class="modal-body" style="text-align:center;"><p>أنت بالفعل مسجل دخولك من جهاز اخر</p><p>هل تريد تسجيل الخروج من الجهاز الاخر وتسجيل الدخول من هنا؟ </p>';
+                            popup += '<hr /><a ng-click="Login()" class="button alert">نعم</a>&nbsp;<a class="button" ng-click="close()" style="width:39px;">لا</a></div></div></div>';
+                            angular.element("#login").append($compile(popup)($scope));
+                            angular.element("#myModal").css("display", "block");
                             break;
                         case "Active":
-                            Login(params);
+                            $scope.Login();
                             break;
                         case "Waiting":
                             sendCodeMessage = "<h2>أنت قيد الانتظار لحين الموافقه على حسابك من قبل مدير الموقع</h2>";
@@ -97,7 +93,7 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", function ($
                             sendCodeMessage += "<h2> لإعادة ارسال بريد الكترونى آخر برجاء الضغط <a href=\"javascript:sendCode('" + userId + "')\">هنــا</a></h2></div>";
                             $("#sendCodeMsg").append(sendCodeMessage);
                             break;
-                           
+
                         case "ErrorInUserNameOrPassword":
                             $scope.IsLogedin = false;
                             alertify.set('notifier', 'position', 'bottom-left');
@@ -107,20 +103,21 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", function ($
                             alertify.set('notifier', 'position', 'bottom-left');
                             alertify.error("البريد الإلكترونى أو كلمة المرور غير صحيحة", 5);
                     }
-                    
+
 
                 }).error(function (data) {
                     alertify.set('notifier', 'position', 'bottom-left');
                     alertify.error("خطأ فى عملية الدخول");
                 });
         }
+
     };
 
-    function Login(params) {
+    $scope.Login = function () {
         var lang = getCookie('language');
+        
         switch (lang) {
             case "en":
-                //
                 $http.post("/Account/Login", params).success(function (response) {
                     if (data != "Admin" && data != "Active" && data != "NotConfirmed" && data != "PasswordError" && data != "Waiting" && data != "ErrorInUserNameOrPassword") {
                         $scope.IsLogedin = true;
@@ -134,25 +131,22 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", function ($
                                 window.location.href = '/Admin/Home/Index';
                                 break;
                             case "Active":
+                                
                                 $scope.IsLogedin = true;
                                 $scope.message = 'Just a second please...'
                                 window.location.href = '/UTMS/Home';
                                 break;
-
                             case "PasswordError":
                                 $scope.IsLogedin = false;
                                 alertify.set('notifier', 'position', 'bottom-right');
                                 alertify.error("Password is not correct", 5);
                                 break;
-
                             default:
                                 alertify.set('notifier', 'position', 'bottom-right');
                                 alertify.error("Email or Password is incorrect", 5);
                         }
                     }
-
                 }).error(function (response) {
-
                 })
                 break;
             default:
@@ -162,7 +156,6 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", function ($
                           $scope.IsLogedin = true;
                           $scope.message = 'لحظة من فضلك...';
                           window.location.href = data;
-
                       } else {
                           switch (data) {
                               case "Admin":
@@ -180,24 +173,20 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", function ($
                                   alertify.set('notifier', 'position', 'bottom-left');
                                   alertify.error("كلمة المرور غير صحيحة", 5);
                                   break;
-
                               default:
                                   alertify.set('notifier', 'position', 'bottom-left');
                                   alertify.error("البريد الإلكترونى أو كلمة المرور غير صحيحة", 5);
                           }
                       }
-
                   }).error(function (data) {
                       alertify.set('notifier', 'position', 'bottom-left');
                       alertify.error("خطأ فى عملية الدخول");
                   });
-
         }
     }
 
-    var modal = document.getElementById('myModal');
-
     $scope.close = function () {
+        var modal = document.getElementById('myModal');
         modal.style.display = "none";
     }
 

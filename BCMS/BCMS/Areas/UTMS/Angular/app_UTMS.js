@@ -1,6 +1,7 @@
 ﻿
 var App = angular.module('UTMSApp', ['ngRoute', 'uiGmapgoogle-maps', 'chieffancypants.loadingBar', 'ngAnimate']);
 
+var connect = null;
 App.config(['$routeProvider', "cfpLoadingBarProvider", function ($routeProvider, cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = true;
     $routeProvider
@@ -57,6 +58,17 @@ App.config(['$routeProvider', "cfpLoadingBarProvider", function ($routeProvider,
     .when('/Regulators', { templateUrl: '/Areas/UTMS/Angular/HelperPages/Regulators.html', controller: 'RegulatorsController' })
 
     .otherwise({ redirectTo: '/' });
+
+
+    connect = $.connection.mainHub;
+    $.connection.hub.start();
+    connect.client.logoff = function () {
+        
+        $.connection.hub.stop();
+        window.location.href = "/Account/LogOff";
+    }
+
+
 }]);
 
 App.controller('CompanyCardController', function ($scope) {

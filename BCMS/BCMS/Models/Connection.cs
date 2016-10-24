@@ -14,7 +14,8 @@ namespace BCMS.Models
         public string UserId { get; set; }
 
         public string Email { get; set; }
-        
+        public DateTime Time { get; set; }
+
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }
 

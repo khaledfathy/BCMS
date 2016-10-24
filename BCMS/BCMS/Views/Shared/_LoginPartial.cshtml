@@ -7,9 +7,9 @@
     var UserId = User.Identity.GetUserId();
     FullName = db.Users.FirstOrDefault(a => a.Id == UserId).FullName;
     <li>
-        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Get, new { id = "logoutForm" }))
         {
-            @Html.AntiForgeryToken()
+            //@Html.AntiForgeryToken()
             <a href="javascript:document.getElementById('logoutForm').submit()">{{logout | translate}}</a>
         }
     </li>

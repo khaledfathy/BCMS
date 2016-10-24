@@ -99,6 +99,9 @@ MyApp.config(["$routeProvider", "$locationProvider", "cfpLoadingBarProvider", fu
         redirectTo: '/'
     });
 
+
+    
+
     //.when('/AdminstrationMessage', {
     //    templateUrl: 'AdminstrationMessage.html',
     //    controller: 'AdminstrationMessageController'

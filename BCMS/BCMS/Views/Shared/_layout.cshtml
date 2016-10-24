@@ -62,23 +62,6 @@
     @{Html.RenderPartial("_FooterPartial");}
     <!--End Footer-->
 
-    <div id="myModal" class="modal" ng-controller="LoginController">
-        <!-- Modal content -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" ng-click="close()">×</span>
-                <h2 id="title" style="text-align:center;"></h2>
-            </div>
-            <div class="modal-body" id="content">
-
-            </div>
-            <!--<div class="modal-footer">
-                <h3>Modal Footer</h3>
-            </div>-->
-        </div>
-    </div>
-
-
 
     @{
         if (Request.IsAuthenticated)
@@ -88,8 +71,10 @@
                 $(function () {
                     connect = $.connection.mainHub;
                     $.connection.hub.start();
-                    connect.client.anotherDeviceConnected = function () {
-                        alert("you are connected via another device");
+                    connect.client.logoff = function () {
+                       
+                        $.connection.hub.stop();
+                        window.location.href = "/Account/LogOff";
                     }
 
                     

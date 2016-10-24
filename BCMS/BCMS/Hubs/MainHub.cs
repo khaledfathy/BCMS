@@ -29,28 +29,32 @@ namespace BCMS.Hubs
                 NewConnection.UserId = UserId;
                 NewConnection.ConnectionId = Context.ConnectionId;
                 NewConnection.Email = Context.User.Identity.GetUserName();
+                NewConnection.Time = DateTime.Now;
                 db.Connections.Add(NewConnection);
                 db.SaveChanges();
-                HttpCookieCollection CookieCollection = new HttpCookieCollection();
-                HttpCookie cookie = new HttpCookie("Connected", "true");
-                                cookie.Expires = DateTime.Now.AddYears(50);
-
-                CookieCollection.Set(cookie);
-                //cookie.Value = ;
-                //Cookies.Set(cookie);
-
+           
             }
             else
             {
-                var Connected = HttpContext.Current.Request.Cookies["Connected"];
-                if (Connected != null)
-                {
-                    Clients.Caller.anotherDeviceConnected();
-                }
+                Clients.Client(UserConnection.ConnectionId).logoff();
+                Connection NewConnection = new Connection();
+                NewConnection.UserId = UserId;
+                NewConnection.ConnectionId = Context.ConnectionId;
+                NewConnection.Email = Context.User.Identity.GetUserName();
+                NewConnection.Time = DateTime.Now;
+                db.Connections.Add(NewConnection);
+                db.SaveChanges();
             }
 
 
             return base.OnConnected();
+        }
+
+        public void Logoff()
+        {
+            var UserId = Context.User.Identity.GetUserId();
+            var connectionId = db.Connections.Where(a => a.UserId == UserId).OrderBy(a => a.Time).Select(a => a.ConnectionId).FirstOrDefault();
+            Clients.Client(connectionId).logoff();
         }
 
         public override Task OnDisconnected(bool stopCalled)
