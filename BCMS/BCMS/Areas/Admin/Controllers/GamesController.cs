@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using BCMS.Models;
 
-namespace WebTest1.Areas.Admin.Controllers
+namespace BCMS.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class GamesController : Controller

@@ -1,0 +1,68 @@
+﻿@using BCMS.Models
+
+<table class="table table-bordered table-hover table-striped table-responsive">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Middle Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Confirmed</th>
+            <th>User Status</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody style="max-height:700px; overflow-y:auto;">
+        @if (Model.Count != 0)
+            {
+                foreach (ApplicationUser user in Model)
+                {
+                <tr>
+                    <td>@user.FirstName</td>
+                    @if (user.MiddleName == null)
+                    {
+                        <td>ـــ</td>
+                    }
+                    else
+                    {
+                        <td>@user.MiddleName</td>
+                    }
+                    <td>@user.LastName</td>
+                    <td>@user.Email</td>
+                    <td>@user.EmailConfirmed</td>
+                    <td>@user.UserStatus</td>
+                    <td>
+                        @if (!user.EmailConfirmed)
+                        {
+                            <b style="color:darkred">Not Confirmed</b>
+                        }
+                        else
+                        {
+                            if (user.UserStatus == UserStatus.Active)
+                            {
+                                @Ajax.ActionLink("Deactivate", "Deactivate", new { UserId = user.Id }, new AjaxOptions { UpdateTargetId = "userslist" }, new { @class = "btn btn-warning" })
+                                @*<a class="btn btn-warning" href="@Url.Action("Deactivate", "Management", new { UserId =user.Id })">Deactivate</a>*@
+                            }
+                            else
+                            {
+                                @Ajax.ActionLink("Activate", "Activate", new { UserId = user.Id }, new AjaxOptions { UpdateTargetId = "userslist" }, new { @class = "btn btn-primary" })
+                            }
+                        }
+
+
+                        @Ajax.ActionLink("Delete", "DeleteUser", new { UserId = user.Id }, new AjaxOptions() { UpdateTargetId = "popupBody", InsertionMode = InsertionMode.Replace, OnSuccess = "$('#myModal').modal({ show: true, backdrop: true });" }, new { @class = "btn btn-danger" })
+                        @*<a class="btn btn-danger" data-toggle="modal" data-target="#myModal">Delete</a>*@
+
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5" style="text-align:center;"><h2>No Users</h2></td>
+            </tr>
+        }
+
+    </tbody>
+</table>

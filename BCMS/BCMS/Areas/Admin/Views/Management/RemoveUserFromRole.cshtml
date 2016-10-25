@@ -1,0 +1,91 @@
+﻿
+@using BCMS.Models
+@{
+    Layout = null;
+    int i = 0;
+}
+<html>
+<head>
+
+</head>
+<body>
+    @using (Ajax.BeginForm("RemoveUserFromRole", "Management", new AjaxOptions { UpdateTargetId = "RoleContent", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnSuccess = "$('.close').click()" }))
+    {
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <td colspan="5" style="text-align:center;"><h2>Remove user from @ViewBag.RoleName role</h2></td>
+                </tr>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>User Status</th>
+                    <th>Roles</th>
+                    <th>Remove from role</th>
+                </tr>
+            </thead>
+            <tbody style="max-height:700px; overflow-y:auto;">
+                @if (Model.Count == 0)
+                {
+                    <tr>
+                        <td colspan="5"><h2>There weren't any users in this role</h2></td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (Staff item in Model)
+                    {
+                        <tr>
+                            <td>@item.FirstName @item.LastName</td>
+                            <td>@item.Email</td>
+                            <td>@item.UserStatus</td>
+                            @if (item.Roles == null)
+                            {
+                                <td>ــ</td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <ul class="list-inline">
+                                        @if (item.Roles.Count == 0)
+                                        {
+                                            <li>ـــ</li>
+                                        }
+                                        else
+                                        {
+                                            foreach (var role in item.Roles)
+                                            {
+                                                <li>@role</li>
+                                            }
+                                        }
+                                        
+                                    </ul>
+                                </td>
+                            }
+                            <td>
+                                <input type="hidden" name="RoleId" value="@ViewBag.RoleId" />
+                                <div class="CheckBox">
+                                    <label><input type="checkbox" style="cursor:pointer;" name="UsersIds" value="@item.Id" /></label>
+                                </div>
+                            </td>
+
+                        </tr>
+                        i++;
+
+                    }
+                    <tr>
+                        <td colspan="5" style="text-align:center;">
+                            <input type="hidden" name="RoleId" value="@ViewBag.RoleId" />
+                            <input type="submit" value="Save" class="btn btn-success" />
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    }
+
+</body>
+</html>
+
+

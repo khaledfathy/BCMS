@@ -18,7 +18,6 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
     $scope.message = '';
     var userId = getCookie("UserId");
     var params = null;
-    var connect = null;
 
     $scope.LoginChecker = function () {
         var returnUrl = $("#returnUrl").val();

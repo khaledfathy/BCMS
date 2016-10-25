@@ -9,7 +9,7 @@ using PagedList.Mvc;
 using System.Threading.Tasks;
 using System.Data.Entity;
 
-namespace WebTest1.Areas.Admin.Controllers
+namespace BCMS.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class EldersController : Controller

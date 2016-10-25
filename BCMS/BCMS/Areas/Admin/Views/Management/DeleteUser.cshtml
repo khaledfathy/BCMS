@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DeleteUser</title>
+</head>
+<body>
+    <div> 
+        @using (Ajax.BeginForm("DeleteUserPost", "Management", new AjaxOptions { UpdateTargetId = "userslist", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnSuccess = "$('.close').click()" }))
+        {
+            <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+            <p style="font-size:16px; text-align:center">
+                <strong>Are you sure you want to delete "<i>@ViewBag.FullName</i>"?</strong> &nbsp;
+                <input type="submit" value="Yes" class="btn btn-danger " />
+                <input id="save" type="button" value="No" class="btn btn-default" data-dismiss="modal" />
+            </p>
+        }
+    </div>
+</body>
+</html>

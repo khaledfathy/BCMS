@@ -20,7 +20,7 @@
                 <li><a href="#">الملف الشخصى</a></li>
                 <li class="divider"></li>
                 <li>
-                    <form action="/Account/LogOff" method="post">
+                    <form action="/Account/LogOff" method="get">
                         @Html.AntiForgeryToken()
                         <button type="submit" class="ui-icon-link">تسجيل خروج</button>
                     </form>
@@ -35,9 +35,9 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" style="text-align:center">
-                <li><a href="/Admin/Home/UsersList">المستخدمين</a></li>
+                <li><a href="/Admin/Management/UsersList">المستخدمين</a></li>
                 <li class="divider"></li>
-                <li><a href="/Admin/Home/Roles">Roles</a></li>
+                <li><a href="/Admin/Management/Roles">Roles</a></li>
             </ul>
         </div>
         <ul class="collapse navbar-collapse nav navbar-nav top-menu pull-right">

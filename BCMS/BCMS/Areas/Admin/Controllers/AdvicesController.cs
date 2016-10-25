@@ -9,7 +9,7 @@ using BCMS.Models;
 using PagedList;
 using PagedList.Mvc;
 
-namespace WebTest1.Areas.Admin.Controllers
+namespace BCMS.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class AdvicesController : Controller

@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace WebTest1.Areas.Admin
+namespace BCMS.Areas.Admin
 {
     public class AdminAreaRegistration : AreaRegistration
     {

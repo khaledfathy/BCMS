@@ -50,13 +50,6 @@ namespace BCMS.Hubs
             return base.OnConnected();
         }
 
-        public void Logoff()
-        {
-            var UserId = Context.User.Identity.GetUserId();
-            var connectionId = db.Connections.Where(a => a.UserId == UserId).OrderBy(a => a.Time).Select(a => a.ConnectionId).FirstOrDefault();
-            Clients.Client(connectionId).logoff();
-        }
-
         public override Task OnDisconnected(bool stopCalled)
         {
             var UserId = Context.User.Identity.GetUserId();

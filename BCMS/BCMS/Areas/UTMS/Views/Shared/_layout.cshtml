@@ -7,16 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="application/xhtml+html; charset=utf-8" />
     <title>BorsaCapital | Welcome</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="~/Materials/UTMS/Images/favicon.ico" type="image/x-icon">
-    <link href="~/Materials/UTMS/css/foundation.css" rel="stylesheet" />
-    <link href="~/Materials/UTMS/css/MainStyle.css" rel="stylesheet" />
-    <link href="~/Materials/UTMS/MainMenu/css/component.css" rel="stylesheet" />
-    <link href="~/Materials/UTMS/MainMenu/css/css3.css" rel="stylesheet" />
-    <link href="~/Materials/UTMS/css/Graphics.css" rel="stylesheet" />
-    <link href="~/Content/loading-bar.css" rel="stylesheet" />
-    @*<link href="~/Materials/Ar/css/login.css" rel="stylesheet" />*@
-    @*@Styles.Render("~/App_Start/bundles/BCMS/style")*@
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
+    @*<link rel="icon" href="~/Materials/UTMS/Images/favicon.ico" type="image/x-icon">*@
+
+    @Styles.Render("~/App_Start/bundles/UTMS/style")
     <style>
         .angular-google-map-container{
             height:400px;
@@ -73,41 +67,10 @@
             @Html.Partial("_FooterPartial")
         </div>
         <div class="clearfix"></div>
-        @*@Html.Partial("_FooterPartial")*@
     </div>
 
-    <script src="~/Scripts/jquery.js"></script>
-    <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
-    <script src="~/Scripts/modernizr.js"></script>
-    <script src="~/Scripts/foundation.js"></script>
-    <script src="~/Scripts/spin.js"></script>
-    <script src="~/Scripts/angular.js"></script>
-    <script src="~/Scripts/angular-animate.js"></script>
-    <script src="~/Scripts/loading-bar.js"></script>
-    <script src="~/Scripts/angular-route.js"></script>
-    <script src="~/Areas/UTMS/Angular/app_UTMS.js"></script>
-    <script src="~/Scripts/highcharts.js"></script>
-    <script src="~/Areas/UTMS/Angular/UTMS_Controller.js"></script>
+    @Scripts.Render("~/App_Start/bundles/UTMS/script")
     <script src="~/signalr/Hubs"></script>
-    <script src="~/Areas/UTMS/Charts/angular-google-maps.js"></script>
-    <!--BC-Counters-->
-    <script src="~/Scripts/highcharts-more.js"></script>
-    <script src="~/Scripts/solid-gauge.src.js"></script>
-    <!--/BC-Counters-->
-    @*@Scripts.Render("~/App_Start/bundles/BCMS/script")*@
-    @*@Scripts.Render("~/App_Start/bundles/UTMS/script")*@
-
-
-    @*<script>
-        var connect;
-        $(function () {
-            connect = $.connection.mainHub;
-            $.connection.hub.start();
-            connect.client.Connected = function () {
-                // Connect to hub 
-            }
-        });
-    </script>*@
 
 </body>
 </html>
