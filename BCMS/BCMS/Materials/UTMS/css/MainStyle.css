@@ -1921,20 +1921,37 @@ table.TimeWorld td.Night, table.TimeWorld th.Night, td.Night, th.Night
 }
 
 /*Edit by hala 16-10-2016*/
+.company{
+ width:190px;
+ float:right;
+  margin:15px;
+}
 .company_logo{
     width:190px;
     float:right;
     background:#ffffff;
     padding:20px 8px 10px 8px;
-    margin:15px;
+   
     border:#999 solid 1px;
-    height:140px;
+    height:110px;
     text-align:center;
     font-weight:500;
     font-size:18px;
+    margin-bottom:5px;
 }
 
     .company_logo img {
         width:100%;
          height: 65px;
+    }
+
+    .title-companyLogo{
+        color:#ffffff;
+        padding : 10px;
+        text-align:center;
+         font-weight:500;
+         font-size:16px;
+             font-family: "Droid Arabic Kufi",serif;
+             margin-top:10px;
+
     }

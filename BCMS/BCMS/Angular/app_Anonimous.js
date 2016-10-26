@@ -99,18 +99,6 @@ MyApp.config(["$routeProvider", "$locationProvider", "cfpLoadingBarProvider", fu
         redirectTo: '/'
     });
 
-
-    
-
-    //.when('/AdminstrationMessage', {
-    //    templateUrl: 'AdminstrationMessage.html',
-    //    controller: 'AdminstrationMessageController'
-    //})
-    //.when('/MyPortfolio', {
-    //    templateUrl: '/Demo/MyPortfolio',
-    //    controller: 'MyPortfolioController'
-    //})
-    //alert("Routing");
     //$locationProvider.html5Mode(true);
     //$locationProvider.html5Mode(true).hashPrefix('!');
 }])
@@ -138,14 +126,6 @@ MyApp.config(["$routeProvider", "$locationProvider", "cfpLoadingBarProvider", fu
 
 
 /**************************************************** Controllers ***********************************************************/
-
-MyApp.controller('ChartController', function ($scope) {
-
-});
-
-MyApp.controller('BorsaCloudCtrl', function ($scope) {
-    window.location.href = '/UTMS/Home/index';
-});
 
 MyApp.controller('HomeController', ["$scope", "$location", function ($scope) {
     $scope.bc = 'bc';
@@ -243,15 +223,4 @@ MyApp.controller('RelaxingController', ["$scope", "$http", function ($scope, $ht
     $scope.silverSponsor = 'SILVER_SPONSOR';
 }]);
 
-MyApp.controller('AdminstrationMessageController', ["$scope", function ($scope) {
-
-}]);
-
-MyApp.controller('MyPortfolioController', ["$scope", function ($scope) {
-
-}]);
-
-MyApp.controller('MusicController', ["$scope", function ($scope) {
-
-}]);
 

@@ -18,34 +18,49 @@ namespace BCMS.Hubs
         public HttpCookieCollection Cookies { get; }
 
         public override Task OnConnected()
+
         {
             var UserId = Context.User.Identity.GetUserId();
+            var IsAuthenticated = Context.User.Identity.IsAuthenticated;
 
+            var SessionId = HttpContext.Current.Request.Cookies["SessionID"];
 
-            var UserConnection = db.Connections.Where(a => a.UserId == UserId).FirstOrDefault();
-            if (UserConnection == null)
+            if (SessionId != null)
             {
-                Connection NewConnection = new Connection();
-                NewConnection.UserId = UserId;
-                NewConnection.ConnectionId = Context.ConnectionId;
-                NewConnection.Email = Context.User.Identity.GetUserName();
-                NewConnection.Time = DateTime.Now;
-                db.Connections.Add(NewConnection);
-                db.SaveChanges();
-           
-            }
-            else
-            {
-                Clients.Client(UserConnection.ConnectionId).logoff();
-                Connection NewConnection = new Connection();
-                NewConnection.UserId = UserId;
-                NewConnection.ConnectionId = Context.ConnectionId;
-                NewConnection.Email = Context.User.Identity.GetUserName();
-                NewConnection.Time = DateTime.Now;
-                db.Connections.Add(NewConnection);
-                db.SaveChanges();
-            }
+                string CurrentSessionId = SessionId.Value;
+                var UserConnection = db.Connections.Where(a => a.UserId == UserId).FirstOrDefault();
+                if (UserConnection == null)
+                {
+                    Connection NewConnection = new Connection();
+                    NewConnection.UserId = UserId;
+                    NewConnection.ConnectionId = Context.ConnectionId;
+                    NewConnection.Email = Context.User.Identity.GetUserName();
+                    NewConnection.Time = DateTime.Now;
+                    NewConnection.TabsNumber = 1;
+                    NewConnection.SessionId = CurrentSessionId;
+                    db.Connections.Add(NewConnection);
 
+                }
+                else if (UserConnection.SessionId != CurrentSessionId)
+                {
+                    Clients.Client(UserConnection.ConnectionId).logoff();
+                    Connection NewConnection = new Connection();
+                    NewConnection.UserId = UserId;
+                    NewConnection.ConnectionId = Context.ConnectionId;
+                    NewConnection.Email = Context.User.Identity.GetUserName();
+                    NewConnection.Time = DateTime.Now;
+                    NewConnection.TabsNumber = 1;
+                    NewConnection.SessionId = CurrentSessionId;
+                    db.Connections.Add(NewConnection);
+                }
+                else 
+                {
+                    UserConnection.TabsNumber++;
+                }
+                
+                db.SaveChanges();
+            }
+            
 
             return base.OnConnected();
         }
@@ -53,10 +68,21 @@ namespace BCMS.Hubs
         public override Task OnDisconnected(bool stopCalled)
         {
             var UserId = Context.User.Identity.GetUserId();
-
+            var IsAuthenticated = Context.User.Identity.IsAuthenticated;
             var UserConnection = db.Connections.Where(a => a.UserId == UserId).FirstOrDefault();
-            db.Connections.Remove(UserConnection);
-            db.SaveChanges();
+            if (UserConnection != null)
+            {
+                if (UserConnection.TabsNumber == 1 || !IsAuthenticated)
+                {
+                    db.Connections.Remove(UserConnection);
+                }
+                else
+                {
+                    UserConnection.TabsNumber--;
+                }
+                db.SaveChanges();
+            }
+
             return base.OnDisconnected(stopCalled);
         }
     }

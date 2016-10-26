@@ -32,8 +32,18 @@ MyApp.controller('FeedbackController', ["$scope", "$http", function ($scope, $ht
         $scope.isFormValid = newValue;
     });
 
-    var lang=localStorage.getItem('language');
+    $("#capture").unselectable = "on";
+    var num = Math.floor((Math.random() * 100000) + 1);
+    $("#capture").text(num)
+
+    $scope.generate = function () {
+        var num = Math.floor((Math.random() * 100000) + 1);
+        $("#capture").text(num)
+    }
+
+    //var lang=localStorage.getItem('language');
     $scope.Save = function () {
+        var lang = getCookie('language');
         if (lang == 'en') {
             if ($scope.isFormValid) {
                 $("#valid").attr("hidden", "hidden").removeClass("error");
@@ -64,7 +74,7 @@ MyApp.controller('FeedbackController', ["$scope", "$http", function ($scope, $ht
                 }
             } else {
                 $("#valid").removeAttr("hidden").addClass("error");
-                $scope.validationMessage = "Please fill out all the blanks";
+                $scope.validationMessage = "All fields are required";
             }
         }
 

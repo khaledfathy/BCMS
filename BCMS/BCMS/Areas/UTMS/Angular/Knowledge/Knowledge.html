@@ -6,17 +6,15 @@
             <div class="acc-container">
                 
                 <div style="margin: 1em 0;">
-
                     <ul class="tabs">
                         <li class="tab-title" ng-repeat="know in knowledges" id="tab{{$index}}" ng-class="{'active':$index==0}">
-                        
                             <a ng-click="gotoAnchor($index)">{{know.KnowledgeTitle}}</a>
                         </li>
                     </ul>
 
-                    <div class="tabs-content">
+                    <div class="tabs-content" style="padding:0px 15px; font-size:14px;">
                         <div class="content" id="{{$index}}" ng-repeat="know in knowledges" ng-class="{'active':$index==0}">
-                            <p ng-repeat="Spec in know.informatoins" style="margin-right:10px; font-size:14px;">{{Spec}}</p>
+                            <p ng-repeat="Spec in know.informatoins">{{Spec}}</p>
                         </div>
                     </div>
 

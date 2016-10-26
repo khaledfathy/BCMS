@@ -130,7 +130,12 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
                                 window.location.href = '/Admin/Home/Index';
                                 break;
                             case "Active":
-                                
+                                //var connect = $.connection.mainHub;
+                                //$.connection.hub.start();
+                                //connect.client.logoff = function () {
+                                //    $.connection.hub.stop();
+                                //    window.location.href = "/Account/LogOff";
+                                //}
                                 $scope.IsLogedin = true;
                                 $scope.message = 'Just a second please...'
                                 window.location.href = '/UTMS/Home';
@@ -163,6 +168,11 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
                                   window.location.href = '/Admin/Home/Index';
                                   break;
                               case "Active":
+                                  //$.connection.hub.start();
+                                  //connect.client.logoff = function () {
+                                  //    $.connection.hub.stop();
+                                  //    window.location.href = "/Account/LogOff";
+                                  //}
                                   $scope.IsLogedin = true;
                                   $scope.message = 'لحظة من فضلك...'
                                   window.location.href = '/UTMS/Home';

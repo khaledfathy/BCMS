@@ -295,6 +295,18 @@
     <Compile Include="Migrations\201610241101139_time.Designer.cs">
       <DependentUpon>201610241101139_time.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610261046578_TabsNumberConnections.cs" />
+    <Compile Include="Migrations\201610261046578_TabsNumberConnections.Designer.cs">
+      <DependentUpon>201610261046578_TabsNumberConnections.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610261103573_TabsNumberConnections1.cs" />
+    <Compile Include="Migrations\201610261103573_TabsNumberConnections1.Designer.cs">
+      <DependentUpon>201610261103573_TabsNumberConnections1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610261222572_sessionId.cs" />
+    <Compile Include="Migrations\201610261222572_sessionId.Designer.cs">
+      <DependentUpon>201610261222572_sessionId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -2951,6 +2963,79 @@
     <Content Include="Materials\Portfolio\Sliding\Images\Bottom.png" />
     <Content Include="Materials\Portfolio\Sliding\Images\FooterButton.png" />
     <Content Include="Materials\Portfolio\Sliding\Images\Top.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\1-alyanz.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\1-araby.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\1-eldr3-.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\1-malz.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\1-metgalf.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\1-salama.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\1-tawnya.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\1-walaa.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-ab7as.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-AlAhsa.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-albaha-logo-01.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-Altayyargroup.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-amantet.gif" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-anabeb.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-arabanabeb.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-arkan.gif" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-aslak.gif" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-asser.gif" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-bahry.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-BCI.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-bowan.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-btateen.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-budget.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-cablat.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-fakhrya.gif" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-gypsum-logo1.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-khodery.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-khzef.gif" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-m3rfa.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-ma3jal.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-mabred.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-maka.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-mamlka.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-motwra.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-omr.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-readsea.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-ryad.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-sabtco.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-sarco.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-sesco.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-SIDC.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-tohama.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-tyba.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-zamel.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\2-ُa3mar.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-3amel.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-amn.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-baldya.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-byaa.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-dyoon.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-e3laam.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-e7saat.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-e7saat2.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-eqtsad.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-estsmar.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-etslaat.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-islamic.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-khrgya.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-malek.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-malya.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-mohsba.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-monafsa.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-naqed.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-naqel.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-pareed.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-se7a.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-soqemala.gif" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-t3leem.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-tameen.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-taqa.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-tegra.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-watnya.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\7-zakha.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\7AAL.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\7akeer.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\A7%27wan.png" />
@@ -2958,33 +3043,55 @@
     <Content Include="Materials\UTMS\Images\companyLogo\Ahly.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\alinma.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\almarai.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\alwatanlogo.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\anaam_logo.gif" />
+    <Content Include="Materials\UTMS\Images\companyLogo\arabic magazine logo copy.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\arabNews.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\Araby.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\arabyaChannel.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\Arba7.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\arbyia.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\arqam.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\asmak.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\bankInter.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\bbc-blocks-dark.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\brand-mobily-new.gif" />
     <Content Include="Materials\UTMS\Images\companyLogo\brand-tadawul.gif" />
     <Content Include="Materials\UTMS\Images\companyLogo\city.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\cnbc.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\creditSuisse.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\dalha.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\E7%27brya.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\elblad.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\eldrees.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\eljoof.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\elkher.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\elqora.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\Eltahad.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\elyoom.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\emarats.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\enerdata.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\enwiki.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\eqtsadya.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\EqtsadyaChannel.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\euro.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\eXtra_logo.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\ftehy.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\gadwa.gif" />
     <Content Include="Materials\UTMS\Images\companyLogo\ganoob.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\gasico.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\GO_Logo.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\gulfbase.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\herfy-logoar.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\herms.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\hsbc_logo.gif" />
     <Content Include="Materials\UTMS\Images\companyLogo\hy2aelsoqegif.gif" />
+    <Content Include="Materials\UTMS\Images\companyLogo\investo.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\investo.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\jarir.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\jazeera_logo.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\jazera.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\jazyra.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\joufZer3ya.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\kamtoon.gif" />
     <Content Include="Materials\UTMS\Images\companyLogo\kayan.gif" />
@@ -2993,9 +3100,12 @@
     <Content Include="Materials\UTMS\Images\companyLogo\logo.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\logo.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\logo_ar.gif" />
+    <Content Include="Materials\UTMS\Images\companyLogo\madena.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\magmo3a.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\mazr3a.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\mefc.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\mobasher.gif" />
+    <Content Include="Materials\UTMS\Images\companyLogo\mobasher.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\mostsmer.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\motkmala.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\motqadma.png" />
@@ -3003,10 +3113,15 @@
     <Content Include="Materials\UTMS\Images\companyLogo\nadak.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\NAJRAN.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\nama-chemicals-logo.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\naqd.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\naqdInter.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\nefaie-logo.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\odaa.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\okaz.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\opic.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\petrokem.gif" />
     <Content Include="Materials\UTMS\Images\companyLogo\Petro_Rabigh_logo_06.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\qandl.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\ra3ya.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\raghy.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\ryad.jpg" />
@@ -3019,12 +3134,16 @@
     <Content Include="Materials\UTMS\Images\companyLogo\Sambaa.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\sasko.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\saudi-airlines-catering.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\Saudi-Gazette-272x90.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\shamliya.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\sharqMagz.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\sharqyaa.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\shrgyaZra3ya.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\sipctom.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\sky.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\SP_ConflictLogo.gif" />
     <Content Include="Materials\UTMS\Images\companyLogo\stc-logo-AR.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\stockcharts_icon.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\suadi.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\sudiAsment.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\sudiElctric.png" />
@@ -3032,7 +3151,10 @@
     <Content Include="Materials\UTMS\Images\companyLogo\sudiFrnce.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\tabco-zer3ya.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\tabok.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\taqainter.png" />
+    <Content Include="Materials\UTMS\Images\companyLogo\trading.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\wafra.jpg" />
+    <Content Include="Materials\UTMS\Images\companyLogo\wekala.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\yamama.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\yanbo3.jpg" />
     <Content Include="Materials\UTMS\Images\companyLogo\yansab.gif" />
@@ -3744,7 +3866,6 @@
     <Content Include="Materials\UTMS\MainMenu\fonts\fontawesome.ttf" />
     <Content Include="Materials\UTMS\MainMenu\fonts\fontawesome.woff" />
     <Content Include="Materials\UTMS\MainMenu\fonts\readme.md" />
-    <Content Include="Materials\UTMS\Images\companyLogo\Thumbs.db" />
     <Content Include="Scripts\jquery-1.4.4.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -3823,6 +3944,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610241101139_time.resx">
       <DependentUpon>201610241101139_time.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610261046578_TabsNumberConnections.resx">
+      <DependentUpon>201610261046578_TabsNumberConnections.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610261103573_TabsNumberConnections1.resx">
+      <DependentUpon>201610261103573_TabsNumberConnections1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610261222572_sessionId.resx">
+      <DependentUpon>201610261222572_sessionId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

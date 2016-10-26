@@ -63,7 +63,6 @@ App.config(['$routeProvider', "cfpLoadingBarProvider", function ($routeProvider,
     connect = $.connection.mainHub;
     $.connection.hub.start();
     connect.client.logoff = function () {
-        
         $.connection.hub.stop();
         window.location.href = "/Account/LogOff";
     }

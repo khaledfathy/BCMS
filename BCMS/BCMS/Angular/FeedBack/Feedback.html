@@ -91,7 +91,7 @@
                                         </div>
                                     </div>
                                     <div class="large-1 column">
-                                        <a href="javascript:generate();" style="height:40px;">
+                                        <a ng-click="generate()" style="height:40px;">
                                             <img src="../Materials/Ar/img/reload.jpg" style="margin-top:7px;" />
                                         </a>
                                     </div>
@@ -131,15 +131,3 @@
     </div>
 </div>
 
-<script>
-    $(function () {
-        $("#capture").unselectable = "on";
-        var num = Math.floor((Math.random() * 100000) + 1);
-        $("#capture").text(num)
-
-    })
-    function generate() {
-        var num = Math.floor((Math.random() * 100000) + 1);
-        $("#capture").text(num)
-    }
-</script>

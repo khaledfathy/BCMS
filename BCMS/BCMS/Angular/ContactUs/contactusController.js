@@ -13,21 +13,19 @@ MyApp.controller('ContactUsController', ["$scope", "$http", function ($scope, $h
     $scope.goldenSponsor = 'GOLDEN_SPONSOR';
     $scope.platinumSponsor = 'PLATINUM_SPONSOR';
     $scope.silverSponsor = 'SILVER_SPONSOR';
-
-
     $scope.contacUs = 'CONTACT_US';
     $scope.name = 'name';
     $scope.nameValidation = 'nameValidation';
     $scope.email = 'email';
     $scope.emailValidation = 'EMAIL_VALIDATION';
-    $scope.emailIncorrect='EMAIL_INCORRECT'
+    $scope.emailIncorrect = 'EMAIL_INCORRECT'
     $scope.topic = 'TOPIC';
     $scope.topicValidation = 'TOPIC_VALIDATION';
     $scope.fbMessage = 'message';
     $scope.messageValidation = 'messageValidation';
     $scope.capitha = 'capitha';
     $scope.sendbtn = 'SEND_BTN'
-    var lang = localStorage.getItem('language');
+    //var lang = localStorage.getItem('language');
 
     $scope.newContactUs = {
         name: '',
@@ -35,19 +33,23 @@ MyApp.controller('ContactUsController', ["$scope", "$http", function ($scope, $h
         subject: '',
         message: ''
     };
-    //$scope.Check = function (CheckAvailability) {
-    //    return (CheckAvailability) ? "TextBoxWrong" : "TextBoxDone";
-    //};
-    //$scope.CheckButton = function (CheckAvailability) {
-    //    return (CheckAvailability) ? "ButtonForbidden" : "";
-    //};
+
+    $("#capture").unselectable = "on";
+    var num = Math.floor((Math.random() * 100000) + 1);
+    $("#capture").text(num)
+
+    $scope.generate = function () {
+        var num = Math.floor((Math.random() * 100000) + 1);
+        $("#capture").text(num)
+    }
+
 
     $scope.$watch('SendMessage.$valid', function (newValue) {
         $scope.isFormValid = newValue;
     });
 
     $scope.Save = function () {
-        
+        var lang = getCookie('language');
         if (lang == 'en') {
             if ($scope.isFormValid) {
                 $("#valid").attr("hidden", "hidden").removeClass("error");
@@ -74,7 +76,12 @@ MyApp.controller('ContactUsController', ["$scope", "$http", function ($scope, $h
                     }
                 }
             }
-            
+
+                //
+            else {
+                $("#valid").removeAttr("hidden").addClass("error");
+                $scope.validationMessage = "All fields are required!";
+            }
         }
 
         else {
@@ -106,7 +113,7 @@ MyApp.controller('ContactUsController', ["$scope", "$http", function ($scope, $h
                 $("#valid").removeAttr("hidden").addClass("error");
                 $scope.validationMessage = "يجب  ملئ جميع الخانات الفارغه";
             }
-            
+
         }
 
     }

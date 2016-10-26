@@ -16,7 +16,7 @@ MyApp.controller("languageController", function ($scope, $translate, $cookies) {
         $translate.use(langKey);
        
         // Setting a cookie
-        $cookies.put('language', langKey);
+        $cookies.put('language', langKey, { path: "/" });
 
         //localStorage.setItem('language', langKey);
         

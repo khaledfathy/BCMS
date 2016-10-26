@@ -70,7 +70,6 @@ namespace BCMS.Controllers
             if (!ModelState.IsValid)
             {
                 return Json("InvalidLogin", JsonRequestBehavior.AllowGet);
-                //return View(model);
             }
             var user = await UserManager.FindByEmailAsync(model.Email);
             if (user != null)
@@ -88,17 +87,16 @@ namespace BCMS.Controllers
                         {
                             case UserStatus.Active:
                                 return Json("Active", JsonRequestBehavior.AllowGet);
-
                             case UserStatus.Pending:
+                                return Json("Waiting", JsonRequestBehavior.AllowGet);
+                            case UserStatus.Waiting:
                                 return Json("Waiting", JsonRequestBehavior.AllowGet);
                         }
                     }
                     else
                     {
                         return Json("NotConfirmed", JsonRequestBehavior.AllowGet);
-
                     }
-
                 }
             }
             else
@@ -114,15 +112,6 @@ namespace BCMS.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            //ApplicationDbContext db = new ApplicationDbContext();
-            //if (!ModelState.IsValid)
-            //{
-            //    return Json("InvalidLogin", JsonRequestBehavior.AllowGet);
-            //    //return View(model);
-            //}
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
             var user = await UserManager.FindByEmailAsync(model.Email);
 
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
@@ -130,6 +119,9 @@ namespace BCMS.Controllers
             {
 
                 case SignInStatus.Success:
+                    HttpCookie cookie = new HttpCookie("SessionID", Session.SessionID);
+                    cookie.Path = "/";
+                    Response.Cookies.Add(cookie);
                     if (returnUrl != null)
                     {
                         return Json(returnUrl, JsonRequestBehavior.AllowGet);
@@ -141,90 +133,6 @@ namespace BCMS.Controllers
                 default:
                     return Json("PasswordError", JsonRequestBehavior.AllowGet);
             }
-
-
-
-            //if (user != null)
-            //{
-            //    var UserConnection = db.Connections.Where(a => a.UserId == user.Id).FirstOrDefault();
-            //    if (UserConnection != null)
-            //    {
-            //        return Json("Connected", JsonRequestBehavior.AllowGet);
-            //    }
-            //    else
-            //    {
-            //        ViewBag.name = user.FirstName;
-            //        //HttpCookie userIdCookie = new HttpCookie("UserId", user.Id);
-            //        //HttpContext.Response.SetCookie(userIdCookie);
-            //        //HttpCookie userNameCookie = new HttpCookie("Name", user.FullName);
-            //        //HttpContext.Response.SetCookie(userNameCookie);
-            //        if (user.EmailConfirmed)
-            //        {
-            //            if (user.UserStatus == UserStatus.Active)
-            //            {
-            //                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            //                switch (result)
-            //                {
-
-            //                    case SignInStatus.Success:
-            //                        if (returnUrl != null)
-            //                        {
-            //                            return Json(returnUrl, JsonRequestBehavior.AllowGet);
-            //                        }
-            //                        else if (IsAdminUser(user.Id))
-            //                            return Json("Admin", JsonRequestBehavior.AllowGet);
-            //                        return Json("Active", JsonRequestBehavior.AllowGet);
-            //                    case SignInStatus.Failure:
-            //                    default:
-            //                        return Json("PasswordError", JsonRequestBehavior.AllowGet);
-            //                }
-            //            }
-            //            else if (user.UserStatus == UserStatus.Pending)
-            //            {
-            //                return Json("Pending", JsonRequestBehavior.AllowGet);
-            //            }
-            //            else
-            //            {
-            //                return Json("Waiting", JsonRequestBehavior.AllowGet);
-            //            }
-            //        }
-            //        else
-            //        {
-            //            return Json("NotConfirmed", JsonRequestBehavior.AllowGet);
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    return Json("ErrorInUserNameOrPassword", JsonRequestBehavior.AllowGet);
-            //}
-
-            #region old
-
-            //    //var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            //    switch (result)
-            //    {
-            //        case SignInStatus.Success:
-
-            //            else
-            //            {
-            //                return Json("NotConfirmed", JsonRequestBehavior.AllowGet);
-            //                //return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe, UserId = user.Id });
-            //            }
-            //        //case SignInStatus.LockedOut:
-            //        //    return View("Lockout");
-            //        //case SignInStatus.RequiresVerification:
-            //        //    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-            //        case SignInStatus.Failure:
-            //        default:
-            //            return Json("Failed", JsonRequestBehavior.AllowGet);
-            //            //ModelState.AddModelError("", "Invalid login attempt.");
-            //            //return View(model);
-            //    }
-            //}
-            //return View(model);
-
-            #endregion
         }
 
         //
@@ -343,11 +251,19 @@ namespace BCMS.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            // WebSecurity.Logout();
+       
             Session.Clear();
             Session.Abandon();
-            FormsAuthentication.SignOut();
-            var test = Request.IsAuthenticated;
+
+            if(HttpContext.Request.Cookies["SessionID"]!=null)
+            {
+                var c = new HttpCookie("SessionID");
+                c.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(c);
+            }
+                       
+            FormsAuthentication.SignOut(); 
+         
             return RedirectToAction("Index", "Home");
         }
 
@@ -647,20 +563,6 @@ namespace BCMS.Controllers
                 return false;
             }
         }
-
-        //public string UserRole()
-        //{
-
-        //    var user = User.Identity;
-        //    ApplicationDbContext context = new ApplicationDbContext();
-
-        //    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-        //    var result = UserManager.GetRoles(user.GetUserId());
-        //    if (result == null)
-        //        return "NotInRole";
-        //    else
-        //        return result[0].ToString();
-        //}
 
         protected override void Dispose(bool disposing)
         {
