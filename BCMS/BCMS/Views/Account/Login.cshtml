@@ -104,6 +104,8 @@
                                 </div>
                             </div>
 
+                            <input type="hidden" id="returnUrl" value="@ViewBag.ReturnUrl" name="returnUrl"  />
+
                             <div class="clear">
                                 <div class="Remeberme">
                                     <div class="H10"></div>
@@ -118,7 +120,7 @@
                             </div>
                             <div>
                                 <div class="Remeberme" style="padding-top: 5px;">
-                                    <span class="colorW FZ12">ليس لديك حساب؟</span>
+                                    <span class="colorW FZ12">{{dontHaveAccount | translate}}</span>
                                     <a href="Register" class="FZ17 FKufi">{{createAccount | translate}}</a>
 
                                 </div>

@@ -73,6 +73,7 @@ langApp.config(["$translateProvider", function ($translateProvider) {
         'CREATE_ACCOUNT': 'Create account',
         'MORE_INFORMATION': 'More Information',
         'LOGIN_BUTTON': 'Login',
+        "DONT_HAVE_ACCOUNT":"Don't have account?",
 
         //contact us
         'CONTACT_US': 'Contact Us',
@@ -171,7 +172,7 @@ langApp.config(["$translateProvider", function ($translateProvider) {
         'CREATE_ACCOUNT': 'مستخدم جديد',
         'MORE_INFORMATION': 'للمزيد من المعلومات',
         'LOGIN_BUTTON': 'دخـــول',
-
+        "DONT_HAVE_ACCOUNT":"ليس لديك حساب؟",
 
         //contact us
         'CONTACT_US': 'تواصل معنا',

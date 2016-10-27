@@ -2689,7 +2689,6 @@
     <Content Include="Materials\Ar\MainMenu\js\cbpHorizontalMenu.js" />
     <Content Include="Materials\Ar\MainMenu\js\cbpHorizontalMenu.min.js" />
     <Content Include="Materials\Ar\MainMenu\js\modernizr.custom.js" />
-    <Content Include="Materials\Ar\Slider\Images\1 - Copy.jpg" />
     <Content Include="Materials\Ar\Slider\Images\1.jpg" />
     <Content Include="Materials\Ar\Slider\Images\2.jpg" />
     <Content Include="Materials\Ar\Slider\Images\3.jpg" />
@@ -3624,13 +3623,6 @@
     <Content Include="Materials\Ar\Service\index_edge.js" />
     <Content Include="Materials\Ar\Service\index_edgeActions.js" />
     <Content Include="Materials\Ar\Service\index_edgePreload.js" />
-    <Content Include="Materials\Ar\Service\publish\web\images\pramed.png" />
-    <Content Include="Materials\Ar\Service\publish\web\images\PRAMID-SERVICES3_01.png" />
-    <Content Include="Materials\Ar\Service\publish\web\images\preloader5.gif" />
-    <Content Include="Materials\Ar\Service\publish\web\index.html" />
-    <Content Include="Materials\Ar\Service\publish\web\index_edge.js" />
-    <Content Include="Materials\Ar\Service\publish\web\index_edgeActions.js" />
-    <Content Include="Materials\Ar\Service\publish\web\index_edgePreload.js" />
     <Content Include="Materials\Sliding\css\Sliding.css" />
     <Content Include="Materials\Sliding\Images\Bottom.png" />
     <Content Include="Materials\Sliding\Images\FooterButton.png" />

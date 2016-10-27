@@ -11,9 +11,10 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
     $scope.password = 'password';
     $scope.rememberMe = 'REMEMBER_ME';
     $scope.forgotPassword = 'FORGET_PASSWORD';
-    $scope.createAccount = 'CREATE_ACCOUNT';
+    $scope.createAccount = 'REGISTER_BUTTON';
     $scope.moreInformation = 'MORE_INFORMATION';
     $scope.loginBtn = 'LOGIN_BUTTON';
+    $scope.dontHaveAccount = "DONT_HAVE_ACCOUNT";
     var sendCodeMessage = '';
     $scope.message = '';
     var userId = getCookie("UserId");
