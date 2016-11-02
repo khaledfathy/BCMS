@@ -6,6 +6,8 @@ using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using BCMS.Areas.UTMS.Models;
+using System.Data.Entity;
+
 
 namespace BCMS.Areas.UTMS.Controllers
 {
@@ -21,8 +23,9 @@ namespace BCMS.Areas.UTMS.Controllers
 
         public JsonResult GetAllChartAnalysesKind(int id)
         {
-            var model = DB.ChartAnalysesKinds.Where(w => w.ChartCategoryId == id).Select(c => new { c.CAKId, c.CAKName, c.Description,c.ImgId, c.ChartCategory.ChartCategoryName  }).ToList();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            DB.Configuration.ProxyCreationEnabled = false;
+            var Charts = DB.ChartAnalysesKinds.Where(a => a.ChartCategoryId == id).Include(a => a.Charts).Select(z=>new { z.CAKId,z.CAKName,z.Charts}).ToList();
+            return Json(Charts, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetAllCharts(int id)

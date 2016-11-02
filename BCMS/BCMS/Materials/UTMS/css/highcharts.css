@@ -1,0 +1,155 @@
+﻿.padding10{padding: 10px;}
+
+
+.highcharts-wrapper
+{
+    padding: 10px 0 10px 10px;
+    margin: 10px 0;
+    background-color: #1c1c1c;
+
+    border: 1px solid #939393;
+}
+
+.highcharts-column
+{
+    width: 20%;
+    max-width: 250px;
+}
+.highcharts-column ul
+{
+    padding: 0;
+    margin: 0;
+}
+.highcharts-column ul li
+{
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+.highcharts-column ul li a
+{
+    display: block;
+    font-size: .8em;
+    color: #FFF;
+    padding: .4em .5em;
+    margin: 0;
+    border-bottom: 1px solid rgba(59,59,59,1.0);
+
+    background-image: url(../img/arrowR.png);
+    background-position: 10px;
+    background-repeat: no-repeat;
+    background-size: .6em;
+    background-color: rgba(00,00,00,.0);
+}
+.highcharts-column ul li:first-child a
+{
+    border-top: 0 solid #53565a;
+}
+.highcharts-column ul li a.Active
+{
+    color: #b4cf0b;
+}
+.highcharts-column ul li a:hover
+{
+    background-color: rgba(00,00,00,1);
+}
+
+
+.highcharts-column .highcharts-Sub
+{
+    padding: 0;
+    margin: 0;
+}
+.highcharts-column .highcharts-Sub li
+{
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+.highcharts-column .highcharts-Sub li a
+{
+    display: block;
+    font-size: .6em;
+    color: #FFF;
+    padding: .4em 1.4em;
+    margin: 0;
+    border-bottom: 1px solid rgba(59,59,59,0.0);
+
+    background-image: none;
+    background-color: rgba(00,00,00,.0);
+}
+.highcharts-column .highcharts-Sub li:first-child a
+{
+    border-top: 0 solid #53565a;
+}
+.highcharts-column .highcharts-Sub li a.Active
+{
+    color: #b4cf0b;
+}
+.highcharts-column .highcharts-Sub li a:hover
+{
+    background-color: rgba(00,00,00,1);
+}
+
+.highcharts-content
+{
+    padding: 0;
+    margin: 0px;
+    width: 80%;
+    height: 100vh;
+    border: 1px solid #53565a;
+}
+
+
+.highcharts-TopTapsColumn
+{
+    width: 20%;
+    max-width: 250px;
+}
+
+.highcharts-TopTaps
+{
+    padding: 0;
+    margin: 0px;
+    width: 80%;
+}
+.highcharts-TopTaps ul
+{
+    padding: 0;
+    margin: 0 10px 0 0;
+}
+.highcharts-TopTaps ul li
+{
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    float: right;
+}
+.highcharts-TopTaps ul li a
+{
+    display: inline-block;
+    font-size: .8em;
+    color: #FFF;
+    padding: .4em .5em;
+    margin: 0;
+    border-left: 1px solid #53565a;
+    border-top: 1px solid #53565a;
+
+    background-image: url(../img/arrowR.png);
+    background-position: 10px;
+    background-repeat: no-repeat;
+    background-size: .6em;
+    background-color: rgba(00,00,00,.3);
+}
+.highcharts-TopTaps ul li:first-child a
+{
+    border-right: 1px solid #53565a;
+}
+.highcharts-TopTaps ul li a.Active
+{
+    color: #b4cf0b;
+}
+.highcharts-TopTaps ul li a:hover
+{
+    background-color: rgba(00,00,00,1);
+}

@@ -1,23 +1,38 @@
 ﻿
-<div>
-    <h1 class="Spec InnerPage"> بورصة جرافيكس </h1>
-    <div class="clear H10"></div>
-    <div class="large-12 columns">
-        <div class="large-4 column" ng-repeat="category in ChartCategory">
-            <div class="TikerChartWrapper">
-                <div class="view view-first">
-                    <img src="../Areas/UTMS/Images/BorsaGraphics/{{category.ChartCategoryId}}.jpg" />
-                    <div class="mask">
-                        <h2>{{category.ChartCategoryName}}</h2>
-                        <p>{{category.Description}}</p>
-                        <a href="#Analyses/{{category.ChartCategoryId}}" class="info">أقرأ المزيد</a>
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div>
+
+<h1 class="Spec InnerPage">بورصة جرافيكس</h1>
+
+<div class="highcharts-wrapper" ng-controller="BorsaGraphicsController">
+
+    <div class="highcharts-TopTaps right">
+        <ul ng-repeat="category in ChartCategory">
+            <li>
+                <a ng-click="DisplayCategory(category.ChartCategoryId)" id="{{category.ChartCategoryId}}" ng-class="{'Active':category.ChartCategoryId==1}">{{category.ChartCategoryName}}</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="highcharts-content right">
+        <div class="highcharts-column right">
+            <ul>
+                <li ng-repeat="Kind in ChartAnalysesKind" class="cakli">
+                    <a id="cak{{$index}}" ng-class="{'Active': Kind == ChartAnalysesKind[0]}" ng-click="showChilds($index)">{{Kind.CAKName}}</a>
+                    <ul class="highcharts-Sub" > 
+                        <li ng-repeat="Chart in Kind.Charts" ng-show="Kind.active">
+                            <a ng-click="DisplayChart(Chart.ChartId)" id="chart{{Chart.ChartId}}" ng-class="{'Active': Chart.ChartId == 1}">{{Chart.ChartName}}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="highcharts-chartcontainer left">
+            <iframe ng-src="{{url}}" id="chartiframe" class="iframechart">
+                <p>Your browser does not support iframes.</p>
+            </iframe>
         </div>
     </div>
-    <div class="clear H10"></div>
-    <!--START TABLE-->
-    <div class="clear"></div>
+    <div class="clearfix"></div>
 </div>

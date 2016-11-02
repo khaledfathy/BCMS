@@ -247,58 +247,71 @@ App.controller('StockUpController', function ($scope) {
     }
 });
 
-App.controller('BorsaGraphicsController', ["$scope", "$http", function ($scope, $http) {
+App.controller('BorsaGraphicsController', ["$scope", "$http", "$sce", function ($scope, $http, $sce) {
+
+    $scope.ChartAnalysesKind = null;
+
     $http.get("/UTMS/BorsaGraphics/GetAllChartCategories")
         .success(function (data) {
             $scope.ChartCategory = data;
         }).error(function () {
             alert("error");
         });
-}]);
 
-App.controller('AnalysesController', function ($scope, $http, $routeParams) {
-    $scope.CatID = $routeParams.CategoryId;
     $http({
         url: "/UTMS/BorsaGraphics/GetAllChartAnalysesKind",
         method: 'GET',
-        params: { id: $scope.CatID }
+        params: { id: 1 }
     }).success(function (data) {
         $scope.ChartAnalysesKind = data;
-    }).error(function () {
-        alert("error");
-    });
-});
-
-App.controller('AnalysesDetailsController', function ($scope, $http, $routeParams) {
-    $scope.KindID = $routeParams.KindId;
-    $http({
-        url: "/UTMS/BorsaGraphics/GetAllCharts",
-        method: 'GET',
-        params: { id: $scope.KindID }
-    }).success(function (data) {
-        $scope.Charts = data;
+        $scope.ChartAnalysesKind[0].active = true;
     }).error(function () {
         alert("error");
     });
 
-    var modal = document.getElementById('myModal');
-    var span = document.getElementsByClassName("close")[0];
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+    $scope.url = $sce.trustAsResourceUrl('/UTMS/BorsaGraphics/ChartDiv/1');
+
+    $scope.DisplayCategory = function (catId) {
+        $http({
+            url: "/UTMS/BorsaGraphics/GetAllChartAnalysesKind",
+            method: 'GET',
+            params: { id: catId }
+        }).success(function (data) {
+            $scope.ChartAnalysesKind = data;
+            $scope.ChartAnalysesKind[0].active = true;
+        }).error(function () {
+            alert("error");
+        });
+        for (i = 1; i <= 6; i++) {
+            angular.element("#" + i + "").removeClass("Active");
         }
+        angular.element("#" + catId + "").addClass("Active");
     }
 
-    $scope.popup = function (id, title) {
-        modal.style.display = "block";
-        $("#title").html(title);
-        $("#content").html("<iframe src='/UTMS/BorsaGraphics/ChartDiv/" + id + "' style='min-height:450px; width:100%; overflow-y:auto;'></iframe>");
+    $scope.DisplayChart = function (ChartId) {
+        $scope.url = $sce.trustAsResourceUrl('/UTMS/BorsaGraphics/ChartDiv/' + ChartId + '');
+        $('.highcharts-Sub>li>a.Active').removeClass('Active');
+        angular.element("#chart" + ChartId + "").addClass("Active");
+
     }
 
-});
+    $scope.showChilds = function (index) {
+        $scope.ChartAnalysesKind[index].active = true;
+        $(".cakli>a.Active").removeClass("Active");
+        angular.element("#cak" + index + "").addClass("Active");
+
+        collapseAnother(index);
+    };
+
+    var collapseAnother = function (index) {
+        for (var i = 0; i < $scope.ChartAnalysesKind.length; i++) {
+            if (i != index) {
+                $scope.ChartAnalysesKind[i].active = false;
+            }
+        }
+    };
+
+}]);
 
 App.controller('BC-CounterController', function ($scope, $http) {
 

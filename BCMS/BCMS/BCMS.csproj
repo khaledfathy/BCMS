@@ -436,8 +436,6 @@
     <Content Include="Areas\UTMS\Angular\BorsaBreak\Magazines.html" />
     <Content Include="Areas\UTMS\Angular\BorsaBreak\MarketNews.html" />
     <Content Include="Areas\UTMS\Angular\BorsaBreak\Television.html" />
-    <Content Include="Areas\UTMS\Angular\BorsaGraphics\Analyses.html" />
-    <Content Include="Areas\UTMS\Angular\BorsaGraphics\AnalysesDetails.html" />
     <Content Include="Areas\UTMS\Angular\BorsaGraphics\Index.html" />
     <Content Include="Areas\UTMS\Angular\CompaniesMap\CompaniesMap.html" />
     <Content Include="Areas\UTMS\Angular\CompaniesMap\map.html" />
@@ -2962,6 +2960,7 @@
     <Content Include="Materials\Portfolio\Sliding\Images\Bottom.png" />
     <Content Include="Materials\Portfolio\Sliding\Images\FooterButton.png" />
     <Content Include="Materials\Portfolio\Sliding\Images\Top.png" />
+    <Content Include="Materials\UTMS\css\highcharts.css" />
     <Content Include="Materials\UTMS\Images\companyLogo\1-alyanz.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\1-araby.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\1-eldr3-.jpg" />
@@ -3961,7 +3960,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2302</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
