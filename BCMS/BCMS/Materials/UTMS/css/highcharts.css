@@ -13,7 +13,8 @@
 .highcharts-column
 {
     width: 20%;
-    max-width: 250px;
+    /*max-width: 250px;*/
+    border-left: 1px solid #53565a;
 }
 .highcharts-column ul
 {
@@ -95,8 +96,8 @@
 {
     padding: 0;
     margin: 0px;
-    width: 80%;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     border: 1px solid #53565a;
 }
 
@@ -128,9 +129,9 @@
 .highcharts-TopTaps ul li a
 {
     display: inline-block;
-    font-size: .8em;
+    font-size: 1em;
     color: #FFF;
-    padding: .4em .5em;
+    padding: .4em 1.5em;
     margin: 0;
     border-left: 1px solid #53565a;
     border-top: 1px solid #53565a;
@@ -152,4 +153,22 @@
 .highcharts-TopTaps ul li a:hover
 {
     background-color: rgba(00,00,00,1);
+}
+
+
+.highcharts-chartcontainer
+{
+    width: 80%;
+}
+.iframechart
+{
+    max-width: 800px;
+    width: 100%;
+    min-height: 500px; 
+    height: 500px;
+    overflow: hidden;
+    border: 0;
+    padding: 0;
+    margin: 10px auto;
+    display: block;
 }

@@ -19,7 +19,7 @@
             <ul>
                 <li ng-repeat="Kind in ChartAnalysesKind" class="cakli">
                     <a id="cak{{$index}}" ng-class="{'Active': Kind == ChartAnalysesKind[0]}" ng-click="showChilds($index)">{{Kind.CAKName}}</a>
-                    <ul class="highcharts-Sub" > 
+                    <ul class="highcharts-Sub">
                         <li ng-repeat="Chart in Kind.Charts" ng-show="Kind.active">
                             <a ng-click="DisplayChart(Chart.ChartId)" id="chart{{Chart.ChartId}}" ng-class="{'Active': Chart.ChartId == 1}">{{Chart.ChartName}}</a>
                         </li>
@@ -29,10 +29,23 @@
         </div>
 
         <div class="highcharts-chartcontainer left">
-            <iframe ng-src="{{url}}" id="chartiframe" class="iframechart">
-                <p>Your browser does not support iframes.</p>
-            </iframe>
+            <div class="padding10">
+
+                <iframe ng-src="{{url}}" id="chartiframe" class="iframechart">
+                    <p>Your browser does not support iframes.</p>
+                </iframe>
+                <!--<iframe ng-src="{{url}}" frameborder="0" scrolling="no" onload="resizeIframe(this)" >
+                    <p>Your browser does not support iframes.</p>
+                </iframe>-->
+
+
+            </div>
         </div>
     </div>
     <div class="clearfix"></div>
 </div>
+<script>
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+  }
+</script>
