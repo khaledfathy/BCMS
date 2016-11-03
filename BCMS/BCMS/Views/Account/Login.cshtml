@@ -1,5 +1,5 @@
 ﻿@using System.Web.Optimization
-@{ 
+@{
     Layout = null;
 }
 <!doctype html>
@@ -25,16 +25,16 @@
     {
         @Styles.Render("~/Materials/Ar/css/login.css")
     }
+    <link href="~/Materials/Ar/css/alerts/alertify.rtl.min.css" rel="stylesheet" />
+    <link href="~/Materials/Ar/css/alerts/themes/default.min.css" rel="stylesheet" />
+
     <link href="~/Content/loading-bar.css" rel="stylesheet" />
     <link href="~/Materials/UTMS/css/borsagraphicspobup.css" rel="stylesheet" />
     <link href="~/Materials/UTMS/css/foundation.min.css" rel="stylesheet" />
-    @Scripts.Render("~/bundles/BCMS/script")
-    
-
 
 </head>
 <body>
-    
+
     <div class="MobileWrapper">
         <div class="headerWrapper">
 
@@ -104,7 +104,7 @@
                                 </div>
                             </div>
 
-                            <input type="hidden" id="returnUrl" value="@ViewBag.ReturnUrl" name="returnUrl"  />
+                            <input type="hidden" id="returnUrl" value="@ViewBag.ReturnUrl" name="returnUrl" />
 
                             <div class="clear">
                                 <div class="Remeberme">
@@ -150,5 +150,6 @@
             <div class="clear"></div>
         </div>
     </div>
+    @Scripts.Render("~/bundles/BCMS/script")
 </body>
 </html>

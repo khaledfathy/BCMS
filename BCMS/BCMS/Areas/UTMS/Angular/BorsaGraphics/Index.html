@@ -31,21 +31,11 @@
         <div class="highcharts-chartcontainer left">
             <div class="padding10">
 
-                <iframe ng-src="{{url}}" id="chartiframe" class="iframechart">
+                <iframe ng-src="{{url}}" id="chartiframe" class="iframechart" scrolling="no">
                     <p>Your browser does not support iframes.</p>
                 </iframe>
-                <!--<iframe ng-src="{{url}}" frameborder="0" scrolling="no" onload="resizeIframe(this)" >
-                    <p>Your browser does not support iframes.</p>
-                </iframe>-->
-
-
             </div>
         </div>
     </div>
     <div class="clearfix"></div>
 </div>
-<script>
-  function resizeIframe(obj) {
-    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-  }
-</script>

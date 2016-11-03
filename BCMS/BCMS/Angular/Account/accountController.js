@@ -114,15 +114,15 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
     };
 
     $scope.Login = function () {
+        $scope.close();
         var lang = getCookie('language');
-        
         switch (lang) {
             case "en":
                 $http.post("/Account/Login", params).success(function (response) {
-                    if (data != "Admin" && data != "Active" && data != "NotConfirmed" && data != "PasswordError" && data != "Waiting" && data != "ErrorInUserNameOrPassword") {
+                    if (response != "Admin" && response != "Active" && response != "NotConfirmed" && response != "PasswordError" && response != "Waiting" && response != "ErrorInUserNameOrPassword") {
                         $scope.IsLogedin = true;
                         $scope.message = 'Just a second please...';
-                        window.location.href = data;
+                        window.location.href = response;
                     } else {
                         switch (response) {
                             case "Admin":
@@ -131,12 +131,6 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
                                 window.location.href = '/Admin/Home/Index';
                                 break;
                             case "Active":
-                                //var connect = $.connection.mainHub;
-                                //$.connection.hub.start();
-                                //connect.client.logoff = function () {
-                                //    $.connection.hub.stop();
-                                //    window.location.href = "/Account/LogOff";
-                                //}
                                 $scope.IsLogedin = true;
                                 $scope.message = 'Just a second please...'
                                 window.location.href = '/UTMS/Home';
@@ -152,28 +146,24 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
                         }
                     }
                 }).error(function (response) {
+                    alert("Error!");
                 })
                 break;
             default:
                 $http.post("/Account/Login", params)
-                  .success(function (data) {
-                      if (data != "Admin" && data != "Active" && data != "NotConfirmed" && data != "PasswordError" && data != "Waiting" && data != "ErrorInUserNameOrPassword") {
+                  .success(function (response) {
+                      if (response != "Admin" && response != "Active" && response != "NotConfirmed" && response != "PasswordError" && response != "Waiting" && response != "ErrorInUserNameOrPassword") {
                           $scope.IsLogedin = true;
                           $scope.message = 'لحظة من فضلك...';
-                          window.location.href = data;
+                          window.location.href = response;
                       } else {
-                          switch (data) {
+                          switch (response) {
                               case "Admin":
                                   $scope.IsLogedin = true;
                                   $scope.message = 'لحظة من فضلك...'
                                   window.location.href = '/Admin/Home/Index';
                                   break;
                               case "Active":
-                                  //$.connection.hub.start();
-                                  //connect.client.logoff = function () {
-                                  //    $.connection.hub.stop();
-                                  //    window.location.href = "/Account/LogOff";
-                                  //}
                                   $scope.IsLogedin = true;
                                   $scope.message = 'لحظة من فضلك...'
                                   window.location.href = '/UTMS/Home';
@@ -188,7 +178,7 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
                                   alertify.error("البريد الإلكترونى أو كلمة المرور غير صحيحة", 5);
                           }
                       }
-                  }).error(function (data) {
+                  }).error(function (response) {
                       alertify.set('notifier', 'position', 'bottom-left');
                       alertify.error("خطأ فى عملية الدخول");
                   });

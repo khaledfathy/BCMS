@@ -3,7 +3,7 @@
 /// <reference path="C:\Users\hany\Documents\Visual Studio 2015\Projects\BCMS\BCMS\Scripts/angular-translate.js" />
 /// <reference path="langApp.js" />
 
-langApp.controller("headerController", function ($scope) {
+langApp.controller("headerController", function ($scope, $timeout) {
     // Layout Header
     $scope.login = 'login';
     $scope.logout = 'logout';
@@ -25,7 +25,19 @@ langApp.controller("headerController", function ($scope) {
     $scope.partners = 'partners';
     $scope.contactus = 'contactus';
 
+    dateTime('time');
 
+    //$scope.clock = "loading clock..."; // initialise the time variable
+    //$scope.tickInterval = 1000 //ms
+
+    //var tick = function () {
+    //    $scope.clock = Date.now() // get the current time
+    //    $timeout(tick, $scope.tickInterval); // reset the timer
+    //}
+
+    //// Start the timer
+    //$timeout(tick, $scope.tickInterval);
+    ////$scope.date = new Date();
 });
 
 langApp.controller('footerController', function ($scope) {
@@ -45,7 +57,7 @@ langApp.controller('footerController', function ($scope) {
     $scope.pixel = 'pixel';
     $scope.register = 'register';
     $scope.login = 'login';
-    
+
     $scope.education = 'education';
 
     $scope.library = 'library';
@@ -62,8 +74,33 @@ langApp.controller('footerController', function ($scope) {
     $scope.siteMap = 'siteMap';
     $scope.copyRights = 'copyRights';
 });
-  
-langApp.controller('register')
-    
 
+function dateTime(id) {
+    date = new Date;
+    year = date.getFullYear();
+    month = date.getMonth();
+    var lang = getCookie('language');
+    if (lang == 'en')
+        months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
+    else
+        months = new Array('يناير', 'فبراير', 'مارس', 'ابريل', 'مايو', 'يونية', 'يوليو', 'اغسطس', 'سبتمبر', 'اكتوبر', 'نوفمبر', 'ديسمبر');
 
+    d = date.getDate();
+    day = date.getDay();
+    h = date.getHours();
+    if (h < 10) {
+        h = "0" + h;
+    }
+    m = date.getMinutes();
+    if (m < 10) {
+        m = "0" + m;
+    }
+    s = date.getSeconds();
+    if (s < 10) {
+        s = "0" + s;
+    }
+    result = '' + d + ' ' + months[month] + ' ' + year + ',  ' + h + ':' + m + ':' + s;
+    document.getElementById(id).innerHTML = result;
+    setTimeout('date_time("' + id + '");', '1000');
+    return true;
+}
