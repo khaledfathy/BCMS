@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "InternalServer";
+    Layout = "~/Views/Shared/_LayoutCallBack.cshtml";
+}
+
+@if (Request.Cookies["language"] != null)
+{
+    if (Request.Cookies["language"].Value == "en")
+    {
+        <div style="text-align:center;">
+            <div class="text-danger" style="font-size:130px; color:red">500</div>
+            <h1 class="text-danger" style="margin:40px;">Sorry, there were error in server, please try again later</h1>
+        </div>
+    }
+    else
+    {
+        <div style="text-align:center;">
+            <div class="text-danger" style="font-size:130px; color:red">500</div>
+            <h1 class="text-danger" style="margin:40px;">عذراً حدث خطأ فى السيرفر من فضلك اعد المحاوله لاحقاً</h1>
+        </div>
+    }
+}
+else
+{
+    <div style="text-align:center;">
+        <div class="text-danger" style="font-size:130px; color:red">500</div>
+        <h1 class="text-danger" style="margin:40px;">عذراً حدث خطأ فى السيرفر من فضلك اعد المحاوله لاحقاً</h1>
+    </div>
+}

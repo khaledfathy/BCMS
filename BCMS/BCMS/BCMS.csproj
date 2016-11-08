@@ -278,6 +278,7 @@
     <Compile Include="Areas\UTMS\UTMSAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ContactUsController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FAQController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -408,6 +409,7 @@
     <Content Include="Angular\Account\Register.html" />
     <Content Include="Angular\ContactUs\ContactUs.html" />
     <Content Include="Angular\ContactUs\contactusController.js" />
+    <Content Include="Angular\PageNotFound.html" />
     <Content Include="Areas\Exams\content\css\example.css" />
     <Content Include="Areas\Exams\content\css\images\counter_back.gif" />
     <Content Include="Areas\Exams\content\css\images\counter_bg.jpg" />
@@ -451,6 +453,7 @@
     <Content Include="Areas\UTMS\Angular\Investment\Investment.html" />
     <Content Include="Areas\UTMS\Angular\Knowledge\Knowledge.html" />
     <Content Include="Areas\UTMS\Angular\MetaStock\MetaStock.html" />
+    <Content Include="Areas\UTMS\Angular\PageNotFound.html" />
     <Content Include="Areas\UTMS\Angular\Petrochemical\Petrochemical.html" />
     <Content Include="Areas\UTMS\Angular\StockUp\GulfMap.svg" />
     <Content Include="Areas\UTMS\Angular\StockUp\LeftPartialStockUp.html" />
@@ -3917,6 +3920,9 @@
     <Content Include="Materials\Portfolio\MainMenu\fonts\readme.md" />
     <Content Include="Views\Shared\_LayoutCallBack.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Home\PageNotFound.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\InternalServer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />

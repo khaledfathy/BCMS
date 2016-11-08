@@ -25,6 +25,12 @@ namespace BCMS
                 namespaces: new string[] { "BCMS.Controllers" }
             );
 
+            routes.MapRoute(
+                name: "404-PageNotFound",
+                url: "{*url}",
+                defaults: new { controller = "Home", action = "PageNotFound" },
+                namespaces: new string[] { "BCMS.Controllers" }
+                );
             //routes.MapRoute(
             //    name: "Account",
             //    url: "Account/{*all}",

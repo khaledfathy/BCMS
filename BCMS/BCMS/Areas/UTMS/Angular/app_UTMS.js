@@ -57,7 +57,11 @@ App.config(['$routeProvider', "cfpLoadingBarProvider", function ($routeProvider,
 
     .when('/Regulators', { templateUrl: '/Areas/UTMS/Angular/HelperPages/Regulators.html', controller: 'RegulatorsController' })
 
-    .otherwise({ redirectTo: '/' });
+    .when('/PageNotFound', { templateUrl: '/Areas/UTMS/Angular/PageNotFound.html', controller: 'PageNotFoundController' })
+
+    .otherwise({
+        redirectTo: '/PageNotFound'
+    });
 
 
     connect = $.connection.mainHub;
@@ -72,6 +76,15 @@ App.config(['$routeProvider', "cfpLoadingBarProvider", function ($routeProvider,
 
 App.controller('CompanyCardController', function ($scope) {
 
+});
+App.controller('PageNotFoundController', function ($scope) {
+    $scope.content = null;
+    var lang = getCookie('language');
+    if (lang == 'en') {
+        $scope.content = "Sorry the page you requested not found";
+    } else {
+        $scope.content = "عذراً ولكن الصفحة التى تبحث عنها غير موجودة";
+    }
 });
 
 

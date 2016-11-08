@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "NotFound";
+    Layout = "~/Views/Shared/_LayoutCallBack.cshtml";
+}
+
+@if (Request.Cookies["language"] != null)
+{
+    if (Request.Cookies["language"].Value == "en")
+    {
+        <div style="text-align:center;" ng-controller="PageNotFoundController">
+            <div class="text-danger" style="font-size:130px; color:red">404</div>
+            <h1 class="text-danger" style="margin:40px;">Sorry the page you requested not found</h1>
+        </div>
+    }
+    else
+    {
+        <div style="text-align:center;" ng-controller="PageNotFoundController">
+            <div class="text-danger" style="font-size:130px; color:red">404</div>
+            <h1 class="text-danger" style="margin:40px;">عذراً ولكن الصفحة التى تبحث عنها غير موجودة</h1>
+        </div>
+    }
+}
+else
+{
+    <div style="text-align:center;" ng-controller="PageNotFoundController">
+        <div class="text-danger" style="font-size:130px; color:red">404</div>
+        <h1 class="text-danger" style="margin:40px;">عذراً ولكن الصفحة التى تبحث عنها غير موجودة</h1>
+    </div>
+}
+

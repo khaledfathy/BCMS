@@ -94,9 +94,12 @@ MyApp.config(["$routeProvider", "$locationProvider", "cfpLoadingBarProvider", fu
     .when('/Resetpassword', {
         templateUrl: '/Angular/Account/ResetPassword.html',
         controller: 'ResetpasswordController'
+    }).when('/PageNotFound', {
+        templateUrl: '/Angular/PageNotFound.html',
+        controller: 'PageNotFoundController'
     })
     .otherwise({
-        redirectTo: '/'
+        redirectTo: '/PageNotFound'
     });
 
     //$locationProvider.html5Mode(true);
@@ -222,5 +225,15 @@ MyApp.controller('RelaxingController', ["$scope", "$http", function ($scope, $ht
     $scope.platinumSponsor = 'PLATINUM_SPONSOR';
     $scope.silverSponsor = 'SILVER_SPONSOR';
 }]);
+
+MyApp.controller('PageNotFoundController', function ($scope) {
+    $scope.content = null;
+    var lang = getCookie('language');
+    if (lang == 'en') {
+        $scope.content = "Sorry the page you requested not found";
+    } else {
+        $scope.content = "عذراً ولكن الصفحة التى تبحث عنها غير موجودة";
+    }
+})
 
 
