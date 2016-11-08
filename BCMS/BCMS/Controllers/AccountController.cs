@@ -66,44 +66,52 @@ namespace BCMS.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> LoginChecker(LoginViewModel model, string returnUrl)
         {
-            ApplicationDbContext db = new ApplicationDbContext();
-            if (!ModelState.IsValid)
+            try
             {
-                return Json("InvalidLogin", JsonRequestBehavior.AllowGet);
-            }
-            var user = await UserManager.FindByEmailAsync(model.Email);
-            if (user != null)
-            {
-                var UserConnection = db.Connections.Where(a => a.UserId == user.Id).FirstOrDefault();
-                if (UserConnection != null)
+                ApplicationDbContext db = new ApplicationDbContext();
+                if (!ModelState.IsValid)
                 {
-                    return Json("Connected", JsonRequestBehavior.AllowGet);
+                    return Json("InvalidLogin", JsonRequestBehavior.AllowGet);
                 }
-                else
+                var user = await UserManager.FindByEmailAsync(model.Email);
+                if (user != null)
                 {
-                    if(user.EmailConfirmed)
+                    var UserConnection = db.Connections.Where(a => a.UserId == user.Id).FirstOrDefault();
+                    if (UserConnection != null)
                     {
-                        switch (user.UserStatus)
-                        {
-                            case UserStatus.Active:
-                                return Json("Active", JsonRequestBehavior.AllowGet);
-                            case UserStatus.Pending:
-                                return Json("Waiting", JsonRequestBehavior.AllowGet);
-                            case UserStatus.Waiting:
-                                return Json("Waiting", JsonRequestBehavior.AllowGet);
-                        }
+                        return Json("Connected", JsonRequestBehavior.AllowGet);
                     }
                     else
                     {
-                        return Json("NotConfirmed", JsonRequestBehavior.AllowGet);
+                        if (user.EmailConfirmed)
+                        {
+                            switch (user.UserStatus)
+                            {
+                                case UserStatus.Active:
+                                    return Json("Active", JsonRequestBehavior.AllowGet);
+                                case UserStatus.Pending:
+                                    return Json("Waiting", JsonRequestBehavior.AllowGet);
+                                case UserStatus.Waiting:
+                                    return Json("Waiting", JsonRequestBehavior.AllowGet);
+                            }
+                        }
+                        else
+                        {
+                            return Json("NotConfirmed", JsonRequestBehavior.AllowGet);
+                        }
                     }
                 }
+                else
+                {
+                    return Json("ErrorInUserNameOrPassword", JsonRequestBehavior.AllowGet);
+                }
+                return View();
             }
-            else
+            catch (Exception ex)
             {
-                return Json("ErrorInUserNameOrPassword", JsonRequestBehavior.AllowGet);
+                return Json("Error", JsonRequestBehavior.AllowGet);
             }
-            return View();
+            
         }
 
         //
@@ -112,27 +120,39 @@ namespace BCMS.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            var user = await UserManager.FindByEmailAsync(model.Email);
-
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            try
             {
+                var user = await UserManager.FindByEmailAsync(model.Email);
 
-                case SignInStatus.Success:
-                    HttpCookie cookie = new HttpCookie("SessionID", Session.SessionID);
-                    cookie.Path = "/";
-                    Response.Cookies.Add(cookie);
-                    if (returnUrl != null)
-                    {
-                        return Json(returnUrl, JsonRequestBehavior.AllowGet);
-                    }
-                    else if (IsAdminUser(user.Id))
-                        return Json("Admin", JsonRequestBehavior.AllowGet);
-                    return Json("Active", JsonRequestBehavior.AllowGet);
-                case SignInStatus.Failure:
-                default:
-                    return Json("PasswordError", JsonRequestBehavior.AllowGet);
+                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+                switch (result)
+                {
+
+                    case SignInStatus.Success:
+                        HttpCookie cookie = new HttpCookie("SessionID", Session.SessionID);
+                        cookie.Path = "/";
+                        Response.Cookies.Add(cookie);
+                        HttpCookie NameCookie = new HttpCookie("FullName", user.FullName);
+                        NameCookie.Path = "/";
+                        Response.Cookies.Add(NameCookie);
+                        if (returnUrl != null)
+                        {
+                            return Json(returnUrl, JsonRequestBehavior.AllowGet);
+                        }
+                        else if (IsAdminUser(user.Id))
+                            return Json("Admin", JsonRequestBehavior.AllowGet);
+                        return Json("Active", JsonRequestBehavior.AllowGet);
+                    case SignInStatus.Failure:
+                    default:
+                        return Json("PasswordError", JsonRequestBehavior.AllowGet);
+                }
             }
+            catch (Exception ex)
+            {
+                return Json("Error", JsonRequestBehavior.AllowGet);
+            }
+
+
         }
 
         //
@@ -141,53 +161,63 @@ namespace BCMS.Controllers
         [AllowAnonymous]
         public async Task<JsonResult> Register(RegisterViewModel model, string language)
         {
-            string message = "";
-            if (ModelState.IsValid)
+            try
             {
-                var user = new ApplicationUser
+                string message = "";
+                if (ModelState.IsValid)
                 {
-                    FirstName = model.FirstName,
-                    MiddleName = model.MiddleName,
-                    LastName = model.LastName,
-                    UserName = model.Email,
-                    Email = model.Email,
-                    UserStatus = UserStatus.Waiting
-                };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    if (language == "en")
+                    var user = new ApplicationUser
                     {
-                        string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code, lang = language }, protocol: Request.Url.Scheme);
-                        string body = "<div dir='ltr'><h1>Welcome in Borsa Capital</h1><h3>You have done an account in Borsa Capital";
-                        body += " and your password is " + model.Password + ".</h3>";
-                        body += "<h3>To confirm your account please click <a href=\"" + callbackUrl + "\"><i>here</i></a></b></div>";
-                        string msg = EmailVerification.SendEMail(model.Email, "Borsa Capital", body);
+                        FirstName = model.FirstName,
+                        MiddleName = model.MiddleName,
+                        LastName = model.LastName,
+                        UserName = model.Email,
+                        Email = model.Email,
+                        UserStatus = UserStatus.Waiting
+                    };
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        if (language == "en")
+                        {
+                            string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code, lang = language }, protocol: Request.Url.Scheme);
+                            string body = "<div style='text-align:center;'><h1>Welcome in Borsa Capital</h1>";
+                            body += "<h3>You just create an account in Borsa Capital</h3>";
+                            //body += " and your password is " + model.Password + ".</h3>";
+                            body += "<h3>To confirm your account <a href=\"" + callbackUrl + "\"><i>please click here</i></a></b></div>";
+                            string msg = EmailVerification.SendEMail(model.Email, "Confirm Email", body);
+                        }
+                        else
+                        {
+                            string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code, lang = language }, protocol: Request.Url.Scheme);
+                            string body = "<div dir='rtl' style='text-align:center;'><h1>مرحبا بك فى بورصه كابيتال</h1>";
+                            body += "<h3>لقد قمت بعمل حساب على بورصه كابيتال</h3>";
+                            //body += "وكلمة المرور الخاصة بك هى ";
+                            //body += model.Password + ".</h3>";
+                            body += "<h3>لتأكيد الحساب<a href=\"" + callbackUrl + "\"><i> من فضلك اضغط هنـا </i></a></h3></div>";
+                            string msg = EmailVerification.SendEMail(model.Email, "تأكيد البريد الالكترونى", body);
+                        }
+                        message = "Success";
                     }
                     else
                     {
-                        string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code, lang = language }, protocol: Request.Url.Scheme);
-                        string body = "<div dir='rtl'><h1>مرحبا بك فى بورصه كابيتال</h1><h3>لقد قمت بعمل حساب على بورصه كابيتال";
-                        body += "وكلمة المرور الخاصة بك هى ";
-                        body += model.Password + ".</h3>";
-                        body += "<h3>لتأكيد الحساب من فضلك اضغط <a href=\"" + callbackUrl + "\"><i>هنـــا</i></a></h3></div>";
-                        string msg = EmailVerification.SendEMail(model.Email, "Borsa Capital", body);
+                        AddErrors(result);
+                        message = "EmailAlreadyToken";
                     }
-                    message = "Success";
                 }
                 else
                 {
-                    AddErrors(result);
-                    message = "EmailAlreadyToken";
+                    message = "InvalidPassword";
                 }
+                return new JsonResult { Data = message, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
-            else
+            catch (Exception ex)
             {
-                message = "InvalidPassword";
+                return Json("Error", JsonRequestBehavior.AllowGet);
             }
-            return new JsonResult { Data = message, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            
         }
 
         //
@@ -195,26 +225,34 @@ namespace BCMS.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code, string lang)
         {
-            var user = await UserManager.FindByIdAsync(userId);
-            ViewBag.name = user.FirstName;
-            if (lang == "en")
+            try
             {
-                if (userId == null || code == null)
+                var user = await UserManager.FindByIdAsync(userId);
+                ViewBag.name = user.FirstName;
+                if (lang == "en")
                 {
-                    return View("ErrorEn");
+                    if (userId == null || code == null)
+                    {
+                        return View("ErrorEn");
+                    }
+                    var result = await UserManager.ConfirmEmailAsync(userId, code);
+                    return View(result.Succeeded ? "ConfirmEmailEn" : "ErrorEn");
                 }
-                var result = await UserManager.ConfirmEmailAsync(userId, code);
-                return View(result.Succeeded ? "ConfirmEmailEn" : "ErrorEn");
+                else
+                {
+                    if (userId == null || code == null)
+                    {
+                        return View("ErrorAr");
+                    }
+                    var result = await UserManager.ConfirmEmailAsync(userId, code);
+                    return View(result.Succeeded ? "ConfirmEmailAr" : "ErrorAr");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                if (userId == null || code == null)
-                {
-                    return View("ErrorAr");
-                }
-                var result = await UserManager.ConfirmEmailAsync(userId, code);
-                return View(result.Succeeded ? "ConfirmEmailAr" : "ErrorAr");
+                return Json("Error", JsonRequestBehavior.AllowGet);
             }
+
         }
 
         [HttpPost]
@@ -222,49 +260,65 @@ namespace BCMS.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<ActionResult> SendCode(string UserId, string language)
         {
-            if (language == "en")
+            try
             {
-                string code = await UserManager.GenerateEmailConfirmationTokenAsync(UserId);
-                var user = await UserManager.FindByIdAsync(UserId);
-                var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = UserId, code = code }, protocol: Request.Url.Scheme);
-                string body = "<div dir='ltr'><h1>Welcome in Borsa Capital<h1/>";
-                body += "<h2>In order to confirm your account please click <a href=\"" + callbackUrl + "\"><i>here</i></a></h2></div>";
-                string msg = EmailVerification.SendEMail(user.Email, "Borsa Capital", body);
-                ViewBag.name = user.FirstName;
-            }
-            else
-            {
-                string code = await UserManager.GenerateEmailConfirmationTokenAsync(UserId);
-                var user = await UserManager.FindByIdAsync(UserId);
-                var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = UserId, code = code }, protocol: Request.Url.Scheme);
-                string body = "<div dir='rtl'><h1>مرحبا بك فى بورصة كابيتال</h1>";
-                body += "<h2>لتأكيد الحساب من فضلك اضغط<a href=\"" + callbackUrl + "\"><i> هنــا.</i></a></h2></div>";
-                string msg = EmailVerification.SendEMail(user.Email, "Borsa Capital", body);
-                ViewBag.name = user.FirstName;
-            }
+                if (language == "en")
+                {
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(UserId);
+                    var user = await UserManager.FindByIdAsync(UserId);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = UserId, code = code }, protocol: Request.Url.Scheme);
+                    string body = "<div style='text-align:center;'><h1>Welcome in Borsa Capital<h1/>";
+                    body += "<h2>In order to confirm your account <a href=\"" + callbackUrl + "\"><i>please click here</i></a></h2></div>";
+                    string msg = EmailVerification.SendEMail(user.Email, "Verify Email", body);
+                    ViewBag.name = user.FirstName;
+                }
+                else
+                {
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(UserId);
+                    var user = await UserManager.FindByIdAsync(UserId);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = UserId, code = code }, protocol: Request.Url.Scheme);
+                    string body = "<div style='text-align:center;'><h1>مرحبا بك فى بورصة كابيتال</h1>";
+                    body += "<h2>لتأكيد الحساب <a href=\"" + callbackUrl + "\"><i>من فضلك اضغط هنــا</i></a></h2></div>";
+                    string msg = EmailVerification.SendEMail(user.Email, "تأكيد البريد الالكترونى", body);
+                    ViewBag.name = user.FirstName;
+                }
 
-            return Json("success", JsonRequestBehavior.AllowGet);
+                return Json("success", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json("Error", JsonRequestBehavior.AllowGet);
+            }
+            
         }
 
        // [HttpPost]
        // [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-       
-            Session.Clear();
-            Session.Abandon();
-
-            if(HttpContext.Request.Cookies["SessionID"]!=null)
+            try
             {
-                var c = new HttpCookie("SessionID");
-                c.Expires = DateTime.Now.AddDays(-1);
-                Response.Cookies.Add(c);
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
+                Session.Clear();
+                Session.Abandon();
+
+                if (HttpContext.Request.Cookies["SessionID"] != null)
+                {
+                    var c = new HttpCookie("SessionID");
+                    c.Expires = DateTime.Now.AddDays(-1);
+                    Response.Cookies.Add(c);
+                }
+
+                FormsAuthentication.SignOut();
+
+                return RedirectToAction("Index", "Home");
             }
-                       
-            FormsAuthentication.SignOut(); 
-         
-            return RedirectToAction("Index", "Home");
+            catch (Exception ex)
+            {
+                return Json("Error", JsonRequestBehavior.AllowGet);
+            }
+            
         }
 
         #region Forgot and Reset Password
@@ -274,29 +328,65 @@ namespace BCMS.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null)
+                if (ModelState.IsValid)
                 {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return Json("InvalidUser", JsonRequestBehavior.AllowGet);
-                    //return View("ForgotPasswordConfirmation");
-                }
-                else if (!(await UserManager.IsEmailConfirmedAsync(user.Id)))
-                {
-                    return Json("NotConfirmed", JsonRequestBehavior.AllowGet);
-                }
+                    var user = await UserManager.FindByNameAsync(model.Email);
+                    string response = "";
+                    if (user == null)
+                    {
+                        // Don't reveal that the user does not exist or is not confirmed
+                        return Json("InvalidUser", JsonRequestBehavior.AllowGet);
+                        //return View("ForgotPasswordConfirmation");
+                    }
+                    else if (!(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                    {
+                        return Json("NotConfirmed", JsonRequestBehavior.AllowGet);
+                    }
+                    string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    if (Request.Cookies["language"] != null)
+                    {
+                        string lang = Request.Cookies["language"].Value;
+                        if (lang == "en")
+                        {
+                            string body = "<div style='text-align:center; color:#367e27'><h2>Reset password</h2></div>";
+                            body += "<div style='margin:15px; text-align:center;'><h3>In order to reset your password <a href=\"" + callbackUrl + "\"><i>please click here</i></a></h3></div>";
+                            response = EmailVerification.SendEMail(model.Email, "Reset Password", body);
+                        }
+                        else
+                        {
+                            string body = "<div style='text-align:center; color:#367e27'><h2>إعادة تعيين كلمة المرور</h2></div>";
+                            body += "<div style='margin:15px; text-align:center;'><h3>لإعادة تعيين كلمة المرور <a href=\"" + callbackUrl + "\"><i>من فضلك اضغط هنـا</i></a></h3></div>";
+                            response = EmailVerification.SendEMail(model.Email, "إعادة تعيين كلمة المرور", body);
+                        }
+                    }
+                    else
+                    {
+                        string body = "<div style='text-align:center; color:#367e27'><h2>إعادة تعيين كلمة المرور</h2></div>";
+                        body += "<div style='margin:15px; text-align:center;'><h3>لإعادة تعيين كلمة المرور <a href=\"" + callbackUrl + "\"><i>من فضلك اضغط هنـا</i></a></h3></div>";
+                        response = EmailVerification.SendEMail(model.Email, "إعادة تعيين كلمة المرور", body);
+                    }
 
-                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                string body = "<b>لإعادة تعيين كلمة المرور من فضلك اضغط  <a href=\"" + callbackUrl + "\"><b>هـنــــا</b></a> </b><br/>";
-                string msg = EmailVerification.SendEMail(model.Email, "Borsa Capital", body);
-                return Json("EmailSent", JsonRequestBehavior.AllowGet);
-                //return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                    if (response == "Success")
+                    {
+                        return Json("EmailSent", JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json("SendingFailed", JsonRequestBehavior.AllowGet);
+                    }
+                    //return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                }
+                // If we got this far, something failed, redisplay form
+                return View(model);
             }
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            catch (Exception ex)
+            {
+                return Json("Error", JsonRequestBehavior.AllowGet);
+            }
+
         }
 
         //
@@ -315,28 +405,42 @@ namespace BCMS.Controllers
 
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View(model);
+                if (ModelState.IsValid)
+                {
+                    var user = await UserManager.FindByNameAsync(model.Email);
+                    if (user == null)
+                    {
+                        // Don't reveal that the user does not exist
+                        //return RedirectToAction("ResetPasswordConfirmation", "Account");
+                        return Json("InvalidUser", JsonRequestBehavior.AllowGet);
+                    }
+                    var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+                    if (result.Succeeded)
+                    {
+                        return Json("Success", JsonRequestBehavior.AllowGet);
+                        //return RedirectToAction("ResetPasswordConfirmation", "Account");
+                    }
+                    else
+                    {
+                        return Json("SomeThingWrong", JsonRequestBehavior.AllowGet);
+                    }
+
+                }
+                else
+                {
+
+                    return Json("InvalidEmailOrPassword", JsonRequestBehavior.AllowGet);
+                }
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
-            if (user == null)
+            catch
             {
-                // Don't reveal that the user does not exist
-                //return RedirectToAction("ResetPasswordConfirmation", "Account");
-                return Json("InvalidUser", JsonRequestBehavior.AllowGet);
+                return Json("Error", JsonRequestBehavior.AllowGet);
             }
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
-            if (result.Succeeded)
-            {
-                return Json("Success", JsonRequestBehavior.AllowGet);
-                //return RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
-            AddErrors(result);
-            return View();
+
+
         }
-
-
 
         #endregion
 
@@ -542,26 +646,35 @@ namespace BCMS.Controllers
         //}
 
         #endregion
+
         public Boolean IsAdminUser(string UserId)
         {
-            ApplicationDbContext context = new ApplicationDbContext();
-            var user = context.Users.Where(a => a.Id == UserId).Select(a => a.Roles).FirstOrDefault();
-            if (user.Count == 0)
+            try
             {
-                return false;
-            }
-            else
-            {
-                foreach (var item in user)
+                ApplicationDbContext context = new ApplicationDbContext();
+                var user = context.Users.Where(a => a.Id == UserId).Select(a => a.Roles).FirstOrDefault();
+                if (user.Count == 0)
                 {
-                    var RoleName = context.Roles.Where(a => a.Id == item.RoleId).Select(a => a.Name).FirstOrDefault();
-                    if (RoleName == "Admin")
-                    {
-                        return true;
-                    }
+                    return false;
                 }
+                else
+                {
+                    foreach (var item in user)
+                    {
+                        var RoleName = context.Roles.Where(a => a.Id == item.RoleId).Select(a => a.Name).FirstOrDefault();
+                        if (RoleName == "Admin")
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            }
+            catch(Exception ex)
+            {
                 return false;
             }
+            
         }
 
         protected override void Dispose(bool disposing)

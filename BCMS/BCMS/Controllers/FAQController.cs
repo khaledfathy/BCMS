@@ -10,12 +10,19 @@ namespace BCMS.Controllers
 {
     public class FAQController : Controller
     {
-
         BorsaCapitalDataModel DB = new BorsaCapitalDataModel();
-        public JsonResult GetAllFAQ()
+        public ActionResult GetAllFAQ()
         {
-            var model = DB.Faqs.ToList();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            try
+            {
+                var model = DB.Faqs.ToList();
+                return Json(model, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                return Json("Error", JsonRequestBehavior.AllowGet);
+            }
         }
 
         protected override void Dispose(bool disposing)

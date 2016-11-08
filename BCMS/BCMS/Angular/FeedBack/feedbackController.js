@@ -65,7 +65,7 @@ MyApp.controller('FeedbackController', ["$scope", "$http", function ($scope, $ht
                                 alertify.error("Error occured at sending message", 5);
                             }
                         }).error(function (data) {
-                            alertify.error("Error occured at sending message", 5);
+                            window.location.href = "/Home/Error";
                         });
                     } else {
                         $scope.message = "The numbers didn't matched please enter the correct numbers";
@@ -99,7 +99,7 @@ MyApp.controller('FeedbackController', ["$scope", "$http", function ($scope, $ht
                                 alertify.error("حدث خطأ فى إرسال الرسالة", 5);
                             }
                         }).error(function (data) {
-                            alertify.error("حدث خطأ فى إرسال الرسالة", 5);
+                            window.location.href = "/Home/Error";
                         });
                     } else {
                         $scope.message = "الارقام غير متطابقه من فضلك اعد كتابة الارقام";

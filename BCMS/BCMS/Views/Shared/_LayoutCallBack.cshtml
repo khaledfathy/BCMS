@@ -1,0 +1,309 @@
+﻿@using System.Web.Optimization
+@using Microsoft.AspNet.Identity
+@using BCMS.Models
+
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html ng-app="langApp" dir="rtl" lang="ar">
+<head>
+    @*<base href="/" />*@
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    @if (Request.Cookies["language"] != null)
+    {
+        var lang = Request.Cookies["language"].Value;
+        if (lang == "en")
+        {
+            @Styles.Render("~/bundles/BCMS/style/en")
+        }
+        else
+        {
+            @Styles.Render("~/bundles/BCMS/style/ar")
+        }
+    }
+    else
+    {
+        @Styles.Render("~/bundles/BCMS/style/ar")
+    }
+    @Scripts.Render("~/bundles/BCMS/script")
+    <script src="~/signalr/Hubs"></script>
+
+    @RenderSection("scripts", required: false)
+</head>
+
+<body>
+    <!-- Start Header-->
+    <div ng-controller="headerController">
+        <div class="headerWrapper">
+
+            <div class="BorderBottom">
+                <div class="row">
+                    <div class="TopNav">
+                        <ul>
+                            <li ng-controller="languageController">
+
+                                <a ng-show="!arabic" class="btn btn-sm" ng-click="switchLanguage('ar');">
+                                    عربى
+                                    <img width="35" height="20" src="~/Language/saudiarabia-flag.jpg" />
+                                </a>
+                                <a ng-show="arabic" class="btn btn-sm" ng-click="switchLanguage('en');">
+                                    English
+                                    <img width="35" height="20" src="~/Language/british-flag.png" />
+                                </a>
+                            </li>
+                            <li><a id="time"></a></li>
+                            
+                            @if (Request.IsAuthenticated)
+                            {
+                                string FullName = null;
+                                var FullNameCookie = HttpContext.Current.Request.Cookies["FullName"];
+                                if (FullNameCookie != null)
+                                {
+                                    FullName = FullNameCookie.Value;
+                                }
+                                <li>
+                                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Get, new { id = "logoutForm" }))
+                                    {
+                                        //@Html.AntiForgeryToken()
+                                        <a href="javascript:document.getElementById('logoutForm').submit()">{{logout | translate}}</a>
+                                    }
+                                </li>
+                                <li><a href="/#">{{welcome | translate}}  @FullName</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/#/Login"> {{login | translate}} </a></li>
+                                <li><a href="/#/Register"> {{register | translate}} </a></li>
+                            }
+                            <li><a href="http://pixel.borsacapital.com/" target="_blank">{{pixel | translate}}</a></li>
+                            <li><a href="/#Feedback">{{feedback | translate}}</a></li>
+                            @*<li><a href="#/">{{onlineSupport | translate}}</a></li>*@
+
+                            <li><a href="/#/"><img src="~/Materials/Ar/img/home.png" alt="" width="20" /></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="headerWrapper">
+            <div class="row">
+                <div class="LogoWraper">
+                    <div class="logo"> <a href="/#/"><img src="~/Materials/Ar/images/logo.png"></a></div>
+                    <div class="clear"></div>
+                    <div class="date"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+        <div class="Marquee">
+
+            <marquee direction="right" scrollamount="3" onmousedown="this.stop();" onmouseup="this.start();">
+                السعودية: تراجع مستوى التضخم إلى 2.5 % خلال شهر نوفمبر
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                انخفاض أرباح "مكة للإنشاء" إلى 241 مليون ريال (- 4 %) بنهاية التسعة أشهر الأولى المنتهية فى المحرم 1436 هـ
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                صحيفة: هيئة السوق المالية تواصل تحقيقاتها في قوائم "موبايلي".. والقرارات التي ستصدر قد تؤدي لحل مجلس إدارة الشركة
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                رئيس طائفة العقار بجدة: نصف عمائر مكة المكرمة مهجورة 11 شهرا في العام
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                مجلس إدارة "أسمنت نجران" يوصي بتوزيع أرباح نقدية بنسبة 6 % ( بواقع 0.60 ريال للسهم) عن العام 2014
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                المبيعات الإجمالية لشركات الأسمنت السعودية ترتفع إلى 5.09 مليون طن (+ 39 %) خلال نوفمبر 2014
+            </marquee>
+
+        </div>
+        <div class="clear"></div>
+        <div class="MainMenuWrappe">
+            <div class="row">
+                <div class="large-12 columns">
+                    <nav id="cbp-hrmenu" class="cbp-hrmenu">
+                        <ul>
+                            <li class="SubMenuDock">
+                                <a href="/#/">{{home | translate}}</a>
+                                <div class="cbp-hrsub">
+                                    <div class="cbp-hrsub-inner">
+                                        <div>
+                                            <ul class="ca-menu">
+                                                <li>
+                                                    <a href="/#AboutUs">
+                                                        <span class="ca-icon">A</span>
+                                                        <div class="ca-content">
+                                                            <h3 class="ca-sub">{{about | translate}}</h3>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/#BCWord">
+                                                        <span class="ca-icon">c</span>
+                                                        <div class="ca-content">
+                                                            <h3 class="ca-sub">{{bcWord | translate}}</h3>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/#AboutSaudi">
+                                                        <span class="ca-icon">A</span>
+                                                        <div class="ca-content">
+                                                            <h3 class="ca-sub">{{aboutKSA | translate}}</h3>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/#FAQ">
+                                                        <span class="ca-icon">e</span>
+                                                        <div class="ca-content">
+                                                            <h3 class="ca-sub">{{commonQuestions | translate}}</h3>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/#Jobs">
+                                                        <span class="ca-icon">h</span>
+                                                        <div class="ca-content">
+                                                            <h3 class="ca-sub">{{jobs | translate}}</h3>
+                                                        </div>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li><a href="#PyramidServices">{{pyramidServices | translate}}</a></li>
+                            @*<li><a href="#/">{{download | translate}}</a></li>*@
+                            <li><a href="/UTMS/Home">UTMs</a></li>
+                            <li><a href="/#Demo">{{demo | translate}}</a></li>
+                            <li><a href="/#Partners">{{partners | translate}}</a></li>
+                            <li><a href="/#ContactUs">{{contactus | translate}}</a></li>
+                        </ul>
+                    </nav>
+
+                    <!-- Hany -->
+                    @*@System.Web.Optimization.Scripts.Render("~/bundles/BCMS/cbpHorizontalMenu")
+                        <script>
+                            $(function () {
+                                cbpHorizontalMenu.init();
+                            });
+                        </script>*@
+                    <!-- /Hany -->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Header-->
+    <div style="min-height:initial;">
+        <div class="large-12 columns">
+            <div class="large-12 column" id="body">
+                <!--START CONTENT-->
+                @RenderBody()
+                <!--END CONTENT-->
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+    <!-- Start Footer-->
+    <div ng-controller="footerController">
+        <div class="FooterWrapperBG">
+            <div style="height: 55px;margin: 0 auto">
+                <div id="footer_wrapper">
+                    @*<div class="footer_middle_section">*@
+                    <div class="footer_middle_section_content">
+                        <div class="Bottom">
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <div class="large-3 columns">
+                                        <ul>
+                                            <li><h2>{{bc | translate}}</h2></li>
+                                            <li><a href="/#BCWord">{{bcWord | translate}}</a></li>
+                                            <li><a href="/#AboutSaudi">{{aboutKSA | translate}}</a></li>
+                                            <li><a href="/#AboutUs">{{about | translate}}</a></li>
+                                            <li><a href="/#Partners">{{partners | translate}}</a></li>
+                                            <li><a href="/#SayingsOfWise">{{sayingsOfWise | translate}}</a></li>
+                                            <li><a href="/#Feedback">{{feedback | translate}}</a></li>
+                                            <li><a href="/#Jobs">{{jobs | translate}}</a></li>
+                                            <li><a href="/#ContactUs">{{contactus | translate}}</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="large-3 columns">
+                                        <ul>
+                                            <li><h2>{{ourServices | translate}}</h2></li>
+                                            <li><a href="/#Advice">{{investmentAdvices | translate}}</a></li>
+                                            @*<li><a href="#Login">UTMs</a></li>*@
+                                            @*<li><a href="#">{{download | translate}}</a></li>*@
+                                            <li><a href="/#PyramidServices">{{pyramidServices | translate}}</a></li>
+                                            <li><a href="http://pixel.borsacapital.com/" target="_blank">{{pixel | translate}}</a></li>
+                                            @*<li><a href="#Register">{{register | translate}}</a></li>*@
+                                            @*<li><a href="#Login">{{login | translate}}</a></li>*@
+                                        </ul>
+                                    </div>
+
+                                    <div class="large-3 columns">
+                                        <ul>
+                                            <li><h2>{{education | translate}}</h2></li>
+                                            @*<li><a href="#">{{library | translate}}</a></li>*@
+                                            <li><a href="@Url.Action("Category", "Home", new { Area = "Exams" })" target="_blank">{{exams | translate}}</a></li>
+                                            <li><a href="/#Terminology">{{terminology | translate}}</a></li>
+                                            <li><a href="/#FAQ">{{commonQuestions | translate}}</a></li>
+                                            @*<li><a href="#">{{educationalVideos | translate}}</a></li>*@
+                                            <li><a href="@Url.Action("Index", "Game", new { Area = "Games" })" target="_blank">{{educationalGames | translate}}</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="large-3 columns">
+                                        <ul>
+                                            <li><h2>{{entertainment | translate}}</h2></li>
+                                            @*<li><a href="#">{{caricature | translate}}</a></li>*@
+                                            <li><a href="/#Games">{{entertainmentGames | translate}}</a></li>
+                                            <li><a href="/#Music" target="_blank">{{music | translate}}</a></li>
+
+                                            @*<li><a id="btnMusic" href="#">{{music | translate}}</a></li>*@
+                                            <li><a href="/#Relaxing">{{videos | translate}}</a></li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*</div>*@
+                    @*<div class="footer_bottom_section">
+                            <div class="sitemap">
+                                <div class="sitemap_content"><h2> <a href="javascript:close();" class="close" title="{{siteMap | translate}}">{{siteMap | translate}}</a> </h2></div>
+                            </div>
+                        </div>*@
+                </div>
+            </div>
+            @*<div class="clear"></div>*@
+            <div class="copyRight">{{copyRights | translate}} © BorsaCapital 2015</div>
+            @*<div class="clear"></div>*@
+        </div>
+    </div>
+    <!--End Footer-->
+
+    @if (Request.IsAuthenticated)
+    {
+        <script>
+                var connect;
+                $(function () {
+                    connect = $.connection.mainHub;
+                    $.connection.hub.start();
+                    connect.client.logoff = function () {
+                        $.connection.hub.stop();
+                        window.location.href = "/Account/LogOff";
+                    }
+                });
+        </script>
+    }
+
+</body>
+</html>
+

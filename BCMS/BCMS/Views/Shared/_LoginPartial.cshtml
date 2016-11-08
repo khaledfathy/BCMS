@@ -2,10 +2,16 @@
 @using BCMS.Models
 @if (Request.IsAuthenticated)
 {
-    ApplicationDbContext db = new ApplicationDbContext();
     string FullName = null;
-    var UserId = User.Identity.GetUserId();
-    FullName = db.Users.FirstOrDefault(a => a.Id == UserId).FullName;
+    var FullNameCookie = HttpContext.Current.Request.Cookies["FullName"];
+    if (FullNameCookie != null)
+    {
+        FullName = FullNameCookie.Value;
+    }
+    //ApplicationDbContext db = new ApplicationDbContext();
+
+    //var UserId = User.Identity.GetUserId();
+    //FullName = db.Users.FirstOrDefault(a => a.Id == UserId).FullName;
     <li>
         @using (Html.BeginForm("LogOff", "Account", FormMethod.Get, new { id = "logoutForm" }))
         {

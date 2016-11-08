@@ -13,17 +13,24 @@ namespace BCMS.Controllers
    
         public JsonResult GetAllJobs()
         {
-           
-            return Json(DB.Jobs.Select(x => new
+            try
             {
-                JobID = x.JobID,
-                JobTitle = x.JobTitle,
-                specification = x.Job_Specification.Select(s=>s.specification),
-                education = x.Job_Education.Select(e => e.Education),
-                prefer = x.Job_Prefer.Select(p => p.Prefer),
-                skill = x.Job_Skill.Select(sk => sk.Skill)
-            }), JsonRequestBehavior.AllowGet);
-               
+                return Json(DB.Jobs.Select(x => new
+                {
+                    JobID = x.JobID,
+                    JobTitle = x.JobTitle,
+                    specification = x.Job_Specification.Select(s => s.specification),
+                    education = x.Job_Education.Select(e => e.Education),
+                    prefer = x.Job_Prefer.Select(p => p.Prefer),
+                    skill = x.Job_Skill.Select(sk => sk.Skill)
+                }), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json("Error", JsonRequestBehavior.AllowGet);
+            }
+
+
         }
 
         protected override void Dispose(bool disposing)

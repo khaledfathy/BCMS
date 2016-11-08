@@ -7,11 +7,18 @@ MyApp.controller('JobsController', ["$scope", "$http", function ($scope, $http) 
     $scope.platinumSponsor = 'PLATINUM_SPONSOR';
     $scope.silverSponsor = 'SILVER_SPONSOR';
     $scope.availableJobs = 'AVAILABLE_JOBS';
-    
+
     $http.get('/Job/GetAllJobs').success(function (data) {
-        $scope.jobs = data;
+        if (data == "Error") {
+
+            window.location.href = "/Home/Error";
+        }
+        else {
+            $scope.jobs = data;
+
+        }
     }).error(function (error) {
-        alert(error);
+        window.location.href = "/Home/Error";
     });
 }]);
 

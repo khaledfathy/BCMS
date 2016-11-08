@@ -2671,6 +2671,7 @@
     <Content Include="Materials\Ar\img\linkedin.png" />
     <Content Include="Materials\Ar\img\logo.png" />
     <Content Include="Materials\Ar\img\MetaStock-Logo.gif" />
+    <Content Include="Materials\Ar\img\no-connection.png" />
     <Content Include="Materials\Ar\img\Our-Services-3.png" />
     <Content Include="Materials\Ar\img\reload.jpg" />
     <Content Include="Materials\Ar\img\rss.png" />
@@ -3914,6 +3915,8 @@
     <Content Include="Materials\Portfolio\MainMenu\fonts\fontawesome.ttf" />
     <Content Include="Materials\Portfolio\MainMenu\fonts\fontawesome.woff" />
     <Content Include="Materials\Portfolio\MainMenu\fonts\readme.md" />
+    <Content Include="Views\Shared\_LayoutCallBack.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />

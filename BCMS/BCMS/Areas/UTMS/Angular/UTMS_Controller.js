@@ -36,23 +36,31 @@ App.controller('BorsaCloudController', ["$scope", "$http", function ($scope, $ht
             type: 'GET',
             dataType: 'html'
         }).success(function (result) {
-            SectorAndCategory.empty().append(result);
-            $("#loadingArea").hide();
-            $(".row").show();
-            if (check == false) {
-                // convert old data before change to array CategoriesOld
-                function ConvertToArray(tag) {
-                    var a = [];
-                    for (var i = 0; i < tag.length; i++) {
-                        a.push(tag[i].innerHTML);
+            if (result == "Error") {
+                window.location.href = "/Home/Error";
+            } else {
+                SectorAndCategory.empty().append(result);
+                $("#loadingArea").hide();
+                $(".row").show();
+                if (check == false) {
+                    // convert old data before change to array CategoriesOld
+                    function ConvertToArray(tag) {
+                        var a = [];
+                        for (var i = 0; i < tag.length; i++) {
+                            a.push(tag[i].innerHTML);
+                        }
+                        CategoriesOld = a;
                     }
-                    CategoriesOld = a;
+                    ConvertToArray($("#SectorAndCategory li").toArray());
                 }
-                ConvertToArray($("#SectorAndCategory li").toArray());
+                check = true;
+                $('#SectorAndCategory').trigger('contentchanged');
             }
-            check = true;
-            $('#SectorAndCategory').trigger('contentchanged');
+
+
         }).error(function () {
+            window.location.href = "/Home/Error";
+
         });
     }
     $('#SectorAndCategory').bind('contentchanged', function () {
@@ -137,28 +145,33 @@ App.controller('MarketCasterController', function ($scope, $http) {
     function getAllMessages() {
         var tbl = $('#mrkcaster');
         $http.get('/MarketCaster/GetMessages').success(function (result) {
-            //clean table market caster and append new data from partial view (_MessagesList)
-            tbl.empty().append(result);
-            $("#loadingArea").hide();
-            $(".row").show();
-            if (check == false) {
-                // push cells market caster table to Array for current market values to  marketableold
-                var myTableArray = [];
-                $("#mrkcaster tr").each(function () {
-                    var arrayOfThisRow = [];
-                    var tableData = $(this).find('td');
-                    if (tableData.length > 0) {
-                        tableData.each(function () { arrayOfThisRow.push($(this).text()); });
-                        myTableArray.push(arrayOfThisRow);
-                    }
-                    marketableold = myTableArray;
-                });
+            if (result == "Error") {
+                window.location.href = "/Home/Error";
             }
-            //trigger fire when data changeing from database
-            $('#mrkcaster').trigger('contentchanged');
-            check = true;
+            else {
+                //clean table market caster and append new data from partial view (_MessagesList)
+                tbl.empty().append(result);
+                $("#loadingArea").hide();
+                $(".row").show();
+                if (check == false) {
+                    // push cells market caster table to Array for current market values to  marketableold
+                    var myTableArray = [];
+                    $("#mrkcaster tr").each(function () {
+                        var arrayOfThisRow = [];
+                        var tableData = $(this).find('td');
+                        if (tableData.length > 0) {
+                            tableData.each(function () { arrayOfThisRow.push($(this).text()); });
+                            myTableArray.push(arrayOfThisRow);
+                        }
+                        marketableold = myTableArray;
+                    });
+                }
+                //trigger fire when data changeing from database
+                $('#mrkcaster').trigger('contentchanged');
+                check = true;
+            }
         }).error(function () {
-            alert('Error!')
+            window.location.href = "/Home/Error";
         });
     }
 
@@ -253,9 +266,14 @@ App.controller('BorsaGraphicsController', ["$scope", "$http", "$sce", function (
 
     $http.get("/UTMS/BorsaGraphics/GetAllChartCategories")
         .success(function (data) {
-            $scope.ChartCategory = data;
+            if (data == "Error") {
+                window.location.href = "/Home/Error";
+            }
+            else {
+                $scope.ChartCategory = data;
+            }
         }).error(function () {
-            alert("error");
+            window.location.href = "/Home/Error";
         });
 
     $http({
@@ -263,10 +281,15 @@ App.controller('BorsaGraphicsController', ["$scope", "$http", "$sce", function (
         method: 'GET',
         params: { id: 1 }
     }).success(function (data) {
-        $scope.ChartAnalysesKind = data;
-        $scope.ChartAnalysesKind[0].active = true;
+        if (data == "Error") {
+            window.location.href = "/Home/Error";
+        }
+        else {
+            $scope.ChartAnalysesKind = data;
+            $scope.ChartAnalysesKind[0].active = true;
+        }
     }).error(function () {
-        alert("error");
+        window.location.href = "/Home/Error";
     });
 
     $scope.url = $sce.trustAsResourceUrl('/UTMS/BorsaGraphics/ChartDiv/1');
@@ -277,10 +300,15 @@ App.controller('BorsaGraphicsController', ["$scope", "$http", "$sce", function (
             method: 'GET',
             params: { id: catId }
         }).success(function (data) {
-            $scope.ChartAnalysesKind = data;
-            $scope.ChartAnalysesKind[0].active = true;
+            if (data == "Error") {
+                window.location.href = "/Home/Error";
+            }
+            else {
+                $scope.ChartAnalysesKind = data;
+                $scope.ChartAnalysesKind[0].active = true;
+            }
         }).error(function () {
-            alert("error");
+            window.location.href = "/Home/Error";
         });
         for (i = 1; i <= 6; i++) {
             angular.element("#" + i + "").removeClass("Active");
@@ -325,297 +353,454 @@ App.controller('BC-CounterController', function ($scope, $http) {
     })
 
     $http.get("/UTMS/BcCounters/selectAllMarkets").success(function (result) {
-        $("#ddlMarkets").html("");
-        for (var i = 0, count = result.length; i < result.length; i++) {
-            $("#ddlMarkets").append("<option value=" + result[i].CODE + ">" + result[i].NAME + "</option>")
+        if (result == "Error") {
+            window.location.href = "/Home/Error";
         }
-        var FirstCode = $("#ddlMarkets option:first").val();
-        DrowChart(FirstCode);
-        DrowChartOut(FirstCode);
-        DrowChartCompin(FirstCode);
+        else {
+            $("#ddlMarkets").html("");
+            for (var i = 0, count = result.length; i < result.length; i++) {
+                $("#ddlMarkets").append("<option value=" + result[i].CODE + ">" + result[i].NAME + "</option>")
+            }
+            var FirstCode = $("#ddlMarkets option:first").val();
+            DrowChart(FirstCode);
+            DrowChartOut(FirstCode);
+            DrowChartCompin(FirstCode);
+        }
     }).error(function (e) {
-        alert("Error : " + e);
+        window.location.href = "/Home/Error";
     });
 
     function DrowChart(code) {
         $http.get("/UTMS/BcCounters/selectMarketData", { params: { code: code } }).success(function (result) {
-            //console.log('first Code is ' + code);
-            var CompanyNames = [];
-            var CashFlowInValue = [];
-            var CashFlowOutValue = [];
-
-            for (var i = 0; i < result.length; i++) {
-                CompanyNames.push(result[i].Name);
-                CashFlowInValue.push(result[i].CASHFLOWIN);
-                CashFlowOutValue.push(result[i].CASHFLOWOUT)
+            if (result == "Error") {
+                window.location.href = "/Home/Error";
             }
-            var nr = CashFlowInValue;
-            //console.log('nr  ' + nr);
-            var charts = new Highcharts.Chart({
+            else {
+                //console.log('first Code is ' + code);
+                var CompanyNames = [];
+                var CashFlowInValue = [];
+                var CashFlowOutValue = [];
 
-                chart: {
-                    type: 'gauge',
-                    alignTicks: false,
-                    plotBackgroundColor: null,
-                    plotBackgroundImage: null,
-                    plotBorderWidth: 0,
-                    plotShadow: false,
-                    renderTo: 'bccounter'
-                },
+                for (var i = 0; i < result.length; i++) {
+                    CompanyNames.push(result[i].Name);
+                    CashFlowInValue.push(result[i].CASHFLOWIN);
+                    CashFlowOutValue.push(result[i].CASHFLOWOUT)
+                }
+                var nr = CashFlowInValue;
+                //console.log('nr  ' + nr);
+                var charts = new Highcharts.Chart({
 
-                title: {
-                    text: ''
-                },
-                pane: {
-                    startAngle: -150,
-                    endAngle: 150,
-                    background: [{
-                        backgroundColor: {
-                            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-                            stops: [
-                                [0, '#DDD'],
-                                [1, '#333']
-                            ]
-                        },
-                        borderWidth: 0,
-                        outerRadius: '109%'
-                    }, {
-                        backgroundColor: {
-                            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-                            stops: [
-                                [0, '#333'],
-                                [1, '#DDD']
-                            ]
-                        },
-                        borderWidth: 1,
-                        outerRadius: '107%'
-                    }, {
-                        // default background
-                    }, {
-                        backgroundColor: '#DDD',
-                        borderWidth: 0,
-                        outerRadius: '105%',
-                        innerRadius: '103%'
-                    }]
-                },
-                credits: {
-
-                    text: 'Borsa Capital',
-                    href: 'http://borsacapital.com'
-                },
-                yAxis: [{
-                    min: 0,
-                    max: 100000,
-                    lineColor: '#339',
-                    tickColor: '#339',
-                    minorTickColor: '#339',
-                    offset: -25,
-                    lineWidth: 2,
-                    labels: {
-                        distance: -20,
-                        rotation: 'auto',
-                        formatter: function () {
-                            return +this.value / 1000 + ' ' + 'M SR';
-                        }
+                    chart: {
+                        type: 'gauge',
+                        alignTicks: false,
+                        plotBackgroundColor: null,
+                        plotBackgroundImage: null,
+                        plotBorderWidth: 0,
+                        plotShadow: false,
+                        renderTo: 'bccounter'
                     },
-                    tickLength: 5,
-                    minorTickLength: 5,
-                    endOnTick: false
-                }, {
-                    min: 0,
-                    max: 100000,
-                    tickPosition: 'outside',
-                    lineColor: '#933',
-                    lineWidth: 2,
-                    minorTickPosition: 'outside',
-                    tickColor: '#933',
-                    minorTickColor: '#933',
-                    tickLength: 5,
-                    minorTickLength: 5,
-                    labels: {
-                        distance: 12,
-                        rotation: 'auto',
-                        formatter: function () {
-                            return +this.value / 1000 + ' ' + 'M SR';
-                        }
+
+                    title: {
+                        text: ''
                     },
-                    offset: -20,
-                    endOnTick: false
-                }],
-                series: [{
-                    name: 'M',
-                    data: [nr],
-                    dataLabels: {
-                        borderWidth: 1,
+                    pane: {
+                        startAngle: -150,
+                        endAngle: 150,
+                        background: [{
+                            backgroundColor: {
+                                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                                stops: [
+                                    [0, '#DDD'],
+                                    [1, '#333']
+                                ]
+                            },
+                            borderWidth: 0,
+                            outerRadius: '109%'
+                        }, {
+                            backgroundColor: {
+                                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                                stops: [
+                                    [0, '#333'],
+                                    [1, '#DDD']
+                                ]
+                            },
+                            borderWidth: 1,
+                            outerRadius: '107%'
+                        }, {
+                            // default background
+                        }, {
+                            backgroundColor: '#DDD',
+                            borderWidth: 0,
+                            outerRadius: '105%',
+                            innerRadius: '103%'
+                        }]
+                    },
+                    credits: {
+
+                        text: 'Borsa Capital',
+                        href: 'http://borsacapital.com'
+                    },
+                    yAxis: [{
+                        min: 0,
+                        max: 100000,
+                        lineColor: '#339',
+                        tickColor: '#339',
+                        minorTickColor: '#339',
+                        offset: -25,
+                        lineWidth: 2,
+                        labels: {
+                            distance: -20,
+                            rotation: 'auto',
+                            formatter: function () {
+                                return +this.value / 1000 + ' ' + 'M SR';
+                            }
+                        },
+                        tickLength: 5,
+                        minorTickLength: 5,
+                        endOnTick: false
+                    }, {
+                        min: 0,
+                        max: 100000,
+                        tickPosition: 'outside',
+                        lineColor: '#933',
+                        lineWidth: 2,
+                        minorTickPosition: 'outside',
+                        tickColor: '#933',
+                        minorTickColor: '#933',
+                        tickLength: 5,
+                        minorTickLength: 5,
+                        labels: {
+                            distance: 12,
+                            rotation: 'auto',
+                            formatter: function () {
+                                return +this.value / 1000 + ' ' + 'M SR';
+                            }
+                        },
+                        offset: -20,
+                        endOnTick: false
+                    }],
+                    series: [{
+                        name: 'M',
+                        data: [nr],
+                        dataLabels: {
+                            borderWidth: 1,
+                            shadow: false,
+                            useHTML: true,
+                            padding: 4,
+
+                            backgroundColor: {
+                                linearGradient: {
+                                    x1: 0,
+                                    y1: 0,
+                                    x2: 0,
+                                    y2: 1
+                                },
+                                stops: [
+                                    [0, '#DDD'],
+                                    [1, '#333']
+                                ]
+                            }
+                        }
+                    }],
+                    tooltip: {
+                        //enabled: true,
+                        backgroundColor: 'none',
+                        borderWidth: 0,
                         shadow: false,
                         useHTML: true,
                         padding: 4,
-
-                        backgroundColor: {
-                            linearGradient: {
-                                x1: 0,
-                                y1: 0,
-                                x2: 0,
-                                y2: 1
-                            },
-                            stops: [
-                                [0, '#DDD'],
-                                [1, '#333']
-                            ]
+                        formatter: function () {
+                            $('#bccounter').hover(function () {
+                                $('#tooltipChashFlowIn').toggle().html('السيولة الداخلة<br> ' + nr);
+                            });
                         }
-                    }
-                }],
-                tooltip: {
-                    //enabled: true,
-                    backgroundColor: 'none',
-                    borderWidth: 0,
-                    shadow: false,
-                    useHTML: true,
-                    padding: 4,
-                    formatter: function () {
-                        $('#bccounter').hover(function () {
-                            $('#tooltipChashFlowIn').toggle().html('السيولة الداخلة<br> ' + nr);
-                        });
-                    }
-                },
-                // Add some life
-                function (chart) {
-                    setInterval(function () {
-                        var point = chart.series[0].points[0],
-                            newVal,
-                            inc = CashFlowInValue;
+                    },
+                    // Add some life
+                    function (chart) {
+                        setInterval(function () {
+                            var point = chart.series[0].points[0],
+                                newVal,
+                                inc = CashFlowInValue;
 
-                        newVal = point.y + inc;
-                        if (newVal < 0 || newVal > 200) {
-                            newVal = point.y - inc;
-                        }
-                        point.update(newVal);
-                    }, 3000);
-                }
-            })
+                            newVal = point.y + inc;
+                            if (newVal < 0 || newVal > 200) {
+                                newVal = point.y - inc;
+                            }
+                            point.update(newVal);
+                        }, 3000);
+                    }
+                })
+            }
 
         }).error(function (xhr, status, error) {
-            alert('يوجد خطأ : ' + error);
+            window.location.href = "/Home/Error";
         })
     }
 
     function DrowChartOut(code) {
         $http.get("/UTMS/BcCounters/selectMarketData", { params: { code: code } }).success(function (result) {
-            //console.log('first Code is ' + code);
-            var CompanyNames = [];
-            var CashFlowInValue = [];
-            var CashFlowOutValue = [];
+            if (result == "Error") {
+                window.location.href = "/Home/Error";
 
-            for (var i = 0; i < result.length; i++) {
-                CompanyNames.push(result[i].Name);
-                CashFlowInValue.push(result[i].CASHFLOWIN);
-                CashFlowOutValue.push(result[i].CASHFLOWOUT)
             }
-            var nr = CashFlowOutValue;
-            //console.log('nr  ' + nr);
-            //console.log('Company name ' + CompanyNames[0]);
-            var charts = new Highcharts.Chart({
+            else {
 
-                chart: {
-                    type: 'gauge',
-                    alignTicks: false,
-                    plotBackgroundColor: null,
-                    plotBackgroundImage: null,
-                    plotBorderWidth: 0,
-                    plotShadow: false,
-                    renderTo: 'bccounter2'
-                },
 
-                title: {
-                    text: ''
-                },
-                pane: {
-                    startAngle: -150,
-                    endAngle: 150,
-                    background: [{
-                        backgroundColor: {
-                            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-                            stops: [
-                                [0, '#DDD'],
-                                [1, '#333']
-                            ]
-                        },
-                        borderWidth: 0,
-                        outerRadius: '109%'
-                    }, {
-                        backgroundColor: {
-                            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-                            stops: [
-                                [0, '#333'],
-                                [1, '#DDD']
-                            ]
-                        },
-                        borderWidth: 1,
-                        outerRadius: '107%'
-                    }, {
-                        // default background
-                    }, {
-                        backgroundColor: '#DDD',
-                        borderWidth: 0,
-                        outerRadius: '105%',
-                        innerRadius: '103%'
-                    }]
-                },
-                credits: {
+                //console.log('first Code is ' + code);
+                var CompanyNames = [];
+                var CashFlowInValue = [];
+                var CashFlowOutValue = [];
 
-                    text: 'Borsa Capital',
-                    href: 'http://borsacapital.com'
-                },
-                yAxis: [{
-                    min: 0,
-                    max: 100000,
-                    lineColor: '#339',
-                    tickColor: '#339',
-                    minorTickColor: '#339',
-                    offset: -25,
-                    lineWidth: 2,
-                    labels: {
-                        distance: -20,
-                        rotation: 'auto',
-                        formatter: function () {
-                            return +this.value / 1000 + ' ' + 'M SR';
-                        }
+                for (var i = 0; i < result.length; i++) {
+                    CompanyNames.push(result[i].Name);
+                    CashFlowInValue.push(result[i].CASHFLOWIN);
+                    CashFlowOutValue.push(result[i].CASHFLOWOUT)
+                }
+                var nr = CashFlowOutValue;
+                //console.log('nr  ' + nr);
+                //console.log('Company name ' + CompanyNames[0]);
+                var charts = new Highcharts.Chart({
 
+                    chart: {
+                        type: 'gauge',
+                        alignTicks: false,
+                        plotBackgroundColor: null,
+                        plotBackgroundImage: null,
+                        plotBorderWidth: 0,
+                        plotShadow: false,
+                        renderTo: 'bccounter2'
                     },
-                    tickLength: 5,
-                    minorTickLength: 5,
-                    endOnTick: false
-                }, {
-                    min: 0,
-                    max: 100000,
-                    tickPosition: 'outside',
-                    lineColor: '#933',
-                    lineWidth: 2,
-                    minorTickPosition: 'outside',
-                    tickColor: '#933',
-                    minorTickColor: '#933',
-                    tickLength: 5,
-                    minorTickLength: 5,
-                    labels: {
-                        distance: 12,
-                        rotation: 'auto',
-                        formatter: function () {
-                            return +this.value / 100 + ' ' + 'M SR';
-                        }
-                    },
-                    offset: -20,
-                    endOnTick: false
-                }],
 
-                series: [{
-                    name: 'Speed',
-                    data: [nr],
-                    dataLabels: {
-                        borderWidth: 1,
+                    title: {
+                        text: ''
+                    },
+                    pane: {
+                        startAngle: -150,
+                        endAngle: 150,
+                        background: [{
+                            backgroundColor: {
+                                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                                stops: [
+                                    [0, '#DDD'],
+                                    [1, '#333']
+                                ]
+                            },
+                            borderWidth: 0,
+                            outerRadius: '109%'
+                        }, {
+                            backgroundColor: {
+                                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                                stops: [
+                                    [0, '#333'],
+                                    [1, '#DDD']
+                                ]
+                            },
+                            borderWidth: 1,
+                            outerRadius: '107%'
+                        }, {
+                            // default background
+                        }, {
+                            backgroundColor: '#DDD',
+                            borderWidth: 0,
+                            outerRadius: '105%',
+                            innerRadius: '103%'
+                        }]
+                    },
+                    credits: {
+
+                        text: 'Borsa Capital',
+                        href: 'http://borsacapital.com'
+                    },
+                    yAxis: [{
+                        min: 0,
+                        max: 100000,
+                        lineColor: '#339',
+                        tickColor: '#339',
+                        minorTickColor: '#339',
+                        offset: -25,
+                        lineWidth: 2,
+                        labels: {
+                            distance: -20,
+                            rotation: 'auto',
+                            formatter: function () {
+                                return +this.value / 1000 + ' ' + 'M SR';
+                            }
+
+                        },
+                        tickLength: 5,
+                        minorTickLength: 5,
+                        endOnTick: false
+                    }, {
+                        min: 0,
+                        max: 100000,
+                        tickPosition: 'outside',
+                        lineColor: '#933',
+                        lineWidth: 2,
+                        minorTickPosition: 'outside',
+                        tickColor: '#933',
+                        minorTickColor: '#933',
+                        tickLength: 5,
+                        minorTickLength: 5,
+                        labels: {
+                            distance: 12,
+                            rotation: 'auto',
+                            formatter: function () {
+                                return +this.value / 100 + ' ' + 'M SR';
+                            }
+                        },
+                        offset: -20,
+                        endOnTick: false
+                    }],
+
+                    series: [{
+                        name: 'Speed',
+                        data: [nr],
+                        dataLabels: {
+                            borderWidth: 1,
+                            shadow: false,
+                            useHTML: true,
+                            padding: 4,
+
+                            backgroundColor: {
+                                linearGradient: {
+                                    x1: 0,
+                                    y1: 0,
+                                    x2: 0,
+                                    y2: 1
+                                },
+                                stops: [
+                                    [0, '#DDD'],
+                                    [1, '#333']
+                                ]
+                            }
+                        },
+                        tooltip: {
+                            valueSuffix: ' '
+                        }
+                    }],
+
+                    tooltip: {
+                        backgroundColor: 'none',
+                        borderWidth: 0,
                         shadow: false,
                         useHTML: true,
                         padding: 4,
+                        formatter: function () {
+                            $('#bccounter2').hover(function () {
+                                $('#tooltipChashFlowOut').toggle().html('السيولة الخارجة<br> ' + nr);
+                            });
+                        }
+                    }
+                })
 
+            }
+
+        })
+        .error(function (xhr, status, error) {
+            window.location.href = "/Home/Error";
+        })
+    }
+
+    function DrowChartCompin(code) {
+        $http.get("/UTMS/BcCounters/selectMarketData", { params: { code: code } }).success(function (result) {
+            if (result == "Error") {
+                window.location.href = "/Home/Error";
+
+            }
+            else {
+                //console.log('first Code is ' + code);
+                var CompanyNames = [];
+                var CashFlowInValue = [];
+                var CashFlowOutValue = [];
+                $("#loadingArea").hide();
+                $(".RegisterWrapper").show();
+
+                for (var i = 0; i < result.length; i++) {
+                    CompanyNames.push(result[i].Name);
+                    CashFlowInValue.push(result[i].CASHFLOWIN);
+                    CashFlowOutValue.push(result[i].CASHFLOWOUT)
+                }
+                var nr = CashFlowOutValue;
+                //console.log('nr  ' + nr);
+                var gaugeOptions = {
+                    chart: {
+                        type: 'solidgauge'
+                    },
+                    title: null,
+                    pane: {
+                        center: ['50%', '85%'],
+                        size: '140%',
+                        startAngle: -90,
+                        endAngle: 90,
+                        background: {
+                            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+                            innerRadius: '60%',
+                            outerRadius: '100%',
+                            shape: 'arc'
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'none',
+                        borderWidth: 0,
+                        shadow: false,
+                        useHTML: true,
+                        padding: 4,
+                        formatter: function () {
+                            $('#container-speed').hover(function () {
+                                $('#tooltip').toggle().html('صافي السيولة<br> ' + (CashFlowInValue - CashFlowOutValue));
+                            });
+                        }
+                    },
+                    yAxis: {
+                        stops: [
+                            [0.1, '#55BF3B'], // green
+                            [0.5, '#DDDF0D'], // yellow
+                            [0.9, '#DF5353'] // red
+                        ],
+                        lineWidth: 0,
+                        minorTickInterval: null,
+                        tickPixelInterval: 400,
+                        tickWidth: 0,
+                        title: {
+                            y: -70
+                        },
+                        labels: {
+                            y: 16
+                        }
+                    },
+
+                    plotOptions: {
+                        solidgauge: {
+                            dataLabels: {
+                                y: 5,
+                                borderWidth: 0,
+                            }
+                        }
+                    }
+                    ,
+                    credits: {
+                        text: 'Borsa Capital',
+                        href: 'http://borsacapital.com'
+                    },
+                };
+                var ch1 = new Highcharts.Chart(Highcharts.merge(gaugeOptions, {
+                    chart: {
+                        renderTo: 'container-speed'
+                    },
+                    yAxis: {
+                        min: 0,
+                        max: 100000,
+                        title: {
+                            text: 'السيولة الخارجة'
+                        }
+                    },
+                    series: [{
+                        name: 'الكمية',
+                        data: [CashFlowOutValue / 100],
+                        borderWidth: 1,
+                        shadow: false,
+                        useHTML: true,
+                        padding: 0,
                         backgroundColor: {
                             linearGradient: {
                                 x1: 0,
@@ -627,187 +812,54 @@ App.controller('BC-CounterController', function ($scope, $http) {
                                 [0, '#DDD'],
                                 [1, '#333']
                             ]
+                        },
+                        tooltip: {
+                            valueSuffix: ''
+                        }
+                    }]
+
+                }));
+                var ch1 = new Highcharts.Chart(Highcharts.merge(gaugeOptions, {
+                    chart: {
+                        renderTo: 'container-rpm'
+                    },
+                    yAxis: {
+                        min: 0,
+                        max: 10000,
+                        title: {
+                            text: 'السيولة الداخلة'
                         }
                     },
-                    tooltip: {
-                        valueSuffix: ' '
-                    }
-                }],
+                    series: [{
+                        name: 'الكمية',
+                        data: [CashFlowInValue / 100],
+                        borderWidth: 1,
+                        shadow: false,
+                        useHTML: true,
+                        padding: 0,
+                        backgroundColor: {
+                            linearGradient: {
+                                x1: 0,
+                                y1: 0,
+                                x2: 0,
+                                y2: 1
+                            },
+                            stops: [
+                                [0, '#DDD'],
+                                [1, '#333']
+                            ]
+                        },
+                        tooltip: {
+                            valueSuffix: ''
+                        }
+                    }]
 
-                tooltip: {
-                    backgroundColor: 'none',
-                    borderWidth: 0,
-                    shadow: false,
-                    useHTML: true,
-                    padding: 4,
-                    formatter: function () {
-                        $('#bccounter2').hover(function () {
-                            $('#tooltipChashFlowOut').toggle().html('السيولة الخارجة<br> ' + nr);
-                        });
-                    }
-                }
-            })
-
-        })
-            .error(function (xhr, status, error) {
-                alert('يوجد خطأ : ' + error);
-            })
-    }
-
-    function DrowChartCompin(code) {
-        $http.get("/UTMS/BcCounters/selectMarketData", { params: { code: code } }).success(function (result) {
-            //console.log('first Code is ' + code);
-            var CompanyNames = [];
-            var CashFlowInValue = [];
-            var CashFlowOutValue = [];
-            $("#loadingArea").hide();
-            $(".RegisterWrapper").show();
-
-            for (var i = 0; i < result.length; i++) {
-                CompanyNames.push(result[i].Name);
-                CashFlowInValue.push(result[i].CASHFLOWIN);
-                CashFlowOutValue.push(result[i].CASHFLOWOUT)
+                }));
             }
-            var nr = CashFlowOutValue;
-            //console.log('nr  ' + nr);
-            var gaugeOptions = {
-                chart: {
-                    type: 'solidgauge'
-                },
-                title: null,
-                pane: {
-                    center: ['50%', '85%'],
-                    size: '140%',
-                    startAngle: -90,
-                    endAngle: 90,
-                    background: {
-                        backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
-                        innerRadius: '60%',
-                        outerRadius: '100%',
-                        shape: 'arc'
-                    }
-                },
-                tooltip: {
-                    backgroundColor: 'none',
-                    borderWidth: 0,
-                    shadow: false,
-                    useHTML: true,
-                    padding: 4,
-                    formatter: function () {
-                        $('#container-speed').hover(function () {
-                            $('#tooltip').toggle().html('صافي السيولة<br> ' + (CashFlowInValue - CashFlowOutValue));
-                        });
-                    }
-                },
-                yAxis: {
-                    stops: [
-                        [0.1, '#55BF3B'], // green
-                        [0.5, '#DDDF0D'], // yellow
-                        [0.9, '#DF5353'] // red
-                    ],
-                    lineWidth: 0,
-                    minorTickInterval: null,
-                    tickPixelInterval: 400,
-                    tickWidth: 0,
-                    title: {
-                        y: -70
-                    },
-                    labels: {
-                        y: 16
-                    }
-                },
-
-                plotOptions: {
-                    solidgauge: {
-                        dataLabels: {
-                            y: 5,
-                            borderWidth: 0,
-                        }
-                    }
-                }
-                ,
-                credits: {
-                    text: 'Borsa Capital',
-                    href: 'http://borsacapital.com'
-                },
-            };
-            var ch1 = new Highcharts.Chart(Highcharts.merge(gaugeOptions, {
-                chart: {
-                    renderTo: 'container-speed'
-                },
-                yAxis: {
-                    min: 0,
-                    max: 100000,
-                    title: {
-                        text: 'السيولة الخارجة'
-                    }
-                },
-                series: [{
-                    name: 'الكمية',
-                    data: [CashFlowOutValue / 100],
-                    borderWidth: 1,
-                    shadow: false,
-                    useHTML: true,
-                    padding: 0,
-                    backgroundColor: {
-                        linearGradient: {
-                            x1: 0,
-                            y1: 0,
-                            x2: 0,
-                            y2: 1
-                        },
-                        stops: [
-                            [0, '#DDD'],
-                            [1, '#333']
-                        ]
-                    },
-                    tooltip: {
-                        valueSuffix: ''
-                    }
-                }]
-
-            }));
-            var ch1 = new Highcharts.Chart(Highcharts.merge(gaugeOptions, {
-                chart: {
-                    renderTo: 'container-rpm'
-                },
-                yAxis: {
-                    min: 0,
-                    max: 10000,
-                    title: {
-                        text: 'السيولة الداخلة'
-                    }
-                },
-                series: [{
-                    name: 'الكمية',
-                    data: [CashFlowInValue / 100],
-                    borderWidth: 1,
-                    shadow: false,
-                    useHTML: true,
-                    padding: 0,
-                    backgroundColor: {
-                        linearGradient: {
-                            x1: 0,
-                            y1: 0,
-                            x2: 0,
-                            y2: 1
-                        },
-                        stops: [
-                            [0, '#DDD'],
-                            [1, '#333']
-                        ]
-                    },
-                    tooltip: {
-                        valueSuffix: ''
-                    }
-                }]
-
-            }));
-
 
 
         }).error(function (xhr, status, error) {
-            alert('يوجد خطأ : ' + error);
+            window.location.href = "/Home/Error";
         })
 
     }
@@ -963,17 +1015,28 @@ App.controller('BcIndicatorsController', function ($scope) {
 
 App.controller('PetrochemicalsController', ["$scope", "$http", function ($scope, $http) {
     $http.get("/UTMS/Petrochemicals/GetAllPetrochemicals").success(function (data) {
-        $scope.MyData = data;
+        if (data == "Error") {
+            window.location.href = "/Home/Error";
+
+        }
+        else {
+            $scope.MyData = data;
+
+        }
     }).error(function (error) {
-        alert(error);
+        window.location.href = "/Home/Error";
     });
 }]);
 
 App.controller('KnowledgeController', ["$scope", "$http", function ($scope, $http) {
     $scope.knowledges = null;
     $http.get("/UTMS/Knowledge/GetAllKnowledge").success(function (data) {
-        $scope.knowledges = data;
-
+        if (data == "Error") {
+            window.location.href = "/Home/Error";
+        }
+        else {
+            $scope.knowledges = data;
+        }
     }).error(function (error) {
         alert(error);
     });

@@ -15,9 +15,17 @@ namespace BCMS.Areas.UTMS.Controllers
           
         public ActionResult GetMessages()
         {
-            MessagesRepository _messageRepository = new MessagesRepository();
-            return PartialView("~/Areas/UTMS/Views/BorsaCloud/_BorsaCloud.cshtml", _messageRepository.GetSectorsAndCategories());
+            try
+            {
+                MessagesRepository _messageRepository = new MessagesRepository();
+                return PartialView("~/Areas/UTMS/Views/BorsaCloud/_BorsaCloud.cshtml", _messageRepository.GetSectorsAndCategories());
 
+            }
+
+            catch (Exception ex)
+            {
+                return Json("Error", JsonRequestBehavior.AllowGet);
+            }
         }
       
     }

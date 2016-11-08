@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_LayoutCallBack.cshtml";
+
+}
+@if (Request.Cookies["language"] != null)
+{
+    string lang = Request.Cookies["language"].Value;
+    if (lang == "en")
+    {
+        
+        <div style="text-align:center;">
+            <h1 class="text-danger">Error!</h1>
+            <h2 class="text-danger">An error occured while processing your request please check your internet connection and try again</h2>
+            <img src="~/Materials/Ar/img/no-connection.png" width="120" height="120" style="margin:40px;"/>
+        </div>
+    }
+    else
+    {
+        
+        <div style="text-align:center;">
+            <h1 class="text-danger">خطــــأ!</h1>
+            <h2 class="text-danger">هناك خطأ ما حدث فى تنفيذ طلبك برجاء فحص الاتصال بالانترنت ثم حاول مرة أخرى</h2>
+            <img src="~/Materials/Ar/img/no-connection.png" width="100" height="100" style="margin:40px;"/>
+        </div>
+    }
+}
+else
+{
+    <div style="text-align:center;">
+        <h1 class="text-danger">خطــــأ!</h1>
+        <h2 class="text-danger">هناك خطأ ما حدث فى تنفيذ طلبك برجاء فحص الاتصال بالانترنت ثم حاول مرة أخرى</h2>
+        <img src="~/Materials/Ar/img/no-connection.png" width="100" height="100" style="margin:40px;" />
+    </div>
+}
+
+
+

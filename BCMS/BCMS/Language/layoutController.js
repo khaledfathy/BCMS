@@ -101,6 +101,6 @@ function dateTime(id) {
     }
     result = '' + d + ' ' + months[month] + ' ' + year + ',  ' + h + ':' + m + ':' + s;
     document.getElementById(id).innerHTML = result;
-    setTimeout('date_time("' + id + '");', '1000');
+    setTimeout('dateTime("' + id + '");', '1000');
     return true;
 }

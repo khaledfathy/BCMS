@@ -62,6 +62,7 @@ langApp.config(["$translateProvider", function ($translateProvider) {
         'EMAIL_INCORRECT': 'Email is incorrect',
         'password': 'Password',
         'passwordValidation': 'Password required',
+        'INCORRECT_PASSWORD':'Password must be 8 characters at least includes numbers and one capital letter at least and special characters like (!, @, #, $, %, ^, &, ... etc)',
         'cPassword': 'Confirm password',
         'cPasswordValidation': 'Please confirm your password',
         'REGISTER_BUTTON': 'Register',
@@ -102,6 +103,12 @@ langApp.config(["$translateProvider", function ($translateProvider) {
         // Forgot Password
         'FORGOT_PASSWORD': 'Forgot Password',
         'PLZ_ENTER_EMAIL': 'Please enter your email address',
+
+        // Reset password
+        'RESET_PASSWORD': 'Reset Password',
+        'NEW_PASSWORD': 'New Password',
+        'CONFIRM_NEW_PASSWORD':'Confirm new password'
+
 
     });
 
@@ -161,6 +168,7 @@ langApp.config(["$translateProvider", function ($translateProvider) {
         'EMAIL_INCORRECT': 'البريد الإلكتروني غير صحيح',
         'password': 'كلمة المرور',
         'passwordValidation': 'يجب ادخال كلمة المرور',
+        'INCORRECT_PASSWORD':'كلمة المرور لا تقل عن ثمانية احرف كبيره وصغيره من بينهم رقم واحد على الاقل ورموز مثل(@،#،$،%،!،_،-،=،+ ...)',
         'cPassword': 'تأكيد كلمة المرور',
         'cPasswordValidation': 'يجب تأكيد كلمة المرور',
         'REGISTER_BUTTON': 'تسجيل',
@@ -206,6 +214,11 @@ langApp.config(["$translateProvider", function ($translateProvider) {
         // Forgot Password
         'FORGOT_PASSWORD': 'نسيت كلمة المرور',
         'PLZ_ENTER_EMAIL': 'من فضلك أدخل البريد الالكتروني',
+
+        // Reset password
+        'RESET_PASSWORD': 'إعادة تعيين كلمة المرور',
+        'NEW_PASSWORD': 'كلمة المرور الجديدة',
+        'CONFIRM_NEW_PASSWORD': 'تأكيد كلمة المرور الجديدة'
 
     });
 

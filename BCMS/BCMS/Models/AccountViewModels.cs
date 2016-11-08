@@ -113,16 +113,15 @@ namespace BCMS.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [RegularExpression(@"((?=.*\d)(?=.*[a-z])+(?=.*[A-Z])(?=.*[@#$%!%=+]).{8,20})", ErrorMessage = "كلمة المرور لا تقل عن 8 احرف كبيره وصغيره من بينهم رقم واحد على الاقل واحرف خاصة مثل'@،#،$،%،!،_،-،=،+ ...'واحد على الاقل")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
+        [Required]
         public string Code { get; set; }
     }
 

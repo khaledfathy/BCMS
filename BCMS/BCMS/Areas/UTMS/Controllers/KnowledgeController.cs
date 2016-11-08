@@ -14,12 +14,20 @@ namespace BCMS.Areas.UTMS.Controllers
         [HttpGet]
         public JsonResult GetAllKnowledge()
         {
-            return Json(DB.Knowledges.Select(x => new {
-                KnowledgeID = x.KnowledgeID,
-                KnowledgeTitle = x.KnowledgeTitle,
-                informatoins = x.Information.Select(e => e.InformationTitle).ToList()
+            try
+            {
+                return Json(DB.Knowledges.Select(x => new
+                {
+                    KnowledgeID = x.KnowledgeID,
+                    KnowledgeTitle = x.KnowledgeTitle,
+                    informatoins = x.Information.Select(e => e.InformationTitle).ToList()
 
-            }), JsonRequestBehavior.AllowGet);
+                }), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json("Error", JsonRequestBehavior.AllowGet);
+            }
         }
 
         protected override void Dispose(bool disposing)

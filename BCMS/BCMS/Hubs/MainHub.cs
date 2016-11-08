@@ -18,72 +18,86 @@ namespace BCMS.Hubs
         public HttpCookieCollection Cookies { get; }
 
         public override Task OnConnected()
-
         {
-            var UserId = Context.User.Identity.GetUserId();
-            var IsAuthenticated = Context.User.Identity.IsAuthenticated;
-
-            var SessionId = HttpContext.Current.Request.Cookies["SessionID"];
-
-            if (SessionId != null)
+            try
             {
-                string CurrentSessionId = SessionId.Value;
-                var UserConnection = db.Connections.Where(a => a.UserId == UserId).FirstOrDefault();
-                if (UserConnection == null)
-                {
-                    Connection NewConnection = new Connection();
-                    NewConnection.UserId = UserId;
-                    NewConnection.ConnectionId = Context.ConnectionId;
-                    NewConnection.Email = Context.User.Identity.GetUserName();
-                    NewConnection.Time = DateTime.Now;
-                    NewConnection.TabsNumber = 1;
-                    NewConnection.SessionId = CurrentSessionId;
-                    db.Connections.Add(NewConnection);
 
-                }
-                else if (UserConnection.SessionId != CurrentSessionId)
+                var UserId = Context.User.Identity.GetUserId();
+                var IsAuthenticated = Context.User.Identity.IsAuthenticated;
+
+                var SessionId = HttpContext.Current.Request.Cookies["SessionID"];
+
+                if (SessionId != null)
                 {
-                    Clients.Client(UserConnection.ConnectionId).logoff();
-                    Connection NewConnection = new Connection();
-                    NewConnection.UserId = UserId;
-                    NewConnection.ConnectionId = Context.ConnectionId;
-                    NewConnection.Email = Context.User.Identity.GetUserName();
-                    NewConnection.Time = DateTime.Now;
-                    NewConnection.TabsNumber = 1;
-                    NewConnection.SessionId = CurrentSessionId;
-                    db.Connections.Add(NewConnection);
+                    string CurrentSessionId = SessionId.Value;
+                    var UserConnection = db.Connections.Where(a => a.UserId == UserId).FirstOrDefault();
+                    if (UserConnection == null)
+                    {
+                        Connection NewConnection = new Connection();
+                        NewConnection.UserId = UserId;
+                        NewConnection.ConnectionId = Context.ConnectionId;
+                        NewConnection.Email = Context.User.Identity.GetUserName();
+                        NewConnection.Time = DateTime.Now;
+                        NewConnection.TabsNumber = 1;
+                        NewConnection.SessionId = CurrentSessionId;
+                        db.Connections.Add(NewConnection);
+
+                    }
+                    else if (UserConnection.SessionId != CurrentSessionId)
+                    {
+                        Clients.Client(UserConnection.ConnectionId).logoff();
+                        Connection NewConnection = new Connection();
+                        NewConnection.UserId = UserId;
+                        NewConnection.ConnectionId = Context.ConnectionId;
+                        NewConnection.Email = Context.User.Identity.GetUserName();
+                        NewConnection.Time = DateTime.Now;
+                        NewConnection.TabsNumber = 1;
+                        NewConnection.SessionId = CurrentSessionId;
+                        db.Connections.Add(NewConnection);
+                    }
+                    else
+                    {
+                        UserConnection.TabsNumber++;
+                    }
+
+                    db.SaveChanges();
                 }
-                else 
-                {
-                    UserConnection.TabsNumber++;
-                }
-                
-                db.SaveChanges();
+
+
+                return base.OnConnected();
             }
-            
-
-            return base.OnConnected();
+            catch(Exception ex)
+            {
+                return base.OnConnected();
+            }
         }
 
         public override Task OnDisconnected(bool stopCalled)
         {
-            var UserId = Context.User.Identity.GetUserId();
-            var IsAuthenticated = Context.User.Identity.IsAuthenticated;
-            var UserConnection = db.Connections.Where(a => a.UserId == UserId).FirstOrDefault();
-            if (UserConnection != null)
+            try
             {
-                if (UserConnection.TabsNumber == 1 || !IsAuthenticated)
+                var UserId = Context.User.Identity.GetUserId();
+                var IsAuthenticated = Context.User.Identity.IsAuthenticated;
+                var UserConnection = db.Connections.Where(a => a.UserId == UserId).FirstOrDefault();
+                if (UserConnection != null)
                 {
-                    db.Connections.Remove(UserConnection);
+                    if (UserConnection.TabsNumber == 1 || !IsAuthenticated)
+                    {
+                        db.Connections.Remove(UserConnection);
+                    }
+                    else
+                    {
+                        UserConnection.TabsNumber--;
+                    }
+                    db.SaveChanges();
                 }
-                else
-                {
-                    UserConnection.TabsNumber--;
-                }
-                db.SaveChanges();
-            }
 
-            return base.OnDisconnected(stopCalled);
+                return base.OnDisconnected(stopCalled);
+            }
+            catch (Exception ex)
+            {
+                return base.OnDisconnected(stopCalled);
+            }
         }
     }
 }

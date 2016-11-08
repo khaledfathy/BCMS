@@ -54,6 +54,8 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
                             alertify.set('notifier', 'position', 'bottom-right');
                             alertify.error("Email or Password is incorrect", 5);
                             break;
+                        case "Error":
+                            window.location.href = "/Home/Error";
                         default:
                             alertify.set('notifier', 'position', 'bottom-right');
                             alertify.error("Email or Password is incorrect", 5);
@@ -61,8 +63,8 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
 
 
                 }).error(function (data) {
-                    alertify.set('notifier', 'position', 'bottom-right');
-                    alertify.error("Error in login process");
+
+                    window.location.href = "/Home/Error";
                 });
                 break;
             default:
@@ -99,6 +101,8 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
                             alertify.set('notifier', 'position', 'bottom-left');
                             alertify.error("البريد الإلكترونى أو كلمة المرور غير صحيحة", 5);
                             break;
+                        case "Error":
+                            window.location.href = "/Home/Error";
                         default:
                             alertify.set('notifier', 'position', 'bottom-left');
                             alertify.error("البريد الإلكترونى أو كلمة المرور غير صحيحة", 5);
@@ -106,8 +110,8 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
 
 
                 }).error(function (data) {
-                    alertify.set('notifier', 'position', 'bottom-left');
-                    alertify.error("خطأ فى عملية الدخول");
+
+                    window.location.href = "/Home/Error";
                 });
         }
 
@@ -140,13 +144,16 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
                                 alertify.set('notifier', 'position', 'bottom-right');
                                 alertify.error("Password is not correct", 5);
                                 break;
+                            case "Error":
+                                window.location.href = "/Home/Error";
                             default:
                                 alertify.set('notifier', 'position', 'bottom-right');
                                 alertify.error("Email or Password is incorrect", 5);
                         }
                     }
                 }).error(function (response) {
-                    alert("Error!");
+
+                    window.location.href = "/Home/Error";
                 })
                 break;
             default:
@@ -173,14 +180,16 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
                                   alertify.set('notifier', 'position', 'bottom-left');
                                   alertify.error("كلمة المرور غير صحيحة", 5);
                                   break;
+                              case "Error":
+                                  window.location.href = "/Home/Error";
                               default:
                                   alertify.set('notifier', 'position', 'bottom-left');
                                   alertify.error("البريد الإلكترونى أو كلمة المرور غير صحيحة", 5);
                           }
                       }
                   }).error(function (response) {
-                      alertify.set('notifier', 'position', 'bottom-left');
-                      alertify.error("خطأ فى عملية الدخول");
+
+                      window.location.href = "/Home/Error";
                   });
         }
     }
@@ -244,7 +253,8 @@ MyApp.controller('RegisterController', function ($scope, registerationService) {
                         $scope.message = "Password must be 8 characters at least includes numbers and one capital letter at least and special characters like (!, @, #, $, %, ^, &, ... etc)";
                     }
                     else {
-                        alert('Error');
+
+                        window.location.href = "/Home/Error";
                     }
                 });
             } else {
@@ -264,7 +274,7 @@ MyApp.controller('RegisterController', function ($scope, registerationService) {
                         $scope.validationSummary = true;
                         $scope.message = "كلمة المرور لا تقل عن ثمانية احرف كبيره وصغيره من بينهم رقم واحد على الاقل ورموز مثل(@،#،$،%،!،_،-،=،+ ...)";
                     } else {
-                        alert('هناك خطأ ما');
+                        window.location.href = "/Home/Error";
                     }
                 });
             } else {
@@ -276,7 +286,7 @@ MyApp.controller('RegisterController', function ($scope, registerationService) {
 
 });
 
-MyApp.controller('ForgotpasswordController', ["$scope", "$http", function ($scope, $http) {
+MyApp.controller('ForgotpasswordController', ["$scope", "$http", "$compile", function ($scope, $http, $compile) {
 
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
@@ -286,85 +296,193 @@ MyApp.controller('ForgotpasswordController', ["$scope", "$http", function ($scop
     $scope.forgotPassword = 'FORGOT_PASSWORD';
     $scope.plzEnterEmail = 'PLZ_ENTER_EMAIL';
     $scope.email = 'email';
+    $scope.emailValidation = 'EMAIL_VALIDATION';
     $scope.emailIncorrect = 'EMAIL_INCORRECT';
     $scope.sendBtn = 'SEND_BTN';
-
+    $scope.emailformat = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
+    $scope.clicked = false;
     $scope.emailSent = false;
     $scope.message = "";
-
-    $scope.Send = function () {
+    $scope.isFormValid = false;
+    $scope.validationSummary = false;
+    $scope.$watch('ForgetPasswordForm.$valid', function (newValue) {
+        $scope.isFormValid = newValue;
+    });
+    var UserEmail = null;
+    $scope.Send = function (Member) {
+        UserEmail = Member;
         var lang = getCookie('language');
 
-        if (lang == 'en') {
-            $http.post("/Account/ForgotPassword", this.Member)
-            .success(function (data) {
-                $scope.emailSent = true;
-                switch (data) {
-                    case "InvalidUser":
-                        $scope.message = "Invalid email address";
-                    case "NotConfirmed":
-                        $scope.message = "Your account is not confirmed yet";
-                    case "EmailSent":
-                        $scope.message = "Please check your email address and click the link in email";
-                }
-            }).error(function (data) {
-                alertify.set('notifier', 'position', 'bottom-left');
-                alertify.error("Processing Error!, please try again. ", 5);
-            });
+        if ($scope.isFormValid) {
+            if (lang == 'en') {
+
+                $http.post("/Account/ForgotPassword", UserEmail)
+                .success(function (data) {
+                    $scope.emailSent = true;
+                    switch (data) {
+                        case "InvalidUser":
+                            $scope.validationSummary = true;
+                            $scope.message = "Invalid email address";
+                            break;
+                        case "NotConfirmed":
+                            var message = "Your account is not confirmed yet, please verify your email first";
+                            angular.element("#feedbackdiv").html($compile(message)($scope));
+                            break;
+                        case "SendingFailed":
+                            alertify.set('notifier', 'position', 'bottom-left');
+                            alertify.error("Processing Error!, please try again. ", 8);
+                            break;
+                        case "EmailSent":
+                            var feedback = "<h2>Please check your email address and click the link in it, to reset your password</h2>";
+                            feedback += "<h3>To send another email please click <a ng-click='SendCallBack()'>here</a></h3>"
+                            angular.element("#feedbackdiv").html($compile(feedback)($scope));
+                            break;
+                        case "Error":
+                            window.location.href = "/Home/Error";
+                    }
+                }).error(function (data) {
+                            window.location.href = "/Home/Error";
+                });
+            }
+
+            else {
+                $http.post("/Account/ForgotPassword", UserEmail)
+                .success(function (data) {
+
+                    switch (data) {
+                        case "InvalidUser":
+                            $scope.validationSummary = true;
+                            $scope.message = "البريد الالكترونى غير متاح";
+                            break;
+                        case "NotConfirmed":
+                            $scope.emailSent = true;
+                            var message = "حسابك لم يتم تأكيده بعد، من فضلك قم بتأكيد حسابك عن طريق الضغط على الرابط الذى تم ارساله الى بريدك الالكترونى";
+                            angular.element("#feedbackdiv").html($compile(message)($scope));
+                            break;
+                        case "SendingFailed":
+                            alertify.set('notifier', 'position', 'bottom-left');
+                            alertify.error("خطأ فى عملية الإرسال، من فضلك اعد المحاولة ", 8);
+                            break;
+                        case "EmailSent":
+                            $scope.emailSent = true;
+                            var feedback = "<h2>من فضلك افحص البريد الالكترونى وقم بالضغط على الرابط الموجود به لإعادة تعيين كلمة المرور الجديدة</h2>";
+                            feedback += "<h3>لإعادة ارسال بريد الكترونى اخر من فضلك اضغط <a ng-click='SendCallBack()'>هنــا</a></h3>";
+                            angular.element("#feedbackdiv").html($compile(feedback)($scope));
+                            break;
+                        case "Error":
+                            window.location.href = "/Home/Error";
+                    }
+                }).error(function (data) {
+          
+                            window.location.href = "/Home/Error";
+                });
+            }
         }
 
-        else {
-            $http.post("/Account/ForgotPassword", this.Member)
-            .success(function (data) {
-                $scope.emailSent = true;
-                switch (data) {
-                    case "InvalidUser":
-                        $scope.message = "البريد الالكترونى غير متاح";
-                    case "NotConfirmed":
-                        $scope.message = "حسابك لم يتم تأكيده بعد، من فضلك قم بتأكيد حسابك عن طريق الضغط على الرابط الذى تم ارساله الى بريدك الالكترونى";
-                    case "EmailSent":
-                        $scope.message = " من فضلك افحص البريد الالكترونى وقم بالضغط على الرابط الموجود به";
-                }
-            }).error(function (data) {
-                alertify.set('notifier', 'position', 'bottom-left');
-                alertify.error(data + "خطأ فى عملية الإرسال، من فضلك اعد المحاولة ", 5);
-            });
-        }
+    }
+
+    $scope.SendCallBack = function () {
+        $scope.Send(UserEmail);
     }
 }]);
 
 MyApp.controller('ResetpasswordController', ["$scope", "$http", "$timeout", "cfpLoadingBar", function ($scope, $http, $timeout, cfpLoadingBar) {
+    $scope.officialSponsors = 'OFFICIAL_SPONSORS';
+    $scope.diamondSponsor = 'DIAMOND_SPONSOR';
+    $scope.goldenSponsor = 'GOLDEN_SPONSOR';
+    $scope.platinumSponsor = 'PLATINUM_SPONSOR';
+    $scope.silverSponsor = 'SILVER_SPONSOR';
+    $scope.resetPassword = 'RESET_PASSWORD';
+    $scope.newPassword = 'NEW_PASSWORD';
+    $scope.confirmNewPassword = 'CONFIRM_NEW_PASSWORD';
+    $scope.passwordValidation = 'passwordValidation';
+    $scope.email = 'email';
+    $scope.emailValidation = 'EMAIL_VALIDATION';
+    $scope.incorrectEmail = 'EMAIL_INCORRECT';
+    $scope.cPasswordValidation = 'cPasswordValidation';
+    $scope.incorrectPassword = 'INCORRECT_PASSWORD';
+    $scope.sendbtn = 'SEND_BTN';
+    $scope.clicked = false;
     $scope.submitted = false;
     $scope.message = '';
+    $scope.passwordMessage = '';
     var message = '';
-    //DoLoading();
-    $scope.Send = function () {
-        this.user.Code = $("#code").val();
-        // $scope.user.code = $("#code").val();
-        $http.post("/Account/ResetPassword", this.user)
-     .success(function (data) {
+    $scope.isFormValid = false;
+    $scope.validationSummary = false;
+    $scope.emailformat = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
+    $scope.passwordformat = /((?=.*\d)(?=.*[a-z])+(?=.*[A-Z])(?=.*[@#$%!%=+]).{8,20})/;
 
-         switch (data) {
-             case 'InvalidUser':
-                 message = 'Invalid email address please re-enter your email';
-             case 'Success':
-                 message = 'Password changed succefully please click <a href="http://localhost:2302/#/Login">here</a> to login';
-                 $("#feedback").append(message);
-                 $scope.submitted = true;
-         }
+    $scope.$watch('ResetPasswordForm.$valid', function (newValue) {
+        $scope.isFormValid = newValue;
+    });
 
+    $scope.Send = function (user) {
+        var lang = getCookie('language');
+        user.Code = $("#code").val();
+        if (lang == 'en') {
+            if ($scope.isFormValid) {
+                $http.post("/Account/ResetPassword", user).success(function (data) {
+                    switch (data) {
+                        case 'InvalidUser':
+                            $scope.message = 'Invalid email address please re-enter your email';
+                            break;
+                        case 'Success':
+                            message = 'Password changed succefully please click <a href="http://localhost:2302/#/Login">here</a> to login';
+                            $("#feedback").html(message);
+                            $scope.submitted = true;
+                            break;
+                        case 'InvalidEmailOrPassword':
+                            $scope.validationSummary = true;
+                            $scope.message = "Error in Email or Password";
+                            break;
+                        case "Error":
+                            window.location.href = "/Home/Error";
+                        default:
+                            alertify.set('notifier', 'position', 'bottom-left');
+                            alertify.error("Error! please check internet connection", 5);
+                    }
+                }).error(function (data) {
+                    alertify.set('notifier', 'position', 'bottom-left');
+                    alertify.error("Error! please check internet connection", 5);
+                });
+            } else {
+                $scope.validationSummary = true;
+                message = "Please complete all fields consistent with conditions";
+            }
 
-         //alertify.set('notifier', 'position', 'bottom-left');
-         //if (data.indexOf("خ") > -1) {
-         //    alertify.error(data, 5);
-         //} else {
-         //    alertify.success(data, 5);
-         //    $scope.Member = [];
-         //}
-     }).error(function (data) {
-         alertify.set('notifier', 'position', 'bottom-left');
-         alertify.error(data + " خطأ فى عملية إعدة التعيين ", 5);
-     });
+        } else {
+
+            if ($scope.isFormValid) {
+                $http.post("/Account/ResetPassword", this.user).success(function (data) {
+                    switch (data) {
+                        case 'InvalidUser':
+                            $scope.message = 'البريد الالكترونى غير مدون فى سجلاتنا اذا كنت مستخدم جديد برجاء التسجيل اولا';
+                            break;
+                        case 'Success':
+                            message = 'تم إعادة تعيين كلمة المرور بنجاح للدخول للموقع اضغط  <a href="http://localhost:2302/#/Login">هنــــا</a>';
+                            $("#feedback").html(message);
+                            $scope.submitted = true;
+                            break;
+                        case 'InvalidEmailOrPassword':
+                            $scope.validationSummary = true;
+                            $scope.message = "خطأ فى البريد الالكترونى او كلمة المرور";
+                            $scope.passwordMessage = "كلمة المرور لا تقل عن ثمانية احرف كبيره وصغيره من بينهم رقم واحد على الاقل ورموز مثل(@،#،$،%،!،_،-،=،+ ...)";
+                            break;
+                        case "Error":
+                            window.location.href = "/Home/Error";
+                        default:
+                            alertify.set('notifier', 'position', 'bottom-right');
+                            alertify.error("خطأ! من فضلك تأكد من أنك متصل بالانترنت", 5);
+                    }
+                }).error(function (data) {
+                    window.location.href = "/Home/Error";
+                });
+            } else {
+                $scope.validationSummary = true;
+                $scope.message = "من فضلك املأ الخانات بما يتناسب مع الشروط";
+
+            }
+        }
     }
 }]);
 

@@ -7,9 +7,14 @@ MyApp.controller('faqController', ["$scope", "$http", function ($scope, $http) {
     $scope.platinumSponsor = 'PLATINUM_SPONSOR';
     $scope.silverSponsor = 'SILVER_SPONSOR';
     $scope.commonQuestions = 'COMMON_QUESTIONS';
+    var lang = getCookie('language');
     $http.get('/FAQ/GetAllFAQ').success(function (data) {
-        $scope.faqs = data;
+        if (data == "Error") {
+            window.location.href = "/Home/Error";
+        }
+        else
+            $scope.faqs = data;
     }).error(function () {
-        alert("error");
+        window.location.href = "/Home/Error";
     });
 }]);

@@ -11,8 +11,15 @@ namespace BCMS.Areas.UTMS.Controllers
     {
         public ActionResult GetMessages()
         {
-            MessagesRepository _messageRepository = new MessagesRepository();
-            return PartialView("~/Areas/UTMS/Views/MarketCaster/_MarketCaster.cshtml", _messageRepository.GetAllMessages());
+            try
+            {
+                MessagesRepository _messageRepository = new MessagesRepository();
+                return PartialView("~/Areas/UTMS/Views/MarketCaster/_MarketCaster.cshtml", _messageRepository.GetAllMessages());
+            }
+            catch (Exception ex)
+            {
+                return Json("Error", JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }
