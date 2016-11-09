@@ -182,7 +182,7 @@ namespace BCMS.Controllers
                         {
                             string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                             var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code, lang = language }, protocol: Request.Url.Scheme);
-                            string body = "<div style='text-align:center;'><h1>Welcome in Borsa Capital</h1>";
+                            string body = "<div style='text-align:center;'><h1>Welcome to Borsa Capital</h1>";
                             body += "<h3>You just create an account in Borsa Capital</h3>";
                             //body += " and your password is " + model.Password + ".</h3>";
                             body += "<h3>To confirm your account <a href=\"" + callbackUrl + "\"><i>please click here</i></a></b></div>";
@@ -192,7 +192,7 @@ namespace BCMS.Controllers
                         {
                             string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                             var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code, lang = language }, protocol: Request.Url.Scheme);
-                            string body = "<div dir='rtl' style='text-align:center;'><h1>مرحبا بك فى بورصه كابيتال</h1>";
+                            string body = "<div style='text-align:center;'><h1>مرحبا بك فى بورصه كابيتال</h1>";
                             body += "<h3>لقد قمت بعمل حساب على بورصه كابيتال</h3>";
                             //body += "وكلمة المرور الخاصة بك هى ";
                             //body += model.Password + ".</h3>";
