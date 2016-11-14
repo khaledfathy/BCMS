@@ -43,7 +43,7 @@ langApp.config(["$translateProvider", function ($translateProvider) {
         'caricature': 'Caricature',
         'entertainmentGames': 'Entertainment Games',
         'music': 'Music',
-        'videos': 'Videos',
+        'relaxingVideos': 'Relaxing Videos',
         'siteMap': 'Site Map',
         'copyRights': 'Copyrights',
 
@@ -51,12 +51,13 @@ langApp.config(["$translateProvider", function ($translateProvider) {
         'newUser': 'New User',
         'fullName': 'Full Name',
         'fName': 'First Name',
-        'fNameValidaion': 'First name required',
+        'fNameValidation': 'First name required',
         'mName': 'Middle Name',
         'lName': 'Last Name',
         'lNameValidation': 'Last name required',
         'USER_NAME': 'User Name',
         'USER_NAME_VALIDATION': 'User name required',
+        'INVALID_USERNAME':'Username must be from 8 to 30 character and must start with character and end with character or number and you can use numbers and characters and . and _ inside',
         'email': 'E-mail',
         'EMAIL_VALIDATION': 'E-mail required',
         'EMAIL_INCORRECT': 'Email is incorrect',
@@ -69,6 +70,7 @@ langApp.config(["$translateProvider", function ($translateProvider) {
 
         // Login
         'LOGIN': 'Login',
+        'USERNAME_EMAIL':'Username or Email',
         'REMEMBER_ME': 'Remember me',
         'FORGET_PASSWORD': 'Forgot Password',
         'CREATE_ACCOUNT': 'Create account',
@@ -107,8 +109,19 @@ langApp.config(["$translateProvider", function ($translateProvider) {
         // Reset password
         'RESET_PASSWORD': 'Reset Password',
         'NEW_PASSWORD': 'New Password',
-        'CONFIRM_NEW_PASSWORD':'Confirm new password'
+        'CONFIRM_NEW_PASSWORD': 'Confirm new password',
 
+        // Profile
+        'CHANGE_PASSWORD': 'Change Password',
+        'OLD_PASSWORD': 'Current Password',
+        'EDIT':'Edit',
+        'SAVE':'Save',
+        'OLD_PASSWORD_VALIDATION': 'Please enter current password',
+        'NEW_PASSWORD_VALIDATION': 'Please enter new password',
+        'CONFIRM_NEW_PASSWORD_VALIDATION':'Please confirm your new password',
+         'CANCEL':'Cancel',
+         'PASSWORD_CHANGED':'Password Changed',
+         'PASSWORD_NOT_MATCHED':'Password nt matched'
 
     });
 
@@ -149,7 +162,7 @@ langApp.config(["$translateProvider", function ($translateProvider) {
         'caricature': 'كاريكاتير',
         'entertainmentGames': 'ألعاب ترفيهية',
         'music': 'موسيقى',
-        'videos': 'فيديوهات',
+        'relaxingVideos': 'فيديوهات الإسترخاء',
         'siteMap': 'خارطة الموقع',
         'copyRights': 'حقوق النشر',
 
@@ -157,12 +170,13 @@ langApp.config(["$translateProvider", function ($translateProvider) {
         'newUser': 'مستخدم جديد',
         'fullName': 'الاسم بالكامل',
         'fName': 'الاسم الأول',
-        'fNameValidaion': 'يجب إدخال الاسم الأول',
+        'fNameValidation': 'يجب إدخال الاسم الأول',
         'mName': 'اسم الأب',
         'lName': 'اسم العائلة',
         'lNameValidation': 'يجب ادخال اسم العائلة',
         'USER_NAME': 'إسم المستخدم',
         'USER_NAME_VALIDATION': 'يجب ادخال اسم المستخدم',
+        'INVALID_USERNAME':'اسم المستخدم من 8 الى 30 حرف و يجب ان يكون حروف انجليزية ويبدأ بحرف وينتهى بحرف او رقم ويمكنك ادخال حروف وارقام فى الوسط و . و _ فقط',
         'email': 'البريد الإلكتروني',
         'EMAIL_VALIDATION': 'يجب ادخال البريد الإلكتروني',
         'EMAIL_INCORRECT': 'البريد الإلكتروني غير صحيح',
@@ -175,6 +189,7 @@ langApp.config(["$translateProvider", function ($translateProvider) {
 
         // Login
         'LOGIN': 'تسجيل الدخول',
+        'USERNAME_EMAIL': 'إسم المستخدم أو البريد الالكترونى',
         'REMEMBER_ME': 'تذكرنى',
         'FORGET_PASSWORD': 'نسيت كلمة المرور',
         'CREATE_ACCOUNT': 'مستخدم جديد',
@@ -218,7 +233,19 @@ langApp.config(["$translateProvider", function ($translateProvider) {
         // Reset password
         'RESET_PASSWORD': 'إعادة تعيين كلمة المرور',
         'NEW_PASSWORD': 'كلمة المرور الجديدة',
-        'CONFIRM_NEW_PASSWORD': 'تأكيد كلمة المرور الجديدة'
+        'CONFIRM_NEW_PASSWORD': 'تأكيد كلمة المرور الجديدة',
+
+        // Change Password
+        'CHANGE_PASSWORD':'تغيير كلمة المرور',
+        'OLD_PASSWORD': 'كلمة المرور الحالية',
+        'EDIT': 'تعديل',
+        'SAVE': 'حفظ',
+        'OLD_PASSWORD_VALIDATION': 'من فضلك ادخل كلمة المرور الحالية',
+        'NEW_PASSWORD_VALIDATION': 'من فضلك ادخل كلمة المرور الجديدة',
+        'CONFIRM_NEW_PASSWORD_VALIDATION': 'من فضلك أكد كلمة المرور الجديدة',
+        'CANCEL': 'إلغاء',
+        'PASSWORD_CHANGED': 'تم تغيير كلمة المرور',
+        'PASSWORD_NOT_MATCHED':'كلمة المرور غير متطابقة'
 
     });
 

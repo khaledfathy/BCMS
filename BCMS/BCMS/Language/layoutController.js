@@ -70,7 +70,7 @@ langApp.controller('footerController', function ($scope) {
     $scope.caricature = 'caricature';
     $scope.entertainmentGames = 'entertainmentGames';
     $scope.music = 'music';
-    $scope.videos = 'videos';
+    $scope.videos = 'relaxingVideos';
     $scope.siteMap = 'siteMap';
     $scope.copyRights = 'copyRights';
 });

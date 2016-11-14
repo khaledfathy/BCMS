@@ -1,19 +1,19 @@
 ﻿@using System.Web.Optimization
 
 <!doctype html>
-<html ng-app="UTMSApp" dir="rtl" lang="ar">
+<html ng-app="UTMSApp" dir="rtl" lang="ar" ng-controller="TitleController">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="application/xhtml+html; charset=utf-8" />
-    <title>BorsaCapital | Welcome</title>
+    <title>{{Page.title()}}</title>
     <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
     @*<link rel="icon" href="~/Materials/UTMS/Images/favicon.ico" type="image/x-icon">*@
 
     @Styles.Render("~/App_Start/bundles/UTMS/style")
     <style>
-        .angular-google-map-container{
-            height:400px;
+        .angular-google-map-container {
+            height: 400px;
         }
     </style>
     <link href="~/Materials/UTMS/css/highcharts.css" rel="stylesheet" />
@@ -75,4 +75,3 @@
 
 </body>
 </html>
-

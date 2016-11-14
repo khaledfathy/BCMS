@@ -1,6 +1,12 @@
 ﻿/// <reference path="../anonymousApp.js" />
 
-MyApp.controller('faqController', ["$scope", "$http", function ($scope, $http) {
+MyApp.controller('faqController', ["$scope", "$http","Page", function ($scope, $http,Page) {
+    var lang = getCookie('language');
+    if (lang == 'en') {
+        Page.setTitle('FAQ | Borsa Capital');
+    } else {
+        Page.setTitle('أسألة متكررة | بورصة كابيتال');
+    }
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
     $scope.goldenSponsor = 'GOLDEN_SPONSOR';

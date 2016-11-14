@@ -74,6 +74,9 @@ namespace BCMS.Controllers
                     return Json("InvalidLogin", JsonRequestBehavior.AllowGet);
                 }
                 var user = await UserManager.FindByEmailAsync(model.Email);
+                if(user==null)
+                    user = await UserManager.FindByNameAsync(model.Email);
+
                 if (user != null)
                 {
                     var UserConnection = db.Connections.Where(a => a.UserId == user.Id).FirstOrDefault();
@@ -123,8 +126,10 @@ namespace BCMS.Controllers
             try
             {
                 var user = await UserManager.FindByEmailAsync(model.Email);
+                if(user==null)
+                    user = await UserManager.FindByNameAsync(model.Email);
 
-                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+                var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
                 switch (result)
                 {
 
@@ -171,7 +176,7 @@ namespace BCMS.Controllers
                         FirstName = model.FirstName,
                         MiddleName = model.MiddleName,
                         LastName = model.LastName,
-                        UserName = model.Email,
+                        UserName = model.UserName,
                         Email = model.Email,
                         UserStatus = UserStatus.Waiting
                     };
@@ -204,7 +209,14 @@ namespace BCMS.Controllers
                     else
                     {
                         AddErrors(result);
-                        message = "EmailAlreadyToken";
+                        var errormsg = result.Errors.FirstOrDefault();
+                        var errorfield = errormsg.Split(' ')[0];
+                        if (errorfield == "Email")
+                            message = "EmailAlreadyToken";
+                        else if (errorfield == "Name")
+                            message = "UserNameAlreadyToken";
+                        else
+                            message = "Error";
                     }
                 }
                 else
@@ -320,6 +332,8 @@ namespace BCMS.Controllers
             }
             
         }
+
+        
 
         #region Forgot and Reset Password
 

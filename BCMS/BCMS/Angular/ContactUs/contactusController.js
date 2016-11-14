@@ -1,8 +1,12 @@
 ﻿/// <reference path="../anonymousApp.js" />
 
-MyApp.controller('ContactUsController', ["$scope", "$http", function ($scope, $http) {
-    //DoLoading();
-    $scope.message = "";
+MyApp.controller('ContactUsController', ["$scope", "$http", "Page", function ($scope, $http,Page) {
+    var lang = getCookie('language');
+    if (lang == 'en') {
+        Page.setTitle('Contact us | Borsa Capital');
+    } else {
+        Page.setTitle('اتصل بنا | بورصة كابيتال');
+    } $scope.message = "";
     $scope.isFormValid = false;
     $scope.validationMessage = "";
     $scope.sent = false;

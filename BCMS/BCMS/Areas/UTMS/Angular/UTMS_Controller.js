@@ -1,7 +1,7 @@
 ﻿/// <reference path="../app_UTMS.js" />
 
-App.controller('BorsaCloudController', ["$scope", "$http", function ($scope, $http) {
-
+App.controller('BorsaCloudController', ["$scope", "$http","Page", function ($scope, $http,Page) {
+    Page.setTitle('بورصة كلاود');
     //check to push  old data to (CategoriesOld) just first time run page Borsa Cloud
     var check = false;
     // categories before change
@@ -113,7 +113,8 @@ App.controller('BorsaCloudController', ["$scope", "$http", function ($scope, $ht
 
 }]);
 
-App.controller('MarketCasterController', function ($scope, $http) {
+App.controller('MarketCasterController', function ($scope, $http, Page) {
+    Page.setTitle('ماركت كاستر');
     $(".row").hide();
     // last market caster
     var marketableold = [];
@@ -240,7 +241,8 @@ App.controller('MarketCasterController', function ($scope, $http) {
     });
 });
 
-App.controller('StockUpController', function ($scope) {
+App.controller('StockUpController', function ($scope,Page) {
+    Page.setTitle('الملخص اليومى');
     $scope.gotoAnchor = function (id) {
         for (i = 0; i <= 6; i++) {
             $("#" + i + "").removeClass("active");
@@ -260,8 +262,8 @@ App.controller('StockUpController', function ($scope) {
     }
 });
 
-App.controller('BorsaGraphicsController', ["$scope", "$http", "$sce", function ($scope, $http, $sce) {
-
+App.controller('BorsaGraphicsController', ["$scope", "$http", "$sce","Page", function ($scope, $http, $sce,Page) {
+    Page.setTitle('بورصة جرافيكس');
     $scope.ChartAnalysesKind = null;
 
     $http.get("/UTMS/BorsaGraphics/GetAllChartCategories")
@@ -341,7 +343,8 @@ App.controller('BorsaGraphicsController', ["$scope", "$http", "$sce", function (
 
 }]);
 
-App.controller('BC-CounterController', function ($scope, $http) {
+App.controller('BC-CounterController', function ($scope, $http, Page) {
+    Page.setTitle('عدادات بورصة كابيتال');
 
     $(".RegisterWrapper").hide();
 
@@ -1002,7 +1005,8 @@ App.controller('BC-CounterController', function ($scope, $http) {
     });
 });
 
-App.controller('BcIndicatorsController', function ($scope) {
+App.controller('BcIndicatorsController', function ($scope,Page) {
+    Page.setTitle('مؤشرات بورصة كابيتال');
     $scope.gotoAnchor = function (id) {
         for (i = 1; i <= 4; i++) {
             $("#" + i + "").removeClass("active");
@@ -1013,7 +1017,8 @@ App.controller('BcIndicatorsController', function ($scope) {
     };
 });
 
-App.controller('PetrochemicalsController', ["$scope", "$http", function ($scope, $http) {
+App.controller('PetrochemicalsController', ["$scope", "$http", "Page", function ($scope, $http, Page) {
+    Page.setTitle('صفحة البتروكيماويات');
     $http.get("/UTMS/Petrochemicals/GetAllPetrochemicals").success(function (data) {
         if (data == "Error") {
             window.location.href = "/Home/Error";
@@ -1028,7 +1033,8 @@ App.controller('PetrochemicalsController', ["$scope", "$http", function ($scope,
     });
 }]);
 
-App.controller('KnowledgeController', ["$scope", "$http", function ($scope, $http) {
+App.controller('KnowledgeController', ["$scope", "$http","Page", function ($scope, $http,Page) {
+    Page.setTitle('وسع ثقافتك');
     $scope.knowledges = null;
     $http.get("/UTMS/Knowledge/GetAllKnowledge").success(function (data) {
         if (data == "Error") {
@@ -1051,8 +1057,8 @@ App.controller('KnowledgeController', ["$scope", "$http", function ($scope, $htt
     };
 }]);
 
-App.controller('CompaniesMapController', function ($scope) {
-
+App.controller('CompaniesMapController', function ($scope,Page) {
+    Page.setTitle('خارطة الشركات');
     $scope.map = { center: { latitude: 24.3269853, longitude: 45.0858763 }, zoom: 6 };
 
     $scope.markers = [

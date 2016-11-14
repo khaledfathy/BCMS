@@ -329,6 +329,7 @@
     <Compile Include="Models\CridetRatingAgency.cs" />
     <Compile Include="Models\CurrentAccountBalance.cs" />
     <Compile Include="Models\C__MigrationHistory.cs" />
+    <Compile Include="Models\EditProfileView.cs" />
     <Compile Include="Models\Elder.cs" />
     <Compile Include="Models\EmailVerification.cs" />
     <Compile Include="Models\Evaluation.cs" />
@@ -404,8 +405,10 @@
   <ItemGroup>
     <Content Include="Angular\Account\accountController.js" />
     <Content Include="Angular\Account\accountService.js" />
+    <Content Include="Angular\Account\ChangePassword.html" />
     <Content Include="Angular\Account\ForgotPassword.html" />
     <Content Include="Angular\Account\Login.html" />
+    <Content Include="Angular\Account\Profile.html" />
     <Content Include="Angular\Account\Register.html" />
     <Content Include="Angular\ContactUs\ContactUs.html" />
     <Content Include="Angular\ContactUs\contactusController.js" />

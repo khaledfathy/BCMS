@@ -1,8 +1,13 @@
 ﻿/// <reference path="../anonymousApp.js" />
 
 
-MyApp.controller('FeedbackController', ["$scope", "$http", function ($scope, $http) {
-
+MyApp.controller('FeedbackController', ["$scope", "$http","Page", function ($scope, $http,Page) {
+    var lang = getCookie('language');
+    if (lang == 'en') {
+        Page.setTitle('FeedBack | Borsa Capital');
+    } else {
+        Page.setTitle('رأيك يهمنا | بورصة كابيتال');
+    }
     $scope.message = "";
     $scope.isFormValid = false;
     $scope.validationMessage = "";

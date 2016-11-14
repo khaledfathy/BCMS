@@ -13,10 +13,6 @@ App.config(['$routeProvider', "cfpLoadingBarProvider", function ($routeProvider,
 
     .when('/BorsaGraphics', { templateUrl: '/Areas/UTMS/Angular/BorsaGraphics/Index.html', controller: 'BorsaGraphicsController' })
 
-    .when('/Analyses/:CategoryId', { templateUrl: '/Areas/UTMS/Angular/BorsaGraphics/Analyses.html', controller: 'AnalysesController' })
-
-    .when('/AnalysesDetails/:KindId', { templateUrl: '/Areas/UTMS/Angular/BorsaGraphics/AnalysesDetails.html', controller: 'AnalysesDetailsController' })
-
     .when('/BcCounters', { templateUrl: '/Areas/UTMS/Angular/BC-Counters/Counters.html', controller: 'BC-CounterController' })
 
     .when('/BcIndicators', { templateUrl: '/Areas/UTMS/Angular/BC-Indicators/Indicators.html', controller: 'BcIndicatorsController' })
@@ -63,7 +59,6 @@ App.config(['$routeProvider', "cfpLoadingBarProvider", function ($routeProvider,
         redirectTo: '/PageNotFound'
     });
 
-
     connect = $.connection.mainHub;
     $.connection.hub.start();
     connect.client.logoff = function () {
@@ -71,13 +66,66 @@ App.config(['$routeProvider', "cfpLoadingBarProvider", function ($routeProvider,
         window.location.href = "/Account/LogOff";
     }
 
-
 }]);
 
-App.controller('CompanyCardController', function ($scope) {
-
+App.controller('MetaStockController', function ($scope,Page) {
+    Page.setTitle('Meta Stock');
 });
-App.controller('PageNotFoundController', function ($scope) {
+
+App.controller('BorsaBreakController', function ($scope, Page) {
+    Page.setTitle('استراحة | بورصة كابيتال');
+});
+
+App.controller('MarketNewsController', function ($scope, Page) {
+    Page.setTitle('أخبار السوق | بورصة كابيتال');
+});
+
+App.controller('TelevisionController', function ($scope, Page) {
+    Page.setTitle('تلفزيون | بورصة كابيتال');
+});
+
+App.controller('MagazinesController', function ($scope, Page) {
+    Page.setTitle('مـجـلات | بورصة كابيتال');
+});
+
+App.controller('InvestmentsController', function ($scope, Page) {
+    Page.setTitle('استثمارك فى سطر');
+});
+
+App.controller('CompanyCardController', function ($scope, Page) {
+    Page.setTitle('كروت الشركات');
+});
+
+App.controller('TradingTimeController', function ($scope, Page) {
+    Page.setTitle('أوقات التداول');
+});
+
+App.controller('BorsaMarketController', function ($scope, Page) {
+    Page.setTitle('سوق الأسهم');
+});
+
+App.controller('GovernmentAgenciesController', function ($scope, Page) {
+    Page.setTitle('الجهات الحكومية');
+});
+
+App.controller('MediaController', function ($scope, Page) {
+    Page.setTitle('الإعــلام');
+});
+
+App.controller('MediationCompaniesController', function ($scope, Page) {
+    Page.setTitle('شركات الوساطة');
+});
+
+App.controller('OtherEconomicsSourcesController', function ($scope, Page) {
+    Page.setTitle('مصادر إقتصادية اخرى');
+});
+
+App.controller('RegulatorsController', function ($scope, Page) {
+    Page.setTitle('الجهات الرقابية');
+});
+
+App.controller('PageNotFoundController', function ($scope, Page) {
+    Page.setTitle('صفحة غير موجوده');
     $scope.content = null;
     var lang = getCookie('language');
     if (lang == 'en') {
@@ -86,5 +134,17 @@ App.controller('PageNotFoundController', function ($scope) {
         $scope.content = "عذراً ولكن الصفحة التى تبحث عنها غير موجودة";
     }
 });
+
+App.factory('Page', function () {
+    var title = 'بورصة كابيتال | UTMS';
+    return {
+        title: function () { return title; },
+        setTitle: function (newTitle) { title = newTitle }
+    };
+});
+
+App.controller('TitleController', function ($scope, Page) {
+    $scope.Page = Page;
+})
 
 

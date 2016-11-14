@@ -1,7 +1,7 @@
 ﻿
 <div>
     <section class="main" ng-controller="LoginController" id="login">
-        <form name="LoginForm" class="form-3" ng-submit="LoginForm.$valid && LoginChecker()" novalidate>
+        <form name="LoginForm" class="form-3" ng-submit="LoginChecker()" novalidate>
             <div id="sendCodeMsg">
                 <h2>{{message}}</h2>
             </div>
@@ -14,8 +14,8 @@
 
                 <div class="right">
                     <p class="clearfix">
-                        <label class="control-label" for="email">{{email | translate}}</label>
-                        <input type="text" ng-model="Member.Email" id="email" placeholder="{{email | translate}}" ng-class="Submitted?'ng-dirty':''" required autofocus />
+                        <label class="control-label" for="email">{{userName | translate}}</label>
+                        <input type="text" ng-model="Member.Email" id="email" placeholder="{{userNameOrEmail | translate}}" ng-class="Submitted?'ng-dirty':''" required autofocus />
                     </p>
 
                     <p class="clearfix">
@@ -63,9 +63,6 @@
             </div>
         </form>
     </section>
-    <!--<div id="loadingArea" ng-show="loading"></div>
-    <div style="height:180px"></div>-->
-
 
 </div>
 

@@ -1,6 +1,13 @@
 ﻿/// <reference path="../anonymousApp.js" />
 
-MyApp.controller('JobsController', ["$scope", "$http", function ($scope, $http) {
+MyApp.controller('JobsController', ["$scope", "$http", "Page", function ($scope, $http, Page) {
+
+var lang = getCookie('language');
+    if (lang == 'en') {
+        Page.setTitle('Jobs | Borsa Capital');
+    } else {
+        Page.setTitle('وظائف شاغرة | بورصة كابيتال');
+    }
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
     $scope.goldenSponsor = 'GOLDEN_SPONSOR';

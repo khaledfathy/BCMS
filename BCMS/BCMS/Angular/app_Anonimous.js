@@ -19,6 +19,14 @@ MyApp.config(["$routeProvider", "$locationProvider", "cfpLoadingBarProvider", fu
         templateUrl: '/Angular/Account/Register.html',
         controller: 'RegisterController'
     })
+    .when('/Profile', {
+        templateUrl: '/Angular/Account/Profile.html',
+        controller: 'ProfileController'
+    })
+    .when('/ChangePassword', {
+        templateUrl: '/Angular/Account/ChangePassword.html',
+        controller: 'ChangePasswordController'
+    })
     .when('/ContactUs', {
         templateUrl: '/Angular/ContactUs/ContactUs.html',
         controller: 'ContactUsController'
@@ -130,7 +138,13 @@ MyApp.config(["$routeProvider", "$locationProvider", "cfpLoadingBarProvider", fu
 
 /**************************************************** Controllers ***********************************************************/
 
-MyApp.controller('HomeController', ["$scope", "$location", function ($scope) {
+MyApp.controller('HomeController', ["$scope", "Page", function ($scope, Page) {
+    var lang = getCookie('language');
+    if (lang == 'en') {
+        Page.setTitle('Home | Borsa Capital')
+    } else {
+        Page.setTitle('الرئيسية | بورصة كابيتال')
+    }
     $scope.bc = 'bc';
     $scope.ourServices = 'ourServices';
     $scope.education = 'education';
@@ -138,7 +152,13 @@ MyApp.controller('HomeController', ["$scope", "$location", function ($scope) {
 
 }]);
 
-MyApp.controller('AboutUsController', ["$scope", function ($scope) {
+MyApp.controller('AboutUsController', ["$scope", "Page", function ($scope, Page) {
+    var lang = getCookie('language');
+    if (lang == 'en') {
+        Page.setTitle('About us | Borsa Capital')
+    } else {
+        Page.setTitle('نبذه عنا | بورصة كابيتال')
+    }
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
     $scope.goldenSponsor = 'GOLDEN_SPONSOR';
@@ -146,7 +166,13 @@ MyApp.controller('AboutUsController', ["$scope", function ($scope) {
     $scope.silverSponsor = 'SILVER_SPONSOR';
 }]);
 
-MyApp.controller('BCWordController', ["$scope", function ($scope) {
+MyApp.controller('BCWordController', ["$scope", "Page", function ($scope, Page) {
+    var lang = getCookie('language');
+    if (lang == 'en') {
+        Page.setTitle('Borsa Capital Word')
+    } else {
+        Page.setTitle('كلمة بورصة كابيتال')
+    }
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
     $scope.goldenSponsor = 'GOLDEN_SPONSOR';
@@ -154,7 +180,13 @@ MyApp.controller('BCWordController', ["$scope", function ($scope) {
     $scope.silverSponsor = 'SILVER_SPONSOR';
 }]);
 
-MyApp.controller('AboutSaudiController', ["$scope", function ($scope) {
+MyApp.controller('AboutSaudiController', ["$scope", "Page", function ($scope, Page) {
+    var lang = getCookie('language');
+    if (lang == 'en') {
+        Page.setTitle('About Saudi Arabia')
+    } else {
+        Page.setTitle('نبذه عن المملكة العربية السعودية')
+    }
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
     $scope.goldenSponsor = 'GOLDEN_SPONSOR';
@@ -162,7 +194,14 @@ MyApp.controller('AboutSaudiController', ["$scope", function ($scope) {
     $scope.silverSponsor = 'SILVER_SPONSOR';
 }]);
 
-MyApp.controller('DemoController', ["$scope", function ($scope) {
+MyApp.controller('DemoController', ["$scope", "Page", function ($scope, Page) {
+
+    var lang = getCookie('language');
+    if (lang == 'en') {
+        Page.setTitle('Demo | Borsa Capital')
+    } else {
+        Page.setTitle('حساب تجريبى | بورصة كابيتال')
+    }
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
     $scope.goldenSponsor = 'GOLDEN_SPONSOR';
@@ -170,7 +209,13 @@ MyApp.controller('DemoController', ["$scope", function ($scope) {
     $scope.silverSponsor = 'SILVER_SPONSOR';
 }]);
 
-MyApp.controller('PartnersController', ["$scope", function ($scope) {
+MyApp.controller('PartnersController', ["$scope", "Page", function ($scope, Page) {
+    var lang = getCookie('language');
+    if (lang == 'en') {
+        Page.setTitle('Our Partners | Borsa Capital')
+    } else {
+        Page.setTitle('شركاؤنا | بورصة كابيتال')
+    }
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
     $scope.goldenSponsor = 'GOLDEN_SPONSOR';
@@ -178,7 +223,13 @@ MyApp.controller('PartnersController', ["$scope", function ($scope) {
     $scope.silverSponsor = 'SILVER_SPONSOR';
 }]);
 
-MyApp.controller('PyramidServicesController', ["$scope", function ($scope) {
+MyApp.controller('PyramidServicesController', ["$scope", "Page", function ($scope, Page) {
+    var lang = getCookie('language');
+    if (lang == 'en') {
+        Page.setTitle('Pyramid Services')
+    } else {
+        Page.setTitle('هرم الخدمات')
+    }
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
     $scope.goldenSponsor = 'GOLDEN_SPONSOR';
@@ -186,7 +237,13 @@ MyApp.controller('PyramidServicesController', ["$scope", function ($scope) {
     $scope.silverSponsor = 'SILVER_SPONSOR';
 }]);
 
-MyApp.controller('SayingsOfWiseController', ["$scope", "$http", function ($scope, $http) {
+MyApp.controller('SayingsOfWiseController', ["$scope", "$http", "Page", function ($scope, $http, Page) {
+    var lang = getCookie('language');
+    if (lang == 'en') {
+        Page.setTitle('Sayings of wise')
+    } else {
+        Page.setTitle('من أقوال الحكماء')
+    }
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
     $scope.goldenSponsor = 'GOLDEN_SPONSOR';
@@ -194,7 +251,13 @@ MyApp.controller('SayingsOfWiseController', ["$scope", "$http", function ($scope
     $scope.silverSponsor = 'SILVER_SPONSOR';
 }]);
 
-MyApp.controller('AdviceController', ["$scope", "$http", function ($scope, $http) {
+MyApp.controller('AdviceController', ["$scope", "$http", "Page", function ($scope, $http, Page) {
+    var lang = getCookie('language');
+    if (lang == 'en') {
+        Page.setTitle('Investment advices');
+    } else {
+        Page.setTitle('نصائح إستثمارية');
+    }
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
     $scope.goldenSponsor = 'GOLDEN_SPONSOR';
@@ -202,7 +265,13 @@ MyApp.controller('AdviceController', ["$scope", "$http", function ($scope, $http
     $scope.silverSponsor = 'SILVER_SPONSOR';
 }]);
 
-MyApp.controller('TerminologyController', ["$scope", "$http", function ($scope, $http) {
+MyApp.controller('TerminologyController', ["$scope", "$http", "Page", function ($scope, $http, Page) {
+    var lang = getCookie('language');
+    if (lang == 'en') {
+        Page.setTitle('Terminology | Borsa Capital');
+    } else {
+        Page.setTitle('المصطلحات | بورصة كابيتال');
+    }
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
     $scope.goldenSponsor = 'GOLDEN_SPONSOR';
@@ -210,7 +279,13 @@ MyApp.controller('TerminologyController', ["$scope", "$http", function ($scope, 
     $scope.silverSponsor = 'SILVER_SPONSOR';
 }]);
 
-MyApp.controller('GamesController', ["$scope", "$http", function ($scope, $http) {
+MyApp.controller('GamesController', ["$scope", "$http", "Page", function ($scope, $http, Page) {
+    var lang = getCookie('language');
+    if (lang == 'en') {
+        Page.setTitle('Games | Borsa Capital');
+    } else {
+        Page.setTitle('ألعاب ترفيهية | بورصة كابيتال');
+    }
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
     $scope.goldenSponsor = 'GOLDEN_SPONSOR';
@@ -218,7 +293,13 @@ MyApp.controller('GamesController', ["$scope", "$http", function ($scope, $http)
     $scope.silverSponsor = 'SILVER_SPONSOR';
 }]);
 
-MyApp.controller('RelaxingController', ["$scope", "$http", function ($scope, $http) {
+MyApp.controller('RelaxingController', ["$scope", "$http", "Page", function ($scope, $http, Page) {
+    var lang = getCookie('language');
+    if (lang == 'en') {
+        Page.setTitle('Relaxing videos');
+    } else {
+        Page.setTitle('فيديوهات الاسترخاء');
+    }
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
     $scope.goldenSponsor = 'GOLDEN_SPONSOR';
@@ -226,7 +307,13 @@ MyApp.controller('RelaxingController', ["$scope", "$http", function ($scope, $ht
     $scope.silverSponsor = 'SILVER_SPONSOR';
 }]);
 
-MyApp.controller('PageNotFoundController', function ($scope) {
+MyApp.controller('PageNotFoundController', function ($scope, Page) {
+    var lang = getCookie('language');
+    if (lang == 'en') {
+        Page.setTitle('Page not found');
+    } else {
+        Page.setTitle('الصفحة غير موجودة');
+    }
     $scope.content = null;
     var lang = getCookie('language');
     if (lang == 'en') {
@@ -235,5 +322,24 @@ MyApp.controller('PageNotFoundController', function ($scope) {
         $scope.content = "عذراً ولكن الصفحة التى تبحث عنها غير موجودة";
     }
 })
+
+MyApp.factory('Page', function () {
+    var lang = getCookie('language');
+    var title = '';
+    if (lang == 'en') {
+        title = 'Borsa Capital | Welcome';
+    } else {
+        title = 'بورصة كابيتال | مرحباً';
+    }
+    return {
+        title: function () { return title; },
+        setTitle: function (newTitle) { title = newTitle }
+    };
+});
+
+MyApp.controller('TitleController', function ($scope, Page) {
+    $scope.Page = Page;
+})
+
 
 

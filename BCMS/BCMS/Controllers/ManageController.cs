@@ -50,6 +50,69 @@ namespace BCMS.Controllers
             }
         }
 
+        public ActionResult Profile()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var user = db.Users.Where(a => a.UserName == User.Identity.Name).FirstOrDefault();
+            return Json(user, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult EditName(EditNameView model)
+        {
+            try
+            {
+                if(ModelState.IsValid)
+                {
+                    ApplicationDbContext db = new ApplicationDbContext();
+                    var user = db.Users.Where(a => a.UserName == User.Identity.Name).FirstOrDefault();
+                    user.FirstName = model.FirstName;
+                    user.MiddleName = model.MiddleName;
+                    user.LastName = model.LastName;
+                    db.SaveChanges();
+                    return Json("Success", JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("FormNotValid", JsonRequestBehavior.AllowGet);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                return Json("Failed", JsonRequestBehavior.AllowGet);
+            }
+            
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+                if (result.Succeeded)
+                {
+                    var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                    if (user != null)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    }
+                    return Json("Success", JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    AddErrors(result);
+                    return Json("Error", JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                return Json("NotValid", JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
         //
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
@@ -220,30 +283,7 @@ namespace BCMS.Controllers
             return View();
         }
 
-        //
-        // POST: /Manage/ChangePassword
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
-            if (result.Succeeded)
-            {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                if (user != null)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
-            }
-            AddErrors(result);
-            return View(model);
-        }
-
+       
         //
         // GET: /Manage/SetPassword
         public ActionResult SetPassword()

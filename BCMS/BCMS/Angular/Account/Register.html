@@ -31,7 +31,7 @@
                     <h3>{{registerSuccess}}</h3>
                 </div>
 
-                <form name="f1" ng-submit="SaveData(user)" method="post" novalidate ng-show="!submitted">
+                <form name="RegisterForm" ng-submit="SaveData(user)" method="post" novalidate ng-show="!submitted">
 
                     <div class="">
                         <div class="large-8 columns">
@@ -40,14 +40,14 @@
                             </div>
                             <div class="large-3 columns">
                                 <input type="text" ng-model="user.FirstName" name="fName" placeholder="{{fName | translate}}" ng-class="submitted?'ng-dirty':''" required autofocus />
-                                <span class="error" ng-show="(f1.fName.$dirty || submitted) && f1.fName.$error.required">{{fNameValidation | translate}}</span>
+                                <span class="error" ng-show="(RegisterForm.fName.$dirty || submitted) && RegisterForm.fName.$error.required">{{fNameValidation | translate}}</span>
                             </div>
                             <div class="large-3 columns">
                                 <input type="text" ng-model="user.MiddleName" name="mName" placeholder="{{mName | translate}}" />
                             </div>
                             <div class="large-3 columns">
                                 <input type="text" name="lName" ng-model="user.LastName" placeholder="{{lName | translate}}" ng-class="submitted?'ng-dirty':''" required autofocus />
-                                <span class="error" ng-show="(f1.lName.$dirty || submitted) && f1.lName.$error.required">{{lNameValidation | translate}}</span>
+                                <span class="error" ng-show="(RegisterForm.lName.$dirty || submitted) && RegisterForm.lName.$error.required">{{lNameValidation | translate}}</span>
                             </div>
                         </div>
                     </div>
@@ -56,10 +56,12 @@
                         <div class="large-8 columns">
                             <div class="large-2 columns">
                                 <label for="userName" class="control-label">{{userName | translate}}</label>
+
                             </div>
                             <div class="large-9 columns">
-                                <input type="text" ng-model="user.UserName" name="userName" placeholder="{{userName | translate}}" required />
-                                <span class="error" ng-show="(f1.userName.$dirty || submitted) && f1.userName.$error.required">{{userNameValidation | translate}}</span>
+                                <input type="text" ng-model="user.UserName" name="userName" ng-pattern="userNamePatern" placeholder="{{userName | translate}}" required />
+                                <span class="error" ng-show="(RegisterForm.userName.$dirty || submitted) && RegisterForm.userName.$error.required">{{userNameValidation | translate}}</span>
+                                <span class="error" ng-show="RegisterForm.userName.$error.pattern">{{invalidUserName | translate}}</span>
                             </div>
                         </div>
                     </div>
@@ -70,8 +72,10 @@
                                 <label for="email" class="control-label">{{email | translate}}</label>
                             </div>
                             <div class="large-9 columns">
-                                <input type="email" name="email" ng-model="user.Email" placeholder="{{email | translate}}" ng-class="submitted?'ng-dirty':''" required autofocus />
-                                <span class="error" ng-show="(f1.email.$dirty || submitted) && f1.email.$error.required">{{emailValidation | translate}}</span>
+                                <input type="email" name="email" ng-model="user.Email" ng-pattern="emailformat" placeholder="{{email | translate}}" ng-class="submitted?'ng-dirty':''" required autofocus />
+                                <span class="error" ng-show="(RegisterForm.email.$dirty || submitted) && RegisterForm.email.$error.required">{{emailValidation | translate}}</span>
+                                <span class="error" ng-show="RegisterForm.email.$error.pattern">{{emailIncorrect | translate}}</span>
+
                             </div>
                         </div>
                     </div>
@@ -82,8 +86,10 @@
                                 <label for="password" class="control-label">{{password | translate}}</label>
                             </div>
                             <div class="large-9 columns">
-                                <input type="password" name="password" ng-model="user.Password" placeholder="{{password | translate}}" ng-class="submitted?'ng-dirty':''" required autofocus />
-                                <span class="error" ng-show="(f1.password.$dirty || submitted) && f1.password.$error.required">{{passwordValidation | translate}}</span>
+                                <input type="password" name="password" ng-model="user.Password" ng-pattern="passwordformat" placeholder="{{password | translate}}" ng-class="submitted?'ng-dirty':''" required autofocus />
+                                <span class="error" ng-show="(RegisterForm.password.$dirty || submitted) && RegisterForm.password.$error.required">{{passwordValidation | translate}}</span>
+                                <span class="error" ng-show="RegisterForm.password.$error.pattern">{{incorrectPassword | translate}}</span>
+
                             </div>
                         </div>
                     </div>
@@ -95,7 +101,7 @@
                             </div>
                             <div class="large-9 columns">
                                 <input type="password" name="cPassword" ng-model="user.ConfirmPassword" compare-to="user.Password" placeholder="{{cPassword | translate}}" required ng-class="submitted?'ng-dirty':''" autofocus />
-                                <span class="error" ng-show="(f1.cPassword.$dirty || submitted) && f1.cPassword.$error.required">{{cPasswordValidation | translate}}</span>
+                                <span class="error" ng-show="(RegisterForm.cPassword.$dirty || submitted) && RegisterForm.cPassword.$error.required">{{cPasswordValidation | translate}}</span>
                             </div>
                         </div>
                     </div>
@@ -113,7 +119,7 @@
                         <div class="large-8 columns">
                             <div class="large-2 columns">&nbsp;</div>
                             <div class="large-9 columns">
-                                <!--<span ng-show="!submitted && f1.fName.$valid && f1.lName.$valid && f1.userName.$valid && f1.email.$valid && f1.password.$valid && f1.cPassword.$valid" class="error">{{message}}</span>-->
+                                <!--<span ng-show="!submitted && RegisterForm.fName.$valid && RegisterForm.lName.$valid && RegisterForm.userName.$valid && RegisterForm.email.$valid && RegisterForm.password.$valid && RegisterForm.cPassword.$valid" class="error">{{message}}</span>-->
                                 <span class="error" ng-show="validationSummary">{{message}}</span>
                                 
                             </div>
