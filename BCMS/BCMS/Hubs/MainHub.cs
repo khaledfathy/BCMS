@@ -21,12 +21,9 @@ namespace BCMS.Hubs
         {
             try
             {
-
                 var UserId = Context.User.Identity.GetUserId();
                 var IsAuthenticated = Context.User.Identity.IsAuthenticated;
-
                 var SessionId = HttpContext.Current.Request.Cookies["SessionID"];
-
                 if (SessionId != null)
                 {
                     string CurrentSessionId = SessionId.Value;
@@ -62,8 +59,6 @@ namespace BCMS.Hubs
 
                     db.SaveChanges();
                 }
-
-
                 return base.OnConnected();
             }
             catch(Exception ex)

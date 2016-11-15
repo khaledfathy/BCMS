@@ -1,16 +1,16 @@
 ﻿/// <reference path="../anonymousApp.js" />
 /// <reference path="C:\Users\sameh\Desktop\BCMS\BCMS\BCMS\Scripts/angular.js" />
 
-
+// Login Controller
 MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile", "Page", function ($scope, $http, $location, $compile, Page) {
+    // Set page title
     var lang = getCookie('language');
     if (lang == 'en') {
         Page.setTitle('Login | Borsa Capital')
     } else {
         Page.setTitle('تسجيل الدخول | بورصة كابيتال')
     }
-
-    $scope.IsLogedin = false;
+    // Translations
     $scope.login = 'LOGIN';
     $scope.bc = 'bc';
     $scope.email = 'email';
@@ -23,7 +23,8 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
     $scope.moreInformation = 'MORE_INFORMATION';
     $scope.loginBtn = 'LOGIN_BUTTON';
     $scope.dontHaveAccount = "DONT_HAVE_ACCOUNT";
-
+    // Some variable that will be used later
+    $scope.IsLogedin = false;
     var sendCodeMessage = '';
     $scope.message = '';
     var userId = getCookie("UserId");
@@ -33,7 +34,7 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
     $scope.$watch('LoginForm.$valid', function (newValue) {
         $scope.isFormValid = newValue;
     });
-
+    // Check if user logged if from another device or not
     $scope.LoginChecker = function () {
         var lang = getCookie('language');
         var returnUrl = $("#returnUrl").val();
@@ -126,11 +127,10 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
                     alertify.set('notifier', 'position', 'bottom-left');
                     alertify.error("من فضلك ادخل إسم المستخدم أو البريد الالكترونى وكلمة المرور", 10);
                 }
-
         }
 
     };
-
+    // Login request function
     $scope.Login = function () {
         $scope.close();
         var lang = getCookie('language');
@@ -207,28 +207,28 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
                   });
         }
     }
-
+    // Close popup
     $scope.close = function () {
         var modal = document.getElementById('myModal');
         if (modal != null)
             modal.style.display = "none";
     }
-
 }]);
-
+// Register controller
 MyApp.controller('RegisterController', function ($scope, registerationService, Page) {
+    // Set page title
     var lang = getCookie('language');
     if (lang == 'en') {
         Page.setTitle('Register | Borsa Capital')
     } else {
         Page.setTitle('تسجيل | بورصة كابيتال')
     }
+    // Translation
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
     $scope.goldenSponsor = 'GOLDEN_SPONSOR';
     $scope.platinumSponsor = 'PLATINUM_SPONSOR';
     $scope.silverSponsor = 'SILVER_SPONSOR';
-
     $scope.newUser = 'newUser';
     $scope.fullName = 'fullName';
     $scope.fName = 'fName';
@@ -248,11 +248,11 @@ MyApp.controller('RegisterController', function ($scope, registerationService, P
     $scope.cPassword = 'cPassword';
     $scope.cPasswordValidation = 'cPasswordValidation';
     $scope.registerBtn = 'REGISTER_BUTTON';
+    // Regular expressions for Email, Username and Password
     $scope.emailformat = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,4}$/;
     $scope.userNamePatern = /^(?=.{8,30}$)(?![_.0-9])(?!.*[_.]{2})[a-zA-Z0-9._]+(?![_.])$/;
     $scope.passwordformat = /((?=.*\d)(?=.*[a-z])+(?=.*[A-Z])(?=.*[@#$%!%=+]).{8,20})/;
-
-    var lang = localStorage.getItem('language');
+    // Some variable used later
     $scope.submitted = false;
     $scope.message = '';
     $scope.isFormValid = false;
@@ -263,9 +263,8 @@ MyApp.controller('RegisterController', function ($scope, registerationService, P
     $scope.$watch('RegisterForm.$valid', function (newValue) {
         $scope.isFormValid = newValue;
     });
-    //Save Data
+    // Register request function
     $scope.SaveData = function (user) {
-
         var lang = getCookie('language');
         if (lang == 'en') {
             if ($scope.isFormValid) {
@@ -295,7 +294,6 @@ MyApp.controller('RegisterController', function ($scope, registerationService, P
                             alertify.set('notifier', 'position', 'bottom-right');
                             alertify.error("Error occured please try again", 5);
                     }
-
                 });
             } else {
                 $scope.validationSummary = true;
@@ -337,14 +335,16 @@ MyApp.controller('RegisterController', function ($scope, registerationService, P
         }
     }
 });
-
+// Forgot password controller
 MyApp.controller('ForgotpasswordController', ["$scope", "$http", "$compile", function ($scope, $http, $compile, Page) {
+    // Set page title
     var lang = getCookie('language');
     if (lang == 'en') {
         Page.setTitle('Forgot password')
     } else {
         Page.setTitle('نسيت كلمة المرور')
     }
+    // Translation
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
     $scope.goldenSponsor = 'GOLDEN_SPONSOR';
@@ -356,23 +356,25 @@ MyApp.controller('ForgotpasswordController', ["$scope", "$http", "$compile", fun
     $scope.emailValidation = 'EMAIL_VALIDATION';
     $scope.emailIncorrect = 'EMAIL_INCORRECT';
     $scope.sendBtn = 'SEND_BTN';
+    // Regular expression for Email
     $scope.emailformat = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
+    //Some variables used later
     $scope.clicked = false;
     $scope.emailSent = false;
     $scope.message = "";
     $scope.isFormValid = false;
     $scope.validationSummary = false;
+    var UserEmail = null;
+    // Check form validation
     $scope.$watch('ForgetPasswordForm.$valid', function (newValue) {
         $scope.isFormValid = newValue;
     });
-    var UserEmail = null;
+    // Forgot password request function
     $scope.Send = function (Member) {
         UserEmail = Member;
         var lang = getCookie('language');
-
         if ($scope.isFormValid) {
             if (lang == 'en') {
-
                 $http.post("/Account/ForgotPassword", UserEmail)
                 .success(function (data) {
                     $scope.emailSent = true;
@@ -435,21 +437,22 @@ MyApp.controller('ForgotpasswordController', ["$scope", "$http", "$compile", fun
                 });
             }
         }
-
     }
-
+    // This is for sendin another email link
     $scope.SendCallBack = function () {
         $scope.Send(UserEmail);
     }
 }]);
-
+// Reset password controller
 MyApp.controller('ResetpasswordController', ["$scope", "$http", "$timeout", "Page", function ($scope, $http, $timeout, Page) {
+    // Set page title
     var lang = getCookie('language');
     if (lang == 'en') {
         Page.setTitle('Reset Password');
     } else {
         Page.setTitle('إعادة تعيين كلمة المرور');
     }
+    // Translation
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
     $scope.goldenSponsor = 'GOLDEN_SPONSOR';
@@ -465,6 +468,7 @@ MyApp.controller('ResetpasswordController', ["$scope", "$http", "$timeout", "Pag
     $scope.cPasswordValidation = 'cPasswordValidation';
     $scope.incorrectPassword = 'INCORRECT_PASSWORD';
     $scope.sendbtn = 'SEND_BTN';
+    // Some variable that will be used later
     $scope.clicked = false;
     $scope.submitted = false;
     $scope.message = '';
@@ -472,13 +476,14 @@ MyApp.controller('ResetpasswordController', ["$scope", "$http", "$timeout", "Pag
     var message = '';
     $scope.isFormValid = false;
     $scope.validationSummary = false;
+    // Regular expressions for Email and Password
     $scope.emailformat = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
     $scope.passwordformat = /((?=.*\d)(?=.*[a-z])+(?=.*[A-Z])(?=.*[@#$%!%=+]).{8,20})/;
-
+    // Check form validation
     $scope.$watch('ResetPasswordForm.$valid', function (newValue) {
         $scope.isFormValid = newValue;
     });
-
+    // Reset password request function
     $scope.Send = function (user) {
         var lang = getCookie('language');
         user.Code = $("#code").val();
@@ -514,7 +519,6 @@ MyApp.controller('ResetpasswordController', ["$scope", "$http", "$timeout", "Pag
             }
 
         } else {
-
             if ($scope.isFormValid) {
                 $http.post("/Account/ResetPassword", this.user).success(function (data) {
                     switch (data) {
@@ -548,8 +552,9 @@ MyApp.controller('ResetpasswordController', ["$scope", "$http", "$timeout", "Pag
         }
     }
 }]);
-
+// User profile controller
 MyApp.controller('ProfileController', function ($scope, Page, $http) {
+    // Set page title
     var lang = getCookie('language');
     var Name = getCookie('FullName');
     if (lang == 'en') {
@@ -557,6 +562,7 @@ MyApp.controller('ProfileController', function ($scope, Page, $http) {
     } else {
         Page.setTitle(Name);
     }
+    // Translation
     $scope.fullName = 'fullName';
     $scope.fName = 'fName';
     $scope.fNameValidation = 'fNameValidation';
@@ -577,7 +583,9 @@ MyApp.controller('ProfileController', function ($scope, Page, $http) {
     $scope.confirmNewPasswordValidation = 'CONFIRM_NEW_PASSWORD_VALIDATION';
     $scope.passwordChangedMessage = 'PASSWORD_CHANGED';
     $scope.passwordNotMatched = 'PASSWORD_NOT_MATCHED';
+    // Regular expression for password
     $scope.passwordformat = /((?=.*\d)(?=.*[a-z])+(?=.*[A-Z])(?=.*[@#$%!%=+]).{8,20})/;
+    // Some variables that will be used later
     $scope.PasswordChanged = false;
     $scope.UserData = '';
     $scope.clicked = false;
@@ -597,16 +605,17 @@ MyApp.controller('ProfileController', function ($scope, Page, $http) {
         NewPassword: '',
         ConfirmPassword: ''
     }
+    // Check Edit name form validation
     $scope.$watch('editnameform.$valid', function (newValue) {
         $scope.isEditNameFormValid = newValue;
     })
-
+    // Check Change password form validation
     $scope.$watch('ChangePasswordForm.$valid', function (newValue) {
         $scope.isChangePassFormValid = newValue;
     })
-
+    // Get user data function
     $scope.getUser = function () {
-        $http.get('/Manage/Profile').success(function (response) {
+        $http.get('/Manage/UserProfile').success(function (response) {
             $scope.UserData = response;
             $scope.model.FirstName = response.FirstName;
             $scope.model.MiddleName = response.MiddleName;
@@ -615,9 +624,9 @@ MyApp.controller('ProfileController', function ($scope, Page, $http) {
             alert("Error!");
         });
     }
-
+    // Call function getUser 
     $scope.getUser();
-
+    // Update Name of use, post request function
     $scope.UpdateName = function (model) {
         var lang = getCookie('language');
         if (lang == 'en') {
@@ -658,7 +667,7 @@ MyApp.controller('ProfileController', function ($scope, Page, $http) {
         }
 
     }
-
+    // Change password, post request function
     $scope.changePassword = function (changePasswordModel) {
         var lang = getCookie('language');
         if (lang == 'en') {
@@ -669,6 +678,7 @@ MyApp.controller('ProfileController', function ($scope, Page, $http) {
                             $scope.changepassword = false;
                             alertify.set('notifier', 'position', 'bottom-right');
                             alertify.success("Password changed succesfully", 5);
+                            // Reset form
                             $scope.passmodel = {
                                 OldPassword: null,
                                 NewPassword: null,
@@ -704,6 +714,7 @@ MyApp.controller('ProfileController', function ($scope, Page, $http) {
                             $scope.changepassword = false;
                             alertify.set('notifier', 'position', 'bottom-left');
                             alertify.success("تم تغيير كلمة المرور بنجاح", 5);
+                            //Reset form
                             $scope.passmodel = {
                                 OldPassword: null,
                                 NewPassword: null,
@@ -735,21 +746,8 @@ MyApp.controller('ProfileController', function ($scope, Page, $http) {
         }
     }
 })
-
-MyApp.controller('ChangePasswordController', function ($scope, Page, $http) {
-    var lang = getCookie('language');
-    if (lang == 'en') {
-        Page.setTitle('Change password');
-    } else {
-        Page.setTitle('تغيير كلمة المرور');
-    }
-    $scope.userName = 'USER_NAME';
-    $scope.fullName = 'fullName';
-    $scope.email = 'email';
-    $scope.changePassword = 'CHANGE_PASSWORD';
-})
-
-var compareTo = function () {
+// Compare to directive for confirm password field
+MyApp.directive("compareTo", function () {
     return {
         require: "ngModel",
         scope: {
@@ -765,30 +763,4 @@ var compareTo = function () {
             });
         }
     };
-};
-
-MyApp.directive("compareTo", compareTo);
-
-function sendCode(userId) {
-    var lang = localStorage.getItem('language');
-    $.ajax({
-        type: 'POST',
-        url: '/Account/SendCode',
-        data: { "userId": userId, "language": lang },
-        success: function (response) {
-            //alert("success");
-            $("#loginMessage").css('display', 'none');
-            $("#sendEmail").css('display', 'block');
-        },
-        beforeSend: function () {
-
-        },
-        complete: function () {
-
-        },
-        error: function () {
-            alert("error");
-        }
-    });
-}
-
+});

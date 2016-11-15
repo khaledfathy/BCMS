@@ -32,9 +32,9 @@ namespace BCMS.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -50,7 +50,8 @@ namespace BCMS.Controllers
             }
         }
 
-        public ActionResult Profile()
+        //Get user profile data
+        public ActionResult UserProfile()
         {
             ApplicationDbContext db = new ApplicationDbContext();
             var user = db.Users.Where(a => a.UserName == User.Identity.Name).FirstOrDefault();
@@ -62,7 +63,7 @@ namespace BCMS.Controllers
         {
             try
             {
-                if(ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
                     ApplicationDbContext db = new ApplicationDbContext();
                     var user = db.Users.Where(a => a.UserName == User.Identity.Name).FirstOrDefault();
@@ -76,13 +77,13 @@ namespace BCMS.Controllers
                 {
                     return Json("FormNotValid", JsonRequestBehavior.AllowGet);
                 }
-                
+
             }
             catch (Exception ex)
             {
                 return Json("Failed", JsonRequestBehavior.AllowGet);
             }
-            
+
         }
 
         [HttpPost]
@@ -112,6 +113,7 @@ namespace BCMS.Controllers
             }
         }
 
+        #region Not Used Actions
 
         //
         // GET: /Manage/Index
@@ -283,7 +285,7 @@ namespace BCMS.Controllers
             return View();
         }
 
-       
+
         //
         // GET: /Manage/SetPassword
         public ActionResult SetPassword()
@@ -362,6 +364,8 @@ namespace BCMS.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
+        #endregion
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
@@ -373,7 +377,7 @@ namespace BCMS.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -424,6 +428,6 @@ namespace BCMS.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

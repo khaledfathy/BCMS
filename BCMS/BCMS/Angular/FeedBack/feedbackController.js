@@ -1,26 +1,20 @@
 ﻿/// <reference path="../anonymousApp.js" />
 
 
-MyApp.controller('FeedbackController', ["$scope", "$http","Page", function ($scope, $http,Page) {
+MyApp.controller('FeedbackController', ["$scope", "$http", "Page", function ($scope, $http, Page) {
+    // Set page title
     var lang = getCookie('language');
     if (lang == 'en') {
         Page.setTitle('FeedBack | Borsa Capital');
     } else {
         Page.setTitle('رأيك يهمنا | بورصة كابيتال');
     }
-    $scope.message = "";
-    $scope.isFormValid = false;
-    $scope.validationMessage = "";
-    $scope.sent = false;
-    $scope.feedback = "";
-    $scope.submitText = "إرسال";
-
+    // Translation
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
     $scope.diamondSponsor = 'DIAMOND_SPONSOR';
     $scope.goldenSponsor = 'GOLDEN_SPONSOR';
     $scope.platinumSponsor = 'PLATINUM_SPONSOR';
     $scope.silverSponsor = 'SILVER_SPONSOR';
-
     $scope.feedBackTitle = 'FEEDBACK_TITLE';
     $scope.fillForm = 'FILL_FORM';
     $scope.name = 'name';
@@ -32,21 +26,26 @@ MyApp.controller('FeedbackController', ["$scope", "$http","Page", function ($sco
     $scope.messageValidation = 'messageValidation';
     $scope.capitha = 'capitha';
     $scope.sendBtn = 'SEND_BTN';
-
+    // Some variables that will be used later
+    $scope.message = "";
+    $scope.isFormValid = false;
+    $scope.validationMessage = "";
+    $scope.sent = false;
+    $scope.feedback = "";
+    // Check form validation
     $scope.$watch('SendFeedBack.$valid', function (newValue) {
         $scope.isFormValid = newValue;
     });
-
+    // Initialize Captcha
     $("#capture").unselectable = "on";
     var num = Math.floor((Math.random() * 100000) + 1);
     $("#capture").text(num)
-
+    // Change Captcha 
     $scope.generate = function () {
         var num = Math.floor((Math.random() * 100000) + 1);
         $("#capture").text(num)
     }
-
-    //var lang=localStorage.getItem('language');
+    // Feedback, post request function
     $scope.Save = function () {
         var lang = getCookie('language');
         if (lang == 'en') {
@@ -55,7 +54,6 @@ MyApp.controller('FeedbackController', ["$scope", "$http","Page", function ($sco
                 $scope.validationMessage = "";
                 if ($("#txtVerify").val().trim() == "") {
                     $scope.validationMessage = "";
-
                     $scope.message = "Please enter this number";
                     $("#match").removeAttr("hidden").addClass("error");
                 } else {
@@ -82,14 +80,12 @@ MyApp.controller('FeedbackController', ["$scope", "$http","Page", function ($sco
                 $scope.validationMessage = "All fields are required";
             }
         }
-
         else {
             if ($scope.isFormValid) {
                 $("#valid").attr("hidden", "hidden").removeClass("error");
                 $scope.validationMessage = "";
                 if ($("#txtVerify").val().trim() == "") {
                     $scope.validationMessage = "";
-
                     $scope.message = "من فضلك ادخل الارقام التى امامك"
                     $("#match").removeAttr("hidden").addClass("error");
                 } else {
@@ -115,8 +111,6 @@ MyApp.controller('FeedbackController', ["$scope", "$http","Page", function ($sco
                 $("#valid").removeAttr("hidden").addClass("error");
                 $scope.validationMessage = "يجب  ملئ جميع الخانات الفارغه";
             }
-
         }
     }
-
 }]);

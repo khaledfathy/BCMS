@@ -3,8 +3,9 @@
 /// <reference path="C:\Users\hany\Documents\Visual Studio 2015\Projects\BCMS\BCMS\Scripts/angular-translate.js" />
 /// <reference path="langApp.js" />
 
+
+// Layout Header Controller
 langApp.controller("headerController", function ($scope, $timeout) {
-    // Layout Header
     $scope.login = 'login';
     $scope.logout = 'logout';
     $scope.register = 'register';
@@ -24,22 +25,11 @@ langApp.controller("headerController", function ($scope, $timeout) {
     $scope.demo = 'demo';
     $scope.partners = 'partners';
     $scope.contactus = 'contactus';
-
+    // Call datetime function
     dateTime('time');
-
-    //$scope.clock = "loading clock..."; // initialise the time variable
-    //$scope.tickInterval = 1000 //ms
-
-    //var tick = function () {
-    //    $scope.clock = Date.now() // get the current time
-    //    $timeout(tick, $scope.tickInterval); // reset the timer
-    //}
-
-    //// Start the timer
-    //$timeout(tick, $scope.tickInterval);
-    ////$scope.date = new Date();
 });
 
+// Layout Footer Controller
 langApp.controller('footerController', function ($scope) {
     $scope.bc = 'bc';
     $scope.bcWord = 'bcWord';
@@ -57,9 +47,7 @@ langApp.controller('footerController', function ($scope) {
     $scope.pixel = 'pixel';
     $scope.register = 'register';
     $scope.login = 'login';
-
     $scope.education = 'education';
-
     $scope.library = 'library';
     $scope.exams = 'exams';
     $scope.terminology = 'terminology';
@@ -75,6 +63,7 @@ langApp.controller('footerController', function ($scope) {
     $scope.copyRights = 'copyRights';
 });
 
+// Current Date and Time function
 function dateTime(id) {
     date = new Date;
     year = date.getFullYear();

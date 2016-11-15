@@ -15,16 +15,17 @@ namespace BCMS.Areas.Admin.Controllers
     {
         ApplicationDbContext db;
 
+        // Get All users who not assigned to role
         [HttpGet]
         public ActionResult UsersList()
         {
             db = new ApplicationDbContext();
             var users = db.Users.Where(a => a.Roles.Count == 0).ToList();
-
             var x = users.Select(a => a.Roles).ToList();
             return View(users);
         }
 
+        // Activate user
         public ActionResult Activate(string UserId)
         {
             if (UserId != null)
@@ -39,6 +40,7 @@ namespace BCMS.Areas.Admin.Controllers
             return PartialView("_PartialUsers", users);
         }
 
+        // Deactivate user
         public ActionResult Deactivate(string UserId)
         {
             if (UserId != null)
@@ -50,9 +52,9 @@ namespace BCMS.Areas.Admin.Controllers
             }
             var users = db.Users.Where(a => a.Roles.Count == 0).ToList();
             return PartialView("_PartialUsers", users);
-            //return RedirectToAction("UsersList");
         }
 
+        // Delete user //  Get confirmation view in popup
         public ActionResult DeleteUser(string UserId)
         {
             ViewBag.UserId = UserId;
@@ -61,6 +63,7 @@ namespace BCMS.Areas.Admin.Controllers
             return View();
         }
 
+        // Delete user // Post
         [HttpPost]
         public ActionResult DeleteUserPost(string UserId)
         {
@@ -76,11 +79,11 @@ namespace BCMS.Areas.Admin.Controllers
             return PartialView("_PartialUsers", users);
         }
 
+        // Get All Staff
         [HttpGet]
         public ActionResult Staff()
         {
             db = new ApplicationDbContext();
-
             var usrs = db.Users.Where(a => a.Roles.Count != 0).ToList();
             List<Staff> stafList = new List<Staff>();
             foreach (var usr in usrs)
@@ -105,6 +108,8 @@ namespace BCMS.Areas.Admin.Controllers
             }
             return View(stafList);
         }
+        
+        // Get All roles
         [HttpGet]
         public ActionResult Roles()
         {
@@ -112,11 +117,15 @@ namespace BCMS.Areas.Admin.Controllers
             var roles = db.Roles.ToList();
             return View(roles);
         }
+
+        // Create role // Get View
         [HttpGet]
         public ActionResult CreateRole()
         {
             return View();
         }
+
+        // Create role // Post
         [HttpPost]
         public ActionResult CreateRole(string roleName)
         {
@@ -126,8 +135,9 @@ namespace BCMS.Areas.Admin.Controllers
             db.Roles.Add(role);
             db.SaveChanges();
             return PartialView("_PartialRole", db.Roles);
-            //return Json("Success", JsonRequestBehavior.AllowGet);
         }
+
+        // Remove role // Get confirmation view in popup
         [HttpGet]
         public ActionResult RemoveRole(string id)
         {
@@ -137,6 +147,8 @@ namespace BCMS.Areas.Admin.Controllers
             ViewBag.RoleName = RoleName;
             return View();
         }
+
+        // Remove role // Post
         [HttpPost]
         public ActionResult RemoveRolePost(string RoleId)
         {
@@ -147,11 +159,12 @@ namespace BCMS.Areas.Admin.Controllers
 
             return PartialView("_PartialRole", db.Roles);
         }
+
+        // Add user to role // Get view in popup
         [HttpGet]
         public ActionResult AddUserToRole(string id)
         {
             ViewBag.RoleId = id;
-
             db = new ApplicationDbContext();
             var RName = db.Roles.Where(a => a.Id == id).Select(a => a.Name).FirstOrDefault();
             ViewBag.RoleName = RName;
@@ -201,26 +214,26 @@ namespace BCMS.Areas.Admin.Controllers
 
             return View(staffList);
         }
+
+        // Add user to role // Post
         [HttpPost]
         public ActionResult AddUserToRole(string[] UsersIds, string RoleId)
         {
             db = new ApplicationDbContext();
             var RoleName = db.Roles.Where(a => a.Id == RoleId).Select(a => a.Name).FirstOrDefault();
-
-
             foreach (var UserId in UsersIds)
             {
                 var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
                 var result = userManager.AddToRole(UserId, RoleName);
-
             }
             return PartialView("_PartialRole", db.Roles);
         }
+
+        // Remove user from role // Get confirmation view in popup
         [HttpGet]
         public ActionResult RemoveUserFromRole(string id)
         {
             ViewBag.RoleId = id;
-
             db = new ApplicationDbContext();
             var RName = db.Roles.Where(a => a.Id == id).Select(a => a.Name).FirstOrDefault();
             ViewBag.RoleName = RName;
@@ -255,45 +268,42 @@ namespace BCMS.Areas.Admin.Controllers
                         staffList.Add(user);
                     }
                 }
-
             }
-
             return View(staffList);
         }
+
+        // Remove user from role // Post
         [HttpPost]
         public ActionResult RemoveUserFromRole(string[] UsersIds, string RoleId)
         {
             db = new ApplicationDbContext();
             var RoleName = db.Roles.Where(a => a.Id == RoleId).Select(a => a.Name).FirstOrDefault();
-
-
             foreach (var UserId in UsersIds)
             {
                 var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
                 var result = userManager.RemoveFromRole(UserId, RoleName);
-
             }
             return PartialView("_PartialRole", db.Roles);
         }
+
+        // Get Users in role // Get view in popup
         [HttpGet]
         public ActionResult GetUsersInRole(string Id)
         {
-
             db = new ApplicationDbContext();
             var RName = db.Roles.Where(a => a.Id == Id).Select(a => a.Name).FirstOrDefault();
             ViewBag.RoleName = RName;
             var Users = db.Roles.Where(a => a.Id == Id).Select(a => a.Users).FirstOrDefault();
             List<ApplicationUser> UsersInRole = new List<ApplicationUser>();
-
             foreach (var item in Users)
             {
                 var user = db.Users.Where(a => a.Id == item.UserId).FirstOrDefault();
                 UsersInRole.Add(user);
-
             }
             return View(UsersInRole);
         }
 
+        // Logoff // Get
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

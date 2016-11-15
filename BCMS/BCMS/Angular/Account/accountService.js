@@ -1,5 +1,6 @@
 ﻿/// <reference path="../anonymousApp.js" />
 
+// Regestraion service
 MyApp.factory("registerationService", function ($http, $q) {
     var fac = {};
     fac.saveFormData = function (data, lang) {

@@ -8,8 +8,6 @@ using System.Configuration;
 
 namespace BCMS.Areas.UTMS.Hubs
 {
-
-
     [HubName("MessagesHub")]
     public class MessagesHub : Hub
     {

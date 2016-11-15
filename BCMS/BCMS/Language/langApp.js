@@ -5,6 +5,7 @@ var langApp = angular.module("langApp", ['MyApp', 'pascalprecht.translate', 'ngC
 
 langApp.config(["$translateProvider", function ($translateProvider) {
 
+    // English Model
     $translateProvider.translations("en", {
         // Layout Header
         'login': 'Login',
@@ -125,6 +126,7 @@ langApp.config(["$translateProvider", function ($translateProvider) {
 
     });
 
+    // Arabic Model
     $translateProvider.translations("ar", {
         'login': 'تسجيل الدخول',
         'register': 'مستخدم جديد',
@@ -249,10 +251,7 @@ langApp.config(["$translateProvider", function ($translateProvider) {
 
     });
 
-    //var $cookies;
-    //angular.injector(['ngCookies']).invoke(['$cookies', function (_$cookies_) {
-    //    $cookies = _$cookies_;
-    //}]);
+    // Preferred Language
     var lang = getCookie('language');
     if (lang != "") {
         $translateProvider.preferredLanguage(lang);
@@ -264,6 +263,7 @@ langApp.config(["$translateProvider", function ($translateProvider) {
 
 }]);
 
+// Get Cookie function
 function getCookie(CookieName) {
     var name = CookieName + "=";
     var ca = document.cookie.split(';');

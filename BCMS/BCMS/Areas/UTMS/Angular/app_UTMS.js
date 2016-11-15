@@ -60,6 +60,7 @@ App.config(['$routeProvider', "cfpLoadingBarProvider", function ($routeProvider,
     });
 
     connect = $.connection.mainHub;
+    // Start connection
     $.connection.hub.start();
     connect.client.logoff = function () {
         $.connection.hub.stop();
@@ -134,7 +135,7 @@ App.controller('PageNotFoundController', function ($scope, Page) {
         $scope.content = "عذراً ولكن الصفحة التى تبحث عنها غير موجودة";
     }
 });
-
+// Set page title service
 App.factory('Page', function () {
     var title = 'بورصة كابيتال | UTMS';
     return {

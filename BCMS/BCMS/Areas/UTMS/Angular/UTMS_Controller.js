@@ -243,6 +243,7 @@ App.controller('MarketCasterController', function ($scope, $http, Page) {
 
 App.controller('StockUpController', function ($scope,Page) {
     Page.setTitle('الملخص اليومى');
+    // First tabs
     $scope.gotoAnchor = function (id) {
         for (i = 0; i <= 6; i++) {
             $("#" + i + "").removeClass("active");
@@ -252,6 +253,7 @@ App.controller('StockUpController', function ($scope,Page) {
         $("#li" + id + "").addClass("active");
 
     };
+    // Second tabs
     $scope.gotoAnchorShare = function (id) {
         for (i = 7; i <= 9; i++) {
             $("#" + i + "").removeClass("active");
@@ -265,7 +267,7 @@ App.controller('StockUpController', function ($scope,Page) {
 App.controller('BorsaGraphicsController', ["$scope", "$http", "$sce","Page", function ($scope, $http, $sce,Page) {
     Page.setTitle('بورصة جرافيكس');
     $scope.ChartAnalysesKind = null;
-
+    // Get Chart Categories request
     $http.get("/UTMS/BorsaGraphics/GetAllChartCategories")
         .success(function (data) {
             if (data == "Error") {
@@ -277,7 +279,7 @@ App.controller('BorsaGraphicsController', ["$scope", "$http", "$sce","Page", fun
         }).error(function () {
             window.location.href = "/Home/Error";
         });
-
+    // Get Chart Analyses Kind with first category as initial value 
     $http({
         url: "/UTMS/BorsaGraphics/GetAllChartAnalysesKind",
         method: 'GET',
@@ -293,9 +295,11 @@ App.controller('BorsaGraphicsController', ["$scope", "$http", "$sce","Page", fun
     }).error(function () {
         window.location.href = "/Home/Error";
     });
-
+    
+    // First Chart url to run on first page request
     $scope.url = $sce.trustAsResourceUrl('/UTMS/BorsaGraphics/ChartDiv/1');
 
+    // Get selected Chart analyses kind
     $scope.DisplayCategory = function (catId) {
         $http({
             url: "/UTMS/BorsaGraphics/GetAllChartAnalysesKind",
@@ -318,21 +322,21 @@ App.controller('BorsaGraphicsController', ["$scope", "$http", "$sce","Page", fun
         angular.element("#" + catId + "").addClass("Active");
     }
 
+    // Get selected chart
     $scope.DisplayChart = function (ChartId) {
         $scope.url = $sce.trustAsResourceUrl('/UTMS/BorsaGraphics/ChartDiv/' + ChartId + '');
         $('.highcharts-Sub>li>a.Active').removeClass('Active');
         angular.element("#chart" + ChartId + "").addClass("Active");
-
     }
 
+    // Expand selected chart analyses kind
     $scope.showChilds = function (index) {
         $scope.ChartAnalysesKind[index].active = true;
         $(".cakli>a.Active").removeClass("Active");
         angular.element("#cak" + index + "").addClass("Active");
-
         collapseAnother(index);
     };
-
+    // Collapse other chart analyses kind
     var collapseAnother = function (index) {
         for (var i = 0; i < $scope.ChartAnalysesKind.length; i++) {
             if (i != index) {
@@ -1007,6 +1011,7 @@ App.controller('BC-CounterController', function ($scope, $http, Page) {
 
 App.controller('BcIndicatorsController', function ($scope,Page) {
     Page.setTitle('مؤشرات بورصة كابيتال');
+    // Display selected tab
     $scope.gotoAnchor = function (id) {
         for (i = 1; i <= 4; i++) {
             $("#" + i + "").removeClass("active");
@@ -1019,14 +1024,13 @@ App.controller('BcIndicatorsController', function ($scope,Page) {
 
 App.controller('PetrochemicalsController', ["$scope", "$http", "Page", function ($scope, $http, Page) {
     Page.setTitle('صفحة البتروكيماويات');
+    // Get GetAllPetrochemicals request
     $http.get("/UTMS/Petrochemicals/GetAllPetrochemicals").success(function (data) {
         if (data == "Error") {
             window.location.href = "/Home/Error";
-
         }
         else {
             $scope.MyData = data;
-
         }
     }).error(function (error) {
         window.location.href = "/Home/Error";
@@ -1036,6 +1040,7 @@ App.controller('PetrochemicalsController', ["$scope", "$http", "Page", function 
 App.controller('KnowledgeController', ["$scope", "$http","Page", function ($scope, $http,Page) {
     Page.setTitle('وسع ثقافتك');
     $scope.knowledges = null;
+    // Get All Knowledge
     $http.get("/UTMS/Knowledge/GetAllKnowledge").success(function (data) {
         if (data == "Error") {
             window.location.href = "/Home/Error";
@@ -1047,6 +1052,7 @@ App.controller('KnowledgeController', ["$scope", "$http","Page", function ($scop
         alert(error);
     });
 
+    // Dispaly only selected tab
     $scope.gotoAnchor = function (index) {
         for (i = 0; i <= $scope.knowledges.length; i++) {
             $("#" + i + "").removeClass("active");
@@ -1055,6 +1061,7 @@ App.controller('KnowledgeController', ["$scope", "$http","Page", function ($scop
         $("#" + index + "").addClass("active");
         $("#tab" + index + "").addClass("active");
     };
+
 }]);
 
 App.controller('CompaniesMapController', function ($scope,Page) {

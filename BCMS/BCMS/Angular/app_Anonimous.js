@@ -36,22 +36,18 @@ MyApp.config(["$routeProvider", "$locationProvider", "cfpLoadingBarProvider", fu
         controller: 'FeedbackController'
     })
     .when('/AboutUs', {
-        //templateUrl: '/Home/AboutUs',
         templateUrl: '/Angular/Home/AboutUs.html',
         controller: 'AboutUsController'
     })
     .when('/BCWord', {
-        //templateUrl: '/Home/BCWord',
         templateUrl: '/Angular/Home/BCWord.html',
         controller: 'BCWordController'
     })
     .when('/AboutSaudi', {
-        //templateUrl: '/Home/AboutSaudi',
         templateUrl: '/Angular/Home/AboutSaudi.html',
         controller: 'AboutSaudiController'
     })
     .when('/Demo', {
-        //templateUrl: '/Demo/Index',
         templateUrl: '/Angular/Demo/Index.html',
         controller: 'DemoController'
     })
@@ -109,32 +105,7 @@ MyApp.config(["$routeProvider", "$locationProvider", "cfpLoadingBarProvider", fu
     .otherwise({
         redirectTo: '/PageNotFound'
     });
-
-    //$locationProvider.html5Mode(true);
-    //$locationProvider.html5Mode(true).hashPrefix('!');
 }])
-
-//.run( function($rootScope, $location) {
-//    // register listener to watch route changes
-//    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
-//        if ( $rootScope.loggedUser == null ) {
-//            // no logged user, we should be going to #login
-//            if (next.templateUrl == "/Account/Login") {
-//                $location.path("/Login");
-//                // already going to #login, no redirect needed
-//            } if (next.templateUrl == "/Home/Index") {
-//                $location.path("/");
-//            }
-//            else {
-//                // not going to #login, we should redirect now
-//                //doesn't refresh the page 
-//                $location.path( "/" );
-//            }
-//        }         
-//    });
-//})
-
-
 
 /**************************************************** Controllers ***********************************************************/
 
@@ -323,6 +294,7 @@ MyApp.controller('PageNotFoundController', function ($scope, Page) {
     }
 })
 
+// Set page title service
 MyApp.factory('Page', function () {
     var lang = getCookie('language');
     var title = '';
@@ -336,7 +308,7 @@ MyApp.factory('Page', function () {
         setTitle: function (newTitle) { title = newTitle }
     };
 });
-
+// Set page title controller
 MyApp.controller('TitleController', function ($scope, Page) {
     $scope.Page = Page;
 })
