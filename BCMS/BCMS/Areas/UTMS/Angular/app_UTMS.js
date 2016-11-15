@@ -5,7 +5,7 @@ var connect = null;
 App.config(['$routeProvider', "cfpLoadingBarProvider", function ($routeProvider, cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = true;
     $routeProvider
-    .when('/', { templateUrl: '/Areas/UTMS/Angular/BorsaCloud/Index.html', controller: 'BorsaCloudController' })
+    .when('/', { templateUrl: '/Areas/UTMS/Angular/StockUp/Index.html', controller: 'StockUpController' })
 
     .when('/StockUp', { templateUrl: '/Areas/UTMS/Angular/StockUp/Index.html', controller: 'StockUpController' })
 
