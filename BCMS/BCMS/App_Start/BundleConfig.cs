@@ -17,7 +17,7 @@ namespace BCMS
             #region Anonimous
             bundles.Add(new StyleBundle("~/bundles/BCMS/style/ar").Include(
                 "~/Materials/Ar/css/foundation.css",
-                "~/Materials/Ar/css/MainStyle.css",
+                //"~/Materials/Ar/css/MainStyle.css",
                 "~/Materials/Ar/css/Inputs.css",
                 "~/Materials/Ar/Sliding/css/Sliding.css",
                 "~/Materials/Ar/MainMenu/css/component.css",
@@ -25,16 +25,22 @@ namespace BCMS
                 "~/Materials/Ar/MainMenu/css/css3.css",
                 "~/Materials/Ar/Slider/responsiveslides.css",
                 "~/Materials/Ar/css/login.css",
-                "~/Materials/Ar/css/alerts/normalize.min.css",
-                "~/Materials/Ar/css/alerts/alertify.rtl.min.css",
-                "~/Materials/Ar/css/alerts/themes/default.min.css",
+                "~/Materials/Ar/css/alerts/normalize.css",
+                "~/Materials/Ar/css/alerts/alertify.rtl.css",
+                "~/Materials/Ar/css/alerts/themes/default.css",
                  "~/Content/loading-bar.css",
                 "~/Materials/UTMS/css/borsagraphicspobup.css"
                 ));
 
+            bundles.Add(new StyleBundle("~/bundles/MainStyle/ar")
+                   .Include("~/Materials/Ar/css/MainStyle.css", new CssRewriteUrlTransform()));
+
+            bundles.Add(new StyleBundle("~/bundles/MainStyle/en")
+                   .Include("~/Materials/En/css/MainStyle.css", new CssRewriteUrlTransform()));
+
             bundles.Add(new StyleBundle("~/bundles/BCMS/style/en").Include(
                 "~/Materials/En/css/foundation.css",
-                "~/Materials/En/css/MainStyle.css",
+                //"~/Materials/En/css/MainStyle.css",
                 "~/Materials/En/css/Inputs.css",
                 "~/Materials/En/Sliding/css/Sliding.css",
                 "~/Materials/En/MainMenu/css/component.css",
@@ -42,16 +48,16 @@ namespace BCMS
                 "~/Materials/En/MainMenu/css/css3.css",
                 "~/Materials/En/Slider/responsiveslides.css",
                 "~/Materials/En/css/login.css",
-                "~/Materials/En/css/alerts/normalize.min.css",
-                "~/Materials/En/css/alerts/alertify.rtl.min.css",
-                "~/Materials/En/css/alerts/themes/default.min.css",
+                "~/Materials/En/css/alerts/normalize.css",
+                "~/Materials/En/css/alerts/alertify.rtl.css",
+                "~/Materials/En/css/alerts/themes/default.css",
                 "~/Content/loading-bar.css",
                 "~/Materials/UTMS/css/borsagraphicspobup.css"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/BCMS/script").Include(
-                "~/Scripts/jquery.min.js",
-                "~/Scripts/alertify.min.js",
+                "~/Scripts/jquery.js",
+                "~/Scripts/alertify.js",
                 "~/scripts/angular.js",
                 "~/scripts/angular-route.js",
                 "~/Scripts/angular-cookies.js",
@@ -66,27 +72,31 @@ namespace BCMS
                 "~/Angular/FAQ/faqController.js",
                 "~/Angular/FeedBack/feedbackController.js",
                 "~/Angular/Job/jobController.js",
-                "~/Scripts/responsiveslides.min.js",
+                "~/Scripts/responsiveslides.js",
                 "~/Scripts/mm-foundation-tpls-0.6.0.js",
                 "~/Scripts/jquery.signalR-2.2.0.js",
-                "~/Scripts/angular-animate.min.js",
+                "~/Scripts/angular-animate.js",
                 "~/Scripts/loading-bar.js"
                 ));
             #endregion
 
             #region UTMS
-            ////////////////////////////-- BCMS CSS --//////////////////////////////////
+            ////////////////////////////-- UTMS CSS --//////////////////////////////////
 
             bundles.Add(new StyleBundle("~/App_Start/bundles/UTMS/style").Include(
                 "~/Materials/UTMS/css/foundation.css",
-                "~/Materials/UTMS/css/MainStyle.css",
+                //"~/Materials/UTMS/css/MainStyle.css",
                 "~/Materials/UTMS/MainMenu/css/component.css",
                 "~/Materials/UTMS/MainMenu/css/css3.css",
                 "~/Materials/UTMS/css/Graphics.css",
-                "~/Content/loading-bar.css"
+                "~/Content/loading-bar.css",
+                "~/Materials/UTMS/css/highcharts.css"
                 ));
 
-            ////////////////////////////-- BCMS JS --//////////////////////////////////
+            bundles.Add(new StyleBundle("~/UTMS/MainStyle/ar")
+                  .Include("~/Materials/UTMS/css/MainStyle.css", new CssRewriteUrlTransform()));
+
+            ////////////////////////////-- UTMS JS --//////////////////////////////////
 
             bundles.Add(new ScriptBundle("~/App_Start/bundles/UTMS/script").Include(
                 "~/Scripts/jquery.js",

@@ -215,7 +215,7 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
     }
 }]);
 // Register controller
-MyApp.controller('RegisterController', function ($scope, registerationService, Page) {
+MyApp.controller('RegisterController', ["$scope", "registerationService", "Page", function ($scope, registerationService, Page) {
     // Set page title
     var lang = getCookie('language');
     if (lang == 'en') {
@@ -236,38 +236,102 @@ MyApp.controller('RegisterController', function ($scope, registerationService, P
     $scope.mName = 'mName';
     $scope.lName = 'lName';
     $scope.lNameValidation = 'lNameValidation';
+    $scope.nameMinLength = 'NAME_MINLENGTH';
+    $scope.nameMaxLength = 'NAME_MAXLENGTH';
+    $scope.namePattern = 'NAME_PATTERN';
     $scope.userName = 'USER_NAME';
     $scope.userNameValidation = 'USER_NAME_VALIDATION';
     $scope.invalidUserName = "INVALID_USERNAME";
+    $scope.minLengthUsername = 'USERNAME_MINLENGTH';
+    $scope.maxLengthUsername = 'USERNAME_MAXLENGTH';
+    
     $scope.email = 'email';
     $scope.emailValidation = 'EMAIL_VALIDATION';
     $scope.emailIncorrect = 'EMAIL_INCORRECT';
     $scope.password = 'password';
     $scope.passwordValidation = 'passwordValidation';
     $scope.incorrectPassword = 'INCORRECT_PASSWORD';
+    $scope.minLengthPassword = 'PASSWORD_MINLENGTH';
+    $scope.maxLengthPassword = 'PASSWORD_MAXLENGTH';
     $scope.cPassword = 'cPassword';
     $scope.cPasswordValidation = 'cPasswordValidation';
     $scope.registerBtn = 'REGISTER_BUTTON';
-    // Regular expressions for Email, Username and Password
-    $scope.emailformat = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,4}$/;
-    $scope.userNamePatern = /^(?=.{8,30}$)(?![_.0-9])(?!.*[_.]{2})[a-zA-Z0-9._]+(?![_.])$/;
-    $scope.passwordformat = /((?=.*\d)(?=.*[a-z])+(?=.*[A-Z])(?=.*[@#$%!%=+]).{8,20})/;
+
+    // Regular expressions for Name, Email, Username and Password
+    $scope.emailformat = /^[a-z]+[a-z0-9._-]+@[a-z]+\.[a-z.]{2,4}$/;
+    //$scope.userNamePatern = /^[a-zA-Z][a-zA-Z0-9]*[._-]?[a-zA-Z0-9]+$/;
+    $scope.userNamePatern = /^(?![-_.0-9])(?!.*[_.-]{2})[a-zA-Z0-9._-]+(?![_.-])$/;
+    //$scope.userNamePatern = /^(?=.{3,20}$)(?![-_.0-9])(?!.*[_.-]{2})[a-zA-Z0-9._-]+(?![_.-])$/;
+    //$scope.passwordformat = /^[a-z0-9]/;
+    $scope.name = /^[a-zA-Z أاإ-ى]+$/;
+
+
     // Some variable used later
     $scope.submitted = false;
     $scope.message = '';
     $scope.isFormValid = false;
     $scope.validationSummary = false;
     $scope.registerSuccess = '';
+    $scope.pwflag = false;
+    $scope.validpw = false;
+    $scope.user = {
+        FirstName:'',
+        LastName: '',
+        MiddleName: '',
+        UserName: '',
+        Email: '',
+        Password: '',
+        ConfirmPassword:''
+    }
 
     //Check Form Validation
     $scope.$watch('RegisterForm.$valid', function (newValue) {
         $scope.isFormValid = newValue;
     });
+
+    $scope.checkpw = function () {
+        var str = $("#password").val();
+        $("#password").addClass("ng-invalid");
+        if (str.length < 1) {
+            $scope.pwfeedback = "";
+            $scope.pwflag = false;
+            $scope.validpw = false;
+        }
+        else if (str.length < 6) {
+            $scope.pwfeedback = "TOO_SHORT";
+            $scope.pwflag = true;
+            $scope.validpw = false;
+        } else if (str.length > 30) {
+            $scope.pwfeedback = "TOO_LONG";
+            $scope.pwflag = true;
+            $scope.validpw = false;
+        } else if (str.search(/\d/) == -1) {
+            $scope.pwfeedback = "NO_NUMBERS";
+            $scope.pwflag = true;
+            $scope.validpw = false;
+        } else if (str.search(/[a-zA-Zأاإ-ى]/) == -1) {
+            $scope.pwfeedback = "NO_LETTERS";
+            $scope.pwflag = true;
+            $scope.validpw = false;
+        } else if (str.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\+]/) != -1) {
+            $scope.pwfeedback = "BAD_CHAR";
+            $scope.pwflag = true;
+            $scope.validpw = false;
+        } else {
+            $scope.pwflag = false;
+            $scope.pwfeedback = '';
+            $("#password").removeClass("ng-invalid");
+            $("#password").addClass("ng-valid");
+            $scope.validpw = true;
+        }
+        
+    }
+
     // Register request function
     $scope.SaveData = function (user) {
         var lang = getCookie('language');
         if (lang == 'en') {
-            if ($scope.isFormValid) {
+            if ($scope.isFormValid && $scope.validpw) {
                 registerationService.saveFormData(user, lang).then(function (response) {
                     switch (response) {
                         case "Success":
@@ -284,11 +348,11 @@ MyApp.controller('RegisterController', function ($scope, registerationService, P
                             break;
                         case 'InvalidPassword':
                             $scope.validationSummary = true;
-                            $scope.message = "Password must be 8 characters at least includes numbers and one capital letter at least and special characters like (!, @, #, $, %, ^, &, ... etc)";
+                            $scope.message = "Password must be english characters and numbers";
                             break;
                         case "Error":
                             $scope.validationSummary = true;
-                            $scope.message = 'Error!';
+                            $scope.message = 'Error! An error while stablish connection with server, try again';
                             break;
                         default:
                             alertify.set('notifier', 'position', 'bottom-right');
@@ -300,7 +364,7 @@ MyApp.controller('RegisterController', function ($scope, registerationService, P
                 $scope.message = "Please fill all blanks.";
             }
         } else {
-            if ($scope.isFormValid) {
+            if ($scope.isFormValid && $scope.validpw) {
                 registerationService.saveFormData(user, lang).then(function (response) {
                     switch (response) {
                         case "Success":
@@ -317,11 +381,11 @@ MyApp.controller('RegisterController', function ($scope, registerationService, P
                             break;
                         case 'InvalidPassword':
                             $scope.validationSummary = true;
-                            $scope.message = "كلمة المرور لا تقل عن ثمانية احرف كبيره وصغيره من بينهم رقم واحد على الاقل ورموز مثل(@،#،$،%،!،_،-،=،+ ...)";
+                            $scope.message = "كلمة المرور يجب ان تكون حروف وارقام انجليزيه";
                             break;
                         case "Error":
                             $scope.validationSummary = true;
-                            $scope.message = 'خطأ!';
+                            $scope.message = 'خطأ هناك خطأ فى الاتصال بالسيرفر حاول مرة اخرى!';
                             break;
                         default:
                             alertify.set('notifier', 'position', 'bottom-left');
@@ -334,15 +398,15 @@ MyApp.controller('RegisterController', function ($scope, registerationService, P
             }
         }
     }
-});
+}]);
 // Forgot password controller
-MyApp.controller('ForgotpasswordController', ["$scope", "$http", "$compile", function ($scope, $http, $compile, Page) {
+MyApp.controller('ForgotpasswordController', ["$scope", "$http", "$compile", "Page", function ($scope, $http, $compile, Page) {
     // Set page title
     var lang = getCookie('language');
     if (lang == 'en') {
-        Page.setTitle('Forgot password')
+        Page.setTitle('Forgot password');
     } else {
-        Page.setTitle('نسيت كلمة المرور')
+        Page.setTitle('نسيت كلمة المرور');
     }
     // Translation
     $scope.officialSponsors = 'OFFICIAL_SPONSORS';
@@ -357,7 +421,7 @@ MyApp.controller('ForgotpasswordController', ["$scope", "$http", "$compile", fun
     $scope.emailIncorrect = 'EMAIL_INCORRECT';
     $scope.sendBtn = 'SEND_BTN';
     // Regular expression for Email
-    $scope.emailformat = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
+    $scope.emailformat = /^[a-z]+[a-z0-9._-]+@[a-z]+\.[a-z.]{2,4}$/;
     //Some variables used later
     $scope.clicked = false;
     $scope.emailSent = false;
@@ -462,6 +526,8 @@ MyApp.controller('ResetpasswordController', ["$scope", "$http", "$timeout", "Pag
     $scope.newPassword = 'NEW_PASSWORD';
     $scope.confirmNewPassword = 'CONFIRM_NEW_PASSWORD';
     $scope.passwordValidation = 'passwordValidation';
+    $scope.minLengthPassword = 'PASSWORD_MINLENGTH';
+    $scope.maxLengthPassword = 'PASSWORD_MAXLENGTH';
     $scope.email = 'email';
     $scope.emailValidation = 'EMAIL_VALIDATION';
     $scope.incorrectEmail = 'EMAIL_INCORRECT';
@@ -477,8 +543,8 @@ MyApp.controller('ResetpasswordController', ["$scope", "$http", "$timeout", "Pag
     $scope.isFormValid = false;
     $scope.validationSummary = false;
     // Regular expressions for Email and Password
-    $scope.emailformat = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
-    $scope.passwordformat = /((?=.*\d)(?=.*[a-z])+(?=.*[A-Z])(?=.*[@#$%!%=+]).{8,20})/;
+    $scope.emailformat = /^[a-z]+[a-z0-9._-]+@[a-z]+\.[a-z.]{2,4}$/;
+    $scope.passwordformat = /^[a-zA-Z]+[0-9]/;
     // Check form validation
     $scope.$watch('ResetPasswordForm.$valid', function (newValue) {
         $scope.isFormValid = newValue;
@@ -553,7 +619,7 @@ MyApp.controller('ResetpasswordController', ["$scope", "$http", "$timeout", "Pag
     }
 }]);
 // User profile controller
-MyApp.controller('ProfileController', function ($scope, Page, $http) {
+MyApp.controller('ProfileController',["$scope","Page","$http", function ($scope, Page, $http) {
     // Set page title
     var lang = getCookie('language');
     var Name = getCookie('FullName');
@@ -569,12 +635,17 @@ MyApp.controller('ProfileController', function ($scope, Page, $http) {
     $scope.mName = 'mName';
     $scope.lName = 'lName';
     $scope.lNameValidation = 'lNameValidation';
+    $scope.nameMinLength = 'NAME_MINLENGTH';
+    $scope.nameMaxLength = 'NAME_MAXLENGTH';
+    $scope.namePattern = 'NAME_PATTERN';
     $scope.userName = 'USER_NAME';
     $scope.changePass = 'CHANGE_PASSWORD';
     $scope.oldPassword = 'OLD_PASSWORD'
     $scope.newPassword = 'NEW_PASSWORD';
     $scope.confirmNewPassword = 'CONFIRM_NEW_PASSWORD';
     $scope.passwordIncorrect = 'INCORRECT_PASSWORD';
+    $scope.minLengthPassword = 'PASSWORD_MINLENGTH';
+    $scope.maxLengthPassword = 'PASSWORD_MAXLENGTH';
     $scope.edit = 'EDIT';
     $scope.save = 'SAVE';
     $scope.cancel = 'CANCEL';
@@ -584,7 +655,8 @@ MyApp.controller('ProfileController', function ($scope, Page, $http) {
     $scope.passwordChangedMessage = 'PASSWORD_CHANGED';
     $scope.passwordNotMatched = 'PASSWORD_NOT_MATCHED';
     // Regular expression for password
-    $scope.passwordformat = /((?=.*\d)(?=.*[a-z])+(?=.*[A-Z])(?=.*[@#$%!%=+]).{8,20})/;
+    $scope.passwordformat = /^[a-zA-Z]+[0-9]/;
+    $scope.name = /^[a-zA-Z أاإ-ى]+$/;
     // Some variables that will be used later
     $scope.PasswordChanged = false;
     $scope.UserData = '';
@@ -745,7 +817,7 @@ MyApp.controller('ProfileController', function ($scope, Page, $http) {
 
         }
     }
-})
+}])
 // Compare to directive for confirm password field
 MyApp.directive("compareTo", function () {
     return {

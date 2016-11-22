@@ -1,7 +1,7 @@
 ﻿/// <reference path="../anonymousApp.js" />
 
 // Regestraion service
-MyApp.factory("registerationService", function ($http, $q) {
+MyApp.factory("registerationService", ["$http","$q", function ($http, $q) {
     var fac = {};
     fac.saveFormData = function (data, lang) {
         var defer = $q.defer();
@@ -19,4 +19,4 @@ MyApp.factory("registerationService", function ($http, $q) {
         return defer.promise;
     }
     return fac;
-})
+}])

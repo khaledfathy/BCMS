@@ -756,6 +756,12 @@ border-radius: 4px 4px 4px;
     max-width: 100%;
 }
 
+.iframe-svg{
+    border:0px; 
+    height:300px; 
+    width:260px;
+}
+
 
 
 
@@ -1955,3 +1961,12 @@ table.TimeWorld td.Night, table.TimeWorld th.Night, td.Night, th.Night
              margin-top:10px;
 
     }
+
+
+
+
+    /*Foundation*/
+    .column, .columns {
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+}

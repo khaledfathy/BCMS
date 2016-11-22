@@ -405,7 +405,6 @@
   <ItemGroup>
     <Content Include="Angular\Account\accountController.js" />
     <Content Include="Angular\Account\accountService.js" />
-    <Content Include="Angular\Account\ChangePassword.html" />
     <Content Include="Angular\Account\ForgotPassword.html" />
     <Content Include="Angular\Account\Login.html" />
     <Content Include="Angular\Account\Profile.html" />
@@ -427,6 +426,9 @@
     <Content Include="Areas\Exams\content\Images\banner.jpg" />
     <Content Include="Areas\Exams\content\Images\LogoTop.png" />
     <Content Include="Areas\Exams\content\jquery-ui.min.css" />
+    <Content Include="Materials\Ar\css\alerts\normalize.css" />
+    <Content Include="Materials\En\css\alerts\normalize.css" />
+    <Content Include="Materials\UTMS\css\borsagraphicspobup.css" />
     <Content Include="Scripts\exporting.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery.countdown.counter.js" />
@@ -1450,7 +1452,6 @@
     <Content Include="Materials\Ar\css\_MainStyle.css" />
     <Content Include="Materials\Ar\flash\intro.swf" />
     <Content Include="Materials\Ar\flash\Scripts\expressInstall.swf" />
-    <Content Include="Materials\Ar\flash\Scripts\swfobject_modified.js" />
     <Content Include="Materials\Ar\Images\About.jpg" />
     <Content Include="Materials\Ar\Images\apppic.png" />
     <Content Include="Materials\Ar\Images\arrow-down.png" />
@@ -2743,6 +2744,7 @@
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\Note_this_400.font.js" />
     <Content Include="Scripts\responsive-tables.js" />
+    <Content Include="Scripts\responsiveslides.js" />
     <Content Include="Scripts\responsiveslides.min.js" />
     <Content Include="Scripts\solid-gauge.src.js" />
     <Content Include="Scripts\errors.json" />

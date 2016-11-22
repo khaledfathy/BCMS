@@ -278,7 +278,7 @@ MyApp.controller('RelaxingController', ["$scope", "$http", "Page", function ($sc
     $scope.silverSponsor = 'SILVER_SPONSOR';
 }]);
 
-MyApp.controller('PageNotFoundController', function ($scope, Page) {
+MyApp.controller('PageNotFoundController',["$scope","Page", function ($scope, Page) {
     var lang = getCookie('language');
     if (lang == 'en') {
         Page.setTitle('Page not found');
@@ -292,7 +292,7 @@ MyApp.controller('PageNotFoundController', function ($scope, Page) {
     } else {
         $scope.content = "عذراً ولكن الصفحة التى تبحث عنها غير موجودة";
     }
-})
+}])
 
 // Set page title service
 MyApp.factory('Page', function () {
@@ -309,9 +309,9 @@ MyApp.factory('Page', function () {
     };
 });
 // Set page title controller
-MyApp.controller('TitleController', function ($scope, Page) {
+MyApp.controller('TitleController',["$scope","Page", function ($scope, Page) {
     $scope.Page = Page;
-})
+}])
 
 
 

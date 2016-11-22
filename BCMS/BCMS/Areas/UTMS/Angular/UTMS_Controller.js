@@ -113,7 +113,7 @@ App.controller('BorsaCloudController', ["$scope", "$http","Page", function ($sco
 
 }]);
 
-App.controller('MarketCasterController', function ($scope, $http, Page) {
+App.controller('MarketCasterController',["$scope","$http","Page", function ($scope, $http, Page) {
     Page.setTitle('ماركت كاستر');
     $(".row").hide();
     // last market caster
@@ -239,9 +239,9 @@ App.controller('MarketCasterController', function ($scope, $http, Page) {
         //empty new array
         marketablenew = [];
     });
-});
+}]);
 
-App.controller('StockUpController', function ($scope,Page) {
+App.controller('StockUpController',["$scope","Page", function ($scope,Page) {
     Page.setTitle('الملخص اليومى');
     // First tabs
     $scope.gotoAnchor = function (id) {
@@ -262,7 +262,7 @@ App.controller('StockUpController', function ($scope,Page) {
         $("#" + id + "").addClass("active");
         $("#li" + id + "").addClass("active");
     }
-});
+}]);
 
 App.controller('BorsaGraphicsController', ["$scope", "$http", "$sce","Page", function ($scope, $http, $sce,Page) {
     Page.setTitle('بورصة جرافيكس');
@@ -347,7 +347,7 @@ App.controller('BorsaGraphicsController', ["$scope", "$http", "$sce","Page", fun
 
 }]);
 
-App.controller('BC-CounterController', function ($scope, $http, Page) {
+App.controller('BC-CounterController',["$scope","$http","Page", function ($scope, $http, Page) {
     Page.setTitle('عدادات بورصة كابيتال');
 
     $(".RegisterWrapper").hide();
@@ -1007,9 +1007,9 @@ App.controller('BC-CounterController', function ($scope, $http, Page) {
         }
     });
     });
-});
+}]);
 
-App.controller('BcIndicatorsController', function ($scope,Page) {
+App.controller('BcIndicatorsController',["$scope","Page", function ($scope,Page) {
     Page.setTitle('مؤشرات بورصة كابيتال');
     // Display selected tab
     $scope.gotoAnchor = function (id) {
@@ -1020,7 +1020,7 @@ App.controller('BcIndicatorsController', function ($scope,Page) {
         $("#" + id + "").addClass("active");
         $("#tab" + id + "").addClass("active");
     };
-});
+}]);
 
 App.controller('PetrochemicalsController', ["$scope", "$http", "Page", function ($scope, $http, Page) {
     Page.setTitle('صفحة البتروكيماويات');
@@ -1064,7 +1064,7 @@ App.controller('KnowledgeController', ["$scope", "$http","Page", function ($scop
 
 }]);
 
-App.controller('CompaniesMapController', function ($scope,Page) {
+App.controller('CompaniesMapController',["$scope","Page", function ($scope,Page) {
     Page.setTitle('خارطة الشركات');
     $scope.map = { center: { latitude: 24.3269853, longitude: 45.0858763 }, zoom: 6 };
 
@@ -1072,5 +1072,5 @@ App.controller('CompaniesMapController', function ($scope,Page) {
         { 'latitude': 24.4564278, 'longitude': 39.6433692, 'message': 'dd' },
         { 'latitude': 24.797819, 'longitude': 46.722355, 'message': 'ee' }
     ];
-});
+}]);
 

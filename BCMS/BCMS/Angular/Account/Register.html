@@ -33,40 +33,73 @@
 
                 <form name="RegisterForm" ng-submit="SaveData(user)" method="post" novalidate ng-show="!submitted">
 
-                    <div class="">
+                    <div>
                         <div class="large-8 columns">
                             <div class="large-2 columns">
                                 <label class="form-control" for="fName">{{fullName | translate}}</label>
                             </div>
                             <div class="large-3 columns">
-                                <input type="text" ng-model="user.FirstName" name="fName" placeholder="{{fName | translate}}" ng-class="submitted?'ng-dirty':''" required autofocus />
+                                <input type="text" ng-model="user.FirstName" name="fName" 
+                                       ng-pattern="name"
+                                       placeholder="{{fName | translate}}" 
+                                       ng-class="submitted?'ng-dirty':''" 
+                                       ng-minlength="2"
+                                       ng-maxlength="15"
+                                       required autofocus />
+                                <span class="error" ng-show="RegisterForm.fName.$error.pattern">{{namePattern | translate}}</span>
+                                <span class="error" ng-show="RegisterForm.fName.$error.minlength">{{nameMinLength | translate}}</span>
+                                <span class="error" ng-show="RegisterForm.fName.$error.maxlength">{{nameMaxLength | translate}}</span>
                                 <span class="error" ng-show="(RegisterForm.fName.$dirty || submitted) && RegisterForm.fName.$error.required">{{fNameValidation | translate}}</span>
                             </div>
                             <div class="large-3 columns">
-                                <input type="text" ng-model="user.MiddleName" name="mName" placeholder="{{mName | translate}}" />
+                                <input type="text" ng-model="user.MiddleName" name="mName" 
+                                       placeholder="{{mName | translate}}"
+                                       ng-pattern="name"
+                                       ng-minlength="2"
+                                       ng-maxlength="15" />
+                                <span class="error" ng-show="RegisterForm.mName.$error.pattern">{{namePattern | translate}}</span>
+                                <span class="error" ng-show="RegisterForm.mName.$error.minlength">{{nameMinLength | translate}}</span>
+                                <span class="error" ng-show="RegisterForm.mName.$error.maxlength">{{nameMaxLength | translate}}</span>
                             </div>
                             <div class="large-3 columns">
-                                <input type="text" name="lName" ng-model="user.LastName" placeholder="{{lName | translate}}" ng-class="submitted?'ng-dirty':''" required autofocus />
+                                <input type="text" name="lName" ng-model="user.LastName" 
+                                       placeholder="{{lName | translate}}" 
+                                       ng-pattern="name"
+                                       ng-class="submitted?'ng-dirty':''" 
+                                       ng-minlength="2"
+                                       ng-maxlength="15"
+                                       required autofocus />
+                                <span class="error" ng-show="RegisterForm.lName.$error.pattern">{{namePattern | translate}}</span>
+                                <span class="error" ng-show="RegisterForm.lName.$error.minlength">{{nameMinLength | translate}}</span>
+                                <span class="error" ng-show="RegisterForm.lName.$error.maxlength">{{nameMaxLength | translate}}</span>
                                 <span class="error" ng-show="(RegisterForm.lName.$dirty || submitted) && RegisterForm.lName.$error.required">{{lNameValidation | translate}}</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="">
+                    <div>
                         <div class="large-8 columns">
                             <div class="large-2 columns">
                                 <label for="userName" class="control-label">{{userName | translate}}</label>
-
                             </div>
                             <div class="large-9 columns">
-                                <input type="text" ng-model="user.UserName" name="userName" ng-pattern="userNamePatern" placeholder="{{userName | translate}}" required />
+                                <input type="text"
+                                       ng-model="user.UserName"
+                                       name="userName"
+                                       ng-pattern="userNamePatern"
+                                       ng-maxlength="20"
+                                       ng-minlength="3"
+                                       placeholder="{{userName | translate}}"
+                                       required />
                                 <span class="error" ng-show="(RegisterForm.userName.$dirty || submitted) && RegisterForm.userName.$error.required">{{userNameValidation | translate}}</span>
                                 <span class="error" ng-show="RegisterForm.userName.$error.pattern">{{invalidUserName | translate}}</span>
+                                <span class="error" ng-show="RegisterForm.userName.$error.minlength">{{minLengthUsername | translate}}</span>
+                                <span class="error" ng-show="RegisterForm.userName.$error.maxlength">{{maxLengthUsername | translate}}</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="">
+                    <div>
                         <div class="large-8 columns">
                             <div class="large-2 columns">
                                 <label for="email" class="control-label">{{email | translate}}</label>
@@ -75,26 +108,32 @@
                                 <input type="email" name="email" ng-model="user.Email" ng-pattern="emailformat" placeholder="{{email | translate}}" ng-class="submitted?'ng-dirty':''" required autofocus />
                                 <span class="error" ng-show="(RegisterForm.email.$dirty || submitted) && RegisterForm.email.$error.required">{{emailValidation | translate}}</span>
                                 <span class="error" ng-show="RegisterForm.email.$error.pattern">{{emailIncorrect | translate}}</span>
-
                             </div>
                         </div>
                     </div>
 
-                    <div class="">
+                    <div>
                         <div class="large-8 columns">
                             <div class="large-2 columns">
                                 <label for="password" class="control-label">{{password | translate}}</label>
                             </div>
                             <div class="large-9 columns">
-                                <input type="password" name="password" ng-model="user.Password" ng-pattern="passwordformat" placeholder="{{password | translate}}" ng-class="submitted?'ng-dirty':''" required autofocus />
+                                <input type="password" name="password" ng-model="user.Password" id="password"
+                                       placeholder="{{password | translate}}"
+                                       ng-keyup="checkpw()"
+                                       ng-class="submitted?'ng-dirty':''"
+                                       ng-minlength="6"
+                                       ng-maxlength="30"
+                                       required autofocus />
                                 <span class="error" ng-show="(RegisterForm.password.$dirty || submitted) && RegisterForm.password.$error.required">{{passwordValidation | translate}}</span>
-                                <span class="error" ng-show="RegisterForm.password.$error.pattern">{{incorrectPassword | translate}}</span>
-
+                                <!--<span class="error" ng-show="RegisterForm.password.$error.minlength">{{minLengthPassword | translate}}</span>
+                                <span class="error" ng-show="RegisterForm.password.$error.maxlength">{{maxLengthPassword | translate}}</span>-->
+                                <span class="error" ng-show="pwflag">{{pwfeedback | translate}}</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="">
+                    <div>
                         <div class="large-8 columns">
                             <div class="large-2 columns ">
                                 <label for="cPassword" class="control-label">{{cPassword | translate}}</label>
@@ -106,7 +145,7 @@
                         </div>
                     </div>
 
-                    <div class="">
+                    <div>
                         <div class="large-8 columns">
                             <div class="large-2 columns">&nbsp;</div>
                             <div class="large-9 columns">
@@ -115,13 +154,13 @@
                         </div>
                     </div>
 
-                    <div class="">
+                    <div>
                         <div class="large-8 columns">
                             <div class="large-2 columns">&nbsp;</div>
                             <div class="large-9 columns">
                                 <!--<span ng-show="!submitted && RegisterForm.fName.$valid && RegisterForm.lName.$valid && RegisterForm.userName.$valid && RegisterForm.email.$valid && RegisterForm.password.$valid && RegisterForm.cPassword.$valid" class="error">{{message}}</span>-->
                                 <span class="error" ng-show="validationSummary">{{message}}</span>
-                                
+
                             </div>
                         </div>
                     </div>

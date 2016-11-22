@@ -64,34 +64,38 @@ namespace BCMS.Models
 
     public class RegisterViewModel
     {
-      
         [MinLength(2, ErrorMessage = "يجب ان يكون الاسم مكون من حرفان على الاقل")]
+        [MaxLength(15)]
         [Required(ErrorMessage = "ادخل الاسم الاول")]
+        [RegularExpression(@"^[a-zA-Z أاإ-ى]+$")]
         [Display(Name = "الاسم الاول")]
         public string FirstName { get; set; }
 
+        [MinLength(2, ErrorMessage = "يجب ان يكون الاسم مكون من حرفان على الاقل")]
+        [MaxLength(15)]
         [Display(Name = "اسم الاب")]
+        [RegularExpression(@"^[a-zA-Z أاإ-ى]+$")]
         public string MiddleName { get; set; }
 
         [MinLength(2, ErrorMessage = "يجب ان يكون الاسم مكون من حرفان على الاقل")]
+        [MaxLength(15)]
         [Required(ErrorMessage = "ادخل اسم العائلة")]
         [Display(Name = "اسم العائلة")]
+        [RegularExpression(@"^[a-zA-Z أاإ-ى]+$")]
         public string LastName { get; set; }
 
         [Display(Name = "إسم المستخدم")]
         [Required(ErrorMessage = "ادخل إسم المستخدم")]
-        [RegularExpression(@"^(?=.{8,30}$)(?![_.0-9])(?!.*[_.]{2})[a-zA-Z0-9._]+(?![_.])$", ErrorMessage = "UserName is invalid")]
+        [RegularExpression(@"^(?=.{3,20}$)(?![-_.0-9])(?!.*[_.-]{2})[a-zA-Z0-9._-]+(?![_.-])$", ErrorMessage = "UserName is invalid")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "ادخل البريد الالكترونى")]
-        [RegularExpression(@"^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]{2,4}$", ErrorMessage = "البريد الالكترونى غير صحيح")]
         [EmailAddress]
         [Display(Name = "البريد الالكترونى")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "ادخل كلمة المرور")]
         [Display(Name = "كلمة المرور")]
-        [RegularExpression(@"((?=.*\d)(?=.*[a-z])+(?=.*[A-Z])(?=.*[@#$%!%=+]).{8,20})", ErrorMessage = "كلمة المرور لا تقل عن 8 احرف كبيره وصغيره من بينهم رقم واحد على الاقل واحرف خاصة مثل'@،#،$،%،!،_،-،=،+ ...'واحد على الاقل")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
@@ -112,7 +116,7 @@ namespace BCMS.Models
         public string Email { get; set; }
 
         [Required]
-        [RegularExpression(@"((?=.*\d)(?=.*[a-z])+(?=.*[A-Z])(?=.*[@#$%!%=+]).{8,20})", ErrorMessage = "كلمة المرور لا تقل عن 8 احرف كبيره وصغيره من بينهم رقم واحد على الاقل واحرف خاصة مثل'@،#،$،%،!،_،-،=،+ ...'واحد على الاقل")]
+        //[RegularExpression(@"((?=.*\d)(?=.*[a-z])+(?=.*[A-Z])(?=.*[@#$%!%=+]).{8,20})", ErrorMessage = "كلمة المرور لا تقل عن 8 احرف كبيره وصغيره من بينهم رقم واحد على الاقل واحرف خاصة مثل'@،#،$،%،!،_،-،=،+ ...'واحد على الاقل")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

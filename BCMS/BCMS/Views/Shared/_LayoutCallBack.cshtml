@@ -20,15 +20,19 @@
         if (lang == "en")
         {
             @Styles.Render("~/bundles/BCMS/style/en")
+            @Styles.Render("~/bundles/MainStyle/en")
         }
         else
         {
             @Styles.Render("~/bundles/BCMS/style/ar")
+            @Styles.Render("~/bundles/MainStyle/ar")
         }
     }
     else
     {
         @Styles.Render("~/bundles/BCMS/style/ar")
+        @Styles.Render("~/bundles/MainStyle/ar")
+
     }
     @Scripts.Render("~/bundles/BCMS/script")
     <script src="~/signalr/Hubs"></script>

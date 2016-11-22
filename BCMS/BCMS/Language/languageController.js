@@ -3,7 +3,7 @@
 
 
 // Language controller
-MyApp.controller("languageController", function ($scope, $translate, $cookies) {
+MyApp.controller("languageController",["$scope","$translate","$cookies", function ($scope, $translate, $cookies) {
     var lang = $cookies.get('language');
     if (lang == 'en') {
         $scope.arabic = false;
@@ -16,4 +16,4 @@ MyApp.controller("languageController", function ($scope, $translate, $cookies) {
         $cookies.put('language', langKey, { path: "/" });
         location.reload();
     }
-});
+}]);

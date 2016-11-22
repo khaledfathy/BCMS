@@ -69,63 +69,64 @@ App.config(['$routeProvider', "cfpLoadingBarProvider", function ($routeProvider,
 
 }]);
 
-App.controller('MetaStockController', function ($scope,Page) {
+App.controller('MetaStockController',["$scope","Page", function ($scope,Page) {
     Page.setTitle('Meta Stock');
-});
+}]);
 
-App.controller('BorsaBreakController', function ($scope, Page) {
+App.controller('BorsaBreakController', ["$scope", "Page", function ($scope, Page) {
     Page.setTitle('استراحة | بورصة كابيتال');
-});
+}]);
 
-App.controller('MarketNewsController', function ($scope, Page) {
+App.controller('MarketNewsController', ["$scope", "Page", function ($scope, Page) {
     Page.setTitle('أخبار السوق | بورصة كابيتال');
-});
+}]);
 
-App.controller('TelevisionController', function ($scope, Page) {
+App.controller('TelevisionController', ["$scope", "Page", function ($scope, Page) {
     Page.setTitle('تلفزيون | بورصة كابيتال');
-});
+}]);
 
-App.controller('MagazinesController', function ($scope, Page) {
+App.controller('MagazinesController', ["$scope", "Page", function ($scope, Page) {
     Page.setTitle('مـجـلات | بورصة كابيتال');
-});
+}]);
 
-App.controller('InvestmentsController', function ($scope, Page) {
+
+App.controller('InvestmentsController', ["$scope", "Page", function ($scope, Page) {
     Page.setTitle('استثمارك فى سطر');
-});
+}]);
 
-App.controller('CompanyCardController', function ($scope, Page) {
+App.controller('CompanyCardController', ["$scope", "Page", function ($scope, Page) {
     Page.setTitle('كروت الشركات');
-});
+}]);
 
-App.controller('TradingTimeController', function ($scope, Page) {
+App.controller('TradingTimeController', ["$scope", "Page", function ($scope, Page) {
     Page.setTitle('أوقات التداول');
-});
+}]);
 
-App.controller('BorsaMarketController', function ($scope, Page) {
+App.controller('BorsaMarketController', ["$scope", "Page", function ($scope, Page) {
     Page.setTitle('سوق الأسهم');
-});
+}]);
 
-App.controller('GovernmentAgenciesController', function ($scope, Page) {
+App.controller('GovernmentAgenciesController', ["$scope", "Page", function ($scope, Page) {
     Page.setTitle('الجهات الحكومية');
-});
+}]);
 
-App.controller('MediaController', function ($scope, Page) {
+App.controller('MediaController', ["$scope", "Page", function ($scope, Page) {
     Page.setTitle('الإعــلام');
-});
+}]);
 
-App.controller('MediationCompaniesController', function ($scope, Page) {
+App.controller('MediationCompaniesController', ["$scope", "Page", function ($scope, Page) {
     Page.setTitle('شركات الوساطة');
-});
+}]);
 
-App.controller('OtherEconomicsSourcesController', function ($scope, Page) {
+App.controller('OtherEconomicsSourcesController', ["$scope", "Page", function ($scope, Page) {
     Page.setTitle('مصادر إقتصادية اخرى');
-});
+}]);
 
-App.controller('RegulatorsController', function ($scope, Page) {
+App.controller('RegulatorsController', ["$scope", "Page", function ($scope, Page) {
     Page.setTitle('الجهات الرقابية');
-});
+}]);
 
-App.controller('PageNotFoundController', function ($scope, Page) {
+App.controller('PageNotFoundController', ["$scope", "Page", function ($scope, Page) {
     Page.setTitle('صفحة غير موجوده');
     $scope.content = null;
     var lang = getCookie('language');
@@ -134,7 +135,9 @@ App.controller('PageNotFoundController', function ($scope, Page) {
     } else {
         $scope.content = "عذراً ولكن الصفحة التى تبحث عنها غير موجودة";
     }
-});
+}]);
+
+
 // Set page title service
 App.factory('Page', function () {
     var title = 'بورصة كابيتال | UTMS';
@@ -144,8 +147,8 @@ App.factory('Page', function () {
     };
 });
 
-App.controller('TitleController', function ($scope, Page) {
+App.controller('TitleController',["$scope","Page", function ($scope, Page) {
     $scope.Page = Page;
-})
+}])
 
 

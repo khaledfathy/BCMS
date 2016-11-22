@@ -125,6 +125,7 @@ namespace BCMS.Controllers
         {
             try
             {
+                model.Password += "@Aa";
                 var user = await UserManager.FindByEmailAsync(model.Email);
                 if(user==null)
                     user = await UserManager.FindByNameAsync(model.Email);
@@ -169,6 +170,7 @@ namespace BCMS.Controllers
             try
             {
                 string message = "";
+                model.Password += "@Aa";
                 if (ModelState.IsValid)
                 {
                     var user = new ApplicationUser
@@ -423,6 +425,7 @@ namespace BCMS.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    model.Password += "@Aa";
                     var user = await UserManager.FindByNameAsync(model.Email);
                     if (user == null)
                     {

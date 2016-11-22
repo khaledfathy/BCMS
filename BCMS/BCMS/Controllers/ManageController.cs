@@ -91,6 +91,8 @@ namespace BCMS.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.OldPassword += "@Aa";
+                model.NewPassword += "@Aa";
                 var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
                 if (result.Succeeded)
                 {

@@ -20,7 +20,15 @@
                                 </div>
                                 <div class="large-9 columns">
                                     <label>
-                                        <input type="text" name="fname" id="firstname" ng-model="model.FirstName" placeholder="{{fName | translate}}" required />
+                                        <input type="text" name="fname" id="firstname" ng-model="model.FirstName" 
+                                               placeholder="{{fName | translate}}" 
+                                               ng-pattern="name"
+                                               ng-minlength="2"
+                                               ng-maxlength="15"
+                                               required autofocus />
+                                        <span class="error" ng-show="editnameform.fname.$error.pattern">{{namePattern | translate}}</span>
+                                        <span class="error" ng-show="editnameform.fname.$error.minlength">{{nameMinLength | translate}}</span>
+                                        <span class="error" ng-show="editnameform.fname.$error.maxlength">{{nameMaxLength | translate}}</span>
                                         <span class="error" ng-show="(editnameform.fname.$dirty || submitted) && editnameform.fname.$error.required">{{fNameValidation | translate}}</span>
                                     </label>
                                 </div>
@@ -31,7 +39,15 @@
                                 </div>
                                 <div class="large-9 columns">
                                     <label>
-                                        <input type="text" name="mname" id="middlename" ng-model="model.MiddleName" placeholder="{{mName | translate}}" />
+                                        <input type="text" name="mname" id="middlename" ng-model="model.MiddleName" 
+                                               placeholder="{{mName | translate}}"
+                                               ng-pattern="name"
+                                               ng-minlength="2"
+                                               ng-maxlength="15"
+                                               autofocus />
+                                        <span class="error" ng-show="editnameform.mname.$error.pattern">{{namePattern | translate}}</span>
+                                        <span class="error" ng-show="editnameform.mname.$error.minlength">{{nameMinLength | translate}}</span>
+                                        <span class="error" ng-show="editnameform.mname.$error.maxlength">{{nameMaxLength | translate}}</span>
                                     </label>
                                 </div>
                             </div>
@@ -41,7 +57,15 @@
                                 </div>
                                 <div class="large-9 columns">
                                     <label>
-                                        <input type="text" name="lname" id="lastname" ng-model="model.LastName" placeholder="{{lName | translate}}" required />
+                                        <input type="text" name="lname" id="lastname" ng-model="model.LastName" 
+                                               placeholder="{{lName | translate}}" 
+                                               ng-pattern="name"
+                                               ng-minlength="2"
+                                               ng-maxlength="15"
+                                               required autofocus />
+                                        <span class="error" ng-show="editnameform.lname.$error.pattern">{{namePattern | translate}}</span>
+                                        <span class="error" ng-show="editnameform.lname.$error.minlength">{{nameMinLength | translate}}</span>
+                                        <span class="error" ng-show="editnameform.lname.$error.maxlength">{{nameMaxLength | translate}}</span>
                                         <span class="error" ng-show="(editnameform.lname.$dirty || submitted) && editnameform.lname.$error.required">{{lNameValidation | translate}}</span>
                                     </label>
                                 </div>
@@ -98,9 +122,17 @@
                                 </div>
                                 <div class="large-9 columns">
                                     <label>
-                                        <input type="password" name="newPassword" ng-model="passmodel.NewPassword" ng-pattern="passwordformat" placeholder="{{newPassword | translate}}" ng-class="submitted?'ng-dirty':''" required autofocus />
+                                        <input type="password" name="newPassword" ng-model="passmodel.NewPassword" 
+                                               ng-pattern="passwordformat" 
+                                               placeholder="{{newPassword | translate}}" 
+                                               ng-class="submitted?'ng-dirty':''" 
+                                               ng-minlength="6"
+                                               ng-maxlength="30"
+                                               required autofocus />
                                         <span class="error" ng-show="(clicked || ChangePasswordForm.newPassword.$dirty ) && ChangePasswordForm.newPassword.$error.required">{{newPasswordValidation | translate}}</span>
                                         <span class="error" ng-show="ChangePasswordForm.newPassword.$error.pattern">{{passwordIncorrect | translate}}</span>
+                                        <span class="error" ng-show="ChangePasswordForm.newPassword.$error.minlength">{{minLengthPassword | translate}}</span>
+                                        <span class="error" ng-show="ChangePasswordForm.newPassword.$error.maxlength">{{maxLengthPassword | translate}}</span>
                                     </label>
                                 </div>
                             </div>

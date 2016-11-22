@@ -5,7 +5,7 @@
 
 
 // Layout Header Controller
-langApp.controller("headerController", function ($scope, $timeout) {
+langApp.controller("headerController",["$scope","$timeout", function ($scope, $timeout) {
     $scope.login = 'login';
     $scope.logout = 'logout';
     $scope.register = 'register';
@@ -27,10 +27,10 @@ langApp.controller("headerController", function ($scope, $timeout) {
     $scope.contactus = 'contactus';
     // Call datetime function
     dateTime('time');
-});
+}]);
 
 // Layout Footer Controller
-langApp.controller('footerController', function ($scope) {
+langApp.controller('footerController',["$scope", function ($scope) {
     $scope.bc = 'bc';
     $scope.bcWord = 'bcWord';
     $scope.aboutKSA = 'aboutKSA';
@@ -61,7 +61,7 @@ langApp.controller('footerController', function ($scope) {
     $scope.videos = 'relaxingVideos';
     $scope.siteMap = 'siteMap';
     $scope.copyRights = 'copyRights';
-});
+}]);
 
 // Current Date and Time function
 function dateTime(id) {
