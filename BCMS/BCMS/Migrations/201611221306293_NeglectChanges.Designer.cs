@@ -7,13 +7,13 @@ namespace BCMS.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class sessionId : IMigrationMetadata
+    public sealed partial class NeglectChanges : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(sessionId));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(NeglectChanges));
         
         string IMigrationMetadata.Id
         {
-            get { return "201610261222572_sessionId"; }
+            get { return "201611221306293_NeglectChanges"; }
         }
         
         string IMigrationMetadata.Source

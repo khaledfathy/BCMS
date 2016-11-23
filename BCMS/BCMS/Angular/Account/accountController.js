@@ -265,7 +265,6 @@ MyApp.controller('RegisterController', ["$scope", "registerationService", "Page"
     //$scope.passwordformat = /^[a-z0-9]/;
     $scope.name = /^[a-zA-Z أاإ-ى]+$/;
 
-
     // Some variable used later
     $scope.submitted = false;
     $scope.message = '';
@@ -274,21 +273,13 @@ MyApp.controller('RegisterController', ["$scope", "registerationService", "Page"
     $scope.registerSuccess = '';
     $scope.pwflag = false;
     $scope.validpw = false;
-    $scope.user = {
-        FirstName:'',
-        LastName: '',
-        MiddleName: '',
-        UserName: '',
-        Email: '',
-        Password: '',
-        ConfirmPassword:''
-    }
 
     //Check Form Validation
     $scope.$watch('RegisterForm.$valid', function (newValue) {
         $scope.isFormValid = newValue;
     });
 
+    //Check password validation
     $scope.checkpw = function () {
         var str = $("#password").val();
         $("#password").addClass("ng-invalid");
@@ -296,12 +287,11 @@ MyApp.controller('RegisterController', ["$scope", "registerationService", "Page"
             $scope.pwfeedback = "";
             $scope.pwflag = false;
             $scope.validpw = false;
-        }
-        else if (str.length < 6) {
+        } else if (str.length < 6) {
             $scope.pwfeedback = "TOO_SHORT";
             $scope.pwflag = true;
             $scope.validpw = false;
-        } else if (str.length > 30) {
+        } else if (str.length > 50) {
             $scope.pwfeedback = "TOO_LONG";
             $scope.pwflag = true;
             $scope.validpw = false;
@@ -313,7 +303,7 @@ MyApp.controller('RegisterController', ["$scope", "registerationService", "Page"
             $scope.pwfeedback = "NO_LETTERS";
             $scope.pwflag = true;
             $scope.validpw = false;
-        } else if (str.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\+]/) != -1) {
+        } else if (str.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\ \+]/) != -1) {
             $scope.pwfeedback = "BAD_CHAR";
             $scope.pwflag = true;
             $scope.validpw = false;
@@ -544,11 +534,49 @@ MyApp.controller('ResetpasswordController', ["$scope", "$http", "$timeout", "Pag
     $scope.validationSummary = false;
     // Regular expressions for Email and Password
     $scope.emailformat = /^[a-z]+[a-z0-9._-]+@[a-z]+\.[a-z.]{2,4}$/;
-    $scope.passwordformat = /^[a-zA-Z]+[0-9]/;
+    //$scope.passwordformat = /^[a-zA-Z]+[0-9]/;
     // Check form validation
     $scope.$watch('ResetPasswordForm.$valid', function (newValue) {
         $scope.isFormValid = newValue;
     });
+
+    //Check password validation
+    $scope.checkpw = function () {
+        var str = $("#password").val();
+        $("#password").addClass("ng-invalid");
+        if (str.length < 1) {
+            $scope.pwfeedback = "";
+            $scope.pwflag = false;
+            $scope.validpw = false;
+        } else if (str.length < 6) {
+            $scope.pwfeedback = "TOO_SHORT";
+            $scope.pwflag = true;
+            $scope.validpw = false;
+        } else if (str.length > 50) {
+            $scope.pwfeedback = "TOO_LONG";
+            $scope.pwflag = true;
+            $scope.validpw = false;
+        } else if (str.search(/\d/) == -1) {
+            $scope.pwfeedback = "NO_NUMBERS";
+            $scope.pwflag = true;
+            $scope.validpw = false;
+        } else if (str.search(/[a-zA-Zأاإ-ى]/) == -1) {
+            $scope.pwfeedback = "NO_LETTERS";
+            $scope.pwflag = true;
+            $scope.validpw = false;
+        } else if (str.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\ \+]/) != -1) {
+            $scope.pwfeedback = "BAD_CHAR";
+            $scope.pwflag = true;
+            $scope.validpw = false;
+        } else {
+            $scope.pwflag = false;
+            $scope.pwfeedback = '';
+            $("#password").removeClass("ng-invalid");
+            $("#password").addClass("ng-valid");
+            $scope.validpw = true;
+        }
+    }
+
     // Reset password request function
     $scope.Send = function (user) {
         var lang = getCookie('language');
@@ -558,6 +586,7 @@ MyApp.controller('ResetpasswordController', ["$scope", "$http", "$timeout", "Pag
                 $http.post("/Account/ResetPassword", user).success(function (data) {
                     switch (data) {
                         case 'InvalidUser':
+                            $scope.validationSummary = true;
                             $scope.message = 'Invalid email address please re-enter your email';
                             break;
                         case 'Success':
@@ -589,6 +618,7 @@ MyApp.controller('ResetpasswordController', ["$scope", "$http", "$timeout", "Pag
                 $http.post("/Account/ResetPassword", this.user).success(function (data) {
                     switch (data) {
                         case 'InvalidUser':
+                            $scope.validationSummary = true;
                             $scope.message = 'البريد الالكترونى غير مدون فى سجلاتنا اذا كنت مستخدم جديد برجاء التسجيل اولا';
                             break;
                         case 'Success':
@@ -685,6 +715,42 @@ MyApp.controller('ProfileController',["$scope","Page","$http", function ($scope,
     $scope.$watch('ChangePasswordForm.$valid', function (newValue) {
         $scope.isChangePassFormValid = newValue;
     })
+    //Check password validation
+    $scope.checkpw = function () {
+        var str = $("#password").val();
+        $("#password").addClass("ng-invalid");
+        if (str.length < 1) {
+            $scope.pwfeedback = "";
+            $scope.pwflag = false;
+            $scope.validpw = false;
+        } else if (str.length < 6) {
+            $scope.pwfeedback = "TOO_SHORT";
+            $scope.pwflag = true;
+            $scope.validpw = false;
+        } else if (str.length > 50) {
+            $scope.pwfeedback = "TOO_LONG";
+            $scope.pwflag = true;
+            $scope.validpw = false;
+        } else if (str.search(/\d/) == -1) {
+            $scope.pwfeedback = "NO_NUMBERS";
+            $scope.pwflag = true;
+            $scope.validpw = false;
+        } else if (str.search(/[a-zA-Zأاإ-ى]/) == -1) {
+            $scope.pwfeedback = "NO_LETTERS";
+            $scope.pwflag = true;
+            $scope.validpw = false;
+        } else if (str.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\ \+]/) != -1) {
+            $scope.pwfeedback = "BAD_CHAR";
+            $scope.pwflag = true;
+            $scope.validpw = false;
+        } else {
+            $scope.pwflag = false;
+            $scope.pwfeedback = '';
+            $("#password").removeClass("ng-invalid");
+            $("#password").addClass("ng-valid");
+            $scope.validpw = true;
+        }
+    }
     // Get user data function
     $scope.getUser = function () {
         $http.get('/Manage/UserProfile').success(function (response) {
@@ -818,7 +884,7 @@ MyApp.controller('ProfileController',["$scope","Page","$http", function ($scope,
         }
     }
 }])
-// Compare to directive for confirm password field
+// Compare-to directive for confirm password field
 MyApp.directive("compareTo", function () {
     return {
         require: "ngModel",

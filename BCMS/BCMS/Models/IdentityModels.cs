@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace BCMS.Models
 {
@@ -35,7 +36,10 @@ namespace BCMS.Models
         [NotMapped]
         public string FullName { get { return FirstName + ' ' + LastName; } set { value = FirstName + ' ' + LastName; } }
 
-        public UserStatus UserStatus { get; set; }  
+        public UserStatus UserStatus { get; set; }
+
+        //[NotMapped]
+        //public virtual Connection Connection { get; set; }
 
     }
     public enum UserStatus
@@ -64,6 +68,64 @@ namespace BCMS.Models
         public DbSet<Connection> Connections { get; set; }
 
 
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    base.OnModelCreating(modelBuilder);
+
+        //    //modelBuilder.Entity<IdentityUserLogin>()
+        //    // .HasKey(r => new { r.LoginProvider, r.ProviderKey,r.UserId })
+        //    // .ToTable("UserLogins");
+
+        //    //modelBuilder.Entity<IdentityUserRole>()
+        //    //.HasKey(r => new { r.RoleId, r.UserId })
+        //    //.ToTable("UserRoles");
+
+        //    //modelBuilder.Entity<IdentityUser>()
+        //    //.HasKey(r => new { r.Id })
+        //    //.ToTable("Users");
+
+        //    //modelBuilder.Entity<IdentityUserClaim>()
+        //    //.HasKey(r => new { r.Id })
+        //    //.ToTable("UserClaims");
+
+        //    //modelBuilder.Entity<IdentityRole>()
+        //    //.HasKey(r => new { r.Id })
+        //    //.ToTable("Roles");
+
+        //    //modelBuilder.Entity<Connection>()
+        //    //.HasKey(r => new { r.ConnectionId })
+        //    //.ToTable("Connections");
+
+        //    //modelBuilder.Entity<ApplicationUser>().ToTable("Users");
+        //    //modelBuilder.Entity<IdentityRole>().ToTable("Roles");
+        //    //modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
+        //    //modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins");
+        //    //modelBuilder.Entity<IdentityUserRole>().ToTable("UserRoles");
+
+        //    modelBuilder.Entity<Connection>()
+        //        .HasKey(t => t.UserId);
+
+        //    modelBuilder.Entity<Connection>()
+        //        .HasOptional(a => a.User)
+        //        .WithOptionalDependent()
+        //        .WillCascadeOnDelete(true);
+
+        //    //modelBuilder.Entity<ApplicationUser>()
+        //    //    .HasRequired(a => a.Connection)
+        //    //    .WithRequiredDependent(a => a.User)
+        //    //    .WillCascadeOnDelete(true);
+
+        //    //modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+
+
+        //    //modelBuilder.Entity<ApplicationUser>()
+        //    //    .HasRequired(t => t.Connection)
+        //    //    .WithRequiredPrincipal(t => t.User)
+        //    //    .WillCascadeOnDelete(true);
+
+        //}
 
     }
 

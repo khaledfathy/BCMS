@@ -67,10 +67,21 @@ namespace BCMS.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult DeleteUserPost(string UserId)
         {
+            
             if (UserId != null)
             {
                 db = new ApplicationDbContext();
+                var connections = db.Connections.Where(a => a.UserId == UserId).ToList();
+                if (connections != null)
+                {
+                    foreach (var item in connections)
+                    {
+                        db.Connections.Remove(item);
+                        db.SaveChanges();
+                    }
+                }
                 var user = db.Users.Where(a => a.Id == UserId).FirstOrDefault();
+                
                 db.Users.Remove(user);
                 db.SaveChanges();
             }

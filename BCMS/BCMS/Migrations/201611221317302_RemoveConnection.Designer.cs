@@ -7,18 +7,18 @@ namespace BCMS.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class TabsNumberConnections1 : IMigrationMetadata
+    public sealed partial class RemoveConnection : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(TabsNumberConnections1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RemoveConnection));
         
         string IMigrationMetadata.Id
         {
-            get { return "201610261103573_TabsNumberConnections1"; }
+            get { return "201611221317302_RemoveConnection"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return Resources.GetString("Source"); }
+            get { return null; }
         }
         
         string IMigrationMetadata.Target

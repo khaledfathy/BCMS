@@ -268,7 +268,6 @@ langApp.config(["$translateProvider", function ($translateProvider) {
         'CANCEL': 'إلغاء',
         'PASSWORD_CHANGED': 'تم تغيير كلمة المرور',
         'PASSWORD_NOT_MATCHED':'كلمة المرور غير متطابقة'
-
     });
 
     // Preferred Language

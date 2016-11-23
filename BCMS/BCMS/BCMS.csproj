@@ -288,25 +288,21 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\MainHub.cs" />
-    <Compile Include="Migrations\201610191003421_connection.cs" />
-    <Compile Include="Migrations\201610191003421_connection.Designer.cs">
-      <DependentUpon>201610191003421_connection.cs</DependentUpon>
+    <Compile Include="Migrations\201611221257297_UserCascadeDelete.cs" />
+    <Compile Include="Migrations\201611221257297_UserCascadeDelete.Designer.cs">
+      <DependentUpon>201611221257297_UserCascadeDelete.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201610241101139_time.cs" />
-    <Compile Include="Migrations\201610241101139_time.Designer.cs">
-      <DependentUpon>201610241101139_time.cs</DependentUpon>
+    <Compile Include="Migrations\201611221306293_NeglectChanges.cs" />
+    <Compile Include="Migrations\201611221306293_NeglectChanges.Designer.cs">
+      <DependentUpon>201611221306293_NeglectChanges.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201610261046578_TabsNumberConnections.cs" />
-    <Compile Include="Migrations\201610261046578_TabsNumberConnections.Designer.cs">
-      <DependentUpon>201610261046578_TabsNumberConnections.cs</DependentUpon>
+    <Compile Include="Migrations\201611221317302_RemoveConnection.cs" />
+    <Compile Include="Migrations\201611221317302_RemoveConnection.Designer.cs">
+      <DependentUpon>201611221317302_RemoveConnection.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201610261103573_TabsNumberConnections1.cs" />
-    <Compile Include="Migrations\201610261103573_TabsNumberConnections1.Designer.cs">
-      <DependentUpon>201610261103573_TabsNumberConnections1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610261222572_sessionId.cs" />
-    <Compile Include="Migrations\201610261222572_sessionId.Designer.cs">
-      <DependentUpon>201610261222572_sessionId.cs</DependentUpon>
+    <Compile Include="Migrations\201611221320506_AddConnection.cs" />
+    <Compile Include="Migrations\201611221320506_AddConnection.Designer.cs">
+      <DependentUpon>201611221320506_AddConnection.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -427,6 +423,7 @@
     <Content Include="Areas\Exams\content\Images\LogoTop.png" />
     <Content Include="Areas\Exams\content\jquery-ui.min.css" />
     <Content Include="Materials\Ar\css\alerts\normalize.css" />
+    <Content Include="Materials\droidarabickufi.css" />
     <Content Include="Materials\En\css\alerts\normalize.css" />
     <Content Include="Materials\UTMS\css\borsagraphicspobup.css" />
     <Content Include="Scripts\exporting.js" />
@@ -2798,20 +2795,17 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610191003421_connection.resx">
-      <DependentUpon>201610191003421_connection.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611221257297_UserCascadeDelete.resx">
+      <DependentUpon>201611221257297_UserCascadeDelete.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610241101139_time.resx">
-      <DependentUpon>201610241101139_time.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611221306293_NeglectChanges.resx">
+      <DependentUpon>201611221306293_NeglectChanges.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610261046578_TabsNumberConnections.resx">
-      <DependentUpon>201610261046578_TabsNumberConnections.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611221317302_RemoveConnection.resx">
+      <DependentUpon>201611221317302_RemoveConnection.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610261103573_TabsNumberConnections1.resx">
-      <DependentUpon>201610261103573_TabsNumberConnections1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610261222572_sessionId.resx">
-      <DependentUpon>201610261222572_sessionId.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611221320506_AddConnection.resx">
+      <DependentUpon>201611221320506_AddConnection.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

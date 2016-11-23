@@ -123,7 +123,7 @@
                                        ng-keyup="checkpw()"
                                        ng-class="submitted?'ng-dirty':''"
                                        ng-minlength="6"
-                                       ng-maxlength="30"
+                                       ng-maxlength="50"
                                        required autofocus />
                                 <span class="error" ng-show="(RegisterForm.password.$dirty || submitted) && RegisterForm.password.$error.required">{{passwordValidation | translate}}</span>
                                 <!--<span class="error" ng-show="RegisterForm.password.$error.minlength">{{minLengthPassword | translate}}</span>
@@ -168,7 +168,6 @@
                 </form>
             </div>
 
-            <!--<div id="loadingArea" ng-show="loading"></div>-->
             <div class="clear"></div>
         </div>
     </div>

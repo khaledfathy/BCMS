@@ -74,7 +74,7 @@ namespace BCMS.Controllers
                     return Json("InvalidLogin", JsonRequestBehavior.AllowGet);
                 }
                 var user = await UserManager.FindByEmailAsync(model.Email);
-                if(user==null)
+                if (user == null)
                     user = await UserManager.FindByNameAsync(model.Email);
 
                 if (user != null)
@@ -114,7 +114,7 @@ namespace BCMS.Controllers
             {
                 return Json("Error", JsonRequestBehavior.AllowGet);
             }
-            
+
         }
 
         //
@@ -127,7 +127,7 @@ namespace BCMS.Controllers
             {
                 model.Password += "@Aa";
                 var user = await UserManager.FindByEmailAsync(model.Email);
-                if(user==null)
+                if (user == null)
                     user = await UserManager.FindByNameAsync(model.Email);
 
                 var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
@@ -231,7 +231,7 @@ namespace BCMS.Controllers
             {
                 return Json("Error", JsonRequestBehavior.AllowGet);
             }
-            
+
         }
 
         //
@@ -303,11 +303,11 @@ namespace BCMS.Controllers
             {
                 return Json("Error", JsonRequestBehavior.AllowGet);
             }
-            
+
         }
 
-       // [HttpPost]
-       // [ValidateAntiForgeryToken]
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             try
@@ -332,10 +332,10 @@ namespace BCMS.Controllers
             {
                 return Json("Error", JsonRequestBehavior.AllowGet);
             }
-            
+
         }
 
-        
+
 
         #region Forgot and Reset Password
 
@@ -348,7 +348,7 @@ namespace BCMS.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var user = await UserManager.FindByNameAsync(model.Email);
+                    var user = await UserManager.FindByEmailAsync(model.Email);
                     string response = "";
                     if (user == null)
                     {
@@ -426,7 +426,7 @@ namespace BCMS.Controllers
                 if (ModelState.IsValid)
                 {
                     model.Password += "@Aa";
-                    var user = await UserManager.FindByNameAsync(model.Email);
+                    var user = await UserManager.FindByEmailAsync(model.Email);
                     if (user == null)
                     {
                         // Don't reveal that the user does not exist
@@ -687,11 +687,11 @@ namespace BCMS.Controllers
                     return false;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
-            
+
         }
 
         protected override void Dispose(bool disposing)

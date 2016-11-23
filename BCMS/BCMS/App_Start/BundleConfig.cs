@@ -29,7 +29,8 @@ namespace BCMS
                 "~/Materials/Ar/css/alerts/alertify.rtl.css",
                 "~/Materials/Ar/css/alerts/themes/default.css",
                  "~/Content/loading-bar.css",
-                "~/Materials/UTMS/css/borsagraphicspobup.css"
+                "~/Materials/UTMS/css/borsagraphicspobup.css",
+                "~/Materials/droidarabickufi.css"
                 ));
 
             bundles.Add(new StyleBundle("~/bundles/MainStyle/ar")
@@ -52,7 +53,8 @@ namespace BCMS
                 "~/Materials/En/css/alerts/alertify.rtl.css",
                 "~/Materials/En/css/alerts/themes/default.css",
                 "~/Content/loading-bar.css",
-                "~/Materials/UTMS/css/borsagraphicspobup.css"
+                "~/Materials/UTMS/css/borsagraphicspobup.css",
+                "~/Materials/droidarabickufi.css"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/BCMS/script").Include(
@@ -90,7 +92,8 @@ namespace BCMS
                 "~/Materials/UTMS/MainMenu/css/css3.css",
                 "~/Materials/UTMS/css/Graphics.css",
                 "~/Content/loading-bar.css",
-                "~/Materials/UTMS/css/highcharts.css"
+                "~/Materials/UTMS/css/highcharts.css",
+                "~/Materials/droidarabickufi.css"
                 ));
 
             bundles.Add(new StyleBundle("~/UTMS/MainStyle/ar")
@@ -134,7 +137,8 @@ namespace BCMS
             "~/Materials/Games/css/MainStyle.css",
             "~/Materials/MainMenu/css/component.css",
             "~/Materials/MainMenu/css/default.css",
-            "~/Materials/MainMenu/css/css3.css"
+            "~/Materials/MainMenu/css/css3.css",
+            "~/Materials/droidarabickufi.css"
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/BCGame/script").Include(
@@ -157,7 +161,7 @@ namespace BCMS
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*"));
 
-            BundleTable.EnableOptimizations = false;
+            BundleTable.EnableOptimizations = true;
 
         }
 
