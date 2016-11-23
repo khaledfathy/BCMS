@@ -590,9 +590,13 @@ MyApp.controller('ResetpasswordController', ["$scope", "$http", "$timeout", "Pag
                             $scope.message = 'Invalid email address please re-enter your email';
                             break;
                         case 'Success':
-                            message = 'Password changed succefully please click <a href="http://localhost:2302/#/Login">here</a> to login';
+                            message = 'Password changed succefully please click <a href="/#/Login">here</a> to login';
                             $("#feedback").html(message);
                             $scope.submitted = true;
+                            break;
+                        case 'InvalidPassword':
+                            $scope.validationSummary = true;
+                            $scope.message = "Password must be characters and numbers";
                             break;
                         case 'InvalidEmailOrPassword':
                             $scope.validationSummary = true;
@@ -602,11 +606,11 @@ MyApp.controller('ResetpasswordController', ["$scope", "$http", "$timeout", "Pag
                             window.location.href = "/Home/Error";
                         default:
                             alertify.set('notifier', 'position', 'bottom-left');
-                            alertify.error("Error! please check internet connection", 5);
+                            alertify.error("Error! An error occured please try again", 5);
                     }
                 }).error(function (data) {
                     alertify.set('notifier', 'position', 'bottom-left');
-                    alertify.error("Error! please check internet connection", 5);
+                    alertify.error("Error! An error occured please try again", 5);
                 });
             } else {
                 $scope.validationSummary = true;
@@ -622,20 +626,23 @@ MyApp.controller('ResetpasswordController', ["$scope", "$http", "$timeout", "Pag
                             $scope.message = 'البريد الالكترونى غير مدون فى سجلاتنا اذا كنت مستخدم جديد برجاء التسجيل اولا';
                             break;
                         case 'Success':
-                            message = 'تم إعادة تعيين كلمة المرور بنجاح للدخول للموقع اضغط  <a href="http://localhost:2302/#/Login">هنــــا</a>';
+                            message = 'تم إعادة تعيين كلمة المرور بنجاح للدخول للموقع اضغط  <a href="/#/Login">هنــــا</a>';
                             $("#feedback").html(message);
                             $scope.submitted = true;
+                            break;
+                        case 'InvalidPassword':
+                            $scope.validationSummary = true;
+                            $scope.message = "كلمة المرور يجب تكون حروف وارقام";
                             break;
                         case 'InvalidEmailOrPassword':
                             $scope.validationSummary = true;
                             $scope.message = "خطأ فى البريد الالكترونى او كلمة المرور";
-                            $scope.passwordMessage = "كلمة المرور لا تقل عن ثمانية احرف كبيره وصغيره من بينهم رقم واحد على الاقل ورموز مثل(@،#،$،%،!،_،-،=،+ ...)";
                             break;
                         case "Error":
                             window.location.href = "/Home/Error";
                         default:
                             alertify.set('notifier', 'position', 'bottom-right');
-                            alertify.error("خطأ! من فضلك تأكد من أنك متصل بالانترنت", 5);
+                            alertify.error("خطأ! هناك خطأ ما حدث برجاء المحاوله مرة اخرى", 5);
                     }
                 }).error(function (data) {
                     window.location.href = "/Home/Error";
@@ -664,6 +671,7 @@ MyApp.controller('ProfileController',["$scope","Page","$http", function ($scope,
     $scope.fNameValidation = 'fNameValidation';
     $scope.mName = 'mName';
     $scope.lName = 'lName';
+    $scope.email = 'email';
     $scope.lNameValidation = 'lNameValidation';
     $scope.nameMinLength = 'NAME_MINLENGTH';
     $scope.nameMaxLength = 'NAME_MAXLENGTH';

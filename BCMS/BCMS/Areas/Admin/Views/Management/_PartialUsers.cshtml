@@ -40,12 +40,12 @@
                         {
                             if (user.UserStatus == UserStatus.Active)
                             {
-                                @Ajax.ActionLink("Deactivate", "Deactivate", new { UserId = user.Id }, new AjaxOptions { UpdateTargetId = "userslist" }, new { @class = "btn btn-warning" })
+                                @Ajax.ActionLink("Deactivate", "Deactivate", new { UserId = user.Id }, new AjaxOptions { UpdateTargetId = "userslist" }, new { @class = "btn btn-warning", id = user.Id, onclick = "Loading('" + user.Id + "')" })
                                 @*<a class="btn btn-warning" href="@Url.Action("Deactivate", "Management", new { UserId =user.Id })">Deactivate</a>*@
                             }
                             else
                             {
-                                @Ajax.ActionLink("Activate", "Activate", new { UserId = user.Id }, new AjaxOptions { UpdateTargetId = "userslist" }, new { @class = "btn btn-primary" })
+                                @Ajax.ActionLink("Activate", "Activate", new { UserId = user.Id }, new AjaxOptions { UpdateTargetId = "userslist"}, new { @class = "btn btn-primary", id=user.Id, onclick = "Loading('" + user.Id + "')" })
                             }
                         }
 
@@ -66,3 +66,10 @@
 
     </tbody>
 </table>
+
+<script>
+    function Loading(id) {
+        $("#" + id + "").addClass("disabled");
+        $("#" + id + "").text("Wait...");
+    }
+</script>

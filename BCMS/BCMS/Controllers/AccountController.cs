@@ -145,7 +145,7 @@ namespace BCMS.Controllers
                         {
                             return Json(returnUrl, JsonRequestBehavior.AllowGet);
                         }
-                        else if (IsAdminUser(user.Id))
+                        else if (AdminHelpers.IsAdminUser(user.Id))
                             return Json("Admin", JsonRequestBehavior.AllowGet);
                         return Json("Active", JsonRequestBehavior.AllowGet);
                     case SignInStatus.Failure:
@@ -157,8 +157,6 @@ namespace BCMS.Controllers
             {
                 return Json("Error", JsonRequestBehavior.AllowGet);
             }
-
-
         }
 
         //
@@ -313,7 +311,6 @@ namespace BCMS.Controllers
             try
             {
                 AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-
                 Session.Clear();
                 Session.Abandon();
 
@@ -334,8 +331,6 @@ namespace BCMS.Controllers
             }
 
         }
-
-
 
         #region Forgot and Reset Password
 
@@ -418,7 +413,6 @@ namespace BCMS.Controllers
         // POST: /Account/ResetPassword
         [HttpPost]
         [AllowAnonymous]
-
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
             try
@@ -430,24 +424,20 @@ namespace BCMS.Controllers
                     if (user == null)
                     {
                         // Don't reveal that the user does not exist
-                        //return RedirectToAction("ResetPasswordConfirmation", "Account");
                         return Json("InvalidUser", JsonRequestBehavior.AllowGet);
                     }
                     var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
                     if (result.Succeeded)
                     {
                         return Json("Success", JsonRequestBehavior.AllowGet);
-                        //return RedirectToAction("ResetPasswordConfirmation", "Account");
                     }
                     else
                     {
-                        return Json("SomeThingWrong", JsonRequestBehavior.AllowGet);
+                        return Json("InvalidPassword", JsonRequestBehavior.AllowGet);
                     }
-
                 }
                 else
                 {
-
                     return Json("InvalidEmailOrPassword", JsonRequestBehavior.AllowGet);
                 }
             }
@@ -455,8 +445,6 @@ namespace BCMS.Controllers
             {
                 return Json("Error", JsonRequestBehavior.AllowGet);
             }
-
-
         }
 
         #endregion
@@ -663,36 +651,6 @@ namespace BCMS.Controllers
         //}
 
         #endregion
-
-        public Boolean IsAdminUser(string UserId)
-        {
-            try
-            {
-                ApplicationDbContext context = new ApplicationDbContext();
-                var user = context.Users.Where(a => a.Id == UserId).Select(a => a.Roles).FirstOrDefault();
-                if (user.Count == 0)
-                {
-                    return false;
-                }
-                else
-                {
-                    foreach (var item in user)
-                    {
-                        var RoleName = context.Roles.Where(a => a.Id == item.RoleId).Select(a => a.Name).FirstOrDefault();
-                        if (RoleName == "Admin")
-                        {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-
-        }
 
         protected override void Dispose(bool disposing)
         {

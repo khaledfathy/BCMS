@@ -8,125 +8,193 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
 using System.Web.Security;
 using Microsoft.Owin.Security;
+using System.Threading.Tasks;
 
 namespace BCMS.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ManagementController : Controller
     {
         ApplicationDbContext db;
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
 
         // Get All users who not assigned to role
         [HttpGet]
         public ActionResult UsersList()
         {
-            db = new ApplicationDbContext();
-            var users = db.Users.Where(a => a.Roles.Count == 0).ToList();
-            var x = users.Select(a => a.Roles).ToList();
-            return View(users);
+            try
+            {
+                db = new ApplicationDbContext();
+                var users = db.Users.Where(a => a.Roles.Count == 0).ToList();
+                var x = users.Select(a => a.Roles).ToList();
+                return View(users);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { area = "" });
+            }
+            
         }
 
         // Activate user
         public ActionResult Activate(string UserId)
         {
-            if (UserId != null)
+            try
             {
-                db = new ApplicationDbContext();
-                var user = db.Users.Where(a => a.Id == UserId).FirstOrDefault();
-                user.UserStatus = UserStatus.Active;
-                db.SaveChanges();
-            }
+                if (UserId != null)
+                {
+                    db = new ApplicationDbContext();
+                    var user = db.Users.Where(a => a.Id == UserId).FirstOrDefault();
+                    user.UserStatus = UserStatus.Active;
+                    db.SaveChanges();
+                    var body = "<div style='text-align:center;'><h1>مرحباً بك فى بورصة كابيتال</h1>";
+                    body += "<h3 style='color:green;'>تم تفعيل حسابك على بورصة كابيتال بنجاح</h3>";
+                    body += "<h2>شكراً لاستخدامك بورصة كابيتال</h2>";
+                    body += "<h2>من فضلك اضغط <a href='http://sa.borsacapital.com/#/Login'>هنــا لتسجيل الدخول</a> للموقع</h2>";
+                    body += "<p>إذا واجهتك اى مشاكل او اذا كنت تريد الاستفسار عن اى شئ من فضلك لا تتردد فى <a href='http://sa.borsacapital.com/#/ContactUs'>التواصل معنا</a></p>";
 
-            var users = db.Users.Where(a => a.Roles.Count == 0).ToList();
-            return PartialView("_PartialUsers", users);
+                    body += "<br /><br />";
+
+                    body += "<div style='text-align:center;'><h1>Welcome to Borsa Capital</h1>";
+                    body += "<h3 style='color:green;'>Your account has been activeted succesfuly.</h3>";
+                    body += "<h2>Thank you for using Borsa Capital</h2>";
+                    body += "<h2>Please click <a href='http://sa.borsacapital.com/#/Login' > here to login</a> the site</h2>";
+                    body += "<p>If you facing any problem or any question please don't hesitate to <a href='http://sa.borsacapital.com/#/ContactUs'>contact us</a></p>";
+                    string msg = EmailVerification.SendEMail(user.Email, "Borsa Capital Admission", body);
+
+                }
+
+                var users = db.Users.Where(a => a.Roles.Count == 0).ToList();
+                return PartialView("_PartialUsers", users);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { area = "" });
+            }
         }
 
         // Deactivate user
         public ActionResult Deactivate(string UserId)
         {
-            if (UserId != null)
+            try
             {
-                db = new ApplicationDbContext();
-                var user = db.Users.Where(a => a.Id == UserId).FirstOrDefault();
-                user.UserStatus = UserStatus.Pending;
-                db.SaveChanges();
+                if (UserId != null)
+                {
+                    db = new ApplicationDbContext();
+                    var user = db.Users.Where(a => a.Id == UserId).FirstOrDefault();
+                    user.UserStatus = UserStatus.Pending;
+                    db.SaveChanges();
+                }
+                var users = db.Users.Where(a => a.Roles.Count == 0).ToList();
+                return PartialView("_PartialUsers", users);
             }
-            var users = db.Users.Where(a => a.Roles.Count == 0).ToList();
-            return PartialView("_PartialUsers", users);
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { area = "" });
+            }
         }
 
         // Delete user //  Get confirmation view in popup
         public ActionResult DeleteUser(string UserId)
         {
-            ViewBag.UserId = UserId;
-            db = new ApplicationDbContext();
-            ViewBag.FullName = db.Users.FirstOrDefault(a => a.Id == UserId).FullName;
-            return View();
+            try
+            {
+                ViewBag.UserId = UserId;
+                db = new ApplicationDbContext();
+                ViewBag.FullName = db.Users.FirstOrDefault(a => a.Id == UserId).FullName;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { area = "" });
+            }
         }
 
         // Delete user // Post
         [HttpPost]
         public ActionResult DeleteUserPost(string UserId)
         {
-            
-            if (UserId != null)
+            try
             {
-                db = new ApplicationDbContext();
-                var connections = db.Connections.Where(a => a.UserId == UserId).ToList();
-                if (connections != null)
+                if (UserId != null)
                 {
-                    foreach (var item in connections)
+                    db = new ApplicationDbContext();
+                    var connections = db.Connections.Where(a => a.UserId == UserId).ToList();
+                    if (connections != null)
                     {
-                        db.Connections.Remove(item);
-                        db.SaveChanges();
+                        foreach (var item in connections)
+                        {
+                            db.Connections.Remove(item);
+                            db.SaveChanges();
+                        }
                     }
-                }
-                var user = db.Users.Where(a => a.Id == UserId).FirstOrDefault();
-                
-                db.Users.Remove(user);
-                db.SaveChanges();
-            }
+                    var user = db.Users.Where(a => a.Id == UserId).FirstOrDefault();
 
-            var users = db.Users.Where(a => a.Roles.Count == 0).ToList();
-            return PartialView("_PartialUsers", users);
+                    db.Users.Remove(user);
+                    db.SaveChanges();
+                }
+
+                var users = db.Users.Where(a => a.Roles.Count == 0).ToList();
+                return PartialView("_PartialUsers", users);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { area = "" });
+            }
         }
 
         // Get All Staff
         [HttpGet]
         public ActionResult Staff()
         {
-            db = new ApplicationDbContext();
-            var usrs = db.Users.Where(a => a.Roles.Count != 0).ToList();
-            List<Staff> stafList = new List<Staff>();
-            foreach (var usr in usrs)
+            try
             {
-                Staff staf = new Staff();
-                staf.FirstName = usr.FirstName;
-                if (usr.MiddleName != null)
-                    staf.MiddleName = usr.MiddleName;
-                else
-                    staf.MiddleName = "ــ";
-                staf.LastName = usr.LastName;
-                staf.Email = usr.Email;
-                var RolesOfUsers = db.Users.Where(a => a.Id == usr.Id).Select(a => a.Roles).FirstOrDefault();
-                staf.Roles = new List<string>();
-                foreach (var item in RolesOfUsers)
+                db = new ApplicationDbContext();
+                var usrs = db.Users.Where(a => a.Roles.Count != 0).ToList();
+                List<Staff> stafList = new List<Staff>();
+                foreach (var usr in usrs)
                 {
-                    var role = db.Roles.Where(a => a.Id == item.RoleId).Select(a => a.Name).FirstOrDefault();
-                    staf.Roles.Add(role);
+                    Staff staf = new Staff();
+                    staf.FirstName = usr.FirstName;
+                    if (usr.MiddleName != null)
+                        staf.MiddleName = usr.MiddleName;
+                    else
+                        staf.MiddleName = "ــ";
+                    staf.LastName = usr.LastName;
+                    staf.Email = usr.Email;
+                    var RolesOfUsers = db.Users.Where(a => a.Id == usr.Id).Select(a => a.Roles).FirstOrDefault();
+                    staf.Roles = new List<string>();
+                    foreach (var item in RolesOfUsers)
+                    {
+                        var role = db.Roles.Where(a => a.Id == item.RoleId).Select(a => a.Name).FirstOrDefault();
+                        staf.Roles.Add(role);
+                    }
+                    staf.UserStatus = usr.UserStatus;
+                    stafList.Add(staf);
                 }
-                staf.UserStatus = usr.UserStatus;
-                stafList.Add(staf);
+                return View(stafList);
             }
-            return View(stafList);
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { area = "" });
+            }
         }
-        
+
         // Get All roles
         [HttpGet]
         public ActionResult Roles()
         {
-            db = new ApplicationDbContext();
-            var roles = db.Roles.ToList();
-            return View(roles);
+            try
+            {
+                db = new ApplicationDbContext();
+                var roles = db.Roles.ToList();
+                return View(roles);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { area = "" });
+            }
         }
 
         // Create role // Get View
@@ -140,190 +208,253 @@ namespace BCMS.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult CreateRole(string roleName)
         {
-            db = new ApplicationDbContext();
-            var role = new IdentityRole();
-            role.Name = roleName;
-            db.Roles.Add(role);
-            db.SaveChanges();
-            return PartialView("_PartialRole", db.Roles);
+            try
+            {
+                db = new ApplicationDbContext();
+                var role = new IdentityRole();
+                role.Name = roleName;
+                db.Roles.Add(role);
+                db.SaveChanges();
+                return PartialView("_PartialRole", db.Roles);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { area = "" });
+            }
         }
 
         // Remove role // Get confirmation view in popup
         [HttpGet]
         public ActionResult RemoveRole(string id)
         {
-            ViewBag.RoleId = id;
-            db = new ApplicationDbContext();
-            var RoleName = db.Roles.Where(a => a.Id == id).Select(a => a.Name).FirstOrDefault();
-            ViewBag.RoleName = RoleName;
-            return View();
+            try
+            {
+                ViewBag.RoleId = id;
+                db = new ApplicationDbContext();
+                var RoleName = db.Roles.Where(a => a.Id == id).Select(a => a.Name).FirstOrDefault();
+                ViewBag.RoleName = RoleName;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { area = "" });
+            }
         }
 
         // Remove role // Post
         [HttpPost]
         public ActionResult RemoveRolePost(string RoleId)
         {
-            db = new ApplicationDbContext();
-            var role = db.Roles.Where(a => a.Id == RoleId).FirstOrDefault();
-            db.Roles.Remove(role);
-            db.SaveChanges();
+            try
+            {
+                db = new ApplicationDbContext();
+                var role = db.Roles.Where(a => a.Id == RoleId).FirstOrDefault();
+                db.Roles.Remove(role);
+                db.SaveChanges();
 
-            return PartialView("_PartialRole", db.Roles);
+                return PartialView("_PartialRole", db.Roles);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { area = "" });
+            }
         }
 
         // Add user to role // Get view in popup
         [HttpGet]
         public ActionResult AddUserToRole(string id)
         {
-            ViewBag.RoleId = id;
-            db = new ApplicationDbContext();
-            var RName = db.Roles.Where(a => a.Id == id).Select(a => a.Name).FirstOrDefault();
-            ViewBag.RoleName = RName;
-            var Users = db.Users.ToList();
-            var AllRolesExceptCurrent = db.Roles.Where(a => a.Id != id).ToList();
-            var RolesWithUsers = AllRolesExceptCurrent.Select(a => a.Users).ToList();
-            List<Staff> staffList = new List<Staff>();
-            foreach (var item in Users)
+            try
             {
-                Staff user = new Staff();
-                if (item.Roles.Count != 0)
+                ViewBag.RoleId = id;
+                db = new ApplicationDbContext();
+                var RName = db.Roles.Where(a => a.Id == id).Select(a => a.Name).FirstOrDefault();
+                ViewBag.RoleName = RName;
+                var Users = db.Users.ToList();
+                var AllRolesExceptCurrent = db.Roles.Where(a => a.Id != id).ToList();
+                var RolesWithUsers = AllRolesExceptCurrent.Select(a => a.Users).ToList();
+                List<Staff> staffList = new List<Staff>();
+                foreach (var item in Users)
                 {
-                    var xx = db.Users.Where(a => a.Id == item.Id).Select(a => a.Roles).FirstOrDefault();
+                    Staff user = new Staff();
+                    if (item.Roles.Count != 0)
+                    {
+                        var xx = db.Users.Where(a => a.Id == item.Id).Select(a => a.Roles).FirstOrDefault();
 
-                    if (!xx.Select(a => a.RoleId).Contains(id))
+                        if (!xx.Select(a => a.RoleId).Contains(id))
+                        {
+                            user.Id = item.Id;
+                            user.FirstName = item.FirstName;
+                            user.MiddleName = item.MiddleName;
+                            user.LastName = item.LastName;
+                            user.Email = item.Email;
+                            user.UserStatus = item.UserStatus;
+
+                            var UserRoles = db.Users.Where(a => a.Id == item.Id).Select(a => a.Roles).FirstOrDefault();
+                            var RoleIds = UserRoles.Select(a => a.RoleId).ToList();
+                            user.Roles = new List<string>();
+                            foreach (var RoleId in RoleIds)
+                            {
+                                var RoleName = db.Roles.Where(a => a.Id == RoleId).Select(a => a.Name).FirstOrDefault();
+                                user.Roles.Add(RoleName);
+                            }
+                            staffList.Add(user);
+                        }
+                    }
+                    else
                     {
                         user.Id = item.Id;
                         user.FirstName = item.FirstName;
                         user.MiddleName = item.MiddleName;
                         user.LastName = item.LastName;
                         user.Email = item.Email;
+                        user.Roles = null;
                         user.UserStatus = item.UserStatus;
-
-                        var UserRoles = db.Users.Where(a => a.Id == item.Id).Select(a => a.Roles).FirstOrDefault();
-                        var RoleIds = UserRoles.Select(a => a.RoleId).ToList();
-                        user.Roles = new List<string>();
-                        foreach (var RoleId in RoleIds)
-                        {
-                            var RoleName = db.Roles.Where(a => a.Id == RoleId).Select(a => a.Name).FirstOrDefault();
-                            user.Roles.Add(RoleName);
-                        }
                         staffList.Add(user);
                     }
                 }
-                else
-                {
-                    user.Id = item.Id;
-                    user.FirstName = item.FirstName;
-                    user.MiddleName = item.MiddleName;
-                    user.LastName = item.LastName;
-                    user.Email = item.Email;
-                    user.Roles = null;
-                    user.UserStatus = item.UserStatus;
-                    staffList.Add(user);
-                }
-            }
 
-            return View(staffList);
+                return View(staffList);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { area = "" });
+            }
         }
 
         // Add user to role // Post
         [HttpPost]
         public ActionResult AddUserToRole(string[] UsersIds, string RoleId)
         {
-            db = new ApplicationDbContext();
-            var RoleName = db.Roles.Where(a => a.Id == RoleId).Select(a => a.Name).FirstOrDefault();
-            foreach (var UserId in UsersIds)
+            try
             {
-                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
-                var result = userManager.AddToRole(UserId, RoleName);
+                db = new ApplicationDbContext();
+                var RoleName = db.Roles.Where(a => a.Id == RoleId).Select(a => a.Name).FirstOrDefault();
+                foreach (var UserId in UsersIds)
+                {
+                    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+                    var result = userManager.AddToRole(UserId, RoleName);
+                }
+                return PartialView("_PartialRole", db.Roles);
             }
-            return PartialView("_PartialRole", db.Roles);
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { area = "" });
+            }
         }
 
         // Remove user from role // Get confirmation view in popup
         [HttpGet]
         public ActionResult RemoveUserFromRole(string id)
         {
-            ViewBag.RoleId = id;
-            db = new ApplicationDbContext();
-            var RName = db.Roles.Where(a => a.Id == id).Select(a => a.Name).FirstOrDefault();
-            ViewBag.RoleName = RName;
-            var Users = db.Users.ToList();
-            List<Staff> staffList = new List<Staff>();
-            foreach (var item in Users)
+            try
             {
-                Staff user = new Staff();
-                if (item.Roles.Count != 0)
+                ViewBag.RoleId = id;
+                db = new ApplicationDbContext();
+                var RName = db.Roles.Where(a => a.Id == id).Select(a => a.Name).FirstOrDefault();
+                ViewBag.RoleName = RName;
+                var Users = db.Users.ToList();
+                List<Staff> staffList = new List<Staff>();
+                foreach (var item in Users)
                 {
-                    var xx = db.Users.Where(a => a.Id == item.Id).Select(a => a.Roles).FirstOrDefault();
-                    if (xx.Select(a => a.RoleId).Contains(id))
+                    Staff user = new Staff();
+                    if (item.Roles.Count != 0)
                     {
-                        user.Id = item.Id;
-                        user.FirstName = item.FirstName;
-                        user.MiddleName = item.MiddleName;
-                        user.LastName = item.LastName;
-                        user.Email = item.Email;
-                        user.UserStatus = item.UserStatus;
-                        var UserRoles = db.Users.Where(a => a.Id == item.Id).Select(a => a.Roles).FirstOrDefault();
-                        var RoleIds = UserRoles.Select(a => a.RoleId).ToList();
-                        user.Roles = new List<string>();
-                        foreach (var RoleId in RoleIds)
+                        var xx = db.Users.Where(a => a.Id == item.Id).Select(a => a.Roles).FirstOrDefault();
+                        if (xx.Select(a => a.RoleId).Contains(id))
                         {
-                            if (RoleId != id)
+                            user.Id = item.Id;
+                            user.FirstName = item.FirstName;
+                            user.MiddleName = item.MiddleName;
+                            user.LastName = item.LastName;
+                            user.Email = item.Email;
+                            user.UserStatus = item.UserStatus;
+                            var UserRoles = db.Users.Where(a => a.Id == item.Id).Select(a => a.Roles).FirstOrDefault();
+                            var RoleIds = UserRoles.Select(a => a.RoleId).ToList();
+                            user.Roles = new List<string>();
+                            foreach (var RoleId in RoleIds)
                             {
-                                var RoleName = db.Roles.Where(a => a.Id == RoleId).Select(a => a.Name).FirstOrDefault();
-                                user.Roles.Add(RoleName);
-                            }
+                                if (RoleId != id)
+                                {
+                                    var RoleName = db.Roles.Where(a => a.Id == RoleId).Select(a => a.Name).FirstOrDefault();
+                                    user.Roles.Add(RoleName);
+                                }
 
+                            }
+                            staffList.Add(user);
                         }
-                        staffList.Add(user);
                     }
                 }
+                return View(staffList);
             }
-            return View(staffList);
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { area = "" });
+            }
         }
 
         // Remove user from role // Post
         [HttpPost]
         public ActionResult RemoveUserFromRole(string[] UsersIds, string RoleId)
         {
-            db = new ApplicationDbContext();
-            var RoleName = db.Roles.Where(a => a.Id == RoleId).Select(a => a.Name).FirstOrDefault();
-            foreach (var UserId in UsersIds)
+            try
             {
-                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
-                var result = userManager.RemoveFromRole(UserId, RoleName);
+                db = new ApplicationDbContext();
+                var RoleName = db.Roles.Where(a => a.Id == RoleId).Select(a => a.Name).FirstOrDefault();
+                foreach (var UserId in UsersIds)
+                {
+                    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+                    var result = userManager.RemoveFromRole(UserId, RoleName);
+                }
+                return PartialView("_PartialRole", db.Roles);
             }
-            return PartialView("_PartialRole", db.Roles);
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { area = "" });
+            }
         }
 
         // Get Users in role // Get view in popup
         [HttpGet]
         public ActionResult GetUsersInRole(string Id)
         {
-            db = new ApplicationDbContext();
-            var RName = db.Roles.Where(a => a.Id == Id).Select(a => a.Name).FirstOrDefault();
-            ViewBag.RoleName = RName;
-            var Users = db.Roles.Where(a => a.Id == Id).Select(a => a.Users).FirstOrDefault();
-            List<ApplicationUser> UsersInRole = new List<ApplicationUser>();
-            foreach (var item in Users)
+            try
             {
-                var user = db.Users.Where(a => a.Id == item.UserId).FirstOrDefault();
-                UsersInRole.Add(user);
+                db = new ApplicationDbContext();
+                var RName = db.Roles.Where(a => a.Id == Id).Select(a => a.Name).FirstOrDefault();
+                ViewBag.RoleName = RName;
+                var Users = db.Roles.Where(a => a.Id == Id).Select(a => a.Users).FirstOrDefault();
+                List<ApplicationUser> UsersInRole = new List<ApplicationUser>();
+                foreach (var item in Users)
+                {
+                    var user = db.Users.Where(a => a.Id == item.UserId).FirstOrDefault();
+                    UsersInRole.Add(user);
+                }
+                return View(UsersInRole);
             }
-            return View(UsersInRole);
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { area = "" });
+            }
         }
 
         // Logoff // Get
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            // WebSecurity.Logout();
-            Session.Clear();
-            Session.Abandon();
-            FormsAuthentication.SignOut();
-            var test = Request.IsAuthenticated;
-            return RedirectToAction("Index", "Home");
+            try
+            {
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                // WebSecurity.Logout();
+                Session.Clear();
+                Session.Abandon();
+                FormsAuthentication.SignOut();
+                var test = Request.IsAuthenticated;
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new { area = "" });
+            }
         }
 
         private IAuthenticationManager AuthenticationManager
@@ -332,6 +463,24 @@ namespace BCMS.Areas.Admin.Controllers
             {
                 return HttpContext.GetOwinContext().Authentication;
             }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_userManager != null)
+                {
+                    _userManager.Dispose();
+                    _userManager = null;
+                }
+                if (_signInManager != null)
+                {
+                    _signInManager.Dispose();
+                    _signInManager = null;
+                }
+            }
+            base.Dispose(disposing);
         }
     }
 }

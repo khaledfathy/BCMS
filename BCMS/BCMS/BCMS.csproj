@@ -308,6 +308,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\Activity_Year.cs" />
+    <Compile Include="Models\AdminHelpers.cs" />
     <Compile Include="Models\Advice.cs" />
     <Compile Include="Models\Bank.cs" />
     <Compile Include="Models\Bank_Year.cs" />

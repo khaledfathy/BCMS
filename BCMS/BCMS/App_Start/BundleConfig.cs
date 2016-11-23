@@ -161,7 +161,7 @@ namespace BCMS
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*"));
 
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
 
         }
 
