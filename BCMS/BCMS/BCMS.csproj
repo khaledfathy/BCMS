@@ -467,6 +467,7 @@
     <Content Include="Materials\UTMS\Images\companyLogo\wataniya.gif" />
     <Content Include="Materials\UTMS\Images\companyLogo\weqaya.png" />
     <Content Include="Materials\UTMS\Images\companyLogo\zoujaj-glass.jpg" />
+    <Content Include="Scripts\angular-video-bg.js" />
     <Content Include="Scripts\exporting.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery.countdown.counter.js" />
