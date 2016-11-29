@@ -69,7 +69,12 @@
                                 if (FullNameCookie != null)
                                 {
                                     FullName = FullNameCookie.Value;
+                                }else {
+                                    ApplicationDbContext db = new ApplicationDbContext();
+                                    var UserId = User.Identity.GetUserId();
+                                    FullName = db.Users.FirstOrDefault(a => a.Id == UserId).FullName;
                                 }
+
                                 <li>
                                     @using (Html.BeginForm("LogOff", "Account", FormMethod.Get, new { id = "logoutForm" }))
                                     {
@@ -77,7 +82,7 @@
                                         <a href="javascript:document.getElementById('logoutForm').submit()">{{logout | translate}}</a>
                                     }
                                 </li>
-                                <li><a href="/#">{{welcome | translate}}  @FullName</a></li>
+                                <li><a href="/#/Profile">{{welcome | translate}}  @FullName</a></li>
                             }
                             else
                             {

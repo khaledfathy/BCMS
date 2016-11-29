@@ -290,8 +290,11 @@ padding: .5em 0;
 {
     padding: 0.313em 0;
     border-top: 0px solid #b5edff;
-    
-    background-color: #000;
+    background: -webkit-radial-gradient( #242424,black);
+    background: -o-radial-gradient(#242424,black); /* For Opera 11.1 to 12.0 */
+    background: -moz-radial-gradient(#242424,black); /* For Firefox 3.6 to 15 */
+    background: radial-gradient(#242424,black);
+    /*background-color: #000;*/
    /* background-image: url(../images/bgfooter.jpg);
     background-position: center;*/
 }

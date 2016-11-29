@@ -8,10 +8,12 @@
     {
         FullName = FullNameCookie.Value;
     }
-    //ApplicationDbContext db = new ApplicationDbContext();
-
-    //var UserId = User.Identity.GetUserId();
-    //FullName = db.Users.FirstOrDefault(a => a.Id == UserId).FullName;
+    else
+    {
+        ApplicationDbContext db = new ApplicationDbContext();
+        var UserId = User.Identity.GetUserId();
+        FullName = db.Users.FirstOrDefault(a => a.Id == UserId).FullName;
+    }
     <li>
         @using (Html.BeginForm("LogOff", "Account", FormMethod.Get, new { id = "logoutForm" }))
         {

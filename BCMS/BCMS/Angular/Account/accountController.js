@@ -138,19 +138,19 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
             case "en":
                 $http.post("/Account/Login", params).success(function (response) {
                     if (response != "Admin" && response != "Active" && response != "NotConfirmed" && response != "PasswordError" && response != "Waiting" && response != "ErrorInUserNameOrPassword") {
-                        $scope.IsLogedin = true;
-                        $scope.message = 'Just a second please...';
+                        //$scope.IsLogedin = true;
+                        //$scope.message = 'Just a second please...';
                         window.location.href = response;
                     } else {
                         switch (response) {
                             case "Admin":
-                                $scope.IsLogedin = true;
-                                $scope.message = 'Just a second please...';
+                                //$scope.IsLogedin = true;
+                                //$scope.message = 'Just a second please...';
                                 window.location.href = '/Admin/Home/Index';
                                 break;
                             case "Active":
-                                $scope.IsLogedin = true;
-                                $scope.message = 'Just a second please...'
+                                //$scope.IsLogedin = true;
+                                //$scope.message = 'Just a second please...'
                                 window.location.href = '/UTMS/Home';
                                 break;
                             case "PasswordError":
@@ -160,6 +160,7 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
                                 break;
                             case "Error":
                                 window.location.href = "/Home/Error";
+                                break;
                             default:
                                 alertify.set('notifier', 'position', 'bottom-right');
                                 alertify.error("Email or Password is incorrect", 5);
@@ -174,19 +175,19 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
                 $http.post("/Account/Login", params)
                   .success(function (response) {
                       if (response != "Admin" && response != "Active" && response != "NotConfirmed" && response != "PasswordError" && response != "Waiting" && response != "ErrorInUserNameOrPassword") {
-                          $scope.IsLogedin = true;
-                          $scope.message = 'لحظة من فضلك...';
+                          //$scope.IsLogedin = true;
+                          //$scope.message = 'لحظة من فضلك...';
                           window.location.href = response;
                       } else {
                           switch (response) {
                               case "Admin":
-                                  $scope.IsLogedin = true;
-                                  $scope.message = 'لحظة من فضلك...'
+                                  //$scope.IsLogedin = true;
+                                  //$scope.message = 'لحظة من فضلك...'
                                   window.location.href = '/Admin/Home/Index';
                                   break;
                               case "Active":
-                                  $scope.IsLogedin = true;
-                                  $scope.message = 'لحظة من فضلك...'
+                                  //$scope.IsLogedin = true;
+                                  //$scope.message = 'لحظة من فضلك...'
                                   window.location.href = '/UTMS/Home';
                                   break;
                               case "PasswordError":
@@ -196,6 +197,7 @@ MyApp.controller('LoginController', ["$scope", "$http", "$location", "$compile",
                                   break;
                               case "Error":
                                   window.location.href = "/Home/Error";
+                                  break;
                               default:
                                   alertify.set('notifier', 'position', 'bottom-left');
                                   alertify.error("البريد الإلكترونى أو كلمة المرور غير صحيحة", 5);
@@ -263,7 +265,7 @@ MyApp.controller('RegisterController', ["$scope", "registerationService", "Page"
     $scope.userNamePatern = /^(?![-_.0-9])(?!.*[_.-]{2})[a-zA-Z0-9._-]+(?![_.-])$/;
     //$scope.userNamePatern = /^(?=.{3,20}$)(?![-_.0-9])(?!.*[_.-]{2})[a-zA-Z0-9._-]+(?![_.-])$/;
     //$scope.passwordformat = /^[a-z0-9]/;
-    $scope.name = /^[a-zA-Z أاإ-ى]+$/;
+    $scope.name = /^[a-zA-Z أاإ-ي]+$/;
 
     // Some variable used later
     $scope.submitted = false;
@@ -299,7 +301,7 @@ MyApp.controller('RegisterController', ["$scope", "registerationService", "Page"
             $scope.pwfeedback = "NO_NUMBERS";
             $scope.pwflag = true;
             $scope.validpw = false;
-        } else if (str.search(/[a-zA-Zأاإ-ى]/) == -1) {
+        } else if (str.search(/[a-zA-Zأاإ-ي]/) == -1) {
             $scope.pwfeedback = "NO_LETTERS";
             $scope.pwflag = true;
             $scope.validpw = false;
@@ -560,7 +562,7 @@ MyApp.controller('ResetpasswordController', ["$scope", "$http", "$timeout", "Pag
             $scope.pwfeedback = "NO_NUMBERS";
             $scope.pwflag = true;
             $scope.validpw = false;
-        } else if (str.search(/[a-zA-Zأاإ-ى]/) == -1) {
+        } else if (str.search(/[a-zA-Zأاإ-ي]/) == -1) {
             $scope.pwfeedback = "NO_LETTERS";
             $scope.pwflag = true;
             $scope.validpw = false;
@@ -694,7 +696,7 @@ MyApp.controller('ProfileController',["$scope","Page","$http", function ($scope,
     $scope.passwordNotMatched = 'PASSWORD_NOT_MATCHED';
     // Regular expression for password
     $scope.passwordformat = /^[a-zA-Z]+[0-9]/;
-    $scope.name = /^[a-zA-Z أاإ-ى]+$/;
+    $scope.name = /^[a-zA-Z أاإ-ي]+$/;
     // Some variables that will be used later
     $scope.PasswordChanged = false;
     $scope.UserData = '';
@@ -743,7 +745,7 @@ MyApp.controller('ProfileController',["$scope","Page","$http", function ($scope,
             $scope.pwfeedback = "NO_NUMBERS";
             $scope.pwflag = true;
             $scope.validpw = false;
-        } else if (str.search(/[a-zA-Zأاإ-ى]/) == -1) {
+        } else if (str.search(/[a-zA-Zأاإ-ي]/) == -1) {
             $scope.pwfeedback = "NO_LETTERS";
             $scope.pwflag = true;
             $scope.validpw = false;

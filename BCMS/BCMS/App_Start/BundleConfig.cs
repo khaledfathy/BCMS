@@ -61,6 +61,7 @@ namespace BCMS
                 "~/Scripts/jquery.js",
                 "~/Scripts/alertify.js",
                 "~/scripts/angular.js",
+                "~/Scripts/angular-video-bg.js",
                 "~/scripts/angular-route.js",
                 "~/Scripts/angular-cookies.js",
                 "~/Scripts/angular-translate.js",
@@ -161,7 +162,7 @@ namespace BCMS
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*"));
 
-            BundleTable.EnableOptimizations = false;
+            BundleTable.EnableOptimizations = true;
 
         }
 

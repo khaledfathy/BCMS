@@ -250,3 +250,8 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+/BCMS/BCMS/Materials/Ar/Slider/Images
+/BCMS/BCMS/Materials/Ar/img
+/BCMS/BCMS/Materials/Ar/Images
+/BCMS/BCMS/Materials/En/Images
+/angular-video-bg/

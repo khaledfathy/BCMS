@@ -1,6 +1,6 @@
 ﻿/// <reference path="C:\Users\hany\Documents\Visual Studio 2015\Projects\BCMS\BCMS\Scripts/angular.js" />
 
-var MyApp = angular.module('MyApp', ['ngRoute', 'mm.foundation', 'pascalprecht.translate', 'chieffancypants.loadingBar', 'ngAnimate']);
+var MyApp = angular.module('MyApp', ['ngRoute', 'mm.foundation', 'pascalprecht.translate', 'chieffancypants.loadingBar', 'ngAnimate','angularVideoBg']);
 
 MyApp.config(["$routeProvider", "$locationProvider", "cfpLoadingBarProvider", function ($routeProvider, $locationProvider, cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = true;

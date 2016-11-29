@@ -357,7 +357,7 @@ App.controller('BC-CounterController',["$scope","$http","Page", function ($scope
         DrowChart(selectedMarket);
         DrowChartOut(selectedMarket);
         DrowChartCompin(selectedMarket);
-    })
+    });
 
     $http.get("/UTMS/BcCounters/selectAllMarkets").success(function (result) {
         if (result == "Error") {
@@ -521,21 +521,10 @@ App.controller('BC-CounterController',["$scope","$http","Page", function ($scope
                                 $('#tooltipChashFlowIn').toggle().html('السيولة الداخلة<br> ' + nr);
                             });
                         }
-                    },
-                    // Add some life
-                    function (chart) {
-                        setInterval(function () {
-                            var point = chart.series[0].points[0],
-                                newVal,
-                                inc = CashFlowInValue;
-
-                            newVal = point.y + inc;
-                            if (newVal < 0 || newVal > 200) {
-                                newVal = point.y - inc;
-                            }
-                            point.update(newVal);
-                        }, 3000);
                     }
+                    // Add some life
+
+                    
                 })
             }
 
