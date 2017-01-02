@@ -310,17 +310,22 @@ namespace BCMS.Controllers
         {
             try
             {
+                ApplicationDbContext db = new ApplicationDbContext();
+                var UserId = User.Identity.GetUserId();
+
                 AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
                 Session.Clear();
                 Session.Abandon();
-
+                var UserConnection = db.Connections.Where(a => a.UserId == UserId).FirstOrDefault();
+                if(UserConnection!=null)
+                    db.Connections.Remove(UserConnection);
                 if (HttpContext.Request.Cookies["SessionID"] != null)
                 {
                     var c = new HttpCookie("SessionID");
                     c.Expires = DateTime.Now.AddDays(-1);
                     Response.Cookies.Add(c);
                 }
-
+                db.SaveChanges();
                 FormsAuthentication.SignOut();
 
                 return RedirectToAction("Index", "Home");

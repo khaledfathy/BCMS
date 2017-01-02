@@ -22,12 +22,13 @@ namespace BCMS.Hubs
             try
             {
                 var UserId = Context.User.Identity.GetUserId();
-                var IsAuthenticated = Context.User.Identity.IsAuthenticated;
+                //var IsAuthenticated = Context.User.Identity.IsAuthenticated;
                 var SessionId = HttpContext.Current.Request.Cookies["SessionID"];
                 if (SessionId != null)
                 {
                     string CurrentSessionId = SessionId.Value;
                     var UserConnection = db.Connections.Where(a => a.UserId == UserId).FirstOrDefault();
+                    // Login for First time 
                     if (UserConnection == null)
                     {
                         Connection NewConnection = new Connection();
@@ -40,9 +41,13 @@ namespace BCMS.Hubs
                         db.Connections.Add(NewConnection);
 
                     }
+                    // Login from another device
                     else if (UserConnection.SessionId != CurrentSessionId)
                     {
+                        // logout user from previous device
                         Clients.Client(UserConnection.ConnectionId).logoff();
+
+
                         Connection NewConnection = new Connection();
                         NewConnection.UserId = UserId;
                         NewConnection.ConnectionId = Context.ConnectionId;
@@ -52,6 +57,7 @@ namespace BCMS.Hubs
                         NewConnection.SessionId = CurrentSessionId;
                         db.Connections.Add(NewConnection);
                     }
+                    // open new tab
                     else
                     {
                         UserConnection.TabsNumber++;

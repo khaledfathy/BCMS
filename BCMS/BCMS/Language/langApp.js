@@ -8,6 +8,7 @@ langApp.config(["$translateProvider", function ($translateProvider) {
     // English Model
     $translateProvider.translations("en", {
         // Layout Header
+        // 'Key' : 'Value'
         'login': 'Login',
         'register': 'Register',
         'logout': 'Logout',
@@ -79,7 +80,7 @@ langApp.config(["$translateProvider", function ($translateProvider) {
         'cPasswordValidation': 'Please confirm your password',
         'REGISTER_BUTTON': 'Register',
 
-        // Login
+        // Login 
         'LOGIN': 'Login',
         'USERNAME_EMAIL':'Username or Email',
         'REMEMBER_ME': 'Remember me',
